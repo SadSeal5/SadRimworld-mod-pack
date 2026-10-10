@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Mega Mod Shell -->
+  <MegaMod_ModTitle>SadSeal's Mega Mod</MegaMod_ModTitle>
+  <MegaMod_TabCombat>🏹 Lethal Combat</MegaMod_TabCombat>
+  <MegaMod_TabSkills>🎓 Skill Multipliers</MegaMod_TabSkills>
+  <MegaMod_TabRecipes>🛠️ Recipe Tweaker</MegaMod_TabRecipes>
+
+  <!-- Recipe Tweaker Module -->
+  <MegaMod_RecipeTitle>Recipe &amp; Crafting Tweaker</MegaMod_RecipeTitle>
+  <MegaMod_RecipeDesc>In-game real-time recipe editor for vanilla and all modded RecipeDefs. Customize ingredient lists, work amounts (crafting time), names, or disable recipes completely.</MegaMod_RecipeDesc>
+  <MegaMod_RecipeActiveCount>Active Custom Tweaks: {0}</MegaMod_RecipeActiveCount>
+  <MegaMod_OpenRecipeEditor>Open Recipe Editor ({0} tweaks)</MegaMod_OpenRecipeEditor>
+  <MegaMod_ExportXmlPatch>Export to XML Patch</MegaMod_ExportXmlPatch>
+  <MegaMod_ResetAllRecipes>Reset All Tweaks to Vanilla</MegaMod_ResetAllRecipes>
+  <MegaMod_ResetAllConfirm>Are you sure you want to revert all custom recipe tweaks to vanilla defaults? This will erase all your saved recipe modifications.</MegaMod_ResetAllConfirm>
+  <MegaMod_ResetAllSuccess>All recipes have been reset to vanilla defaults.</MegaMod_ResetAllSuccess>
+  <MegaMod_RecipeHelp>Tip: Edits made in the Recipe Editor take effect immediately and are saved automatically across game restarts.</MegaMod_RecipeHelp>
+
+  <!-- Skill Multipliers Module -->
+  <SLM_ModTitle>Skill Learning Multiplier</SLM_ModTitle>
+  <SLM_GeneralSettings>General &amp; Quality of Life</SLM_GeneralSettings>
+  <SLM_OnlyColonists>Apply to Colonists Only</SLM_OnlyColonists>
+  <SLM_OnlyColonists_Desc>When enabled, multipliers and benefits apply exclusively to player colonists and faction members.</SLM_OnlyColonists_Desc>
+  <SLM_DisableDailyCap>Disable Daily XP Soft-Cap</SLM_DisableDailyCap>
+  <SLM_DisableDailyCap_Desc>RimWorld penalizes learning speed by 80% after gaining 4,000 XP in a day. Enabling this removes that penalty entirely.</SLM_DisableDailyCap_Desc>
+  <SLM_DisableSkillDecay>Disable Skill Decay</SLM_DisableSkillDecay>
+  <SLM_DisableSkillDecay_Desc>Prevents skills above level 10 from losing XP over time.</SLM_DisableSkillDecay_Desc>
+  <SLM_UseGlobalMultiplier>Use Global Multiplier for All Skills</SLM_UseGlobalMultiplier>
+  <SLM_UseGlobalMultiplier_Desc>When checked, the global slider applies to every skill. Uncheck to configure each skill independently.</SLM_UseGlobalMultiplier_Desc>
+  <SLM_GlobalMultiplier>Global XP Multiplier</SLM_GlobalMultiplier>
+  <SLM_IndividualMultipliers>Individual Skill Multipliers</SLM_IndividualMultipliers>
+  <SLM_IndividualNotice>Note: Global multiplier is currently active. Uncheck 'Use Global Multiplier' above to apply individual values.</SLM_IndividualNotice>
+  <SLM_Presets>Quick Presets</SLM_Presets>
+  <SLM_Preset_Vanilla>1x (Vanilla)</SLM_Preset_Vanilla>
+  <SLM_Preset_2x>2x</SLM_Preset_2x>
+  <SLM_Preset_5x>5x</SLM_Preset_5x>
+  <SLM_Preset_10x>10x</SLM_Preset_10x>
+  <SLM_Preset_25x>25x</SLM_Preset_25x>
+  <SLM_Preset_50x>50x</SLM_Preset_50x>
+  <SLM_Preset_100x>100x</SLM_Preset_100x>
+  <SLM_ResetDefaults>Reset to Defaults</SLM_ResetDefaults>
+
+  <!-- Lethal Ranged Combat Module -->
+  <LethalRanged_ModTitle>Lethal &amp; Accurate Ranged Combat</LethalRanged_ModTitle>
+  <LethalRanged_SettingsTitle>Lethal &amp; Accurate Ranged Combat Settings</LethalRanged_SettingsTitle>
+  <LethalRanged_PresetHeader>Quick Presets:</LethalRanged_PresetHeader>
+  <LethalRanged_PresetVanillaPlus>Vanilla+</LethalRanged_PresetVanillaPlus>
+  <LethalRanged_PresetTactical>Tactical Lethal</LethalRanged_PresetTactical>
+  <LethalRanged_PresetRealism>Harsh Realism</LethalRanged_PresetRealism>
+  <LethalRanged_ResetDefault>Reset to Default</LethalRanged_ResetDefault>
+
+  <LethalRanged_SectionAccuracy>Ballistic Accuracy Overhaul</LethalRanged_SectionAccuracy>
+  <LethalRanged_EnableAccuracy>Enable Universal Ballistic Formula</LethalRanged_EnableAccuracy>
+  <LethalRanged_EnableAccuracy_Desc>Replaces vanilla's harsh distance penalty with a ballistic curve, making skilled shooters deadly at long range.</LethalRanged_EnableAccuracy_Desc>
+  <LethalRanged_FormulaMode>Accuracy Curve:</LethalRanged_FormulaMode>
+  <LethalRanged_Mode_SoftBallistic>Soft Ballistic</LethalRanged_Mode_SoftBallistic>
+  <LethalRanged_Mode_Hyperbolic>Hyperbolic</LethalRanged_Mode_Hyperbolic>
+  <LethalRanged_Mode_SkillFocused>Skill-Focused</LethalRanged_Mode_SkillFocused>
+  <LethalRanged_Mode_Vanilla>Vanilla Curve</LethalRanged_Mode_Vanilla>
+  <LethalRanged_FalloffMult>Distance Falloff Multiplier</LethalRanged_FalloffMult>
+  <LethalRanged_FalloffMult_Desc>Higher values reduce accuracy at extreme ranges.</LethalRanged_FalloffMult_Desc>
+
+  <LethalRanged_SectionLethality>Damage &amp; Penetration Multipliers</LethalRanged_SectionLethality>
+  <LethalRanged_DamageMult>Projectile Damage Multiplier</LethalRanged_DamageMult>
+  <LethalRanged_DamageMult_Desc>Increases raw damage dealt by ranged projectiles.</LethalRanged_DamageMult_Desc>
+  <LethalRanged_ApMult>Armor Penetration Multiplier</LethalRanged_ApMult>
+  <LethalRanged_ApMult_Desc>Increases bullet armor penetration, making armor quality crucial.</LethalRanged_ApMult_Desc>
+  <LethalRanged_SpeedMult>Projectile Speed Multiplier</LethalRanged_SpeedMult>
+  <LethalRanged_SpeedMult_Desc>Increases projectile travel velocity for snappier gunplay.</LethalRanged_SpeedMult_Desc>
+
+  <LethalRanged_SectionMechanics>Kinetic Stagger &amp; Fatalities</LethalRanged_SectionMechanics>
+  <LethalRanged_EnableStagger>Kinetic Bullet Stagger</LethalRanged_EnableStagger>
+  <LethalRanged_EnableStagger_Desc>Bullets slow incoming targets regardless of pawn body size.</LethalRanged_EnableStagger_Desc>
+  <LethalRanged_StaggerSpeedFactor>Stagger Move Speed Factor</LethalRanged_StaggerSpeedFactor>
+  <LethalRanged_StaggerSpeedFactor_Desc>Target move speed while staggered (lower = heavier slow).</LethalRanged_StaggerSpeedFactor_Desc>
+  <LethalRanged_Prevent1Hp>Disable Vanilla 1-HP Anti-Preservation</LethalRanged_Prevent1Hp>
+  <LethalRanged_Prevent1Hp_Desc>Removes vanilla's artificial rule that forces vital body parts to survive with 1 HP when taking fatal single hits.</LethalRanged_Prevent1Hp_Desc>
+  <LethalRanged_AffectTurrets>Affect Defense Turrets</LethalRanged_AffectTurrets>
+  <LethalRanged_AffectTurrets_Desc>When checked, defensive turrets also benefit from the improved ballistic formula.</LethalRanged_AffectTurrets_Desc>
+</LanguageData>
