@@ -1,0 +1,84 @@
+using HarmonyLib;
+using SadSeal.MegaMod.Combat.UI;
+using SadSeal.MegaMod.Recipes.UI;
+using SadSeal.MegaMod.Skills.UI;
+using UnityEngine;
+using Verse;
+
+namespace SadSeal.MegaMod
+{
+    public enum MegaModTab
+    {
+        Combat,
+        Skills,
+        Recipes
+    }
+
+    public class MegaMod : Mod
+    {
+        public static MegaMod Instance { get; private set; }
+        public static MegaModSettings Settings { get; private set; }
+
+        private static MegaModTab currentTab = MegaModTab.Combat;
+
+        public MegaMod(ModContentPack content) : base(content)
+        {
+            Instance = this;
+            Settings = GetSettings<MegaModSettings>();
+
+            var harmony = new Harmony("sadseal.megamod");
+            harmony.PatchAll();
+
+            Log.Message("[SadSeal's Mega Mod] Successfully initialized: Combat, Skills & Recipe Tweaker.");
+        }
+
+        public override string SettingsCategory()
+        {
+            return "MegaMod_ModTitle".Translate();
+        }
+
+        public override void DoSettingsWindowContents(Rect inRect)
+        {
+            // Top tab selector bar
+            Rect tabRect = new Rect(inRect.x, inRect.y, inRect.width, 36f);
+            float tabWidth = (tabRect.width - 16f) / 3f;
+
+            DrawTabButton(new Rect(tabRect.x, tabRect.y, tabWidth, 36f), "MegaMod_TabCombat".Translate(), MegaModTab.Combat);
+            DrawTabButton(new Rect(tabRect.x + tabWidth + 8f, tabRect.y, tabWidth, 36f), "MegaMod_TabSkills".Translate(), MegaModTab.Skills);
+            DrawTabButton(new Rect(tabRect.x + (tabWidth + 8f) * 2f, tabRect.y, tabWidth, 36f), "MegaMod_TabRecipes".Translate(), MegaModTab.Recipes);
+
+            Widgets.DrawLineHorizontal(inRect.x, inRect.y + 42f, inRect.width);
+
+            Rect contentRect = new Rect(inRect.x, inRect.y + 48f, inRect.width, inRect.height - 48f);
+
+            switch (currentTab)
+            {
+                case MegaModTab.Combat:
+                    CombatSettingsDrawer.DrawSettings(contentRect, Settings.Combat);
+                    break;
+                case MegaModTab.Skills:
+                    SkillSettingsDrawer.DrawSettings(contentRect, Settings.Skills);
+                    break;
+                case MegaModTab.Recipes:
+                    RecipeSettingsDrawer.DrawSettings(contentRect, Settings.Recipes);
+                    break;
+            }
+
+            base.DoSettingsWindowContents(inRect);
+        }
+
+        private void DrawTabButton(Rect rect, string label, MegaModTab tab)
+        {
+            Color prevColor = GUI.color;
+            if (currentTab == tab)
+            {
+                GUI.color = new Color(0.35f, 0.85f, 1f, 1f);
+            }
+            if (Widgets.ButtonText(rect, label))
+            {
+                currentTab = tab;
+            }
+            GUI.color = prevColor;
+        }
+    }
+}
