@@ -26,6 +26,8 @@
   <SLM_DisableDailyCap_Desc>RimWorld penalizes learning speed by 80% after gaining 4,000 XP in a day. Enabling this removes that penalty entirely.</SLM_DisableDailyCap_Desc>
   <SLM_DisableSkillDecay>Disable Skill Decay</SLM_DisableSkillDecay>
   <SLM_DisableSkillDecay_Desc>Prevents skills above level 10 from losing XP over time.</SLM_DisableSkillDecay_Desc>
+  <SLM_MuteMasterworkLegendary>Mute Masterwork &amp; Legendary Crafting Alerts</SLM_MuteMasterworkLegendary>
+  <SLM_MuteMasterworkLegendary_Desc>Disables the loud letter sound effect and popup letter envelopes when colonists craft or construct Masterwork and Legendary quality items.</SLM_MuteMasterworkLegendary_Desc>
   <SLM_UseGlobalMultiplier>Use Global Multiplier for All Skills</SLM_UseGlobalMultiplier>
   <SLM_UseGlobalMultiplier_Desc>When checked, the global slider applies to every skill. Uncheck to configure each skill independently.</SLM_UseGlobalMultiplier_Desc>
   <SLM_GlobalMultiplier>Global XP Multiplier</SLM_GlobalMultiplier>
