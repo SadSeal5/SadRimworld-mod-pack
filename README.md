@@ -1,75 +1,104 @@
-# SadSeal's Mega Mod (Combat, Skills & Recipe Tweaker Suite)
+# 🦭 SadSeal's Mega Mod (Combat, Skills & Recipe Tweaker Suite)
 
-**RimWorld 1.5, 1.6 & 1.7 (Beta) Uyumlu Birleşik Mega Mod**
+<p align="center">
+  <img src="About/Preview.png" alt="SadSeal's Mega Mod Banner" width="800">
+</p>
 
-SadSeal's Mega Mod, RimWorld topluluğu için geliştirilmiş 3 temel modu tek bir çatı altında birleştiren, yüksek performanslı ve tam optimize edilmiş bir süitedir:
-1. **Lethal & Accurate Ranged Combat** (Ölümcül ve İsabetli Menzilli Çatışma)
-2. **Skill Learning Multiplier & Decay Control** (Yetenek Öğrenme Çarpanı ve Erime Denetimi)
-3. **Recipe & Crafting Tweaker** (Oyun İçi Tarif ve Üretim Düzenleyici)
+<p align="center">
+  <a href="#"><img src="https://img.shields.io/badge/RimWorld-1.5%20%7C%201.6%20%7C%201.7%20(Beta)-brightgreen.svg" alt="RimWorld Versions"></a>
+  <a href="https://github.com/pardeike/HarmonyRimWorld"><img src="https://img.shields.io/badge/Requires-Harmony-007EC6.svg?logo=unity&logoColor=white" alt="Requires Harmony"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Language-C%23-239120.svg?logo=csharp&logoColor=white" alt="Language C#"></a>
+  <a href="#"><img src="https://img.shields.io/badge/.NET-10.0-512BD4.svg?logo=dotnet&logoColor=white" alt=".NET 10.0"></a>
+  <a href="#"><img src="https://img.shields.io/badge/License-MIT-orange.svg" alt="License MIT"></a>
+</p>
+
+<p align="center">
+  <b>RimWorld deneyiminizi tepeden tırnağa geliştiren 3 büyük modu tek bir optimize edilmiş süite altında birleştiren hepsi bir arada oyun içi yönetim paketi.</b>
+</p>
 
 ---
 
 ## 🌟 Modül Özellikleri
 
 ### 1. 🏹 Ölümcül ve İsabetli Menzilli Çatışma (Lethal Combat)
-- **Akıcı Balistik İsabet Formülü:** Vanilla'nın aşırı mesafeli atış cezalarını ortadan kaldırarak yetenekli atıcıları mantıklı menzillerde ölümcül kılar.
-- **4 İsabet Eğrisi:** Yumuşak Balistik (Soft Ballistic), Hiperbolik (Hyperbolic), Yetenek Odaklı (Skill-Focused) ve Vanilla eğrisi.
-- **Ölçeklenebilir Çarpanlar:** Mermi ham hasarı, zırh delme oranı (AP) ve mermi uçuş hızı çarpanları.
-- **Kinetik Sarsma (Stopping Power):** Mermilerin hedef vücut büyüklüğü sınırına takılmaksızın hedefleri sarsıp yavaşlatmasını sağlar.
-- **1-Can Koruma Sistemini Kaldırma:** Ağır darbe alan organların yapay olarak 1 Can ile kurtulmasını sağlayan vanilla mekaniğini devre dışı bırakır.
-- **Hazır Şablonlar:** Vanilla+, Taktiksel Ölümcül (Tactical Lethal), Sert Gerçekçilik (Harsh Realism) ve Özel Profil.
+* **Akıcı Balistik İsabet Formülü:** Vanilla'nın orantısız mesafe cezalarını kaldırarak yetenekli atıcıları mantıklı menzillerde ölümcül kılar.
+* **4 Farklı Balistik Eğri:**
+  * **Soft Ballistic (Varsayılan):** Pürüzsüz karekök düşüş eğrisi. Yüksek gerçekçilik ve dengeli çatışma.
+  * **Hyperbolic:** Rasyonel düşüş eğrisi ile uzun menzilli kararlı isabet.
+  * **Skill-Focused:** Yetenekli nişancıların mesafeden bağımsız yüksek isabetini korur.
+  * **Vanilla:** Ayarlanabilir mesafe çarpanlı orijinal vanilla formülü.
+* **Ölçeklenebilir Çarpanlar:** Mermi ham hasarı (1.00x - 2.50x), zırh delme oranı (1.00x - 2.00x) ve mermi uçuş hızı (1.00x - 2.50x) çarpanları.
+* **Kinetik Sarsma (Stopping Power):** Mermilerin isabet ettiği hedefleri vücut boyutu sınırına takılmaksızın yavaşlatmasını sağlar (Centipede, Thrumbo ve yakın dövüş saldırganları sarsılır).
+* **1-Can Koruma Sistemini Kaldırma:** Ağır isabet alan organların ve uzuvların yapay olarak 1 HP ile hayatta kalmasını sağlayan vanilla mekaniğini devre dışı bırakır.
+* **Hazır Şablonlar:** `Vanilla+`, `Taktiksel Ölümcül`, `Sert Gerçekçilik` ve `Özel Profil`.
+
+---
 
 ### 2. 🎓 Yetenek Öğrenme Çarpanı (Skill Multipliers)
-- **Kapsamlı XP Çarpanları:** 0.0x ile 100.0x arasında serbest ölçekleme.
-- **Genel ve Tekil Yetenek Desteği:** Tek bir genel çarpan kullanabilir veya vanilla ve tüm modlu yetenekleri bağımsız olarak ayarlayabilirsiniz.
-- **Günlük XP Yumuşak Tavanını Kaldırma:** 4.000 XP/gün sonrasında uygulanan %80 öğrenme hız cezasını iptal eder.
-- **Yetenek Erimesini (Decay) Engelleme:** Seviye 10 ve üzeri yeteneklerin zamanla tecrübe kaybetmesini önler.
-- **Hızlı Şablon Butonları:** 1x, 2x, 5x, 10x, 25x, 50x, 100x ve Varsayılana Sıfırla.
+* **Kapsamlı XP Çarpanları:** 0.0x (öğrenmeyi durdurma) ile 100.0x (ultra hızlı uzmanlık) arasında serbest ölçekleme.
+* **Genel ve Bağımsız Yetenek Denetimi:** İster tek bir genel çarpan kullanın, ister Shooting, Melee, Crafting, Medicine gibi tüm vanilla ve modlu yetenekleri tek tek ayarlayın.
+* **Günlük XP Yumuşak Tavanını Kaldırma:** RimWorld'ün günde 4.000 XP sonrasında uyguladığı %80 öğrenme hız cezasını tamamen iptal eder.
+* **Yetenek Erimesini (Decay) Engelleme:** Seviye 10 üzerindeki yeteneklerin zamanla tecrübe puanı kaybetmesini önler.
+* **Koloni Üyelerine Özel Koruma:** Çarpanların yalnızca oyuncu kolonistlerine uygulanmasını sağlayarak akıncıların ve düşmanların haksız avantaj kazanmasını engeller.
+* **Usta & Efsanevi Bildirimlerini Susturma:** Yüksek çarpanlarda sık üretilen Masterwork/Legendary eşyaların ses ve mektup bildirim kirliliğini engeller.
+* **Hızlı Şablon Butonları:** `1x`, `2x`, `5x`, `10x`, `25x`, `50x`, `100x` ve `Varsayılana Sıfırla`.
+
+---
 
 ### 3. 🛠️ Tarif ve Üretim Düzenleyici (Recipe Tweaker)
-- **Oyun İçi Tarif Editörü:** Sol listeden tüm modlar ve vanilla tarifleri arasında anında arama yapma ve seçme.
-- **Üretim Süresi (Work Amount) Ayarlama:** Tarifin hem `workAmount` değerini hem de üretilen eşyanın `WorkToMake` statını senkronize günceller.
-- **Malzeme Düzenleme:** Herhangi bir yüklü moddan eşyaları malzeme olarak ekleme, çıkarma ve miktarlarını değiştirme.
-- **Tarif Kapatma:** İstenmeyen tarifleri oyunda devre dışı bırakma.
-- **XML Yaması Dışa Aktarımı:** Yapılan tüm değişiklikleri tek tuşla `Config/SadSealMegaMod/GeneratedPatches.xml` dosyasına standart RimWorld XML yaması olarak dışa aktarabilme.
+* **Oyun İçi Canlı Tarif Editörü:** Tüm vanilla ve modlu tarifler (`RecipeDef`) arasında anında arama yapma ve filtreleme.
+* **Üretim Süresi (İş Miktarı) Senkronizasyonu:** Tarifin `workAmount` değeri ile üretilen eşyanın `WorkToMake` statını eşzamanlı günceller.
+* **Özel Malzeme Seçici:** Yüklü herhangi bir moddan malzemeleri tarife ekleme, çıkarma veya gerekli miktarları değiştirme.
+* **Tarif Kapatma:** İstenmeyen veya dengesiz tarifleri tek tıklamayla oyunda devre dışı bırakma.
+* **Tek Tıkla XML Yaması Dışa Aktarımı:** Yapılan tüm özel tarif düzenlemelerini standart RimWorld `PatchOperation` XML dosyası olarak (`Config/SadSealMegaMod/GeneratedPatches.xml`) dışa aktarabilme.
+* **Orijinale Dönme:** Tekil veya tüm tarifleri onay pencereleri ile güvenle vanilla haline döndürme.
 
 ---
 
 ## 🖥️ Kullanıcı Arayüzü & Mod Ayarları
-- Oyun içinde **Seçenekler -> Mod Ayarları -> SadSeal Mega Mod** menüsüne girdiğinizde üst tarafta **3 Sekme** yer alır:
-  - `[🏹 Menzilli Çatışma]`
-  - `[🎓 Yetenek Çarpanı]`
-  - `[🛠️ Tarif Düzenleyici]`
-- Pencereler arasında geçiş yapmak için tek bir tıklama yeterlidir.
-- Türkçe ve İngilizce tam dil desteğine sahiptir.
+
+Oyun içinde **Seçenekler ➔ Mod Ayarları ➔ SadSeal Mega Mod** menüsüne girdiğinizde üst tarafta 3 ana sekme yer alır:
+
+| Sekme | Açıklama |
+|---|---|
+| `[🏹 Menzilli Çatışma]` | Balistik modeller, hasar, zırh delme ve mermi hız ayarları |
+| `[🎓 Yetenek Çarpanı]` | Genel ve tekil XP katsayıları, erime ve yumuşak tavan denetimi |
+| `[🛠️ Tarif Düzenleyici]` | Oyun içi canlı tarif editörü, malzeme seçici ve XML dışa aktarıcı |
+
+* Türkçe ve İngilizce tam dil desteğine sahiptir.
+* Değişikliklerin çoğu oyun yeniden başlatılmadan anında yürürlüğe girer.
 
 ---
 
-## 📁 Klasör Yapısı
+## 🧩 Bağımsız (Atomize Edilmiş) Mod Depoları
+
+Mega mod süiti içerisindeki modülleri bağımsız olarak kullanmak isterseniz aşağıdaki ayrı depolardan da edinebilirsiniz:
+
+* 🎓 [Rimworld-Skill-learning-multiplier](https://github.com/SadSeal5/Rimworld-Skill-learning-multiplier)
+* 🏹 [rimworld-lethal-ranged-combat-1.6](https://github.com/SadSeal5/rimworld-lethal-ranged-combat-1.6)
+* 🛠️ [rimworld-recipe-tweaker](https://github.com/SadSeal5/rimworld-recipe-tweaker)
+
+---
+
+## ⚙️ Gereksinimler & Yükleme Sırası
+
+* **RimWorld Sürümleri:** `1.5`, `1.6` veya `1.7` (Beta)
+* **Gerekli Mod:** [Harmony (brrainz.harmony)](https://github.com/pardeike/HarmonyRimWorld)
 
 ```
-SadSealMegaMod/
-├── About/
-│   ├── About.xml           # Mod kimliği, bağımlılıklar ve açıklamalar
-│   └── Preview.png         # Oyun içi mod menüsü afişi (800x450)
-├── Assemblies/
-│   └── SadSealMegaMod.dll  # Birleşik derlenmiş C# assembly kütüphanesi
-├── Languages/
-│   ├── English/Keyed/
-│   │   └── MegaMod_Keys.xml
-│   └── Turkish/Keyed/
-│       └── MegaMod_Keys.xml
-└── Source/
-    ├── MegaMod.cs          # Mod giriş noktası ve sekmeli UI yöneticisi
-    ├── MegaModSettings.cs  # Birleşik ayar serileştirme (IExposable)
-    ├── SadSealMegaMod.csproj
-    ├── Combat/             # Balistik, isabet ve hasar yamaları + UI
-    ├── Skills/             # XP çarpanları, erime iptali + UI
-    └── Recipes/            # Tarif motoru, Live Patcher, XML Exporter + UI
+1. Core (RimWorld)
+2. Harmony
+... (Diğer Modlar)
+X. SadSeal's Mega Mod
 ```
 
 ---
 
-## ⚙️ Gereksinimler
-- **RimWorld:** `1.5`, `1.6` veya `1.7` (Beta)
-- **Harmony:** `brrainz.harmony` (Mod yükleme sırasında Harmony'nin Mega Mod'dan önce yüklenmesi gerekir).
+## 📁 Kurulum
+
+1. Deponun en son sürümünü [Releases](https://github.com/SadSeal5/SadRimworld-mod-pack/releases) sayfasından indirin veya depoyu klonlayın.
+2. Klasörü RimWorld mod dizininize yerleştirin:
+   ```
+   RimWorld/Mods/SadSealMegaMod/
+   ```
+3. Oyunu başlatın, Mod Yöneticisi'nde Harmony'nin altına SadSeal's Mega Mod'u ekleyin ve etkinleştirin.
