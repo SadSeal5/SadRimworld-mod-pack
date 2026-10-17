@@ -1,0 +1,5 @@
+Source/obj/
+Source/bin/
+*.pdb
+.vs/
+.idea/

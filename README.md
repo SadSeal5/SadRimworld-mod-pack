@@ -1,6 +1,6 @@
 # SadSeal's Mega Mod (Combat, Skills & Recipe Tweaker Suite)
 
-**RimWorld 1.5 & 1.6 Uyumlu Birleşik Mega Mod**
+**RimWorld 1.5, 1.6 & 1.7 (Beta) Uyumlu Birleşik Mega Mod**
 
 SadSeal's Mega Mod, RimWorld topluluğu için geliştirilmiş 3 temel modu tek bir çatı altında birleştiren, yüksek performanslı ve tam optimize edilmiş bir süitedir:
 1. **Lethal & Accurate Ranged Combat** (Ölümcül ve İsabetli Menzilli Çatışma)
@@ -71,5 +71,5 @@ SadSealMegaMod/
 ---
 
 ## ⚙️ Gereksinimler
-- **RimWorld:** `1.5` veya `1.6`
+- **RimWorld:** `1.5`, `1.6` veya `1.7` (Beta)
 - **Harmony:** `brrainz.harmony` (Mod yükleme sırasında Harmony'nin Mega Mod'dan önce yüklenmesi gerekir).
