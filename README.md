@@ -88,7 +88,7 @@ Mega mod süiti içerisindeki modülleri bağımsız olarak kullanmak isterseniz
 * 🎓 [Rimworld-Skill-learning-multiplier](https://github.com/SadSeal5/Rimworld-Skill-learning-multiplier)
 * 🏹 [rimworld-lethal-ranged-combat-1.6](https://github.com/SadSeal5/rimworld-lethal-ranged-combat-1.6)
 * 🛠️ [rimworld-recipe-tweaker](https://github.com/SadSeal5/rimworld-recipe-tweaker)
-* 🧬 [Rimworld-Gene-Synthesizer](atomized/Rimworld-Gene-Synthesizer)
+* 🧬 [rimworld-gene-synthesizer](https://github.com/SadSeal5/rimworld-gene-synthesizer)
 
 ---
 
