@@ -2,10 +2,10 @@
 <LanguageData>
   <!-- Mega Mod Shell -->
   <MegaMod_ModTitle>SadSeal's Mega Mod</MegaMod_ModTitle>
-  <MegaMod_TabCombat>🏹 Lethal Combat</MegaMod_TabCombat>
-  <MegaMod_TabSkills>🎓 Skill Multipliers</MegaMod_TabSkills>
-  <MegaMod_TabRecipes>🛠️ Recipe Tweaker</MegaMod_TabRecipes>
-  <MegaMod_TabGenes>🧬 Gene Synthesizer</MegaMod_TabGenes>
+  <MegaMod_TabCombat>Lethal Combat</MegaMod_TabCombat>
+  <MegaMod_TabSkills>Skill Multipliers</MegaMod_TabSkills>
+  <MegaMod_TabRecipes>Recipe Tweaker</MegaMod_TabRecipes>
+  <MegaMod_TabGenes>Gene Synthesizer</MegaMod_TabGenes>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Recipe &amp; Crafting Tweaker</MegaMod_RecipeTitle>

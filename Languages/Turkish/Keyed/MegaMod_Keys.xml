@@ -2,10 +2,10 @@
 <LanguageData>
   <!-- Mega Mod Shell -->
   <MegaMod_ModTitle>SadSeal Mega Mod</MegaMod_ModTitle>
-  <MegaMod_TabCombat>🏹 Menzilli Çatışma</MegaMod_TabCombat>
-  <MegaMod_TabSkills>🎓 Yetenek Çarpanı</MegaMod_TabSkills>
-  <MegaMod_TabRecipes>🛠️ Tarif Düzenleyici</MegaMod_TabRecipes>
-  <MegaMod_TabGenes>🧬 Gen Sentezleyici</MegaMod_TabGenes>
+  <MegaMod_TabCombat>Menzilli Çatışma</MegaMod_TabCombat>
+  <MegaMod_TabSkills>Yetenek Çarpanı</MegaMod_TabSkills>
+  <MegaMod_TabRecipes>Tarif Düzenleyici</MegaMod_TabRecipes>
+  <MegaMod_TabGenes>Gen Sentezleyici</MegaMod_TabGenes>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Tarif ve Üretim Düzenleyici</MegaMod_RecipeTitle>
