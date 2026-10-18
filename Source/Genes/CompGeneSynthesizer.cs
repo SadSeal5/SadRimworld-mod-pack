@@ -109,7 +109,7 @@ namespace SadSeal.MegaMod.Genes
                 {
                     defaultLabel = "GeneSynthesis_GizmoSynthesize".Translate(),
                     defaultDesc = "GeneSynthesis_GizmoSynthesizeDesc".Translate(),
-                    icon = ContentFinder<Texture2D>.Get("UI/Icons/Genes/GeneBackground_Positive", false) ?? TexCommand.DesirePower,
+                    icon = ContentFinder<Texture2D>.Get("UI/Gizmos/RecombineGenes", false) ?? TexCommand.DesirePower,
                     action = () =>
                     {
                         Find.WindowStack.Add(new Dialog_GeneSynthesizer(this));
