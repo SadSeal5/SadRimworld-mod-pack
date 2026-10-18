@@ -21,6 +21,7 @@ namespace SadSeal.MegaMod.Recipes
         static RecipePatchApplier()
         {
             ApplyAll();
+            CustomRecipeManager.InitializeAll();
         }
 
         public static void EnsureVanillaSaved(RecipeDef r)
