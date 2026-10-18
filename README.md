@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <b>RimWorld deneyiminizi tepeden tırnağa geliştiren 3 büyük modu tek bir optimize edilmiş süite altında birleştiren hepsi bir arada oyun içi yönetim paketi.</b>
+  <b>RimWorld deneyiminizi tepeden tırnağa geliştiren 4 büyük modu (Çatışma, Yetenekler, Tarifler ve Gen Sentezleme) tek bir optimize edilmiş süite altında birleştiren hepsi bir arada oyun içi yönetim paketi.</b>
 </p>
 
 ---
@@ -55,15 +55,26 @@
 
 ---
 
+### 4. 🧬 Gen Sentezleyici (Gene Synthesizer)
+* **Gene Assembler Üzerinden Doğrudan Sentez:** Gene Assembler binasında "Gen Sentezle" komutu ile dilediğiniz geni seçip saf bir `Genepack` olarak üretin.
+* **Neutroamine ile Üretim:** Varsayılan 100 Neutroamine karşılığında genetik sentezleme (mod ayarlarından serbestçe değiştirilebilir).
+* **Bütün Modlu Genlerle Tam Uyum:** Oyunun `DefDatabase<GeneDef>` kütüphanesini dinamik olarak tarar; Alpha Genes, Biotech Expansion ve diğer tüm gen modlarını otomatik olarak listeler.
+* **Gelişmiş Arama ve Filtreleme:** Arayüzde anlık arama, mod bazında filtreleme, kategori (biyokimyasal, kozmetik, archite vb.) filtreleme ve karmaşıklık/metabolizma/archite istatistik önizlemesi.
+* **Sıralı Koloni İş Akışı:** Taşıyıcı kolonistler Neutroamine'leri makineye depolar, ardından araştırmacılar çalışarak sentezi tamamlar. İptal durumunda malzemeler yere dökülerek iade edilir.
+* **Hızlı Şablon Butonları:** `Bedava` (0 maliyet / anında), `Ucuz` (25 Neutroamine), `Standart` (100 Neutroamine), `Zorlu` (250 Neutroamine) ve `Varsayılana Sıfırla`.
+
+---
+
 ## 🖥️ Kullanıcı Arayüzü & Mod Ayarları
 
-Oyun içinde **Seçenekler ➔ Mod Ayarları ➔ SadSeal Mega Mod** menüsüne girdiğinizde üst tarafta 3 ana sekme yer alır:
+Oyun içinde **Seçenekler ➔ Mod Ayarları ➔ SadSeal Mega Mod** menüsüne girdiğinizde üst tarafta 4 ana sekme yer alır:
 
 | Sekme | Açıklama |
 |---|---|
 | `[🏹 Menzilli Çatışma]` | Balistik modeller, hasar, zırh delme ve mermi hız ayarları |
 | `[🎓 Yetenek Çarpanı]` | Genel ve tekil XP katsayıları, erime ve yumuşak tavan denetimi |
 | `[🛠️ Tarif Düzenleyici]` | Oyun içi canlı tarif editörü, malzeme seçici ve XML dışa aktarıcı |
+| `[🧬 Gen Sentezleyici]` | Neutroamine maliyeti, üretim süresi, archite kuralları ve hazır şablonlar |
 
 * Türkçe ve İngilizce tam dil desteğine sahiptir.
 * Değişikliklerin çoğu oyun yeniden başlatılmadan anında yürürlüğe girer.
@@ -77,6 +88,7 @@ Mega mod süiti içerisindeki modülleri bağımsız olarak kullanmak isterseniz
 * 🎓 [Rimworld-Skill-learning-multiplier](https://github.com/SadSeal5/Rimworld-Skill-learning-multiplier)
 * 🏹 [rimworld-lethal-ranged-combat-1.6](https://github.com/SadSeal5/rimworld-lethal-ranged-combat-1.6)
 * 🛠️ [rimworld-recipe-tweaker](https://github.com/SadSeal5/rimworld-recipe-tweaker)
+* 🧬 [Rimworld-Gene-Synthesizer](atomized/Rimworld-Gene-Synthesizer)
 
 ---
 

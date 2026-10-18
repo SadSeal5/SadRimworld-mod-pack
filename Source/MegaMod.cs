@@ -1,5 +1,6 @@
 using HarmonyLib;
 using SadSeal.MegaMod.Combat.UI;
+using SadSeal.MegaMod.Genes.UI;
 using SadSeal.MegaMod.Recipes.UI;
 using SadSeal.MegaMod.Skills.UI;
 using UnityEngine;
@@ -11,7 +12,8 @@ namespace SadSeal.MegaMod
     {
         Combat,
         Skills,
-        Recipes
+        Recipes,
+        Genes
     }
 
     public class MegaMod : Mod
@@ -29,7 +31,7 @@ namespace SadSeal.MegaMod
             var harmony = new Harmony("sadseal.megamod");
             harmony.PatchAll();
 
-            Log.Message("[SadSeal's Mega Mod] Successfully initialized: Combat, Skills & Recipe Tweaker.");
+            Log.Message("[SadSeal's Mega Mod] Successfully initialized: Combat, Skills, Recipes & Gene Synthesizer.");
         }
 
         public override string SettingsCategory()
@@ -39,13 +41,13 @@ namespace SadSeal.MegaMod
 
         public override void DoSettingsWindowContents(Rect inRect)
         {
-            // Top tab selector bar
             Rect tabRect = new Rect(inRect.x, inRect.y, inRect.width, 36f);
-            float tabWidth = (tabRect.width - 16f) / 3f;
+            float tabWidth = (tabRect.width - 24f) / 4f;
 
             DrawTabButton(new Rect(tabRect.x, tabRect.y, tabWidth, 36f), "MegaMod_TabCombat".Translate(), MegaModTab.Combat);
             DrawTabButton(new Rect(tabRect.x + tabWidth + 8f, tabRect.y, tabWidth, 36f), "MegaMod_TabSkills".Translate(), MegaModTab.Skills);
             DrawTabButton(new Rect(tabRect.x + (tabWidth + 8f) * 2f, tabRect.y, tabWidth, 36f), "MegaMod_TabRecipes".Translate(), MegaModTab.Recipes);
+            DrawTabButton(new Rect(tabRect.x + (tabWidth + 8f) * 3f, tabRect.y, tabWidth, 36f), "MegaMod_TabGenes".Translate(), MegaModTab.Genes);
 
             Widgets.DrawLineHorizontal(inRect.x, inRect.y + 42f, inRect.width);
 
@@ -61,6 +63,9 @@ namespace SadSeal.MegaMod
                     break;
                 case MegaModTab.Recipes:
                     RecipeSettingsDrawer.DrawSettings(contentRect, Settings.Recipes);
+                    break;
+                case MegaModTab.Genes:
+                    GeneSynthesizerSettingsDrawer.DrawSettings(contentRect, Settings.Genes);
                     break;
             }
 

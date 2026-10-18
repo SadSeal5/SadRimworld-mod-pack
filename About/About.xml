@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-  <name>SadSeal's Mega Mod (Combat, Skills &amp; Recipes)</name>
+  <name>SadSeal's Mega Mod (Combat, Skills, Recipes &amp; Genes)</name>
   <author>SadSeal5 / Ramo</author>
   <packageId>sadseal.megamod</packageId>
   <supportedVersions>
@@ -19,7 +19,7 @@
   <loadAfter>
     <li>brrainz.harmony</li>
   </loadAfter>
-  <description>SadSeal's Mega Mod, RimWorld deneyiminizi tepeden tırnağa geliştiren üç büyük modu tek bir optimize edilmiş süite altında birleştirir:
+  <description>SadSeal's Mega Mod, RimWorld deneyiminizi tepeden tırnağa geliştiren dört büyük modu tek bir optimize edilmiş süite altında birleştirir:
 
 1. 🏹 Lethal &amp; Accurate Ranged Combat (Ölümcül ve İsabetli Menzilli Çatışma):
 - Akıcı Balistik İsabet Formülü: Vanilla'nın orantısız mesafe cezalarını kaldırarak yetenekli atıcıları ölümcül kılar.
@@ -41,6 +41,12 @@
 - Eşya üretim süresi düzeltmesi (WorkToMake senkronizasyonu).
 - Herhangi bir moddan malzeme seçici ile tarif içeriklerini değiştirme.
 - Yapılan değişiklikleri standart RimWorld XML yaması olarak dışa aktarabilme.
+
+4. 🧬 Gene Synthesizer (Gen Sentezleyici):
+- Gen Birleştirici (Gene Assembler) makinesinde istenilen genleri (Vanilla + tüm modlarla eklenen genler) sentezleyebilme.
+- Nötroamin karşılığında özel gen paketleri (Genepack) üretme.
+- Kategori ve mod filtreleme, anlık metin araması ve biyo-istatistik önizlemesi.
+- Tamamen özelleştirilebilir Nötroamin maliyeti, üretim süresi ve hazır ayarlar.
 
 Tüm modüller oyun içi Mod Ayarları menüsünden sekmeli arayüz ile kolayca yönetilebilir. Türkçe ve İngilizce dil desteği mevcuttur.</description>
 </ModMetaData>

@@ -1,5 +1,7 @@
 Source/obj/
 Source/bin/
 *.pdb
+*.deps.json
+atomized/
 .vs/
 .idea/
