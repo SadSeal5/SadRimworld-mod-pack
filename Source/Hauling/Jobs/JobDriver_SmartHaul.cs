@@ -38,12 +38,31 @@ namespace SadSeal.MegaMod.Hauling.Jobs
 
         public override string GetReport()
         {
-            Thing primary = TargetThingA ?? pawn.carryTracker.CarriedThing;
-            if (primary != null)
+            Thing primary = (pawn.CurJob == job && pawn.carryTracker.CarriedThing != null)
+                ? pawn.carryTracker.CarriedThing
+                : ((TargetThingA != null && TargetThingA.Spawned) ? TargetThingA : null);
+
+            if (primary == null)
             {
-                return "ReportHauling".Translate(primary.LabelCap, job.targetB.Cell.ToString());
+                return "ReportHaulingUnknown".Translate();
             }
-            return base.GetReport();
+
+            string destLabel = null;
+            if (job.targetB.IsValid)
+            {
+                SlotGroup slotGroup = job.targetB.Cell.GetSlotGroup(Map);
+                if (slotGroup != null)
+                {
+                    destLabel = slotGroup.parent.SlotYielderLabel();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(destLabel))
+            {
+                return "ReportHaulingTo".Translate(primary.Named("THING"), destLabel.Named("DESTINATION"));
+            }
+
+            return "ReportHauling".Translate(primary.Label, primary);
         }
 
         protected override IEnumerable<Toil> MakeNewToils()
@@ -72,7 +91,9 @@ namespace SadSeal.MegaMod.Hauling.Jobs
                     return;
                 }
 
-                pawn.carryTracker.TryStartCarry(primary, primary.stackCount);
+                int count = Mathf.Min(job.count, primary.stackCount);
+                if (count <= 0) count = primary.stackCount;
+                pawn.carryTracker.TryStartCarry(primary, count);
                 if (pawn.carryTracker.CarriedThing == null)
                 {
                     EndJobWith(JobCondition.Incompletable);
@@ -161,14 +182,27 @@ namespace SadSeal.MegaMod.Hauling.Jobs
                         return;
                     }
 
-                    Thing taken = (countToTake < candidate.stackCount) ? candidate.SplitOff(countToTake) : candidate;
-                    if (pawn.inventory.innerContainer.TryAddOrTransfer(taken, false))
+                    Thing taken = candidate.SplitOff(countToTake);
+
+                    bool hasPersonalStack = false;
+                    for (int i = 0; i < pawn.inventory.innerContainer.Count; i++)
+                    {
+                        Thing invThing = pawn.inventory.innerContainer[i];
+                        if (invThing != null && invThing.CanStackWith(taken) && !HauledCargoTracker.IsHauled(pawn, invThing))
+                        {
+                            hasPersonalStack = true;
+                            break;
+                        }
+                    }
+
+                    bool added = pawn.inventory.innerContainer.TryAdd(taken, !hasPersonalStack);
+                    if (added)
                     {
                         HauledCargoTracker.Register(pawn, taken);
                     }
                     else
                     {
-                        if (taken != candidate && !taken.Spawned)
+                        if (!taken.Spawned)
                         {
                             GenPlace.TryPlaceThing(taken, pawn.Position, pawn.Map, ThingPlaceMode.Near);
                         }
