@@ -1,5 +1,6 @@
 using SadSeal.MegaMod.Combat;
 using SadSeal.MegaMod.Genes;
+using SadSeal.MegaMod.Hauling;
 using SadSeal.MegaMod.Recipes;
 using SadSeal.MegaMod.Skills;
 using Verse;
@@ -12,6 +13,7 @@ namespace SadSeal.MegaMod
         public SkillSettings Skills = new SkillSettings();
         public RecipeSettings Recipes = new RecipeSettings();
         public GeneSynthesizerSettings Genes = new GeneSynthesizerSettings();
+        public HaulSettings Hauling = new HaulSettings();
 
         public override void ExposeData()
         {
@@ -20,11 +22,13 @@ namespace SadSeal.MegaMod
             Scribe_Deep.Look(ref Skills, "skills");
             Scribe_Deep.Look(ref Recipes, "recipes");
             Scribe_Deep.Look(ref Genes, "genes");
+            Scribe_Deep.Look(ref Hauling, "hauling");
 
             if (Combat == null) Combat = new CombatSettings();
             if (Skills == null) Skills = new SkillSettings();
             if (Recipes == null) Recipes = new RecipeSettings();
             if (Genes == null) Genes = new GeneSynthesizerSettings();
+            if (Hauling == null) Hauling = new HaulSettings();
         }
     }
 }

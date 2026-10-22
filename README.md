@@ -1,4 +1,4 @@
-# 🦭 SadSeal's Mega Mod (Combat, Skills & Recipe Tweaker Suite)
+# 🦭 SadSeal's Mega Mod (Combat, Skills, Recipes, Genes & Smart Haul Suite)
 
 <p align="center">
   <img src="About/Preview.png" alt="SadSeal's Mega Mod Banner" width="800">
@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <b>RimWorld deneyiminizi tepeden tırnağa geliştiren 4 büyük modu (Çatışma, Yetenekler, Tarifler ve Gen Sentezleme) tek bir optimize edilmiş süite altında birleştiren hepsi bir arada oyun içi yönetim paketi.</b>
+  <b>RimWorld deneyiminizi tepeden tırnağa geliştiren 5 büyük modu (Çatışma, Yetenekler, Tarifler, Gen Sentezleme ve Akıllı Taşıma) tek bir optimize edilmiş süite altında birleştiren hepsi bir arada oyun içi yönetim paketi.</b>
 </p>
 
 ---
@@ -65,9 +65,19 @@
 
 ---
 
+### 5. 📦 Akıllı Taşıma (Smart Haul - Pick Up And Haul Varyantı)
+* **Yüksek Performanslı Çoklu Taşıma:** Kolonistler tek bir eşya taşımak yerine envanter kapasiteleri dolana kadar yakındaki eşyaları da toplar.
+* **Kesintisiz Toplu Boşaltma (Single-Job Batch Unload):** Orijinal Pick Up And Haul'un aksine her eşya için ThinkTree'yi baştan başlatıp TPS kaybetmez; eldeki ve çantadaki tüm eşyaları aynı iş akışı içinde sırayla depoya yerleştirir.
+* **Stok Alanı Kümeleme (Affinity Cache):** Yakındaki aday eşyaların hedef depoya kabul durumunu anında kontrol ederek harita çapı ağır stok taramalarını %95 oranında baypas eder.
+* **Kişisel Eşya Güvenliği:** Yalnızca taşıma amacıyla toplanan yükler etiketlenir; kolonistin yemeği, ilacı ve teçhizatı asla depoya boşaltılmaz.
+* **Askere Alınma (Draft) Koruması:** Kolonist savaşa çağrıldığında taşınan yükler anında yere bırakılarak kolonist muharebeye hazır hale getirilir.
+* **Hazır Şablon Butonları:** `Dengeli`, `Performans (Ultra TPS)`, `Maksimum Kapasite` ve `Varsayılana Sıfırla`.
+
+---
+
 ## 🖥️ Kullanıcı Arayüzü & Mod Ayarları
 
-Oyun içinde **Seçenekler ➔ Mod Ayarları ➔ SadSeal Mega Mod** menüsüne girdiğinizde üst tarafta 4 ana sekme yer alır:
+Oyun içinde **Seçenekler ➔ Mod Ayarları ➔ SadSeal Mega Mod** menüsüne girdiğinizde üst tarafta 5 ana sekme yer alır:
 
 | Sekme | Açıklama |
 |---|---|
@@ -75,6 +85,7 @@ Oyun içinde **Seçenekler ➔ Mod Ayarları ➔ SadSeal Mega Mod** menüsüne g
 | `[🎓 Yetenek Çarpanı]` | Genel ve tekil XP katsayıları, erime ve yumuşak tavan denetimi |
 | `[🛠️ Tarif Düzenleyici]` | Oyun içi canlı tarif editörü, malzeme seçici ve XML dışa aktarıcı |
 | `[🧬 Gen Sentezleyici]` | Neutroamine maliyeti, üretim süresi, archite kuralları ve hazır şablonlar |
+| `[📦 Akıllı Taşıma]` | Çoklu eşya toplama, arama yarıçapı, ağırlık eşiği ve stok kümeleme ayarları |
 
 * Türkçe ve İngilizce tam dil desteğine sahiptir.
 * Değişikliklerin çoğu oyun yeniden başlatılmadan anında yürürlüğe girer.
@@ -89,6 +100,7 @@ Mega mod süiti içerisindeki modülleri bağımsız olarak kullanmak isterseniz
 * 🏹 [rimworld-lethal-ranged-combat-1.6](https://github.com/SadSeal5/rimworld-lethal-ranged-combat-1.6)
 * 🛠️ [rimworld-recipe-tweaker](https://github.com/SadSeal5/rimworld-recipe-tweaker)
 * 🧬 [rimworld-gene-synthesizer](https://github.com/SadSeal5/rimworld-gene-synthesizer)
+* 📦 [rimworld-smart-haul](https://github.com/SadSeal5/rimworld-smart-haul)
 
 ---
 

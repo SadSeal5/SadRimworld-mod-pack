@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-  <name>SadSeal's Mega Mod (Combat, Skills, Recipes &amp; Genes)</name>
+  <name>SadSeal's Mega Mod (Combat, Skills, Recipes, Genes &amp; Smart Haul)</name>
   <author>SadSeal5 / Ramo</author>
   <packageId>sadseal.megamod</packageId>
   <supportedVersions>
@@ -19,7 +19,7 @@
   <loadAfter>
     <li>brrainz.harmony</li>
   </loadAfter>
-  <description>SadSeal's Mega Mod, RimWorld deneyiminizi tepeden tırnağa geliştiren dört büyük modu tek bir optimize edilmiş süite altında birleştirir:
+  <description>SadSeal's Mega Mod, RimWorld deneyiminizi tepeden tırnağa geliştiren beş büyük modu tek bir optimize edilmiş süite altında birleştirir:
 
 1. 🏹 Lethal &amp; Accurate Ranged Combat (Ölümcül ve İsabetli Menzilli Çatışma):
 - Akıcı Balistik İsabet Formülü: Vanilla'nın orantısız mesafe cezalarını kaldırarak yetenekli atıcıları ölümcül kılar.
@@ -47,6 +47,12 @@
 - Nötroamin karşılığında özel gen paketleri (Genepack) üretme.
 - Kategori ve mod filtreleme, anlık metin araması ve biyo-istatistik önizlemesi.
 - Tamamen özelleştirilebilir Nötroamin maliyeti, üretim süresi ve hazır ayarlar.
+
+5. 📦 Smart Haul (Akıllı Çoklu Taşıma - Pick Up And Haul):
+- Yüksek Performanslı Çoklu Toplama: Koloniciler depoya tek bir eşya götürmek yerine yol üstündeki uygun eşyaları envanterlerine alarak tek seferde taşır.
+- Akıllı Boşaltma: Depolama alanına ulaşıldığında envanterdeki tüm toplanan eşyalar tek bir iş akışı içinde ilgili raflara/alanlara otomatik boşaltılır.
+- Güvenli Kargo Takibi: Savaş alarmı (Draft) durumunda veya iş kesintilerinde yalnızca o seferde toplanan kargo eşyaları yere bırakılır; silah, kıyafet, yemek ve ilaçlar korunur.
+- Katı Depo Filtreleme ve Ağırlık Kontrolü: Taşınan eşyaların ana depolama alanına uyumluluğu ve taşıma kapasitesi (Mass Limit) anlık gözetilir.
 
 Tüm modüller oyun içi Mod Ayarları menüsünden sekmeli arayüz ile kolayca yönetilebilir. Türkçe ve İngilizce dil desteği mevcuttur.</description>
 </ModMetaData>

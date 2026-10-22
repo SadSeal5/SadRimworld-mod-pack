@@ -6,6 +6,7 @@
   <MegaMod_TabSkills>Skill Multipliers</MegaMod_TabSkills>
   <MegaMod_TabRecipes>Recipe Tweaker</MegaMod_TabRecipes>
   <MegaMod_TabGenes>Gene Synthesizer</MegaMod_TabGenes>
+  <MegaMod_TabHauling>Smart Haul</MegaMod_TabHauling>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Recipe &amp; Crafting Tweaker</MegaMod_RecipeTitle>
@@ -165,4 +166,29 @@
   <GeneSynthesis_QueueWorkProgress>Work: {0}</GeneSynthesis_QueueWorkProgress>
   <GeneSynthesis_QueueCombinedDetails>Combined pack with {0} genes • Cost: {1}x Neutroamine</GeneSynthesis_QueueCombinedDetails>
   <GeneSynthesis_QueueSingleDetails>Single gene • Cost: {0}x Neutroamine</GeneSynthesis_QueueSingleDetails>
+
+  <!-- Smart Haul Module -->
+  <SadHaul_ModTitle>Smart Haul (Pick Up And Haul)</SadHaul_ModTitle>
+  <SadHaul_ModDesc>Intelligent gathering system that allows colonists to collect multiple haulable items into their inventory on a single trip before delivering and unloading them at storage.</SadHaul_ModDesc>
+  <SadHaul_PresetsHeader>Quick Presets:</SadHaul_PresetsHeader>
+  <SadHaul_PresetBalanced>Balanced</SadHaul_PresetBalanced>
+  <SadHaul_PresetPerformance>Performance</SadHaul_PresetPerformance>
+  <SadHaul_PresetMaximum>Max Throughput</SadHaul_PresetMaximum>
+  <SadHaul_ResetDefaults>Reset Defaults</SadHaul_ResetDefaults>
+  <SadHaul_SectionGeneral>Behavior &amp; Rules</SadHaul_SectionGeneral>
+  <SadHaul_Enable>Enable Smart Haul</SadHaul_Enable>
+  <SadHaul_Enable_Desc>When enabled, haulers automatically gather nearby eligible items along their route into inventory before walking to storage.</SadHaul_Enable_Desc>
+  <SadHaul_DropOnDraft>Drop Hauled Cargo on Draft</SadHaul_DropOnDraft>
+  <SadHaul_DropOnDraft_Desc>Instantly drops only gathered hauling items when drafted for combat, preserving weapons, personal gear, food, and medicine.</SadHaul_DropOnDraft_Desc>
+  <SadHaul_StrictClustering>Strict Destination Clustering</SadHaul_StrictClustering>
+  <SadHaul_StrictClustering_Desc>Only gathers items that share the exact same target stockpile or storage shelf settings as the primary haul target.</SadHaul_StrictClustering_Desc>
+  <SadHaul_Animals>Allow Pack Animals to Smart Haul</SadHaul_Animals>
+  <SadHaul_Animals_Desc>Enables smart multi-item gathering for trained hauling animals and colony beasts of burden.</SadHaul_Animals_Desc>
+  <SadHaul_SectionLimits>Search &amp; Capacity Thresholds</SadHaul_SectionLimits>
+  <SadHaul_Radius>Search Radius</SadHaul_Radius>
+  <SadHaul_Radius_Desc>Maximum distance (in tiles) around the primary item to search for additional haulables.</SadHaul_Radius_Desc>
+  <SadHaul_MaxItems>Max Items Per Trip</SadHaul_MaxItems>
+  <SadHaul_MaxItems_Desc>Maximum number of extra item stacks a pawn may gather into inventory per hauling job.</SadHaul_MaxItems_Desc>
+  <SadHaul_MassLimit>Carrying Mass Limit</SadHaul_MassLimit>
+  <SadHaul_MassLimit_Desc>Maximum percentage of the pawn's carry capacity to fill before ending gathering and heading to storage.</SadHaul_MassLimit_Desc>
 </LanguageData>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <JobDef>
+    <defName>SadHaul_MultiHaulToCell</defName>
+    <driverClass>SadSeal.MegaMod.Hauling.Jobs.JobDriver_SmartHaul</driverClass>
+    <reportString>hauling TargetA and nearby items.</reportString>
+    <casualInterruptible>true</casualInterruptible>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+</Defs>

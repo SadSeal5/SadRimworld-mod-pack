@@ -6,6 +6,7 @@
   <MegaMod_TabSkills>Yetenek Çarpanları</MegaMod_TabSkills>
   <MegaMod_TabRecipes>Tarif Düzenleyici</MegaMod_TabRecipes>
   <MegaMod_TabGenes>Gen Sentezleyici</MegaMod_TabGenes>
+  <MegaMod_TabHauling>Akıllı Taşıma</MegaMod_TabHauling>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Tarif ve Üretim Düzenleyici</MegaMod_RecipeTitle>
@@ -165,4 +166,29 @@
   <GeneSynthesis_QueueWorkProgress>İş: {0}</GeneSynthesis_QueueWorkProgress>
   <GeneSynthesis_QueueCombinedDetails>{0} genli birleşik paket • Maliyet: {1}x Nötroamin</GeneSynthesis_QueueCombinedDetails>
   <GeneSynthesis_QueueSingleDetails>Tekil gen • Maliyet: {0}x Nötroamin</GeneSynthesis_QueueSingleDetails>
+
+  <!-- Smart Haul Module -->
+  <SadHaul_ModTitle>Akıllı Çoklu Taşıma (Smart Haul)</SadHaul_ModTitle>
+  <SadHaul_ModDesc>Kolonicilerin depolara eşya taşırken rotaları üzerindeki uygun eşyaları çantalarına doldurarak tek seferde toplu taşıma ve boşaltma yapmalarını sağlayan yüksek performanslı lojistik sistemi.</SadHaul_ModDesc>
+  <SadHaul_PresetsHeader>Hızlı Hazır Ayarlar:</SadHaul_PresetsHeader>
+  <SadHaul_PresetBalanced>Dengeli</SadHaul_PresetBalanced>
+  <SadHaul_PresetPerformance>Performans</SadHaul_PresetPerformance>
+  <SadHaul_PresetMaximum>Maksimum Hacim</SadHaul_PresetMaximum>
+  <SadHaul_ResetDefaults>Varsayılanlara Sıfırla</SadHaul_ResetDefaults>
+  <SadHaul_SectionGeneral>Davranış ve Kurallar</SadHaul_SectionGeneral>
+  <SadHaul_Enable>Akıllı Taşımayı Etkinleştir</SadHaul_Enable>
+  <SadHaul_Enable_Desc>Etkinleştirildiğinde taşıyıcılar depoya gitmeden önce çevrelerindeki uygun eşyaları da envanterlerine alarak tek seferde taşır.</SadHaul_Enable_Desc>
+  <SadHaul_DropOnDraft>Askeri Seferberlikte Yere Bırak (Draft)</SadHaul_DropOnDraft>
+  <SadHaul_DropOnDraft_Desc>Kolonici savaşa çağrıldığında (Draft) yalnızca taşınan kargo eşyalarını anında yere bırakır; kişisel silah, teçhizat, yemek ve ilaçlara asla dokunulmaz.</SadHaul_DropOnDraft_Desc>
+  <SadHaul_StrictClustering>Katı Depo Filtresi (Strict Clustering)</SadHaul_StrictClustering>
+  <SadHaul_StrictClustering_Desc>Yalnızca ana hedef ile aynı depolama alanına veya rafa kabul edilen eşyaların birlikte toplanmasına izin verir.</SadHaul_StrictClustering_Desc>
+  <SadHaul_Animals>Eğitilmiş Hayvanlara İzin Ver</SadHaul_Animals>
+  <SadHaul_Animals_Desc>Taşıma eğitimi almış yük hayvanlarının da akıllı çoklu toplama sistemini kullanmasına izin verir.</SadHaul_Animals_Desc>
+  <SadHaul_SectionLimits>Mesafe ve Kapasite Sınırları</SadHaul_SectionLimits>
+  <SadHaul_Radius>Arama Yarıçapı</SadHaul_Radius>
+  <SadHaul_Radius_Desc>Ana eşyanın çevresinde ilave taşınabilir eşya aranacak azami karo mesafesi.</SadHaul_Radius_Desc>
+  <SadHaul_MaxItems>Sefer Başı Azami Eşya</SadHaul_MaxItems>
+  <SadHaul_MaxItems_Desc>Bir kolonicinin tek bir taşıma işinde envanterine alabileceği azami ilave eşya yığını sayısı.</SadHaul_MaxItems_Desc>
+  <SadHaul_MassLimit>Taşıma Ağırlık Limiti</SadHaul_MassLimit>
+  <SadHaul_MassLimit_Desc>Kolonicinin taşıma kapasitesinin yüzde kaçına kadar yük toplanabileceğini belirler.</SadHaul_MassLimit_Desc>
 </LanguageData>
