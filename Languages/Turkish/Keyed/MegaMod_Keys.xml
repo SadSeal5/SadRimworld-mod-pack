@@ -2,40 +2,40 @@
 <LanguageData>
   <!-- Mega Mod Shell -->
   <MegaMod_ModTitle>SadSeal Mega Mod</MegaMod_ModTitle>
-  <MegaMod_TabCombat>Menzilli Çatışma</MegaMod_TabCombat>
-  <MegaMod_TabSkills>Yetenek Çarpanı</MegaMod_TabSkills>
+  <MegaMod_TabCombat>Ölümcül Çatışma</MegaMod_TabCombat>
+  <MegaMod_TabSkills>Yetenek Çarpanları</MegaMod_TabSkills>
   <MegaMod_TabRecipes>Tarif Düzenleyici</MegaMod_TabRecipes>
   <MegaMod_TabGenes>Gen Sentezleyici</MegaMod_TabGenes>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Tarif ve Üretim Düzenleyici</MegaMod_RecipeTitle>
-  <MegaMod_RecipeDesc>Vanilla ve yüklü tüm modlardaki eşya tariflerini (RecipeDef) oyun içinden anlık olarak düzenleyin. Malzeme gereksinimlerini, üretim sürelerini (iş miktarı) ve isimleri değiştirebilir veya tarifleri devre dışı bırakabilirsiniz.</MegaMod_RecipeDesc>
-  <MegaMod_RecipeActiveCount>Aktif Özel Düzenleme Sayısı: {0}</MegaMod_RecipeActiveCount>
-  <MegaMod_OpenRecipeEditor>Tarif Editörünü Aç ({0} aktif)</MegaMod_OpenRecipeEditor>
+  <MegaMod_RecipeDesc>Vanilla ve tüm modlu tarifleri (RecipeDef) oyun içinden gerçek zamanlı olarak özelleştirin. Gerekli malzemeleri, iş süresini ve tarif adını değiştirin veya tarifleri tamamen devre dışı bırakın.</MegaMod_RecipeDesc>
+  <MegaMod_RecipeActiveCount>Aktif Özel Ayar: {0}</MegaMod_RecipeActiveCount>
+  <MegaMod_OpenRecipeEditor>Tarif Düzenleyiciyi Aç ({0} ayar)</MegaMod_OpenRecipeEditor>
   <MegaMod_ExportXmlPatch>XML Yaması Olarak Dışa Aktar</MegaMod_ExportXmlPatch>
   <MegaMod_ResetAllRecipes>Tüm Değişiklikleri Sıfırla</MegaMod_ResetAllRecipes>
-  <MegaMod_ResetAllConfirm>Tüm özel tarif düzenlemelerini orijinal vanilla haline döndürmek istediğinize emin misiniz? Kayıtlı tüm tarif değişiklikleriniz silinecektir.</MegaMod_ResetAllConfirm>
-  <MegaMod_ResetAllSuccess>Tüm tarifler orijinal vanilla hallerine döndürüldü.</MegaMod_ResetAllSuccess>
-  <MegaMod_RecipeHelp>İpucu: Tarif Editöründe yapılan değişiklikler anında oyuna uygulanır ve oyun yeniden başlatıldığında korunur.</MegaMod_RecipeHelp>
+  <MegaMod_ResetAllConfirm>Tüm özel tarif değişikliklerini vanilla varsayılanlarına döndürmek istediğinizden emin misiniz? Bu işlem kaydedilen tüm ayarlarınızı silecektir.</MegaMod_ResetAllConfirm>
+  <MegaMod_ResetAllSuccess>Tüm tarifler varsayılan ayarlarına başarıyla döndürüldü.</MegaMod_ResetAllSuccess>
+  <MegaMod_RecipeHelp>İpucu: Tarif Düzenleyicide yapılan tüm değişiklikler anında devreye girer ve oyun yeniden başlatılsa bile korunur.</MegaMod_RecipeHelp>
 
   <!-- Skill Multipliers Module -->
   <SLM_ModTitle>Yetenek Öğrenme Çarpanı</SLM_ModTitle>
-  <SLM_GeneralSettings>Genel ve Kolaylık Ayarları</SLM_GeneralSettings>
-  <SLM_OnlyColonists>Sadece Kolonicileri Etkile</SLM_OnlyColonists>
-  <SLM_OnlyColonists_Desc>Etkinleştirildiğinde, çarpanlar ve öğrenme avantajları yalnızca oyuncu kolonisi üyelerine uygulanır; düşmanları, ziyaretçileri ve diğerlerini etkilemez.</SLM_OnlyColonists_Desc>
-  <SLM_DisableDailyCap>Günlük XP Sınırını Kaldır</SLM_DisableDailyCap>
-  <SLM_DisableDailyCap_Desc>Orijinal RimWorld'de bir günde 4.000 XP kazanıldıktan sonra öğrenme hızı %20'ye düşer. Bu seçenek bu kısıtlamayı kaldırarak yüksek çarpanların etkilenmesini önler.</SLM_DisableDailyCap_Desc>
-  <SLM_DisableSkillDecay>Yetenek Erimesini / Düşüşünü Devre Dışı Bırak</SLM_DisableSkillDecay>
-  <SLM_DisableSkillDecay_Desc>Orijinal RimWorld'de 10 ve üzeri seviyedeki yetenekler zamanla tecrübe kaybeder. Bu seçenek yeteneklerin erimesini engeller.</SLM_DisableSkillDecay_Desc>
-  <SLM_MuteMasterworkLegendary>Ustalık ve Efsanevi Eşya Bildirimlerini/Sesini Kapat</SLM_MuteMasterworkLegendary>
-  <SLM_MuteMasterworkLegendary_Desc>Koloniciler Ustalık İşi (Masterwork) veya Efsanevi (Legendary) kalitede eşya veya yapı ürettiğinde çıkan yüksek mektup ses efektini ve ekranı kaplayan bildirim zarflarını tamamen kapatır.</SLM_MuteMasterworkLegendary_Desc>
-  <SLM_UseGlobalMultiplier>Tüm yetenekler için Genel Çarpan kullan</SLM_UseGlobalMultiplier>
-  <SLM_UseGlobalMultiplier_Desc>İşaretlendiğinde tek bir genel çarpan tüm yeteneklere uygulanır. Her yeteneği ayrı ayrı ayarlamak için işareti kaldırın.</SLM_UseGlobalMultiplier_Desc>
+  <SLM_GeneralSettings>Genel ve Yaşam Kalitesi</SLM_GeneralSettings>
+  <SLM_OnlyColonists>Yalnızca Kolonicilere Uygula</SLM_OnlyColonists>
+  <SLM_OnlyColonists_Desc>Etkinleştirildiğinde çarpanlar ve avantajlar yalnızca oyuncu kolonicileri ve fraksiyon üyeleri için geçerli olur.</SLM_OnlyColonists_Desc>
+  <SLM_DisableDailyCap>Günlük XP Sınırını Devre Dışı Bırak</SLM_DisableDailyCap>
+  <SLM_DisableDailyCap_Desc>RimWorld günde 4.000 XP kazanıldıktan sonra öğrenme hızını %80 düşürür. Bu seçenek o sınırı tamamen kaldırır.</SLM_DisableDailyCap_Desc>
+  <SLM_DisableSkillDecay>Yetenek Erimesini (Skill Decay) Kapat</SLM_DisableSkillDecay>
+  <SLM_DisableSkillDecay_Desc>10. seviyenin üzerindeki yeteneklerin zamanla tecrübe puanı kaybetmesini engeller.</SLM_DisableSkillDecay_Desc>
+  <SLM_MuteMasterworkLegendary>Usta İşi &amp; Efsanevi Üretim Uyarı Seslerini Kapat</SLM_MuteMasterworkLegendary>
+  <SLM_MuteMasterworkLegendary_Desc>Koloniciler Usta İşi (Masterwork) veya Efsanevi (Legendary) kalitede eşya ürettiğinde çalan yüksek sesli mektup uyarısını ve bildirim zarfını kapatır.</SLM_MuteMasterworkLegendary_Desc>
+  <SLM_UseGlobalMultiplier>Tüm Yetenekler İçin Genel Çarpanı Kullan</SLM_UseGlobalMultiplier>
+  <SLM_UseGlobalMultiplier_Desc>İşaretlendiğinde yukarıdaki genel sürgü tüm yeteneklere uygulanır. Her yeteneği ayrı ayrı ayarlamak için işareti kaldırın.</SLM_UseGlobalMultiplier_Desc>
   <SLM_GlobalMultiplier>Genel XP Çarpanı</SLM_GlobalMultiplier>
-  <SLM_IndividualMultipliers>Ayrı Yetenek Çarpanları</SLM_IndividualMultipliers>
-  <SLM_IndividualNotice>Not: Genel çarpan şu an devrede. Ayrı yetenek çarpanlarının oyunda geçerli olması için 'Genel Çarpan kullan' seçeneğini kapatın.</SLM_IndividualNotice>
-  <SLM_Presets>Hızlı Ön Ayarlar</SLM_Presets>
-  <SLM_Preset_Vanilla>1x (Varsayılan)</SLM_Preset_Vanilla>
+  <SLM_IndividualMultipliers>Bireysel Yetenek Çarpanları</SLM_IndividualMultipliers>
+  <SLM_IndividualNotice>Not: Genel çarpan şu anda aktif. Bireysel değerleri kullanmak için yukarıdaki 'Genel Çarpanı Kullan' kutucuğunun işaretini kaldırın.</SLM_IndividualNotice>
+  <SLM_Presets>Hızlı Hazır Ayarlar</SLM_Presets>
+  <SLM_Preset_Vanilla>1x (Vanilla)</SLM_Preset_Vanilla>
   <SLM_Preset_2x>2x</SLM_Preset_2x>
   <SLM_Preset_5x>5x</SLM_Preset_5x>
   <SLM_Preset_10x>10x</SLM_Preset_10x>
@@ -53,30 +53,30 @@
   <LethalRanged_PresetRealism>Sert Gerçekçilik</LethalRanged_PresetRealism>
   <LethalRanged_ResetDefault>Varsayılana Sıfırla</LethalRanged_ResetDefault>
 
-  <LethalRanged_SectionAccuracy>İsabet ve Balistik</LethalRanged_SectionAccuracy>
-  <LethalRanged_EnableAccuracy>İsabet Formülü Yenilemesini Etkinleştir</LethalRanged_EnableAccuracy>
-  <LethalRanged_EnableAccuracy_Desc>Vanilla'nın mesafeye bağlı ağır isabet cezası yerine akıcı balistik eğrisi kullanarak yetenekli atıcıları uzun menzilde ölümcül kılar.</LethalRanged_EnableAccuracy_Desc>
-  <LethalRanged_FormulaMode>İsabet Eğrisi:</LethalRanged_FormulaMode>
+  <LethalRanged_SectionAccuracy>Balistik İsabet Sistemi</LethalRanged_SectionAccuracy>
+  <LethalRanged_EnableAccuracy>Evrensel Balistik Formülü Etkinleştir</LethalRanged_EnableAccuracy>
+  <LethalRanged_EnableAccuracy_Desc>Vanilla'nın sert mesafe cezasını balistik eğri ile değiştirerek yetenekli nişancıların uzun mesafede ölümcül olmasını sağlar.</LethalRanged_EnableAccuracy_Desc>
+  <LethalRanged_FormulaMode>İsabet Eğrisi Modu:</LethalRanged_FormulaMode>
   <LethalRanged_Mode_SoftBallistic>Yumuşak Balistik</LethalRanged_Mode_SoftBallistic>
   <LethalRanged_Mode_Hyperbolic>Hiperbolik</LethalRanged_Mode_Hyperbolic>
   <LethalRanged_Mode_SkillFocused>Yetenek Odaklı</LethalRanged_Mode_SkillFocused>
   <LethalRanged_Mode_Vanilla>Vanilla Eğrisi</LethalRanged_Mode_Vanilla>
   <LethalRanged_FalloffMult>Mesafe Düşüş Çarpanı</LethalRanged_FalloffMult>
-  <LethalRanged_FalloffMult_Desc>Daha yüksek değerler uzun mesafelerde isabet oranını daha fazla düşürür.</LethalRanged_FalloffMult_Desc>
+  <LethalRanged_FalloffMult_Desc>Daha yüksek değerler aşırı mesafelerde isabet oranını düşürür.</LethalRanged_FalloffMult_Desc>
 
-  <LethalRanged_SectionLethality>Hasar ve Delme Çarpanları</LethalRanged_SectionLethality>
+  <LethalRanged_SectionLethality>Hasar ve Zırh Delme Çarpanları</LethalRanged_SectionLethality>
   <LethalRanged_DamageMult>Mermi Hasar Çarpanı</LethalRanged_DamageMult>
-  <LethalRanged_DamageMult_Desc>Menzilli mermilerin ham hasarını artırır.</LethalRanged_DamageMult_Desc>
-  <LethalRanged_ApMult>Zırh Delme Çarpanı</LethalRanged_ApMult>
-  <LethalRanged_ApMult_Desc>Mermilerin zırh delme gücünü artırarak zırh seçimini daha kritik hale getirir.</LethalRanged_ApMult_Desc>
+  <LethalRanged_DamageMult_Desc>Menzilli mermilerin verdiği saf hasarı artırır.</LethalRanged_DamageMult_Desc>
+  <LethalRanged_ApMult>Zırh Delme (AP) Çarpanı</LethalRanged_ApMult>
+  <LethalRanged_ApMult_Desc>Mermilerin zırh delme yeteneğini artırır, zırh kalitesini hayati kılar.</LethalRanged_ApMult_Desc>
   <LethalRanged_SpeedMult>Mermi Hızı Çarpanı</LethalRanged_SpeedMult>
-  <LethalRanged_SpeedMult_Desc>Mermilerin uçuş hızını artırarak daha akıcı ve tepkisel çatışmalar sağlar.</LethalRanged_SpeedMult_Desc>
+  <LethalRanged_SpeedMult_Desc>Mermilerin uçuş hızını artırarak daha akıcı ve tepkisel bir çatışma hissi sağlar.</LethalRanged_SpeedMult_Desc>
 
-  <LethalRanged_SectionMechanics>Kinetik Sarsma ve Ölümcüllük</LethalRanged_SectionMechanics>
-  <LethalRanged_EnableStagger>Gelişmiş Kinetik Mermi Sarsması</LethalRanged_EnableStagger>
-  <LethalRanged_EnableStagger_Desc>Mermilerin hedef vücut büyüklüğü sınırına takılmadan hedefleri sarsmasını sağlar.</LethalRanged_EnableStagger_Desc>
-  <LethalRanged_StaggerSpeedFactor>Sarsılma Hareket Hızı Faktörü</LethalRanged_StaggerSpeedFactor>
-  <LethalRanged_StaggerSpeedFactor_Desc>Sarsılmış hedeflerin hareket hızı çarpanı (düşük = daha ağır sersemleme).</LethalRanged_StaggerSpeedFactor_Desc>
+  <LethalRanged_SectionMechanics>Kinetik Sersemletme ve Ölümcüllük</LethalRanged_SectionMechanics>
+  <LethalRanged_EnableStagger>Kinetik Mermi Sersemletmesi</LethalRanged_EnableStagger>
+  <LethalRanged_EnableStagger_Desc>Mermiler hedef beden boyutundan bağımsız olarak isabet alan hedefleri kısa süreliğine yavaşlatır.</LethalRanged_EnableStagger_Desc>
+  <LethalRanged_StaggerSpeedFactor>Sersemleme Hareket Hızı Faktörü</LethalRanged_StaggerSpeedFactor>
+  <LethalRanged_StaggerSpeedFactor_Desc>Sersemletilen hedefin hareket hızı (daha düşük = daha ağır yavaşlama).</LethalRanged_StaggerSpeedFactor_Desc>
   <LethalRanged_Prevent1Hp>Vanilla 1-Can Koruma Sistemini Devre Dışı Bırak</LethalRanged_Prevent1Hp>
   <LethalRanged_Prevent1Hp_Desc>Ağır hasar alan uzuv ve organların 1 Candan kurtulmasını sağlayan yapay vanilla korumasını kaldırır.</LethalRanged_Prevent1Hp_Desc>
   <LethalRanged_AffectTurrets>Taretleri Dahil Et</LethalRanged_AffectTurrets>
@@ -103,24 +103,30 @@
   <GeneSynthesis_AllowArchite_Desc>Arkit genlerinin gen sentezleyici listesinde görünmesine ve üretilebilmesine olanak tanır.</GeneSynthesis_AllowArchite_Desc>
   <GeneSynthesis_RequireArchiteCapsules>Arkit Genleri İçin Arkit Kapsülü Zorunlu Tut</GeneSynthesis_RequireArchiteCapsules>
   <GeneSynthesis_RequireArchiteCapsules_Desc>Arkit genlerini üretmek için Nötroamin'e ek olarak Arkit Kapsülü de gerektirir.</GeneSynthesis_RequireArchiteCapsules_Desc>
-  <GeneSynthesis_GizmoSynthesize>Gen Sentezle</GeneSynthesis_GizmoSynthesize>
-  <GeneSynthesis_GizmoSynthesizeDesc>Nötroamin karşılığında istenilen geni seçip üretmek için Gen Sentezleyici penceresini açar.</GeneSynthesis_GizmoSynthesizeDesc>
-  <GeneSynthesis_GizmoCancel>Sentezi İptal Et</GeneSynthesis_GizmoCancel>
+  <GeneSynthesis_GizmoSynthesize>Gen / Tür Sentezle</GeneSynthesis_GizmoSynthesize>
+  <GeneSynthesis_GizmoSynthesizeDesc>Nötroamin karşılığında genleri veya hazır tür şablonlarını seçip üretmek için Gen Sentezleyici penceresini açar.</GeneSynthesis_GizmoSynthesizeDesc>
+  <GeneSynthesis_GizmoCancel>Mevcut Emri İptal Et</GeneSynthesis_GizmoCancel>
   <GeneSynthesis_GizmoCancelDesc>Devam eden sentez emrini iptal eder ve yüklenmiş olan Nötroaminleri güvenle yere boşaltır.</GeneSynthesis_GizmoCancelDesc>
+  <GeneSynthesis_GizmoClearAll>Tüm Emirleri Temizle</GeneSynthesis_GizmoClearAll>
+  <GeneSynthesis_GizmoClearAllDesc>Kuyruktaki tüm sentez emirlerini iptal eder ve yüklenmiş Nötroaminleri yere boşaltır.</GeneSynthesis_GizmoClearAllDesc>
   <GeneSynthesis_GizmoDevFinish>Anında Tamamla (Geliştirici)</GeneSynthesis_GizmoDevFinish>
   <GeneSynthesis_GizmoDevFinishDesc>Mevcut gen sentezini anında tamamlar.</GeneSynthesis_GizmoDevFinishDesc>
   <GeneSynthesis_TargetGene>Sentezlenen: {0}</GeneSynthesis_TargetGene>
   <GeneSynthesis_NeutroamineProgress>Nötroamin: {0} / {1}</GeneSynthesis_NeutroamineProgress>
   <GeneSynthesis_WorkProgress>Sentez İlerlemesi: {0}</GeneSynthesis_WorkProgress>
-  <GeneSynthesis_Finished>Gen sentezi tamamlandı: {0} geni içeren gen paketi üretildi.</GeneSynthesis_Finished>
+  <GeneSynthesis_Finished>Gen sentezi tamamlandı: {0} içeren gen paketi üretildi.</GeneSynthesis_Finished>
+  <GeneSynthesis_XenotypeFinished>Gen sentezi tamamlandı: {0} için birleşik gen paketi üretildi.</GeneSynthesis_XenotypeFinished>
+  <GeneSynthesis_QueueProgress>Kuyruk: {0} / {1}</GeneSynthesis_QueueProgress>
   <GeneSynthesis_AllCategories>Tüm Kategoriler</GeneSynthesis_AllCategories>
   <GeneSynthesis_AllMods>Tüm Modlar</GeneSynthesis_AllMods>
   <GeneSynthesis_Count>{0} gen bulundu</GeneSynthesis_Count>
-  <GeneSynthesis_HeaderName>Gen Adı</GeneSynthesis_HeaderName>
+  <GeneSynthesis_HeaderName>Ad</GeneSynthesis_HeaderName>
   <GeneSynthesis_HeaderCpx>Karmaşıklık</GeneSynthesis_HeaderCpx>
   <GeneSynthesis_HeaderMet>Metabolizma</GeneSynthesis_HeaderMet>
   <GeneSynthesis_HeaderArc>Arkit</GeneSynthesis_HeaderArc>
+  <GeneSynthesis_HeaderGenesCount>Genler</GeneSynthesis_HeaderGenesCount>
   <GeneSynthesis_SelectGenePrompt>Ayrıntıları görmek ve sentezi başlatmak için listeden bir gen seçin.</GeneSynthesis_SelectGenePrompt>
+  <GeneSynthesis_SelectXenotypePrompt>İçerdiği genleri incelemek ve üretim emirleri vermek için bir tür seçin.</GeneSynthesis_SelectXenotypePrompt>
   <GeneSynthesis_StatCpx>Karmaşıklık</GeneSynthesis_StatCpx>
   <GeneSynthesis_StatMet>Metabolizma</GeneSynthesis_StatMet>
   <GeneSynthesis_StatArc>Arkit</GeneSynthesis_StatArc>
@@ -130,5 +136,33 @@
   <GeneSynthesis_WorkInstant>Üretim Süresi: Anında</GeneSynthesis_WorkInstant>
   <GeneSynthesis_RequiresArchiteCapsule>{0}x Arkit Kapsülü gerektirir</GeneSynthesis_RequiresArchiteCapsule>
   <GeneSynthesis_StartBtn>Sentezi Başlat</GeneSynthesis_StartBtn>
+  <GeneSynthesis_AddToQueue>Kuyruğa Ekle</GeneSynthesis_AddToQueue>
+  <GeneSynthesis_OrderAdded>{0} sentez kuyruğuna eklendi.</GeneSynthesis_OrderAdded>
+  <GeneSynthesis_BatchEnqueued>{1} için {0} gen kuyruğa eklendi.</GeneSynthesis_BatchEnqueued>
+  <GeneSynthesis_CombinedEnqueued>{0} için birleşik gen paketi kuyruğa eklendi.</GeneSynthesis_CombinedEnqueued>
   <GeneSynthesis_NoNeutroamine>Kullanılabilir Nötroamin gerekiyor</GeneSynthesis_NoNeutroamine>
+
+  <!-- Tabs & Xenotypes -->
+  <GeneSynthesis_TabGenes>Tekil Genler</GeneSynthesis_TabGenes>
+  <GeneSynthesis_TabXenotypes>Türler ve Hazır Ayarlar</GeneSynthesis_TabXenotypes>
+  <GeneSynthesis_TabQueue>Sentez Kuyruğu</GeneSynthesis_TabQueue>
+  <GeneSynthesis_TabQueueCount>Kuyruk ({0})</GeneSynthesis_TabQueueCount>
+  <GeneSynthesis_AllXenotypesCount>{0} tür bulundu</GeneSynthesis_AllXenotypesCount>
+  <GeneSynthesis_ConstituentGenes>İçerdiği Genler ({0})</GeneSynthesis_ConstituentGenes>
+  <GeneSynthesis_InheritableGermline>Kalıtsal (Germline)</GeneSynthesis_InheritableGermline>
+  <GeneSynthesis_InheritableXenogerm>Ksenogen (Kalıtsal Olmayan)</GeneSynthesis_InheritableXenogerm>
+  <GeneSynthesis_QueueAllGenes>Tüm Genleri Kuyruğa Ekle ({0})</GeneSynthesis_QueueAllGenes>
+  <GeneSynthesis_CraftXenotypePack>Birleşik Gen Paketi Üret</GeneSynthesis_CraftXenotypePack>
+  <GeneSynthesis_CombinedPack>Birleşik Paket</GeneSynthesis_CombinedPack>
+
+  <!-- Queue Management -->
+  <GeneSynthesis_QueueTitle>Aktif Sentez Kuyruğu ({0} emir)</GeneSynthesis_QueueTitle>
+  <GeneSynthesis_ClearQueue>Tüm Kuyruğu Temizle</GeneSynthesis_ClearQueue>
+  <GeneSynthesis_QueueEmpty>Sentez kuyruğu şu anda boş. Emir eklemek için bir gen veya hazır tür seçin.</GeneSynthesis_QueueEmpty>
+  <GeneSynthesis_QueueStatusActive>AKTİF</GeneSynthesis_QueueStatusActive>
+  <GeneSynthesis_QueueStatusWaiting>BEKLEMEDE</GeneSynthesis_QueueStatusWaiting>
+  <GeneSynthesis_QueueHaulingProgress>Yükleniyor: {0} / {1} Nötroamin</GeneSynthesis_QueueHaulingProgress>
+  <GeneSynthesis_QueueWorkProgress>İş: {0}</GeneSynthesis_QueueWorkProgress>
+  <GeneSynthesis_QueueCombinedDetails>{0} genli birleşik paket • Maliyet: {1}x Nötroamin</GeneSynthesis_QueueCombinedDetails>
+  <GeneSynthesis_QueueSingleDetails>Tekil gen • Maliyet: {0}x Nötroamin</GeneSynthesis_QueueSingleDetails>
 </LanguageData>
