@@ -30,5 +30,6 @@
 
   <Target Name="PostBuild" AfterTargets="Build">
     <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="..\Assemblies\" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="..\1.6\Assemblies\" SkipUnchangedFiles="true" />
   </Target>
 </Project>
