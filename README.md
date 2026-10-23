@@ -75,8 +75,9 @@
 
 ---
 
-### 6. 💼 Akıllı İş & Zaman Yöneticisi (Work & Schedule Manager - Work Manager 1.7)
-* **Sıfır Bellek Tahsisi (Zero-Allocation Architecture):** Orijinal modun 64-tick başı oluşturduğu ağır LINQ (`.Where().ToList()`) ve heap tahsislerini tamamen ortadan kaldırır; pre-allocated statik tampon dizilerle TPS kaybı yaşatmaz.
+### 6. 💼 Akıllı İş & Zaman Yöneticisi (Work & Schedule Manager - Work Manager 1.6 & 1.7)
+* **Orijinal Mod Uyarlaması:** [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'ın sevilen **Work Manager** modunun RimWorld 1.6 ve 1.7 (.NET 10) için resmi olmayan topluluk uyarlamasıdır.
+* **Modern Performans İyileştirmeleri:** Büyük kolonilerde yüksek TPS sağlamak amacıyla öncelik hesaplamaları statik tampon dizilerle optimize edilmiş, takvim kontrolleri saat başlarına (2.500 tick) bağlanmıştır.
 * **Dinamik Uygunluk Puanlaması (Suitability Scoring):** Kolonistlerin yetenek seviyeleri, tutkuları (Passions), sağlık kapasiteleri (görme, manipülasyon, hareket), özellikler (Traits) ve ideoloji rollerini birleştirerek her iş türü için en yetkin kişileri belirler.
 * **Uzman & Acil Durum İş Dağıtımı:** Doktorluk, Yangın ve Gardiyanlık gibi kritik görevleri acil önceliklendirirken; Aşçılık, Araştırma ve Zanaatkarlık gibi uzmanlık gerektiren alanlara harita başına sabit sayıda en yetkin uzmanları adar.
 * **Boşta Kalan Kolonistleri Yönlendirme (Idle Redirection):** Kendi uzmanlık alanında iş kalmayan kolonistlerin önceliklerini otomatik esneterek taşıma ve temizlik gibi ikincil görevlere yönlendirir.
@@ -139,3 +140,11 @@ X. SadSeal's Mega Mod
    RimWorld/Mods/SadSealMegaMod/
    ```
 3. Oyunu başlatın, Mod Yöneticisi'nde Harmony'nin altına SadSeal's Mega Mod'u ekleyin ve etkinleştirin.
+
+---
+
+## 🙏 Teşekkürler & Krediler (Credits & Attribution)
+
+* **Work Manager:** Fikir, tasarım ve arayüz konsepti için [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'a teşekkür ederiz. Bu modüldeki Work Manager, orijinal modun modern RimWorld 1.6 & 1.7 (.NET 10) sürümlerine topluluk uyarlamasıdır.
+* **Smart Haul:** *Pick Up And Haul* konsepti ve orijinal mod fikirleri için topluluk geliştiricilerine teşekkürler.
+* **Geliştirici & Paket:** SadSeal5 / Ramo tarafından derlenip sürdürülmektedir.
