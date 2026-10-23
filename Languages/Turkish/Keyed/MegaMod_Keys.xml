@@ -7,6 +7,7 @@
   <MegaMod_TabRecipes>Tarif Düzenleyici</MegaMod_TabRecipes>
   <MegaMod_TabGenes>Gen Sentezleyici</MegaMod_TabGenes>
   <MegaMod_TabHauling>Akıllı Taşıma</MegaMod_TabHauling>
+  <MegaMod_TabWorkManager>İş Yöneticisi</MegaMod_TabWorkManager>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Tarif ve Üretim Düzenleyici</MegaMod_RecipeTitle>
@@ -191,4 +192,57 @@
   <SadHaul_MaxItems_Desc>Bir kolonicinin tek bir taşıma işinde envanterine alabileceği azami ilave eşya yığını sayısı.</SadHaul_MaxItems_Desc>
   <SadHaul_MassLimit>Taşıma Ağırlık Limiti</SadHaul_MassLimit>
   <SadHaul_MassLimit_Desc>Kolonicinin taşıma kapasitesinin yüzde kaçına kadar yük toplanabileceğini belirler.</SadHaul_MassLimit_Desc>
+
+  <!-- Work Manager Module -->
+  <WorkManager_ModTitle>Otomatik İş ve Vardiya Yöneticisi (Work Manager)</WorkManager_ModTitle>
+  <WorkManager_ModDesc>Yüksek performanslı, otomatik iş önceliği ve çalışma çizelgesi yöneticisi. Kolonicileri yeteneklerine, tutkularına, özelliklerine ve sağlık kapasitelerine göre sıfır TPS kaybıyla değerlendirip en uygun iş önceliklerini ve dengeli günlük vardiyalarını belirler.</WorkManager_ModDesc>
+  <WorkManager_PresetsHeader>Hızlı Hazır Ayarlar:</WorkManager_PresetsHeader>
+  <WorkManager_PresetBalanced>Dengeli</WorkManager_PresetBalanced>
+  <WorkManager_PresetPerformance>Performans</WorkManager_PresetPerformance>
+  <WorkManager_PresetMicro>Mikro Yönetim</WorkManager_PresetMicro>
+  <WorkManager_ResetDefaults>Varsayılanlara Sıfırla</WorkManager_ResetDefaults>
+
+  <WorkManager_SectionGeneral>Otomasyon Özellikleri</WorkManager_SectionGeneral>
+  <WorkManager_EnableWorkManager>İş Yöneticisini Etkinleştir</WorkManager_EnableWorkManager>
+  <WorkManager_EnableWorkManager_Desc>Otomatik iş önceliği ve vardiya yönetimi ana anahtarı.</WorkManager_EnableWorkManager_Desc>
+  <WorkManager_ManagePriorities>İş Önceliklerini Yönet</WorkManager_ManagePriorities>
+  <WorkManager_ManagePriorities_Desc>Kolonicilerin 1-4 manuel iş önceliklerini yeteneklerine ve koloni ihtiyaçlarına göre dinamik olarak düzenler.</WorkManager_ManagePriorities_Desc>
+  <WorkManager_ManageSchedule>Çalışma Çizelgesini Yönet</WorkManager_ManageSchedule>
+  <WorkManager_ManageSchedule_Desc>Kolonicilerin 24 saatlik günlük çizelgesini uyku, çalışma ve eğlence arasında dengeli vardiyalara dağıtır.</WorkManager_ManageSchedule_Desc>
+  <WorkManager_UseDedicatedWorkers>Uzman Kolonici Rolleri Ata</WorkManager_UseDedicatedWorkers>
+  <WorkManager_UseDedicatedWorkers_Desc>Doktor, Aşçı, Araştırmacı, Gardiyan ve Hayvan Eğiticisi gibi kritik rollere en yetenekli kişileri atarken diğer işleri yedekler.</WorkManager_UseDedicatedWorkers_Desc>
+  <WorkManager_UsePassionPriorities>Tutkuları Öne Çıkar</WorkManager_UsePassionPriorities>
+  <WorkManager_UsePassionPriorities_Desc>Büyük tutkulara (+30) ve küçük tutkulara (+15) puan bonusu vererek kolonicilerin sevdikleri işleri yapmasını sağlar.</WorkManager_UsePassionPriorities_Desc>
+  <WorkManager_AssignWorkToIdlePawns>Boş Kalan Kolonicileri Taşıma ve Temizliğe Yönlendir</WorkManager_AssignWorkToIdlePawns>
+  <WorkManager_AssignWorkToIdlePawns_Desc>Bir kolonici yapacak iş bulamayıp boşta kaldığında geçici olarak Taşıma ve Temizlik önceliklerini artırır.</WorkManager_AssignWorkToIdlePawns_Desc>
+  <WorkManager_SupportNightOwls>Gece Kuşlarını Destekle (Night Owl)</WorkManager_SupportNightOwls>
+  <WorkManager_SupportNightOwls_Desc>Gece Kuşu özelliğine sahip kolonicilere gece çalışma ve gündüz uyuma vardiyası atayarak moral avantajı kazandırır.</WorkManager_SupportNightOwls_Desc>
+
+  <WorkManager_SectionTiming>Zamanlama ve Aralıklar</WorkManager_SectionTiming>
+  <WorkManager_PriorityInterval>Öncelik Güncelleme Aralığı</WorkManager_PriorityInterval>
+  <WorkManager_PriorityInterval_Desc>İş önceliklerinin kaç oyun tick'inde bir yeniden değerlendirileceği (500 tick ≈ normal hızda 8.3 saniye).</WorkManager_PriorityInterval_Desc>
+  <WorkManager_ScheduleInterval>Çizelge Güncelleme Aralığı</WorkManager_ScheduleInterval>
+  <WorkManager_ScheduleInterval_Desc>Günlük çizelgelerin kaç oyun saatinde bir gözden geçirileceği.</WorkManager_ScheduleInterval_Desc>
+
+  <WorkManager_SectionSpecialists>Hedef Uzman Sayıları</WorkManager_SectionSpecialists>
+  <WorkManager_TargetDoctors>Hedef Doktor Sayısı</WorkManager_TargetDoctors>
+  <WorkManager_TargetCooks>Hedef Aşçı Sayısı</WorkManager_TargetCooks>
+  <WorkManager_TargetResearchers>Hedef Araştırmacı Sayısı</WorkManager_TargetResearchers>
+  <WorkManager_TargetWardens>Hedef Gardiyan Sayısı</WorkManager_TargetWardens>
+  <WorkManager_TargetHandlers>Hedef Hayvan Eğiticisi Sayısı</WorkManager_TargetHandlers>
+
+  <WorkManager_ForceUpdate>Şimdi Tümünü Güncelle</WorkManager_ForceUpdate>
+  <WorkManager_RefreshedMsg>İş Yöneticisi: Tüm kolonilerde öncelikler ve çalışma çizelgeleri güncellendi.</WorkManager_RefreshedMsg>
+
+  <!-- UI & Column Tooltips -->
+  <WorkManager_GlobalEnabledTip>İş Yöneticisi aktif. Otomatik yönetimi duraklatmak için tıklayın.</WorkManager_GlobalEnabledTip>
+  <WorkManager_GlobalDisabledTip>İş Yöneticisi duraklatıldı. Otomatik yönetimi başlatmak için tıklayın.</WorkManager_GlobalDisabledTip>
+  <WorkManager_UpdateNowTip>Öncelikleri ve çizelgeleri hemen yeniden hesapla.</WorkManager_UpdateNowTip>
+  <WorkManager_SettingsTip>İş Yöneticisi ayarlarını aç.</WorkManager_SettingsTip>
+  <WorkManager_ColumnPriorityHeaderTip>Otomatik İş Öncelikleri\nKoloniciyi otomatik öncelik güncellemesine dahil etmek veya çıkarmak için tıklayın.</WorkManager_ColumnPriorityHeaderTip>
+  <WorkManager_ColumnScheduleHeaderTip>Otomatik Çalışma Çizelgesi\nKoloniciyi otomatik çizelge güncellemesine dahil etmek veya çıkarmak için tıklayın.</WorkManager_ColumnScheduleHeaderTip>
+  <WorkManager_PawnPriorityEnabledTip>{0}: Otomatik iş öncelikleri açık. Kapatmak için tıklayın.</WorkManager_PawnPriorityEnabledTip>
+  <WorkManager_PawnPriorityDisabledTip>{0}: Otomatik iş öncelikleri kapalı. Açmak için tıklayın.</WorkManager_PawnPriorityDisabledTip>
+  <WorkManager_PawnScheduleEnabledTip>{0}: Otomatik çizelge açık. Kapatmak için tıklayın.</WorkManager_PawnScheduleEnabledTip>
+  <WorkManager_PawnScheduleDisabledTip>{0}: Otomatik çizelge kapalı. Açmak için tıklayın.</WorkManager_PawnScheduleDisabledTip>
 </LanguageData>

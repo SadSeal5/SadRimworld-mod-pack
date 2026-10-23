@@ -1,4 +1,4 @@
-# 🦭 SadSeal's Mega Mod (Combat, Skills, Recipes, Genes & Smart Haul Suite)
+# 🦭 SadSeal's Mega Mod (Combat, Skills, Recipes, Genes, Smart Haul & Work Manager Suite)
 
 <p align="center">
   <img src="About/Preview.png" alt="SadSeal's Mega Mod Banner" width="800">
@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <b>RimWorld deneyiminizi tepeden tırnağa geliştiren 5 büyük modu (Çatışma, Yetenekler, Tarifler, Gen Sentezleme ve Akıllı Taşıma) tek bir optimize edilmiş süite altında birleştiren hepsi bir arada oyun içi yönetim paketi.</b>
+  <b>RimWorld deneyiminizi tepeden tırnağa geliştiren 6 büyük modu (Çatışma, Yetenekler, Tarifler, Gen Sentezleme, Akıllı Taşıma ve İş Yöneticisi) tek bir optimize edilmiş süite altında birleştiren hepsi bir arada oyun içi yönetim paketi.</b>
 </p>
 
 ---
@@ -75,9 +75,20 @@
 
 ---
 
+### 6. 💼 Akıllı İş & Zaman Yöneticisi (Work & Schedule Manager - Work Manager 1.7)
+* **Sıfır Bellek Tahsisi (Zero-Allocation Architecture):** Orijinal modun 64-tick başı oluşturduğu ağır LINQ (`.Where().ToList()`) ve heap tahsislerini tamamen ortadan kaldırır; pre-allocated statik tampon dizilerle TPS kaybı yaşatmaz.
+* **Dinamik Uygunluk Puanlaması (Suitability Scoring):** Kolonistlerin yetenek seviyeleri, tutkuları (Passions), sağlık kapasiteleri (görme, manipülasyon, hareket), özellikler (Traits) ve ideoloji rollerini birleştirerek her iş türü için en yetkin kişileri belirler.
+* **Uzman & Acil Durum İş Dağıtımı:** Doktorluk, Yangın ve Gardiyanlık gibi kritik görevleri acil önceliklendirirken; Aşçılık, Araştırma ve Zanaatkarlık gibi uzmanlık gerektiren alanlara harita başına sabit sayıda en yetkin uzmanları adar.
+* **Boşta Kalan Kolonistleri Yönlendirme (Idle Redirection):** Kendi uzmanlık alanında iş kalmayan kolonistlerin önceliklerini otomatik esneterek taşıma ve temizlik gibi ikincil görevlere yönlendirir.
+* **Akıllı Çalışma & Uyku Takvimi (Schedule Manager):** Gece Kuşu (Night Owl) kolonistleri otomatik olarak gece vardiyasına, diğer kolonistleri ise en verimli gündüz/uyku/eğlence döngüsüne 2.500 tick (1 oyun saati) aralıklarla optimize eder.
+* **İş Sekmesi Doğrudan Entegrasyonu:** Koloni İş (Work) ve Takvim (Schedule) pencerelerine eklenen iki yeni sütun ile kolonist bazında otomasyonu açıp kapatabilme; sağ üst köşedeki düğmelerle anında yenileme ve toplu kontrol.
+* **Hazır Şablon Butonları:** `Dengeli`, `Performans (Ultra TPS)`, `Katı Uzmanlaşma` ve `Varsayılana Sıfırla`.
+
+---
+
 ## 🖥️ Kullanıcı Arayüzü & Mod Ayarları
 
-Oyun içinde **Seçenekler ➔ Mod Ayarları ➔ SadSeal Mega Mod** menüsüne girdiğinizde üst tarafta 5 ana sekme yer alır:
+Oyun içinde **Seçenekler ➔ Mod Ayarları ➔ SadSeal Mega Mod** menüsüne girdiğinizde üst tarafta 6 ana sekme yer alır:
 
 | Sekme | Açıklama |
 |---|---|
@@ -86,6 +97,7 @@ Oyun içinde **Seçenekler ➔ Mod Ayarları ➔ SadSeal Mega Mod** menüsüne g
 | `[🛠️ Tarif Düzenleyici]` | Oyun içi canlı tarif editörü, malzeme seçici ve XML dışa aktarıcı |
 | `[🧬 Gen Sentezleyici]` | Neutroamine maliyeti, üretim süresi, archite kuralları ve hazır şablonlar |
 | `[📦 Akıllı Taşıma]` | Çoklu eşya toplama, arama yarıçapı, ağırlık eşiği ve stok kümeleme ayarları |
+| `[💼 İş Yöneticisi]` | Öncelik hesaplama sıklığı, uzman hedefleri, takvim yönetimi ve boşta kalma kontrolleri |
 
 * Türkçe ve İngilizce tam dil desteğine sahiptir.
 * Değişikliklerin çoğu oyun yeniden başlatılmadan anında yürürlüğe girer.
@@ -101,6 +113,7 @@ Mega mod süiti içerisindeki modülleri bağımsız olarak kullanmak isterseniz
 * 🛠️ [rimworld-recipe-tweaker](https://github.com/SadSeal5/rimworld-recipe-tweaker)
 * 🧬 [rimworld-gene-synthesizer](https://github.com/SadSeal5/rimworld-gene-synthesizer)
 * 📦 [rimworld-smart-haul](https://github.com/SadSeal5/rimworld-smart-haul)
+* 💼 [rimworld-work-manager](https://github.com/SadSeal5/rimworld-work-manager)
 
 ---
 

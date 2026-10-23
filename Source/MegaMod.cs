@@ -4,6 +4,7 @@ using SadSeal.MegaMod.Genes.UI;
 using SadSeal.MegaMod.Hauling.UI;
 using SadSeal.MegaMod.Recipes.UI;
 using SadSeal.MegaMod.Skills.UI;
+using SadSeal.MegaMod.WorkManager.UI;
 using UnityEngine;
 using Verse;
 
@@ -15,7 +16,8 @@ namespace SadSeal.MegaMod
         Skills,
         Recipes,
         Genes,
-        Hauling
+        Hauling,
+        WorkManager
     }
 
     public class MegaMod : Mod
@@ -24,6 +26,11 @@ namespace SadSeal.MegaMod
         public static MegaModSettings Settings { get; private set; }
 
         private static MegaModTab currentTab = MegaModTab.Combat;
+        public static MegaModTab CurrentTab
+        {
+            get => currentTab;
+            set => currentTab = value;
+        }
 
         public MegaMod(ModContentPack content) : base(content)
         {
@@ -33,7 +40,7 @@ namespace SadSeal.MegaMod
             var harmony = new Harmony("sadseal.megamod");
             harmony.PatchAll();
 
-            Log.Message("[SadSeal's Mega Mod] Successfully initialized: Combat, Skills, Recipes, Genes & Smart Haul.");
+            Log.Message("[SadSeal's Mega Mod] Successfully initialized: Combat, Skills, Recipes, Genes, Smart Haul & Work Manager.");
         }
 
         public override string SettingsCategory()
@@ -44,13 +51,14 @@ namespace SadSeal.MegaMod
         public override void DoSettingsWindowContents(Rect inRect)
         {
             Rect tabRect = new Rect(inRect.x, inRect.y, inRect.width, 36f);
-            float tabWidth = (tabRect.width - 32f) / 5f;
+            float tabWidth = (tabRect.width - 40f) / 6f;
 
             DrawTabButton(new Rect(tabRect.x, tabRect.y, tabWidth, 36f), "MegaMod_TabCombat".Translate(), MegaModTab.Combat);
             DrawTabButton(new Rect(tabRect.x + tabWidth + 8f, tabRect.y, tabWidth, 36f), "MegaMod_TabSkills".Translate(), MegaModTab.Skills);
             DrawTabButton(new Rect(tabRect.x + (tabWidth + 8f) * 2f, tabRect.y, tabWidth, 36f), "MegaMod_TabRecipes".Translate(), MegaModTab.Recipes);
             DrawTabButton(new Rect(tabRect.x + (tabWidth + 8f) * 3f, tabRect.y, tabWidth, 36f), "MegaMod_TabGenes".Translate(), MegaModTab.Genes);
             DrawTabButton(new Rect(tabRect.x + (tabWidth + 8f) * 4f, tabRect.y, tabWidth, 36f), "MegaMod_TabHauling".Translate(), MegaModTab.Hauling);
+            DrawTabButton(new Rect(tabRect.x + (tabWidth + 8f) * 5f, tabRect.y, tabWidth, 36f), "MegaMod_TabWorkManager".Translate(), MegaModTab.WorkManager);
 
             Widgets.DrawLineHorizontal(inRect.x, inRect.y + 42f, inRect.width);
 
@@ -72,6 +80,9 @@ namespace SadSeal.MegaMod
                     break;
                 case MegaModTab.Hauling:
                     HaulSettingsDrawer.DrawSettings(contentRect, Settings.Hauling);
+                    break;
+                case MegaModTab.WorkManager:
+                    WorkManagerSettingsDrawer.DrawSettings(contentRect, Settings.WorkManager);
                     break;
             }
 

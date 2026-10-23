@@ -7,6 +7,7 @@
   <MegaMod_TabRecipes>Recipe Tweaker</MegaMod_TabRecipes>
   <MegaMod_TabGenes>Gene Synthesizer</MegaMod_TabGenes>
   <MegaMod_TabHauling>Smart Haul</MegaMod_TabHauling>
+  <MegaMod_TabWorkManager>Work Manager</MegaMod_TabWorkManager>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Recipe &amp; Crafting Tweaker</MegaMod_RecipeTitle>
@@ -191,4 +192,57 @@
   <SadHaul_MaxItems_Desc>Maximum number of extra item stacks a pawn may gather into inventory per hauling job.</SadHaul_MaxItems_Desc>
   <SadHaul_MassLimit>Carrying Mass Limit</SadHaul_MassLimit>
   <SadHaul_MassLimit_Desc>Maximum percentage of the pawn's carry capacity to fill before ending gathering and heading to storage.</SadHaul_MassLimit_Desc>
+
+  <!-- Work Manager Module -->
+  <WorkManager_ModTitle>Work Manager</WorkManager_ModTitle>
+  <WorkManager_ModDesc>High-performance, automated priority and schedule management. Intelligently scores pawns by skill levels, passions, traits, and physical capacities to assign optimal work priorities and balanced schedules with zero TPS lag.</WorkManager_ModDesc>
+  <WorkManager_PresetsHeader>Quick Presets:</WorkManager_PresetsHeader>
+  <WorkManager_PresetBalanced>Balanced</WorkManager_PresetBalanced>
+  <WorkManager_PresetPerformance>Performance</WorkManager_PresetPerformance>
+  <WorkManager_PresetMicro>Micro-focused</WorkManager_PresetMicro>
+  <WorkManager_ResetDefaults>Reset Defaults</WorkManager_ResetDefaults>
+
+  <WorkManager_SectionGeneral>Automation Features</WorkManager_SectionGeneral>
+  <WorkManager_EnableWorkManager>Enable Work Manager</WorkManager_EnableWorkManager>
+  <WorkManager_EnableWorkManager_Desc>Master switch for automated work priority and schedule assignments.</WorkManager_EnableWorkManager_Desc>
+  <WorkManager_ManagePriorities>Manage Work Priorities</WorkManager_ManagePriorities>
+  <WorkManager_ManagePriorities_Desc>Automatically assigns manual 1-4 work priorities based on colonist aptitude and colony needs.</WorkManager_ManagePriorities_Desc>
+  <WorkManager_ManageSchedule>Manage Colonist Schedules</WorkManager_ManageSchedule>
+  <WorkManager_ManageSchedule_Desc>Optimizes 24-hour colony timetables into balanced shifts for rest, work, and recreation.</WorkManager_ManageSchedule_Desc>
+  <WorkManager_UseDedicatedWorkers>Assign Dedicated Specialists</WorkManager_UseDedicatedWorkers>
+  <WorkManager_UseDedicatedWorkers_Desc>Ensures dedicated specialists (Doctors, Cooks, Researchers, Wardens, Handlers) are assigned high priority while leaving general chores to others.</WorkManager_UseDedicatedWorkers_Desc>
+  <WorkManager_UsePassionPriorities>Prioritize Passions</WorkManager_UsePassionPriorities>
+  <WorkManager_UsePassionPriorities_Desc>Gives priority bonuses for burning passions (+30) and minor passions (+15) so colonists do what they love.</WorkManager_UsePassionPriorities_Desc>
+  <WorkManager_AssignWorkToIdlePawns>Assign Idle Colonists to Haul &amp; Clean</WorkManager_AssignWorkToIdlePawns>
+  <WorkManager_AssignWorkToIdlePawns_Desc>When a colonist has no active jobs and goes idle, automatically elevates Hauling and Cleaning to keep them productive.</WorkManager_AssignWorkToIdlePawns_Desc>
+  <WorkManager_SupportNightOwls>Support Night Owls</WorkManager_SupportNightOwls>
+  <WorkManager_SupportNightOwls_Desc>Assigns inverted nocturnal shifts to pawns with the Night Owl trait to maximize mood bonuses.</WorkManager_SupportNightOwls_Desc>
+
+  <WorkManager_SectionTiming>Frequencies &amp; Limits</WorkManager_SectionTiming>
+  <WorkManager_PriorityInterval>Priority Update Interval</WorkManager_PriorityInterval>
+  <WorkManager_PriorityInterval_Desc>Frequency in game ticks between automatic priority evaluations (500 ticks ≈ 8.3s at normal speed).</WorkManager_PriorityInterval_Desc>
+  <WorkManager_ScheduleInterval>Schedule Update Interval</WorkManager_ScheduleInterval>
+  <WorkManager_ScheduleInterval_Desc>Frequency in in-game hours between timetable re-evaluations.</WorkManager_ScheduleInterval_Desc>
+
+  <WorkManager_SectionSpecialists>Target Specialist Counts</WorkManager_SectionSpecialists>
+  <WorkManager_TargetDoctors>Target Doctors</WorkManager_TargetDoctors>
+  <WorkManager_TargetCooks>Target Cooks</WorkManager_TargetCooks>
+  <WorkManager_TargetResearchers>Target Researchers</WorkManager_TargetResearchers>
+  <WorkManager_TargetWardens>Target Wardens</WorkManager_TargetWardens>
+  <WorkManager_TargetHandlers>Target Handlers</WorkManager_TargetHandlers>
+
+  <WorkManager_ForceUpdate>Force Update All Now</WorkManager_ForceUpdate>
+  <WorkManager_RefreshedMsg>Work Manager: Priorities and schedules updated across all colonies.</WorkManager_RefreshedMsg>
+
+  <!-- UI & Column Tooltips -->
+  <WorkManager_GlobalEnabledTip>Work Manager is active. Click to pause automatic management.</WorkManager_GlobalEnabledTip>
+  <WorkManager_GlobalDisabledTip>Work Manager is paused. Click to enable automatic management.</WorkManager_GlobalDisabledTip>
+  <WorkManager_UpdateNowTip>Force recalculate priorities and schedules immediately.</WorkManager_UpdateNowTip>
+  <WorkManager_SettingsTip>Open Work Manager settings.</WorkManager_SettingsTip>
+  <WorkManager_ColumnPriorityHeaderTip>Automated Priority Management\nToggle per colonist to include or exclude them from automatic priority updates.</WorkManager_ColumnPriorityHeaderTip>
+  <WorkManager_ColumnScheduleHeaderTip>Automated Schedule Management\nToggle per colonist to include or exclude them from automatic timetable updates.</WorkManager_ColumnScheduleHeaderTip>
+  <WorkManager_PawnPriorityEnabledTip>{0}: Automatic work priorities enabled. Click to disable.</WorkManager_PawnPriorityEnabledTip>
+  <WorkManager_PawnPriorityDisabledTip>{0}: Automatic work priorities disabled. Click to enable.</WorkManager_PawnPriorityDisabledTip>
+  <WorkManager_PawnScheduleEnabledTip>{0}: Automatic schedule enabled. Click to disable.</WorkManager_PawnScheduleEnabledTip>
+  <WorkManager_PawnScheduleDisabledTip>{0}: Automatic schedule disabled. Click to enable.</WorkManager_PawnScheduleDisabledTip>
 </LanguageData>
