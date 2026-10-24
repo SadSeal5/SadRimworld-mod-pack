@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Verse;
+using SadSeal.Common.UI;
 
 namespace SadSeal.MegaMod.Combat.UI
 {
@@ -16,42 +17,16 @@ namespace SadSeal.MegaMod.Combat.UI
             Listing_Standard listing = new Listing_Standard();
             listing.Begin(viewRect);
 
-            Text.Font = GameFont.Medium;
-            listing.Label("LethalRanged_SettingsTitle".Translate());
-            Text.Font = GameFont.Small;
-            listing.Gap(8f);
+            SadUI.DrawHeader(listing, "LethalRanged_SettingsTitle");
 
             // Preset Buttons
             listing.Label("LethalRanged_PresetHeader".Translate());
-            Rect presetRect = listing.GetRect(32f);
-            float btnWidth = (presetRect.width - 15f) / 4f;
-
-            Color oldColor = GUI.color;
-            if (settings.activePreset == LethalityPreset.VanillaPlus) GUI.color = Color.green;
-            if (Widgets.ButtonText(new Rect(presetRect.x, presetRect.y, btnWidth, 32f), "LethalRanged_PresetVanillaPlus".Translate()))
+            SadUI.DrawPresetRow(listing, settings.activePreset, new (string, LethalityPreset)[]
             {
-                settings.ApplyPreset(LethalityPreset.VanillaPlus);
-            }
-            GUI.color = oldColor;
-
-            if (settings.activePreset == LethalityPreset.TacticalLethal) GUI.color = Color.green;
-            if (Widgets.ButtonText(new Rect(presetRect.x + btnWidth + 5f, presetRect.y, btnWidth, 32f), "LethalRanged_PresetTactical".Translate()))
-            {
-                settings.ApplyPreset(LethalityPreset.TacticalLethal);
-            }
-            GUI.color = oldColor;
-
-            if (settings.activePreset == LethalityPreset.HarshRealism) GUI.color = Color.green;
-            if (Widgets.ButtonText(new Rect(presetRect.x + (btnWidth + 5f) * 2f, presetRect.y, btnWidth, 32f), "LethalRanged_PresetRealism".Translate()))
-            {
-                settings.ApplyPreset(LethalityPreset.HarshRealism);
-            }
-            GUI.color = oldColor;
-
-            if (Widgets.ButtonText(new Rect(presetRect.x + (btnWidth + 5f) * 3f, presetRect.y, btnWidth, 32f), "LethalRanged_ResetDefault".Translate()))
-            {
-                settings.ApplyPreset(LethalityPreset.TacticalLethal);
-            }
+                ("LethalRanged_PresetVanillaPlus", LethalityPreset.VanillaPlus),
+                ("LethalRanged_PresetTactical", LethalityPreset.TacticalLethal),
+                ("LethalRanged_PresetRealism", LethalityPreset.HarshRealism)
+            }, preset => settings.ApplyPreset(preset), () => settings.ApplyPreset(LethalityPreset.TacticalLethal), "LethalRanged_ResetDefault");
 
             listing.Gap(14f);
 

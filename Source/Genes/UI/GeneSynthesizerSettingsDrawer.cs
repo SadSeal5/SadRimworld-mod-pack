@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using UnityEngine;
 using Verse;
+using SadSeal.Common.UI;
 
 namespace SadSeal.MegaMod.Genes.UI
 {
@@ -27,11 +28,7 @@ namespace SadSeal.MegaMod.Genes.UI
             listing.Begin(viewRect);
 
             // Title & Description
-            Text.Font = GameFont.Medium;
-            listing.Label("GeneSynthesis_SettingsHeader".Translate());
-            Text.Font = GameFont.Small;
-            listing.Label("GeneSynthesis_SettingsDesc".Translate());
-            listing.Gap(10f);
+            SadUI.DrawHeader(listing, "GeneSynthesis_SettingsHeader", "GeneSynthesis_SettingsDesc");
 
             // Presets Section
             Text.Font = GameFont.Medium;
@@ -39,57 +36,21 @@ namespace SadSeal.MegaMod.Genes.UI
             Text.Font = GameFont.Small;
             listing.Gap(4f);
 
-            Rect presetRowRect = listing.GetRect(32f);
-            float buttonSpacing = 8f;
-            float buttonWidth = (presetRowRect.width - (buttonSpacing * 4)) / 5f;
-
-            // Free Preset
-            Rect freeRect = new Rect(presetRowRect.x, presetRowRect.y, buttonWidth, 32f);
-            if (Widgets.ButtonText(freeRect, "GeneSynthesis_PresetFree".Translate()))
+            SadUI.DrawPresetRow(listing, settings.ActivePreset, new (string, GeneSynthesizerPreset)[]
             {
-                settings.NeutroamineCost = 0;
-                settings.WorkAmount = 0f;
-                settings.InstantCraft = true;
-                ClearBuffers();
-            }
-
-            // Cheap Preset
-            Rect cheapRect = new Rect(presetRowRect.x + buttonWidth + buttonSpacing, presetRowRect.y, buttonWidth, 32f);
-            if (Widgets.ButtonText(cheapRect, "GeneSynthesis_PresetCheap".Translate()))
+                ("GeneSynthesis_PresetFree", GeneSynthesizerPreset.Free),
+                ("GeneSynthesis_PresetCheap", GeneSynthesizerPreset.Cheap),
+                ("GeneSynthesis_PresetStandard", GeneSynthesizerPreset.Standard),
+                ("GeneSynthesis_PresetHardcore", GeneSynthesizerPreset.Hardcore)
+            }, preset =>
             {
-                settings.NeutroamineCost = 25;
-                settings.WorkAmount = 1000f;
-                settings.InstantCraft = false;
+                settings.ApplyPreset(preset);
                 ClearBuffers();
-            }
-
-            // Standard Preset
-            Rect stdRect = new Rect(presetRowRect.x + (buttonWidth + buttonSpacing) * 2f, presetRowRect.y, buttonWidth, 32f);
-            if (Widgets.ButtonText(stdRect, "GeneSynthesis_PresetStandard".Translate()))
-            {
-                settings.NeutroamineCost = 100;
-                settings.WorkAmount = 2500f;
-                settings.InstantCraft = false;
-                ClearBuffers();
-            }
-
-            // Hardcore Preset
-            Rect hcRect = new Rect(presetRowRect.x + (buttonWidth + buttonSpacing) * 3f, presetRowRect.y, buttonWidth, 32f);
-            if (Widgets.ButtonText(hcRect, "GeneSynthesis_PresetHardcore".Translate()))
-            {
-                settings.NeutroamineCost = 250;
-                settings.WorkAmount = 5000f;
-                settings.InstantCraft = false;
-                ClearBuffers();
-            }
-
-            // Reset Button
-            Rect resetRect = new Rect(presetRowRect.x + (buttonWidth + buttonSpacing) * 4f, presetRowRect.y, buttonWidth, 32f);
-            if (Widgets.ButtonText(resetRect, "GeneSynthesis_ResetDefaults".Translate()))
+            }, () =>
             {
                 settings.ResetToDefaults();
                 ClearBuffers();
-            }
+            }, "GeneSynthesis_ResetDefaults", spacing: 8f);
 
             listing.Gap(16f);
 
@@ -101,9 +62,10 @@ namespace SadSeal.MegaMod.Genes.UI
 
             // Neutroamine Cost Slider & Text
             Rect costRowRect = listing.GetRect(32f);
-            DrawIntRow(costRowRect, "GeneSynthesis_NeutroamineCostLabel".Translate(), settings.NeutroamineCost, 0, 1000, ref costBuffer, newVal =>
+            SadUI.DrawIntRow(costRowRect, "GeneSynthesis_NeutroamineCostLabel".Translate(), settings.NeutroamineCost, 0, 1000, ref costBuffer, newVal =>
             {
                 settings.NeutroamineCost = newVal;
+                settings.ActivePreset = GeneSynthesizerPreset.Custom;
             });
             listing.Gap(4f);
 
@@ -113,9 +75,10 @@ namespace SadSeal.MegaMod.Genes.UI
                 ? "GeneSynthesis_WorkAmountLabel".Translate() + " (" + "GeneSynthesis_WorkInstantShort".Translate() + ")"
                 : "GeneSynthesis_WorkAmountLabel".Translate() + $" ({settings.WorkAmount:F0} ticks / ~{settings.WorkAmount / 60f:F0}s)";
 
-            DrawFloatRow(workRowRect, workLabel, settings.WorkAmount, 0f, 10000f, ref workBuffer, newVal =>
+            SadUI.DrawFloatRow(workRowRect, workLabel, settings.WorkAmount, 0f, 10000f, ref workBuffer, newVal =>
             {
                 settings.WorkAmount = newVal;
+                settings.ActivePreset = GeneSynthesizerPreset.Custom;
             });
             listing.Gap(12f);
 
@@ -125,100 +88,32 @@ namespace SadSeal.MegaMod.Genes.UI
             Text.Font = GameFont.Small;
             listing.Gap(6f);
 
+            bool oldInstant = settings.InstantCraft;
             listing.CheckboxLabeled(
                 "GeneSynthesis_InstantCraft".Translate(),
                 ref settings.InstantCraft,
                 "GeneSynthesis_InstantCraft_Desc".Translate()
             );
+            if (oldInstant != settings.InstantCraft) settings.ActivePreset = GeneSynthesizerPreset.Custom;
 
+            bool oldArchite = settings.AllowArchiteGenes;
             listing.CheckboxLabeled(
                 "GeneSynthesis_AllowArchite".Translate(),
                 ref settings.AllowArchiteGenes,
                 "GeneSynthesis_AllowArchite_Desc".Translate()
             );
+            if (oldArchite != settings.AllowArchiteGenes) settings.ActivePreset = GeneSynthesizerPreset.Custom;
 
+            bool oldCapsules = settings.RequireArchiteCapsules;
             listing.CheckboxLabeled(
                 "GeneSynthesis_RequireArchiteCapsules".Translate(),
                 ref settings.RequireArchiteCapsules,
                 "GeneSynthesis_RequireArchiteCapsules_Desc".Translate()
             );
+            if (oldCapsules != settings.RequireArchiteCapsules) settings.ActivePreset = GeneSynthesizerPreset.Custom;
 
             listing.End();
             Widgets.EndScrollView();
-        }
-
-        private static void DrawIntRow(Rect rowRect, string label, int currentValue, int min, int max, ref string buffer, Action<int> onChanged)
-        {
-            float labelWidth = 240f;
-            float textWidth = 70f;
-            float sliderWidth = rowRect.width - labelWidth - textWidth - 20f;
-
-            Rect labelRect = new Rect(rowRect.x, rowRect.y, labelWidth, rowRect.height);
-            Widgets.Label(labelRect, label);
-
-            Rect sliderRect = new Rect(rowRect.x + labelWidth + 5f, rowRect.y + 4f, sliderWidth, rowRect.height - 8f);
-            int newSliderValue = Mathf.RoundToInt(Widgets.HorizontalSlider(sliderRect, currentValue, min, max, false, null, min.ToString(), max.ToString(), 1f));
-
-            if (newSliderValue != currentValue)
-            {
-                buffer = newSliderValue.ToString();
-                onChanged(newSliderValue);
-            }
-
-            Rect textRect = new Rect(rowRect.x + labelWidth + sliderWidth + 15f, rowRect.y + 2f, textWidth, 26f);
-            if (buffer == null)
-            {
-                buffer = currentValue.ToString();
-            }
-
-            string newText = Widgets.TextField(textRect, buffer);
-            if (newText != buffer)
-            {
-                buffer = newText;
-                if (int.TryParse(newText, out int parsed))
-                {
-                    int clamped = Mathf.Clamp(parsed, min, max);
-                    onChanged(clamped);
-                }
-            }
-        }
-
-        private static void DrawFloatRow(Rect rowRect, string label, float currentValue, float min, float max, ref string buffer, Action<float> onChanged)
-        {
-            float labelWidth = 240f;
-            float textWidth = 70f;
-            float sliderWidth = rowRect.width - labelWidth - textWidth - 20f;
-
-            Rect labelRect = new Rect(rowRect.x, rowRect.y, labelWidth, rowRect.height);
-            Widgets.Label(labelRect, label);
-
-            Rect sliderRect = new Rect(rowRect.x + labelWidth + 5f, rowRect.y + 4f, sliderWidth, rowRect.height - 8f);
-            float newSliderValue = Widgets.HorizontalSlider(sliderRect, currentValue, min, max, false, null, min.ToString("F0"), max.ToString("F0"), 50f);
-
-            if (Math.Abs(newSliderValue - currentValue) > 1f)
-            {
-                float rounded = Mathf.Round(newSliderValue);
-                buffer = rounded.ToString("F0", CultureInfo.InvariantCulture);
-                onChanged(rounded);
-            }
-
-            Rect textRect = new Rect(rowRect.x + labelWidth + sliderWidth + 15f, rowRect.y + 2f, textWidth, 26f);
-            if (buffer == null)
-            {
-                buffer = currentValue.ToString("F0", CultureInfo.InvariantCulture);
-            }
-
-            string newText = Widgets.TextField(textRect, buffer);
-            if (newText != buffer)
-            {
-                buffer = newText;
-                if (float.TryParse(newText, NumberStyles.Float, CultureInfo.InvariantCulture, out float parsed) ||
-                    float.TryParse(newText, NumberStyles.Float, CultureInfo.CurrentCulture, out parsed))
-                {
-                    float clamped = Mathf.Clamp(parsed, min, max);
-                    onChanged(clamped);
-                }
-            }
         }
     }
 }

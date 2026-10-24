@@ -2,6 +2,7 @@ using System;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using SadSeal.Common.UI;
 
 namespace SadSeal.MegaMod.WorkManager.UI
 {
@@ -19,44 +20,16 @@ namespace SadSeal.MegaMod.WorkManager.UI
             Listing_Standard listing = new Listing_Standard();
             listing.Begin(viewRect);
 
-            Text.Font = GameFont.Medium;
-            listing.Label("WorkManager_ModTitle".Translate());
-            Text.Font = GameFont.Small;
-            listing.Label("WorkManager_ModDesc".Translate());
-            listing.Gap(10f);
+            SadUI.DrawHeader(listing, "WorkManager_ModTitle", "WorkManager_ModDesc");
 
             // Preset Buttons Section
             listing.Label("WorkManager_PresetsHeader".Translate());
-            Rect presetRect = listing.GetRect(32f);
-            float btnWidth = (presetRect.width - 15f) / 4f;
-
-            Color oldColor = GUI.color;
-
-            if (settings.ActivePreset == WorkManagerPreset.Balanced) GUI.color = Color.green;
-            if (Widgets.ButtonText(new Rect(presetRect.x, presetRect.y, btnWidth, 32f), "WorkManager_PresetBalanced".Translate()))
+            SadUI.DrawPresetRow(listing, settings.ActivePreset, new (string, WorkManagerPreset)[]
             {
-                settings.ApplyPreset(WorkManagerPreset.Balanced);
-            }
-            GUI.color = oldColor;
-
-            if (settings.ActivePreset == WorkManagerPreset.Performance) GUI.color = Color.green;
-            if (Widgets.ButtonText(new Rect(presetRect.x + btnWidth + 5f, presetRect.y, btnWidth, 32f), "WorkManager_PresetPerformance".Translate()))
-            {
-                settings.ApplyPreset(WorkManagerPreset.Performance);
-            }
-            GUI.color = oldColor;
-
-            if (settings.ActivePreset == WorkManagerPreset.Micro) GUI.color = Color.green;
-            if (Widgets.ButtonText(new Rect(presetRect.x + (btnWidth + 5f) * 2f, presetRect.y, btnWidth, 32f), "WorkManager_PresetMicro".Translate()))
-            {
-                settings.ApplyPreset(WorkManagerPreset.Micro);
-            }
-            GUI.color = oldColor;
-
-            if (Widgets.ButtonText(new Rect(presetRect.x + (btnWidth + 5f) * 3f, presetRect.y, btnWidth, 32f), "WorkManager_ResetDefaults".Translate()))
-            {
-                settings.ResetToDefaults();
-            }
+                ("WorkManager_PresetBalanced", WorkManagerPreset.Balanced),
+                ("WorkManager_PresetPerformance", WorkManagerPreset.Performance),
+                ("WorkManager_PresetMicro", WorkManagerPreset.Micro)
+            }, preset => settings.ApplyPreset(preset), () => settings.ResetToDefaults(), "WorkManager_ResetDefaults");
 
             listing.Gap(14f);
 

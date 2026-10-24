@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Verse;
+using SadSeal.Common.UI;
 
 namespace SadSeal.MegaMod.Hauling.UI
 {
@@ -18,44 +19,16 @@ namespace SadSeal.MegaMod.Hauling.UI
             Listing_Standard listing = new Listing_Standard();
             listing.Begin(viewRect);
 
-            Text.Font = GameFont.Medium;
-            listing.Label("SadHaul_ModTitle".Translate());
-            Text.Font = GameFont.Small;
-            listing.Label("SadHaul_ModDesc".Translate());
-            listing.Gap(10f);
+            SadUI.DrawHeader(listing, "SadHaul_ModTitle", "SadHaul_ModDesc");
 
             // Preset Buttons Section
             listing.Label("SadHaul_PresetsHeader".Translate());
-            Rect presetRect = listing.GetRect(32f);
-            float btnWidth = (presetRect.width - 15f) / 4f;
-
-            Color oldColor = GUI.color;
-
-            if (settings.ActivePreset == HaulPreset.Balanced) GUI.color = Color.green;
-            if (Widgets.ButtonText(new Rect(presetRect.x, presetRect.y, btnWidth, 32f), "SadHaul_PresetBalanced".Translate()))
+            SadUI.DrawPresetRow(listing, settings.ActivePreset, new (string, HaulPreset)[]
             {
-                settings.ApplyPreset(HaulPreset.Balanced);
-            }
-            GUI.color = oldColor;
-
-            if (settings.ActivePreset == HaulPreset.Performance) GUI.color = Color.green;
-            if (Widgets.ButtonText(new Rect(presetRect.x + btnWidth + 5f, presetRect.y, btnWidth, 32f), "SadHaul_PresetPerformance".Translate()))
-            {
-                settings.ApplyPreset(HaulPreset.Performance);
-            }
-            GUI.color = oldColor;
-
-            if (settings.ActivePreset == HaulPreset.MaximumThroughput) GUI.color = Color.green;
-            if (Widgets.ButtonText(new Rect(presetRect.x + (btnWidth + 5f) * 2f, presetRect.y, btnWidth, 32f), "SadHaul_PresetMaximum".Translate()))
-            {
-                settings.ApplyPreset(HaulPreset.MaximumThroughput);
-            }
-            GUI.color = oldColor;
-
-            if (Widgets.ButtonText(new Rect(presetRect.x + (btnWidth + 5f) * 3f, presetRect.y, btnWidth, 32f), "SadHaul_ResetDefaults".Translate()))
-            {
-                settings.ResetToDefaults();
-            }
+                ("SadHaul_PresetBalanced", HaulPreset.Balanced),
+                ("SadHaul_PresetPerformance", HaulPreset.Performance),
+                ("SadHaul_PresetMaximum", HaulPreset.MaximumThroughput)
+            }, preset => settings.ApplyPreset(preset), () => settings.ResetToDefaults(), "SadHaul_ResetDefaults");
 
             listing.Gap(14f);
 

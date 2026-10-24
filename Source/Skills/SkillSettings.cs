@@ -6,6 +6,18 @@ using Verse;
 
 namespace SadSeal.MegaMod.Skills
 {
+    public enum SkillPreset
+    {
+        Custom,
+        X1,
+        X2,
+        X5,
+        X10,
+        X25,
+        X50,
+        X100
+    }
+
     public class SkillSettings : IExposable
     {
         public bool onlyColonists = true;
@@ -14,6 +26,7 @@ namespace SadSeal.MegaMod.Skills
         public bool disableDailyCap = false;
         public bool disableSkillDecay = false;
         public bool muteMasterworkLegendaryNotifications = false;
+        public SkillPreset activePreset = SkillPreset.X1;
 
         public Dictionary<string, float> skillMultipliers = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
 
@@ -65,6 +78,7 @@ namespace SadSeal.MegaMod.Skills
             disableDailyCap = false;
             disableSkillDecay = false;
             muteMasterworkLegendaryNotifications = false;
+            activePreset = SkillPreset.X1;
             if (skillMultipliers == null)
             {
                 skillMultipliers = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
@@ -72,6 +86,21 @@ namespace SadSeal.MegaMod.Skills
             else
             {
                 skillMultipliers.Clear();
+            }
+        }
+
+        public void ApplyPreset(SkillPreset preset)
+        {
+            activePreset = preset;
+            switch (preset)
+            {
+                case SkillPreset.X1: SetAllMultipliers(1f); break;
+                case SkillPreset.X2: SetAllMultipliers(2f); break;
+                case SkillPreset.X5: SetAllMultipliers(5f); break;
+                case SkillPreset.X10: SetAllMultipliers(10f); break;
+                case SkillPreset.X25: SetAllMultipliers(25f); break;
+                case SkillPreset.X50: SetAllMultipliers(50f); break;
+                case SkillPreset.X100: SetAllMultipliers(100f); break;
             }
         }
 
@@ -104,6 +133,7 @@ namespace SadSeal.MegaMod.Skills
             Scribe_Values.Look(ref disableDailyCap, "disableDailyCap", false);
             Scribe_Values.Look(ref disableSkillDecay, "disableSkillDecay", false);
             Scribe_Values.Look(ref muteMasterworkLegendaryNotifications, "muteMasterworkLegendaryNotifications", false);
+            Scribe_Values.Look(ref activePreset, "activePreset", SkillPreset.X1);
             Scribe_Collections.Look(ref skillMultipliers, "skillMultipliers", LookMode.Value, LookMode.Value);
 
             if (skillMultipliers == null)
