@@ -88,7 +88,24 @@ namespace SadSeal.MegaMod.Recipes
             }
 
             // Workbenches
-            if (r.recipeUsers == null) r.recipeUsers = new List<ThingDef>();
+            if (r.recipeUsers != null)
+            {
+                for (int i = 0; i < r.recipeUsers.Count; i++)
+                {
+                    var oldWb = r.recipeUsers[i];
+                    if (oldWb != null)
+                    {
+                        oldWb.recipes?.Remove(r);
+                        allRecipesCachedField?.SetValue(oldWb, null);
+                    }
+                }
+                r.recipeUsers.Clear();
+            }
+            else
+            {
+                r.recipeUsers = new List<ThingDef>();
+            }
+
             if (data.workbenchDefNames != null)
             {
                 for (int i = 0; i < data.workbenchDefNames.Count; i++)
@@ -97,11 +114,9 @@ namespace SadSeal.MegaMod.Recipes
                     var wb = DefDatabase<ThingDef>.GetNamed(wbName, false);
                     if (wb != null)
                     {
+                        wb.recipes?.Remove(r); // ensure wb.recipes does NOT contain r to prevent duplicates
                         if (!r.recipeUsers.Contains(wb)) r.recipeUsers.Add(wb);
-                        if (wb.recipes == null) wb.recipes = new List<RecipeDef>();
-                        if (!wb.recipes.Contains(r)) wb.recipes.Add(r);
-                        var cached = allRecipesCachedField?.GetValue(wb) as List<RecipeDef>;
-                        if (cached != null && !cached.Contains(r)) cached.Add(r);
+                        allRecipesCachedField?.SetValue(wb, null); // invalidate cache so RimWorld cleanly re-evaluates AllRecipes
                     }
                 }
             }
@@ -167,11 +182,13 @@ namespace SadSeal.MegaMod.Recipes
                     for (int i = 0; i < r.recipeUsers.Count; i++)
                     {
                         var wb = r.recipeUsers[i];
-                        wb.recipes?.Remove(r);
-                        var cached = allRecipesCachedField?.GetValue(wb) as List<RecipeDef>;
-                        cached?.Remove(r);
-                        allRecipesCachedField?.SetValue(wb, null);
+                        if (wb != null)
+                        {
+                            wb.recipes?.Remove(r);
+                            allRecipesCachedField?.SetValue(wb, null);
+                        }
                     }
+                    r.recipeUsers.Clear();
                 }
 
                 var allThings = DefDatabase<ThingDef>.AllDefsListForReading;
@@ -180,10 +197,11 @@ namespace SadSeal.MegaMod.Recipes
                     for (int i = 0; i < allThings.Count; i++)
                     {
                         var wb = allThings[i];
-                        wb.recipes?.Remove(r);
-                        var cached = allRecipesCachedField?.GetValue(wb) as List<RecipeDef>;
-                        cached?.Remove(r);
-                        allRecipesCachedField?.SetValue(wb, null);
+                        if (wb != null)
+                        {
+                            wb.recipes?.Remove(r);
+                            allRecipesCachedField?.SetValue(wb, null);
+                        }
                     }
                 }
 

@@ -42,7 +42,7 @@ namespace SadSeal.MegaMod.Recipes
                     lst = new List<RecipeDef>(32);
                     _grouped[m] = lst;
                 }
-                lst.Add(r);
+                if (!lst.Contains(r)) lst.Add(r);
             }
             foreach (var lst in _grouped.Values)
                 lst.Sort((a, b) => string.Compare(a.LabelCap.ToString(), b.LabelCap.ToString(), StringComparison.OrdinalIgnoreCase));
