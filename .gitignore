@@ -1,8 +1,23 @@
-Source/obj/
+# Build and Output Folders
+bin/
+obj/
+*/bin/
+*/obj/
 Source/bin/
+Source/obj/
+
+# Debug and symbol files
 *.pdb
 *.deps.json
-atomized/
+
+# IDE and Editor files
 .vs/
 .idea/
+*.user
+*.suo
+
+# Temporary and Scratch directories
 scratch/
+
+# Atomized mod directories
+atomized/

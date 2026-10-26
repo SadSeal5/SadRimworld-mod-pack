@@ -1,5 +1,7 @@
 # 🦭 SadSeal's Mega Mod (Combat, Skills, Recipes, Genes, Smart Haul, Work Manager & Zero Durability Suite)
 
+> 🇬🇧 **[Click here for the English README](README_EN.md)**
+
 <p align="center">
   <img src="About/Preview.png" alt="SadSeal's Mega Mod Banner" width="800">
 </p>

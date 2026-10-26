@@ -5,7 +5,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>SadSeal.MegaMod</RootNamespace>
     <AssemblyName>SadSealMegaMod</AssemblyName>
-    <OutputPath>..\1.7\Assemblies\</OutputPath>
+    <OutputPath>..\Common\Assemblies\</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <Nullable>disable</Nullable>
@@ -27,9 +27,4 @@
       <Private>False</Private>
     </Reference>
   </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="Build">
-    <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="..\Assemblies\" SkipUnchangedFiles="true" />
-    <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="..\1.6\Assemblies\" SkipUnchangedFiles="true" />
-  </Target>
 </Project>
