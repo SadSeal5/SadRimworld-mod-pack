@@ -1,4 +1,5 @@
 using SadSeal.MegaMod.Combat;
+using SadSeal.MegaMod.Durability;
 using SadSeal.MegaMod.Genes;
 using SadSeal.MegaMod.Hauling;
 using SadSeal.MegaMod.Recipes;
@@ -16,6 +17,7 @@ namespace SadSeal.MegaMod
         public GeneSynthesizerSettings Genes = new GeneSynthesizerSettings();
         public HaulSettings Hauling = new HaulSettings();
         public WorkManagerSettings WorkManager = new WorkManagerSettings();
+        public DurabilitySettings Durability = new DurabilitySettings();
 
         public override void ExposeData()
         {
@@ -26,6 +28,7 @@ namespace SadSeal.MegaMod
             Scribe_Deep.Look(ref Genes, "genes");
             Scribe_Deep.Look(ref Hauling, "hauling");
             Scribe_Deep.Look(ref WorkManager, "workManager");
+            Scribe_Deep.Look(ref Durability, "durability");
 
             if (Combat == null) Combat = new CombatSettings();
             if (Skills == null) Skills = new SkillSettings();
@@ -33,6 +36,8 @@ namespace SadSeal.MegaMod
             if (Genes == null) Genes = new GeneSynthesizerSettings();
             if (Hauling == null) Hauling = new HaulSettings();
             if (WorkManager == null) WorkManager = new WorkManagerSettings();
+            if (Durability == null) Durability = new DurabilitySettings();
         }
     }
 }
+

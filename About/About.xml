@@ -54,5 +54,10 @@
 - Güvenli Kargo Takibi: Savaş alarmı (Draft) durumunda veya iş kesintilerinde yalnızca o seferde toplanan kargo eşyaları yere bırakılır; silah, kıyafet, yemek ve ilaçlar korunur.
 - Katı Depo Filtreleme ve Ağırlık Kontrolü: Taşınan eşyaların ana depolama alanına uyumluluğu ve taşıma kapasitesi (Mass Limit) anlık gözetilir.
 
-Tüm modüller oyun içi Mod Ayarları menüsünden sekmeli arayüz ile kolayca yönetilebilir. Türkçe ve İngilizce dil desteği mevcuttur.</description>
+6. 🛡️ Zero-Tick Durability (Sıfır-Tick Silah ve Kıyafet Dayanıklılık Kaldırıcı):
+- Sıfır-Tick Motor Düzeyinde Optimizasyon: Periyodik tick ve compTick döngüleri olmaksızın silah ve kıyafetlerin dayanıklılık mekaniğini tamamen kaldırır.
+- Yağmurda, karda veya dışarıda bozulma/çürüme yok. Çatışmada zırh ve silah hasarı almaz.
+- Tattered/frayed kıyafet ruh hali cezası almaz. İsteğe bağlı tainted (ceset giysisi) engelleme.
+
+Tüm modüller oyun içi Mod Ayarları menüsünden açılır menü (dropdown) ve ok butonlu modern arayüz ile kolayca yönetilebilir. Türkçe ve İngilizce dil desteği mevcuttur.</description>
 </ModMetaData>

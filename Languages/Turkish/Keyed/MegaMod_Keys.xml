@@ -2,12 +2,14 @@
 <LanguageData>
   <!-- Mega Mod Shell -->
   <MegaMod_ModTitle>SadSeal Mega Mod</MegaMod_ModTitle>
+  <MegaMod_SelectModule>Modül Seç:</MegaMod_SelectModule>
   <MegaMod_TabCombat>Ölümcül Çatışma</MegaMod_TabCombat>
   <MegaMod_TabSkills>Yetenek Çarpanları</MegaMod_TabSkills>
   <MegaMod_TabRecipes>Tarif Düzenleyici</MegaMod_TabRecipes>
   <MegaMod_TabGenes>Gen Sentezleyici</MegaMod_TabGenes>
   <MegaMod_TabHauling>Akıllı Taşıma</MegaMod_TabHauling>
   <MegaMod_TabWorkManager>İş Yöneticisi</MegaMod_TabWorkManager>
+  <MegaMod_TabDurability>Dayanıklılık (Durability)</MegaMod_TabDurability>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Tarif ve Üretim Düzenleyici</MegaMod_RecipeTitle>
@@ -245,4 +247,20 @@
   <WorkManager_PawnPriorityDisabledTip>{0}: Otomatik iş öncelikleri kapalı. Açmak için tıklayın.</WorkManager_PawnPriorityDisabledTip>
   <WorkManager_PawnScheduleEnabledTip>{0}: Otomatik çizelge açık. Kapatmak için tıklayın.</WorkManager_PawnScheduleEnabledTip>
   <WorkManager_PawnScheduleDisabledTip>{0}: Otomatik çizelge kapalı. Açmak için tıklayın.</WorkManager_PawnScheduleDisabledTip>
+
+  <!-- Zero-Tick Durability Module -->
+  <MegaMod_DurabilityTitle>Dayanıklılık ve Kondisyon Yönetimi</MegaMod_DurabilityTitle>
+  <MegaMod_DurabilityDesc>Silah ve giysilerin dayanıklılık (Hit Points) tüketimini sıfır-tick motor düzeyinde devre dışı bırakın. Hiçbir tick maliyeti veya TPS düşüşü yaratmaz.</MegaMod_DurabilityDesc>
+  <MegaMod_RemoveApparelDurability>Giysi Dayanıklılığını Kaldır</MegaMod_RemoveApparelDurability>
+  <MegaMod_RemoveApparelDurability_Desc>Tüm kıyafet ve zırhların dayanıklılık sistemini devre dışı bırakır. Giysiler aşınmaz, yıpranmaz ve hasar almaz. Sıfır-tick motor optimizasyonu sayesinde hiçbir performans kaybı yaşanmaz.</MegaMod_RemoveApparelDurability_Desc>
+  <MegaMod_RemoveWeaponDurability>Silah Dayanıklılığını Kaldır</MegaMod_RemoveWeaponDurability>
+  <MegaMod_RemoveWeaponDurability_Desc>Tüm menzilli ve yakın dövüş silahlarının dayanıklılık sistemini devre dışı bırakır. Silahlar çatışmada veya dış etkenlerle yıpranmaz.</MegaMod_RemoveWeaponDurability_Desc>
+  <MegaMod_RestoreExistingOnLoad>Mevcut Eşyaları Yükleme Sırasında Onar</MegaMod_RestoreExistingOnLoad>
+  <MegaMod_RestoreExistingOnLoad_Desc>Oyun veya harita yüklendiğinde hasarlı giysi ve silahları otomatik olarak %100 kondisyona onarır.</MegaMod_RestoreExistingOnLoad_Desc>
+  <MegaMod_PreventTaintedApparel>Ceset Giysisi (Tainted/Ceset Lekeli) Olmasını Önle</MegaMod_PreventTaintedApparel>
+  <MegaMod_PreventTaintedApparel_Desc>Koloniciler veya düşmanlar öldüğünde üzerlerindeki kıyafetlerin 'cesetten çıkarılmış' (tainted) olarak işaretlenmesini engeller.</MegaMod_PreventTaintedApparel_Desc>
+  <MegaMod_RestoreGearNow>Dünyadaki Tüm Eşyaları Şimdi Onar</MegaMod_RestoreGearNow>
+  <MegaMod_RestoreGearOnlyInGame>Bu işlem yalnızca aktif bir kayıt oynanırken haritadaki ve envanterlerdeki eşyaları onarmak için kullanılabilir.</MegaMod_RestoreGearOnlyInGame>
+  <MegaMod_RestoredGearCount>{0} adet hasarlı giysi ve silah %100 kondisyona onarıldı.</MegaMod_RestoredGearCount>
+  <MegaMod_DurabilityPerfNote>⚡ 0-Tick Performans Mimarisi:\nBu mod, Harmony tick dinleyicileri veya arka plan sayaçları yerine doğrudan RimWorld ThingDef motor flag'lerini (useHitPoints = false) manipüle eder. Bu sayede haritanızda 10.000 eşya dahi olsa TPS'te sıfır (0) düşüş yaşanır.</MegaMod_DurabilityPerfNote>
 </LanguageData>

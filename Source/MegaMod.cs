@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using HarmonyLib;
 using SadSeal.MegaMod.Combat.UI;
+using SadSeal.MegaMod.Durability.UI;
 using SadSeal.MegaMod.Genes.UI;
 using SadSeal.MegaMod.Hauling.UI;
 using SadSeal.MegaMod.Recipes.UI;
@@ -17,7 +20,8 @@ namespace SadSeal.MegaMod
         Recipes,
         Genes,
         Hauling,
-        WorkManager
+        WorkManager,
+        Durability
     }
 
     public class MegaMod : Mod
@@ -40,7 +44,7 @@ namespace SadSeal.MegaMod
             var harmony = new Harmony("sadseal.megamod");
             harmony.PatchAll();
 
-            Log.Message("[SadSeal's Mega Mod] Successfully initialized: Combat, Skills, Recipes, Genes, Smart Haul & Work Manager.");
+            Log.Message("[SadSeal's Mega Mod] Successfully initialized: Combat, Skills, Recipes, Genes, Smart Haul, Work Manager & Durability.");
         }
 
         public override string SettingsCategory()
@@ -50,19 +54,56 @@ namespace SadSeal.MegaMod
 
         public override void DoSettingsWindowContents(Rect inRect)
         {
-            Rect tabRect = new Rect(inRect.x, inRect.y, inRect.width, 36f);
-            float tabWidth = (tabRect.width - 40f) / 6f;
+            float navButtonWidth = 44f;
+            float spacing = 8f;
+            float topBarHeight = 36f;
 
-            DrawTabButton(new Rect(tabRect.x, tabRect.y, tabWidth, 36f), "MegaMod_TabCombat".Translate(), MegaModTab.Combat);
-            DrawTabButton(new Rect(tabRect.x + tabWidth + 8f, tabRect.y, tabWidth, 36f), "MegaMod_TabSkills".Translate(), MegaModTab.Skills);
-            DrawTabButton(new Rect(tabRect.x + (tabWidth + 8f) * 2f, tabRect.y, tabWidth, 36f), "MegaMod_TabRecipes".Translate(), MegaModTab.Recipes);
-            DrawTabButton(new Rect(tabRect.x + (tabWidth + 8f) * 3f, tabRect.y, tabWidth, 36f), "MegaMod_TabGenes".Translate(), MegaModTab.Genes);
-            DrawTabButton(new Rect(tabRect.x + (tabWidth + 8f) * 4f, tabRect.y, tabWidth, 36f), "MegaMod_TabHauling".Translate(), MegaModTab.Hauling);
-            DrawTabButton(new Rect(tabRect.x + (tabWidth + 8f) * 5f, tabRect.y, tabWidth, 36f), "MegaMod_TabWorkManager".Translate(), MegaModTab.WorkManager);
+            Rect prevRect = new Rect(inRect.x, inRect.y, navButtonWidth, topBarHeight);
+            float centerWidth = inRect.width - (navButtonWidth * 2f) - (spacing * 2f);
+            Rect centerRect = new Rect(prevRect.xMax + spacing, inRect.y, centerWidth, topBarHeight);
+            Rect nextRect = new Rect(centerRect.xMax + spacing, inRect.y, navButtonWidth, topBarHeight);
 
-            Widgets.DrawLineHorizontal(inRect.x, inRect.y + 42f, inRect.width);
+            var allTabs = (MegaModTab[])Enum.GetValues(typeof(MegaModTab));
+            int currentIndex = Array.IndexOf(allTabs, currentTab);
 
-            Rect contentRect = new Rect(inRect.x, inRect.y + 48f, inRect.width, inRect.height - 48f);
+            // Left navigation button: ◄ (switches to previous tab)
+            if (Widgets.ButtonText(prevRect, "◄"))
+            {
+                int prevIndex = (currentIndex - 1 + allTabs.Length) % allTabs.Length;
+                currentTab = allTabs[prevIndex];
+            }
+
+            // Center dropdown button: [ 🔽 Modülü Seç: {Localized Tab Name} ]
+            string selectModuleText = "MegaMod_SelectModule".Translate();
+            string currentTabLabel = GetTabLabel(currentTab);
+            string dropdownLabel = $"▼ {selectModuleText} {currentTabLabel}";
+
+            if (Widgets.ButtonText(centerRect, dropdownLabel))
+            {
+                List<FloatMenuOption> options = new List<FloatMenuOption>();
+                foreach (MegaModTab tab in allTabs)
+                {
+                    MegaModTab targetTab = tab;
+                    string optionLabel = GetTabLabel(targetTab);
+                    if (targetTab == currentTab)
+                    {
+                        optionLabel = "● " + optionLabel;
+                    }
+                    options.Add(new FloatMenuOption(optionLabel, () => currentTab = targetTab));
+                }
+                Find.WindowStack.Add(new FloatMenu(options));
+            }
+
+            // Right navigation button: ► (switches to next tab)
+            if (Widgets.ButtonText(nextRect, "►"))
+            {
+                int nextIndex = (currentIndex + 1) % allTabs.Length;
+                currentTab = allTabs[nextIndex];
+            }
+
+            Widgets.DrawLineHorizontal(inRect.x, inRect.y + 44f, inRect.width);
+
+            Rect contentRect = new Rect(inRect.x, inRect.y + 50f, inRect.width, inRect.height - 50f);
 
             switch (currentTab)
             {
@@ -84,23 +125,27 @@ namespace SadSeal.MegaMod
                 case MegaModTab.WorkManager:
                     WorkManagerSettingsDrawer.DrawSettings(contentRect, Settings.WorkManager);
                     break;
+                case MegaModTab.Durability:
+                    DurabilitySettingsDrawer.DrawSettings(contentRect, Settings.Durability);
+                    break;
             }
 
             base.DoSettingsWindowContents(inRect);
         }
 
-        private void DrawTabButton(Rect rect, string label, MegaModTab tab)
+        private static string GetTabLabel(MegaModTab tab)
         {
-            Color prevColor = GUI.color;
-            if (currentTab == tab)
+            return tab switch
             {
-                GUI.color = new Color(0.35f, 0.85f, 1f, 1f);
-            }
-            if (Widgets.ButtonText(rect, label))
-            {
-                currentTab = tab;
-            }
-            GUI.color = prevColor;
+                MegaModTab.Combat => "MegaMod_TabCombat".Translate(),
+                MegaModTab.Skills => "MegaMod_TabSkills".Translate(),
+                MegaModTab.Recipes => "MegaMod_TabRecipes".Translate(),
+                MegaModTab.Genes => "MegaMod_TabGenes".Translate(),
+                MegaModTab.Hauling => "MegaMod_TabHauling".Translate(),
+                MegaModTab.WorkManager => "MegaMod_TabWorkManager".Translate(),
+                MegaModTab.Durability => "MegaMod_TabDurability".Translate(),
+                _ => tab.ToString()
+            };
         }
     }
 }
