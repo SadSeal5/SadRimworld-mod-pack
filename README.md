@@ -1,4 +1,4 @@
-# 🦭 SadSeal's Mega Mod (Combat, Skills, Recipes, Genes, Smart Haul & Work Manager Suite)
+# 🦭 SadSeal's Mega Mod (Combat, Skills, Recipes, Genes, Smart Haul, Work Manager & Zero Durability Suite)
 
 <p align="center">
   <img src="About/Preview.png" alt="SadSeal's Mega Mod Banner" width="800">
@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <b>RimWorld deneyiminizi tepeden tırnağa geliştiren 6 büyük modu (Çatışma, Yetenekler, Tarifler, Gen Sentezleme, Akıllı Taşıma ve İş Yöneticisi) tek bir optimize edilmiş süite altında birleştiren hepsi bir arada oyun içi yönetim paketi.</b>
+  <b>RimWorld deneyiminizi tepeden tırnağa geliştiren 7 entegre ana modülü (Çatışma, Yetenekler, Tarifler, Gen Sentezleme, Akıllı Taşıma, İş Yöneticisi ve Sıfır-Tick Dayanıklılık) tek bir optimize edilmiş süite altında birleştiren hepsi bir arada oyun içi yönetim paketi.</b>
 </p>
 
 ---
@@ -87,11 +87,22 @@
 
 ---
 
+### 7. 🛡️ Sıfır-Tick Silah ve Kıyafet Dayanıklılık Kaldırıcı (Zero-Tick Durability)
+* **Sıfır-Tick Motor Mimarisi:** Periyodik tick (`compTick`) veya döngüsel kod çalıştırmaksızın doğrudan RimWorld motor düzeyinde `ThingDef.useHitPoints = false` bayrağını yönetir. %100 TPS dostudur.
+* **Silah ve Teçhizat Aşınmasını Önleme:** Tüm menzilli ve yakın dövüş silahları çatışmada veya kullanımda asla hasar almaz, aşınmaz ve yıpranmaz.
+* **Kıyafet ve Zırh Bozulmasını Engelleme:** Zırhlar ve giysiler dış ortam koşullarında (yağmur, kar, su), çatışmada veya zamanla hasar almaz.
+* **Ruh Hali Koruması:** Kolonistler aşınmış veya parçalanmış giysi (`tattered/frayed apparel`) nedeniyle negatif ruh hali cezası almaz.
+* **Tek Tıkla Tüm Eşyaları Onarma:** Mod ayarlarındaki buton ile haritadaki, envanterlerdeki ve kervanlardaki tüm yıpranmış eşyaları anında %100 kondisyona getirme seçeneği.
+* **Ceset Kıyafeti (Tainted) Engelleme:** İsteğe bağlı ayar ile düşmanlar öldüğünde üzerlerindeki kıyafetlerin ceset giysisi (`tainted`) olarak etiketlenmesini engelleme desteği.
+* **Hazır Şablon Butonları:** `Tümünü Devre Dışı Bırak`, `Sadece Silahlar`, `Sadece Kıyafetler`, `Her Şey Ölümsüz (Varsayılan)` ve `Varsayılana Sıfırla`.
+
+---
+
 ## 🖥️ Kullanıcı Arayüzü & Mod Ayarları
 
-Oyun içinde **Seçenekler ➔ Mod Ayarları ➔ SadSeal Mega Mod** menüsüne girdiğinizde üst tarafta 6 ana sekme yer alır:
+Oyun içinde **Seçenekler ➔ Mod Ayarları ➔ SadSeal Mega Mod** menüsüne girdiğinizde üst tarafta açılır menü (dropdown) ve ok butonları (`◄ [Modül Adı] ►`) ile tüm sekmeler arasında akıcı geçiş yapabilirsiniz:
 
-| Sekme | Açıklama |
+| Modül | Açıklama |
 |---|---|
 | `[🏹 Menzilli Çatışma]` | Balistik modeller, hasar, zırh delme ve mermi hız ayarları |
 | `[🎓 Yetenek Çarpanı]` | Genel ve tekil XP katsayıları, erime ve yumuşak tavan denetimi |
@@ -99,22 +110,26 @@ Oyun içinde **Seçenekler ➔ Mod Ayarları ➔ SadSeal Mega Mod** menüsüne g
 | `[🧬 Gen Sentezleyici]` | Neutroamine maliyeti, üretim süresi, archite kuralları ve hazır şablonlar |
 | `[📦 Akıllı Taşıma]` | Çoklu eşya toplama, arama yarıçapı, ağırlık eşiği ve stok kümeleme ayarları |
 | `[💼 İş Yöneticisi]` | Öncelik hesaplama sıklığı, uzman hedefleri, takvim yönetimi ve boşta kalma kontrolleri |
+| `[🛡️ Dayanıklılık]` | Silah ve kıyafet dayanıklılık iptali, tek tıkla onarma ve tainted kıyafet engelleme |
 
 * Türkçe ve İngilizce tam dil desteğine sahiptir.
 * Değişikliklerin çoğu oyun yeniden başlatılmadan anında yürürlüğe girer.
 
 ---
 
-## 🧩 Bağımsız (Atomize Edilmiş) Mod Depoları
+## 🧩 Bağımsız (Atomize Edilmiş) ve Ekosistem Mod Depoları
 
-Mega mod süiti içerisindeki modülleri bağımsız olarak kullanmak isterseniz aşağıdaki ayrı depolardan da edinebilirsiniz:
+Mega mod süiti içerisindeki modülleri bağımsız olarak kullanmak veya ekosisteme ait diğer özel modları edinmek isterseniz aşağıdaki depolardan yararlanabilirsiniz:
 
-* 🎓 [Rimworld-Skill-learning-multiplier](https://github.com/SadSeal5/Rimworld-Skill-learning-multiplier)
-* 🏹 [rimworld-lethal-ranged-combat-1.6](https://github.com/SadSeal5/rimworld-lethal-ranged-combat-1.6)
-* 🛠️ [rimworld-recipe-tweaker](https://github.com/SadSeal5/rimworld-recipe-tweaker)
-* 🧬 [rimworld-gene-synthesizer](https://github.com/SadSeal5/rimworld-gene-synthesizer)
-* 📦 [rimworld-smart-haul](https://github.com/SadSeal5/rimworld-smart-haul)
-* 💼 [rimworld-work-manager](https://github.com/SadSeal5/rimworld-work-manager)
+* 🎓 [Rimworld-Skill-learning-multiplier](https://github.com/SadSeal5/Rimworld-Skill-learning-multiplier) - Yetenek öğrenme çarpanı ve tecrübe erimesini engelleme
+* 🏹 [rimworld-lethal-ranged-combat-1.6](https://github.com/SadSeal5/rimworld-lethal-ranged-combat-1.6) - Akıcı balistik menzilli çatışma
+* 🛠️ [rimworld-recipe-tweaker](https://github.com/SadSeal5/rimworld-recipe-tweaker) - Oyun içi canlı üretim tarif editörü ve XML yaması dışa aktarıcı
+* 🧬 [rimworld-gene-synthesizer](https://github.com/SadSeal5/rimworld-gene-synthesizer) - Nötroamin ile saf gen paketi sentezleyici (Biotech)
+* 📦 [rimworld-smart-haul](https://github.com/SadSeal5/rimworld-smart-haul) - Yüksek TPS dostu çoklu taşıma sistemi (Pick Up And Haul)
+* 💼 [rimworld-work-manager](https://github.com/SadSeal5/rimworld-work-manager) - Otomatik iş ve takvim yöneticisi (Work Manager 1.6 & 1.7)
+* 🛡️ [rimworld-no-durability](https://github.com/SadSeal5/rimworld-no-durability) - Sıfır-tick silah ve kıyafet dayanıklılık kaldırıcı
+* 🧪 [Rimworld-Unified-Research-Tree](https://github.com/SadSeal5/Rimworld-Unified-Research-Tree) - Tüm DLC ve modlu araştırmaları tek sonsuz tuvalde toplayan, Anomaly ikili çalışma destekli ve otomatik kuyruklu modern araştırma ağacı
+* 🩸 [SadRimworld-Cellular-Regeneration](https://github.com/SadSeal5/SadRimworld-Cellular-Regeneration) - 4 aşamalı öncelikli iyileşme hatlı (kanama pıhtılaşma, yara kapanması, uzuv yenileme, kalıcı yara izi tedavisi) hücresel rejenerasyon gen paketi
 
 ---
 
@@ -147,4 +162,5 @@ X. SadSeal's Mega Mod
 
 * **Work Manager:** Fikir, tasarım ve arayüz konsepti için [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'a teşekkür ederiz. Bu modüldeki Work Manager, orijinal modun modern RimWorld 1.6 & 1.7 (.NET 10) sürümlerine topluluk uyarlamasıdır.
 * **Smart Haul:** *Pick Up And Haul* konsepti ve orijinal mod fikirleri için topluluk geliştiricilerine teşekkürler.
-* **Geliştirici & Paket:** SadSeal5 / Ramo tarafından derlenip sürdürülmektedir.
+* **Unified Research Tree:** Orijinal *Research Tree* ve *Research Reinvented* konseptlerinden ilham alan, modern RimWorld 1.6 & 1.7 (.NET 10) ve Anomaly DLC için sıfırdan tasarlanan DAG auto-layout araştırma ağacı.
+* **Geliştirici & Paket:** SadSeal5 / Ramo tarafından geliştirilip sürdürülmektedir.

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-  <name>SadSeal's Mega Mod (Combat, Skills, Recipes, Genes &amp; Smart Haul)</name>
+  <name>SadSeal's Mega Mod (Combat, Skills, Recipes, Genes, Smart Haul, Work Manager &amp; Durability)</name>
   <author>SadSeal5 / Ramo</author>
   <packageId>sadseal.megamod</packageId>
   <supportedVersions>
@@ -19,7 +19,7 @@
   <loadAfter>
     <li>brrainz.harmony</li>
   </loadAfter>
-  <description>SadSeal's Mega Mod, RimWorld deneyiminizi tepeden tırnağa geliştiren beş büyük modu tek bir optimize edilmiş süite altında birleştirir:
+  <description>SadSeal's Mega Mod, RimWorld deneyiminizi tepeden tırnağa geliştiren yedi büyük modu tek bir optimize edilmiş süite altında birleştirir:
 
 1. 🏹 Lethal &amp; Accurate Ranged Combat (Ölümcül ve İsabetli Menzilli Çatışma):
 - Akıcı Balistik İsabet Formülü: Vanilla'nın orantısız mesafe cezalarını kaldırarak yetenekli atıcıları ölümcül kılar.
@@ -54,7 +54,12 @@
 - Güvenli Kargo Takibi: Savaş alarmı (Draft) durumunda veya iş kesintilerinde yalnızca o seferde toplanan kargo eşyaları yere bırakılır; silah, kıyafet, yemek ve ilaçlar korunur.
 - Katı Depo Filtreleme ve Ağırlık Kontrolü: Taşınan eşyaların ana depolama alanına uyumluluğu ve taşıma kapasitesi (Mass Limit) anlık gözetilir.
 
-6. 🛡️ Zero-Tick Durability (Sıfır-Tick Silah ve Kıyafet Dayanıklılık Kaldırıcı):
+6. 💼 Work &amp; Schedule Manager (Akıllı İş ve Takvim Yöneticisi):
+- Yüksek Performanslı İş Dağıtımı: Kolonistlerin yetenek, tutku, sağlık ve ideoloji rollerine göre en uygun işleri otomatik atar.
+- Akıllı Takvim Yönetimi: Gece Kuşu kolonistleri otomatik geceye, diğerlerini en verimli uyku ve eğlence döngüsüne alır.
+- İş Sekmesi Entegrasyonu: Koloni İş ve Takvim pencerelerine eklenen otomasyon sütunları ve tek tıkla yenileme kontrolleri.
+
+7. 🛡️ Zero-Tick Durability (Sıfır-Tick Silah ve Kıyafet Dayanıklılık Kaldırıcı):
 - Sıfır-Tick Motor Düzeyinde Optimizasyon: Periyodik tick ve compTick döngüleri olmaksızın silah ve kıyafetlerin dayanıklılık mekaniğini tamamen kaldırır.
 - Yağmurda, karda veya dışarıda bozulma/çürüme yok. Çatışmada zırh ve silah hasarı almaz.
 - Tattered/frayed kıyafet ruh hali cezası almaz. İsteğe bağlı tainted (ceset giysisi) engelleme.
