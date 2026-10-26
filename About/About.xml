@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
   <name>SadSeal's Mega Mod (Combat, Skills, Recipes, Genes, Smart Haul, Work Manager &amp; Durability)</name>
-  <author>SadSeal5 / Ramo</author>
+  <author>SadSeal5</author>
   <packageId>sadseal.megamod</packageId>
   <supportedVersions>
     <li>1.5</li>
