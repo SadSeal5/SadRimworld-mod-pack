@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using RimWorld;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -31,11 +32,45 @@ namespace SadSeal.MegaMod.Hauling
                 return;
             }
 
-            SlotGroup targetSlotGroup = strictClustering && storeCell.IsValid ? storeCell.GetSlotGroup(pawn.Map) : null;
+            SlotGroup targetSlotGroup = storeCell.IsValid ? storeCell.GetSlotGroup(pawn.Map) : null;
+            StoragePriority targetPriority = targetSlotGroup != null ? targetSlotGroup.Settings.Priority : StoragePriority.Unstored;
+
+            // Calculate destination remaining capacity to avoid over-collecting and shelf overflow
+            int destinationRemainingSlots = int.MaxValue;
+            if (targetSlotGroup != null)
+            {
+                destinationRemainingSlots = 0;
+                List<IntVec3> cells = targetSlotGroup.CellsList;
+                for (int i = 0; i < cells.Count; i++)
+                {
+                    IntVec3 c = cells[i];
+                    int maxAllowed = GridsUtility.GetMaxItemsAllowedInCell(c, pawn.Map);
+                    List<Thing> thingList = c.GetThingList(pawn.Map);
+                    int currentItemCount = 0;
+                    for (int j = 0; j < thingList.Count; j++)
+                    {
+                        if (thingList[j].def.category == ThingCategory.Item)
+                        {
+                            currentItemCount++;
+                        }
+                    }
+                    destinationRemainingSlots += Mathf.Max(0, maxAllowed - currentItemCount);
+                }
+
+                // The primary carried item will occupy 1 slot
+                destinationRemainingSlots = Mathf.Max(0, destinationRemainingSlots - 1);
+                if (destinationRemainingSlots <= 0)
+                {
+                    // Target storage has no extra capacity for gathered items
+                    return;
+                }
+            }
+
+            int effectiveLimit = Mathf.Min(maxItems, destinationRemainingSlots);
 
             foreach (Thing thing in GenRadial.RadialDistinctThingsAround(primaryThing.Position, pawn.Map, searchRadius, true))
             {
-                if (outCandidates.Count >= maxItems || MassUtility.FreeSpace(pawn) <= 0.1f)
+                if (outCandidates.Count >= effectiveLimit || MassUtility.FreeSpace(pawn) <= 0.1f)
                 {
                     break;
                 }
@@ -55,12 +90,46 @@ namespace SadSeal.MegaMod.Hauling
                     continue;
                 }
 
+                // Never loot from the destination cell or destination storage unit
+                if (thing.Position == storeCell)
+                {
+                    continue;
+                }
+                if (targetSlotGroup != null && targetSlotGroup.CellsList.Contains(thing.Position))
+                {
+                    continue;
+                }
+
+                // Never loot from valid storage if the item is already stored with equal or higher priority
+                if (StoreUtility.IsInValidStorage(thing))
+                {
+                    if (StoreUtility.TryGetValidStoragePriority(thing, out StoragePriority currentPriority))
+                    {
+                        if (targetSlotGroup != null)
+                        {
+                            if ((int)currentPriority >= (int)targetPriority)
+                            {
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
                 if (!pawn.CanReserve(thing, 1, -1, null, false))
                 {
                     continue;
                 }
 
-                if (strictClustering && targetSlotGroup != null)
+                // Check destination acceptance
+                if (targetSlotGroup != null && targetSlotGroup.parent != null)
                 {
                     if (!targetSlotGroup.parent.Accepts(thing))
                     {

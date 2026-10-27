@@ -268,6 +268,15 @@ namespace SadSeal.MegaMod.Hauling.Jobs
             unloadToil.initAction = () =>
             {
                 List<Thing> hauledItems = HauledCargoTracker.GetHauledThings(pawn);
+                if (hauledItems == null || hauledItems.Count == 0)
+                {
+                    HauledCargoTracker.Clear(pawn);
+                    return;
+                }
+
+                IntVec3 primaryStoreCell = job.GetTarget(StoreCellInd).Cell;
+                SlotGroup primarySlotGroup = primaryStoreCell.IsValid ? primaryStoreCell.GetSlotGroup(pawn.Map) : null;
+
                 for (int i = 0; i < hauledItems.Count; i++)
                 {
                     Thing item = hauledItems[i];
@@ -277,19 +286,73 @@ namespace SadSeal.MegaMod.Hauling.Jobs
                         continue;
                     }
 
-                    Thing dropped;
-                    if (StoreUtility.TryFindBestBetterStoreCellFor(item, pawn, pawn.Map, StoragePriority.Unstored, pawn.Faction, out IntVec3 cell, true))
+                    bool placed = false;
+
+                    // 1. Try placing into cells of primary destination SlotGroup (shelves, stockpiles)
+                    if (primarySlotGroup != null && primarySlotGroup.parent != null && primarySlotGroup.parent.Accepts(item))
                     {
-                        if (!pawn.inventory.innerContainer.TryDrop(item, cell, pawn.Map, ThingPlaceMode.Direct, out dropped))
+                        List<IntVec3> cells = primarySlotGroup.CellsList;
+                        for (int cIdx = 0; cIdx < cells.Count; cIdx++)
                         {
-                            pawn.inventory.innerContainer.TryDrop(item, pawn.Position, pawn.Map, ThingPlaceMode.Near, out dropped);
+                            IntVec3 targetCell = cells[cIdx];
+                            if (!targetCell.InBounds(pawn.Map)) continue;
+
+                            int maxAllowed = GridsUtility.GetMaxItemsAllowedInCell(targetCell, pawn.Map);
+                            List<Thing> thingsInCell = targetCell.GetThingList(pawn.Map);
+                            int currentItemCount = 0;
+                            bool canStack = false;
+
+                            for (int t = 0; t < thingsInCell.Count; t++)
+                            {
+                                Thing th = thingsInCell[t];
+                                if (th.def.category == ThingCategory.Item)
+                                {
+                                    currentItemCount++;
+                                    if (th.CanStackWith(item) && th.stackCount < th.def.stackLimit)
+                                    {
+                                        canStack = true;
+                                    }
+                                }
+                            }
+
+                            if (canStack || currentItemCount < maxAllowed)
+                            {
+                                if (pawn.inventory.innerContainer.TryDrop(item, targetCell, pawn.Map, ThingPlaceMode.Direct, out Thing dropped))
+                                {
+                                    placed = true;
+                                    if (primarySlotGroup.parent is Building_Storage bStorage)
+                                    {
+                                        bStorage.Notify_ReceivedThing(dropped ?? item);
+                                    }
+                                    break;
+                                }
+                            }
                         }
                     }
-                    else
+
+                    // 2. If primary storage is full, search for an adjacent valid store cell
+                    if (!placed)
                     {
-                        pawn.inventory.innerContainer.TryDrop(item, pawn.Position, pawn.Map, ThingPlaceMode.Near, out dropped);
+                        if (StoreUtility.TryFindBestBetterStoreCellFor(item, pawn, pawn.Map, StoragePriority.Unstored, pawn.Faction, out IntVec3 altCell, true))
+                        {
+                            if (altCell.AdjacentTo8WayOrInside(pawn.Position))
+                            {
+                                if (pawn.inventory.innerContainer.TryDrop(item, altCell, pawn.Map, ThingPlaceMode.Direct, out Thing dropped))
+                                {
+                                    placed = true;
+                                    SlotGroup altSlot = altCell.GetSlotGroup(pawn.Map);
+                                    if (altSlot?.parent is Building_Storage altStorage)
+                                    {
+                                        altStorage.Notify_ReceivedThing(dropped ?? item);
+                                    }
+                                }
+                            }
+                        }
                     }
 
+                    // 3. Option A: If not placed, DO NOT drop with ThingPlaceMode.Near onto the floor!
+                    // Leaving the unplaced item safely in pawn.inventory prevents the infinite drop-and-haul loop.
+                    // Always unregister from HauledCargoTracker so tracker is clean.
                     HauledCargoTracker.Unregister(pawn, item);
                 }
 
