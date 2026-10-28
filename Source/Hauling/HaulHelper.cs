@@ -6,6 +6,131 @@ using Verse.AI;
 
 namespace SadSeal.MegaMod.Hauling
 {
+    public class StorageSlotSimulator
+    {
+        private class SimulatedCell
+        {
+            public IntVec3 Cell;
+            public int MaxAllowed;
+            public int ItemCount;
+            public List<SimulatedStack> Stacks = new List<SimulatedStack>();
+        }
+
+        private class SimulatedStack
+        {
+            public ThingDef Def;
+            public int RemainingSpace;
+        }
+
+        private readonly List<SimulatedCell> cells = new List<SimulatedCell>();
+        private readonly StorageSettings settings;
+
+        public StorageSlotSimulator(SlotGroup slotGroup, Map map)
+        {
+            if (slotGroup == null || map == null) return;
+            this.settings = slotGroup.Settings;
+
+            List<IntVec3> cellList = slotGroup.CellsList;
+            if (cellList == null) return;
+
+            for (int i = 0; i < cellList.Count; i++)
+            {
+                IntVec3 c = cellList[i];
+                if (!c.InBounds(map)) continue;
+
+                var simCell = new SimulatedCell
+                {
+                    Cell = c,
+                    MaxAllowed = GridsUtility.GetMaxItemsAllowedInCell(c, map),
+                    ItemCount = 0
+                };
+
+                List<Thing> thingList = c.GetThingList(map);
+                for (int j = 0; j < thingList.Count; j++)
+                {
+                    Thing th = thingList[j];
+                    if (th.def.category == ThingCategory.Item)
+                    {
+                        simCell.ItemCount++;
+                        int spaceLeft = th.def.stackLimit - th.stackCount;
+                        if (spaceLeft > 0)
+                        {
+                            simCell.Stacks.Add(new SimulatedStack
+                            {
+                                Def = th.def,
+                                RemainingSpace = spaceLeft
+                            });
+                        }
+                    }
+                }
+
+                cells.Add(simCell);
+            }
+        }
+
+        public bool HasAnyCapacityLeft()
+        {
+            for (int i = 0; i < cells.Count; i++)
+            {
+                if (cells[i].ItemCount < cells[i].MaxAllowed || cells[i].Stacks.Count > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool TrySimulateAdd(Thing thing)
+        {
+            if (thing == null || thing.def == null) return false;
+            if (settings != null && !settings.AllowedToAccept(thing)) return false;
+
+            int needed = thing.stackCount;
+
+            // 1. First try to merge with existing simulated partial stacks
+            for (int i = 0; i < cells.Count; i++)
+            {
+                var c = cells[i];
+                for (int s = 0; s < c.Stacks.Count; s++)
+                {
+                    var st = c.Stacks[s];
+                    if (st.Def == thing.def && st.RemainingSpace > 0)
+                    {
+                        int take = Mathf.Min(needed, st.RemainingSpace);
+                        st.RemainingSpace -= take;
+                        needed -= take;
+                        if (needed <= 0)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            // 2. If remaining amount needs a new slot, check if any cell has empty slots
+            for (int i = 0; i < cells.Count; i++)
+            {
+                var c = cells[i];
+                if (c.ItemCount < c.MaxAllowed)
+                {
+                    c.ItemCount++;
+                    int spaceLeftInNewStack = thing.def.stackLimit - needed;
+                    if (spaceLeftInNewStack > 0)
+                    {
+                        c.Stacks.Add(new SimulatedStack
+                        {
+                            Def = thing.def,
+                            RemainingSpace = spaceLeftInNewStack
+                        });
+                    }
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
     public static class HaulHelper
     {
         public static bool Accepts(this ISlotGroupParent parent, Thing thing)
@@ -13,47 +138,6 @@ namespace SadSeal.MegaMod.Hauling
             if (parent == null || thing == null) return false;
             var settings = parent.GetSlotGroup()?.Settings;
             return settings != null && settings.AllowedToAccept(thing);
-        }
-
-        public static bool CanStorageAcceptMore(SlotGroup slotGroup, Thing thing, Map map)
-        {
-            if (slotGroup == null || thing == null || map == null) return true;
-            if (slotGroup.Settings == null || !slotGroup.Settings.AllowedToAccept(thing)) return false;
-
-            List<IntVec3> cells = slotGroup.CellsList;
-            if (cells == null || cells.Count == 0) return false;
-
-            for (int i = 0; i < cells.Count; i++)
-            {
-                IntVec3 c = cells[i];
-                if (!c.InBounds(map)) continue;
-
-                int maxAllowed = GridsUtility.GetMaxItemsAllowedInCell(c, map);
-                List<Thing> thingList = c.GetThingList(map);
-                int currentItemCount = 0;
-                bool canStack = false;
-
-                for (int j = 0; j < thingList.Count; j++)
-                {
-                    Thing th = thingList[j];
-                    if (th.def.category == ThingCategory.Item)
-                    {
-                        currentItemCount++;
-                        if (th.CanStackWith(thing) && th.stackCount < th.def.stackLimit)
-                        {
-                            canStack = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (canStack || currentItemCount < maxAllowed)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         public static void FindNearbyHaulables(Pawn pawn, IntVec3 rootPos, Thing primaryThing, IntVec3 storeCell, List<Thing> outCandidates)
@@ -75,12 +159,36 @@ namespace SadSeal.MegaMod.Hauling
             SlotGroup targetSlotGroup = storeCell.IsValid ? storeCell.GetSlotGroup(pawn.Map) : null;
             StoragePriority targetPriority = targetSlotGroup != null ? targetSlotGroup.Settings.Priority : StoragePriority.Unstored;
 
+            // Initialize destination capacity simulator
+            StorageSlotSimulator sim = null;
+            if (targetSlotGroup != null)
+            {
+                sim = new StorageSlotSimulator(targetSlotGroup, pawn.Map);
+
+                // Reserve destination capacity for the primary carried item first!
+                if (primaryThing != null)
+                {
+                    sim.TrySimulateAdd(primaryThing);
+                }
+
+                // If destination is completely full after primary item, do not collect extra items
+                if (!sim.HasAnyCapacityLeft())
+                {
+                    return;
+                }
+            }
+
             // Safe search center: rootPos passed in, falling back to pawn position
             IntVec3 searchCenter = rootPos.IsValid ? rootPos : pawn.Position;
 
             foreach (Thing thing in GenRadial.RadialDistinctThingsAround(searchCenter, pawn.Map, searchRadius, true))
             {
                 if (outCandidates.Count >= maxItems || MassUtility.FreeSpace(pawn) <= 0.1f)
+                {
+                    break;
+                }
+
+                if (sim != null && !sim.HasAnyCapacityLeft())
                 {
                     break;
                 }
@@ -140,10 +248,13 @@ namespace SadSeal.MegaMod.Hauling
                     continue;
                 }
 
-                // Destination acceptance & capacity check
-                if (targetSlotGroup != null && !CanStorageAcceptMore(targetSlotGroup, thing, pawn.Map))
+                // Check destination acceptance & capacity simulation
+                if (sim != null)
                 {
-                    continue;
+                    if (!sim.TrySimulateAdd(thing))
+                    {
+                        continue;
+                    }
                 }
 
                 if (!pawn.CanReach(thing, PathEndMode.ClosestTouch, Danger.Some))
