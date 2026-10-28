@@ -2,6 +2,7 @@ using SadSeal.MegaMod.Combat;
 using SadSeal.MegaMod.Durability;
 using SadSeal.MegaMod.Genes;
 using SadSeal.MegaMod.Hauling;
+using SadSeal.MegaMod.QoL;
 using SadSeal.MegaMod.Recipes;
 using SadSeal.MegaMod.Skills;
 using SadSeal.MegaMod.WorkManager;
@@ -18,6 +19,7 @@ namespace SadSeal.MegaMod
         public HaulSettings Hauling = new HaulSettings();
         public WorkManagerSettings WorkManager = new WorkManagerSettings();
         public DurabilitySettings Durability = new DurabilitySettings();
+        public QoLSettings QoL = new QoLSettings();
 
         public override void ExposeData()
         {
@@ -29,6 +31,7 @@ namespace SadSeal.MegaMod
             Scribe_Deep.Look(ref Hauling, "hauling");
             Scribe_Deep.Look(ref WorkManager, "workManager");
             Scribe_Deep.Look(ref Durability, "durability");
+            Scribe_Deep.Look(ref QoL, "qol");
 
             if (Combat == null) Combat = new CombatSettings();
             if (Skills == null) Skills = new SkillSettings();
@@ -37,7 +40,7 @@ namespace SadSeal.MegaMod
             if (Hauling == null) Hauling = new HaulSettings();
             if (WorkManager == null) WorkManager = new WorkManagerSettings();
             if (Durability == null) Durability = new DurabilitySettings();
+            if (QoL == null) QoL = new QoLSettings();
         }
     }
 }
-

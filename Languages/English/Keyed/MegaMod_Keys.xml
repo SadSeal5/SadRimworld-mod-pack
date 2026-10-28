@@ -10,6 +10,7 @@
   <MegaMod_TabHauling>Smart Haul</MegaMod_TabHauling>
   <MegaMod_TabWorkManager>Work Manager</MegaMod_TabWorkManager>
   <MegaMod_TabDurability>Durability</MegaMod_TabDurability>
+  <MegaMod_TabQoL>QoL Suite</MegaMod_TabQoL>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Recipe &amp; Crafting Tweaker</MegaMod_RecipeTitle>
@@ -262,5 +263,61 @@
   <MegaMod_RestoreGearNow>Restore All In-Game Gear Now</MegaMod_RestoreGearNow>
   <MegaMod_RestoreGearOnlyInGame>This button can only be used while playing an active save to restore map and inventory items.</MegaMod_RestoreGearOnlyInGame>
   <MegaMod_RestoredGearCount>Successfully restored {0} damaged items to 100% condition.</MegaMod_RestoredGearCount>
+  <MegaMod_DurabilityPerfNote>⚡ Zero-Tick Performance Architecture:\nThis mod manipulates core RimWorld ThingDef engine flags (useHitPoints = false) rather than relying on per-tick Harmony hooks or background loops. Even with 10,000+ items on the map, there is absolute zero TPS drop.</MegaMod_DurabilityPerfNote>
+
+  <!-- QoL Suite Module -->
+  <MegaMod_QoLTitle>Quality of Life Suite</MegaMod_QoLTitle>
+  <MegaMod_QoLDesc>Comprehensive collection of essential quality-of-life enhancements, pawn behavior improvements, base conveniences, and configurable raid options.</MegaMod_QoLDesc>
+  <MegaMod_QoLPresetsHeader>Quick Presets:</MegaMod_QoLPresetsHeader>
+  <MegaMod_QoLPresetBalanced>Balanced</MegaMod_QoLPresetBalanced>
+  <MegaMod_QoLPresetMaxComfort>Maximum Comfort</MegaMod_QoLPresetMaxComfort>
+  <MegaMod_QoLPresetVanilla>Vanilla</MegaMod_QoLPresetVanilla>
+
+  <MegaMod_QoLSectionPawn>Pawn Behavior</MegaMod_QoLSectionPawn>
+  <MegaMod_QoLUghYouGotMe>Ugh You Got Me (Peaceful Brawls)</MegaMod_QoLUghYouGotMe>
+  <MegaMod_QoLUghYouGotMe_Desc>Ends social fights peacefully as soon as either participant experiences severe pain (>50%) or serious injury, preventing fatal or dismembering brawl outcomes.</MegaMod_QoLUghYouGotMe_Desc>
+  <MegaMod_QoLUghYouGotMeStopped>{0} and {1} stopped fighting before things got out of hand.</MegaMod_QoLUghYouGotMeStopped>
+  <MegaMod_QoLWhereIsMyWeapon>Where Is My Weapon (Auto Re-equip)</MegaMod_QoLWhereIsMyWeapon>
+  <MegaMod_QoLWhereIsMyWeapon_Desc>When a downed colonist recovers, automatically queues an equip job to pick up their previously dropped primary weapon if it is accessible.</MegaMod_QoLWhereIsMyWeapon_Desc>
+  <MegaMod_QoLPrioritizeSleep>Prioritize Resting in Bed</MegaMod_QoLPrioritizeSleep>
+  <MegaMod_QoLPrioritizeSleep_Desc>Allows right-clicking any valid bed to order a colonist to rest until rested if their rest need is below 75%.</MegaMod_QoLPrioritizeSleep_Desc>
+  <MegaMod_QoLPrioritizeRest>Prioritize resting in {0}</MegaMod_QoLPrioritizeRest>
+  <MegaMod_QoLDontBlockDoors>Don't Block Doors With Items</MegaMod_QoLDontBlockDoors>
+  <MegaMod_QoLDontBlockDoors_Desc>Prevents items from being hauled or stored directly onto door tiles, keeping passages clear.</MegaMod_QoLDontBlockDoors_Desc>
+
+  <MegaMod_QoLSectionBase>Base &amp; Map Management</MegaMod_QoLSectionBase>
+  <MegaMod_QoLMetalDoesntBurn>Metal Doesn't Burn (Steel &amp; Plasteel)</MegaMod_QoLMetalDoesntBurn>
+  <MegaMod_QoLMetalDoesntBurn_Desc>Removes flammability from Steel and Plasteel walls, structures, and items, making metal structures properly fireproof.</MegaMod_QoLMetalDoesntBurn_Desc>
+  <MegaMod_QoLFilthVanishes>Filth Vanishes Over Time &amp; Rain</MegaMod_QoLFilthVanishes>
+  <MegaMod_QoLFilthVanishes_Desc>Causes outdoor filth to be rapidly washed away by precipitation, and old filth to naturally dissipate over time.</MegaMod_QoLFilthVanishes_Desc>
+  <MegaMod_QoLStackableChunks>Stackable Stone &amp; Slag Chunks</MegaMod_QoLStackableChunks>
+  <MegaMod_QoLStackableChunks_Desc>Allows stone chunks and slag chunks to stack up to the configured limit, saving massive storage space.</MegaMod_QoLStackableChunks_Desc>
+  <MegaMod_QoLChunkStackLimit>Chunk Stack Limit</MegaMod_QoLChunkStackLimit>
+  <MegaMod_QoLTreesDontDie>Trees Don't Die of Old Age</MegaMod_QoLTreesDontDie>
+  <MegaMod_QoLTreesDontDie_Desc>Prevents wild mature trees from rotting and dying of old age, preserving beautiful forests and wood reserves.</MegaMod_QoLTreesDontDie_Desc>
+  <MegaMod_QoLPrettyPreciousMetals>Precious Metals Beautification</MegaMod_QoLPrettyPreciousMetals>
+  <MegaMod_QoLPrettyPreciousMetals_Desc>Significantly increases the ambient beauty provided by unworked Gold and Silver, making valuable ore stockpiles aesthetically pleasing.</MegaMod_QoLPrettyPreciousMetals_Desc>
+
+  <MegaMod_QoLSectionWork>Workshop &amp; Jobs</MegaMod_QoLSectionWork>
+  <MegaMod_QoLNoJobAuthors>No Job Authors (Shared Crafting)</MegaMod_QoLNoJobAuthors>
+  <MegaMod_QoLNoJobAuthors_Desc>Allows any qualified colonist to continue working on unfinished crafting, smithing, or tailoring items started by someone else.</MegaMod_QoLNoJobAuthors_Desc>
+  <MegaMod_QoLSmoothWallsBeforeFloors>Smooth Walls Before Floors</MegaMod_QoLSmoothWallsBeforeFloors>
+  <MegaMod_QoLSmoothWallsBeforeFloors_Desc>Ensures construction workers prioritize smoothing rough rock walls before smoothing floors.</MegaMod_QoLSmoothWallsBeforeFloors_Desc>
+  <MegaMod_QoLRepairInZone>Repair Only Within Allowed Area</MegaMod_QoLRepairInZone>
+  <MegaMod_QoLRepairInZone_Desc>Prevents repair workers from leaving their assigned allowed area to repair damaged structures outside the zone.</MegaMod_QoLRepairInZone_Desc>
+  <MegaMod_QoLHaulAfterSlaughter>Haul Corpse After Slaughter</MegaMod_QoLHaulAfterSlaughter>
+  <MegaMod_QoLHaulAfterSlaughter_Desc>Automatically queues a hauling job for the handler immediately after slaughtering an animal to deliver the fresh meat to storage.</MegaMod_QoLHaulAfterSlaughter_Desc>
+
+  <MegaMod_QoLSectionRaids>Raids &amp; Events</MegaMod_QoLSectionRaids>
+  <MegaMod_QoLDisableBreachRaids>Disable Breach Raids</MegaMod_QoLDisableBreachRaids>
+  <MegaMod_QoLDisableBreachRaids_Desc>Prevents hostile factions from initiating mining/sapper breach raids that demolish base perimeters.</MegaMod_QoLDisableBreachRaids_Desc>
+  <MegaMod_QoLDisableDropPodRaids>Disable Drop Pod Raids</MegaMod_QoLDisableDropPodRaids>
+  <MegaMod_QoLDisableDropPodRaids_Desc>Prevents hostile drop pods from crashing directly into the center of your base or through roofs.</MegaMod_QoLDisableDropPodRaids_Desc>
+  <MegaMod_QoLNoDeathAcidifiers>No Death Acidifiers (Preserve Gear)</MegaMod_QoLNoDeathAcidifiers>
+  <MegaMod_QoLNoDeathAcidifiers_Desc>Prevents Empire and advanced raiders' death acidifiers from disintegrating weapons and armor upon death, leaving gear intact.</MegaMod_QoLNoDeathAcidifiers_Desc>
+  <MegaMod_QoLTraderAlerts>Trader Visiting Alert</MegaMod_QoLTraderAlerts>
+  <MegaMod_QoLTraderAlerts_Desc>Displays a prominent on-screen alert whenever a trade caravan or orbital trade ship is present and available for trade.</MegaMod_QoLTraderAlerts_Desc>
+  <MegaMod_AlertTraderTitle>Trader visiting</MegaMod_AlertTraderTitle>
+  <MegaMod_AlertTraderDesc>A trade caravan or orbital trade ship is available for trading with your colony. Don't forget to trade before they leave!</MegaMod_AlertTraderDesc>
   <MegaMod_DurabilityPerfNote>⚡ Zero-Tick Performance Architecture:\nThis mod manipulates core RimWorld ThingDef engine flags (useHitPoints = false) rather than relying on per-tick Harmony hooks or background loops. Even with 10,000+ items on the map, there is absolute zero TPS drop.</MegaMod_DurabilityPerfNote>
 </LanguageData>

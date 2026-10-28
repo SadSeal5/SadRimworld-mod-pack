@@ -5,6 +5,7 @@ using SadSeal.MegaMod.Combat.UI;
 using SadSeal.MegaMod.Durability.UI;
 using SadSeal.MegaMod.Genes.UI;
 using SadSeal.MegaMod.Hauling.UI;
+using SadSeal.MegaMod.QoL.UI;
 using SadSeal.MegaMod.Recipes.UI;
 using SadSeal.MegaMod.Skills.UI;
 using SadSeal.MegaMod.WorkManager.UI;
@@ -21,7 +22,8 @@ namespace SadSeal.MegaMod
         Genes,
         Hauling,
         WorkManager,
-        Durability
+        Durability,
+        QoL
     }
 
     public class MegaMod : Mod
@@ -44,7 +46,7 @@ namespace SadSeal.MegaMod
             var harmony = new Harmony("sadseal.megamod");
             harmony.PatchAll();
 
-            Log.Message("[SadSeal's Mega Mod] Successfully initialized: Combat, Skills, Recipes, Genes, Smart Haul, Work Manager & Durability.");
+            Log.Message("[SadSeal's Mega Mod] Successfully initialized: Combat, Skills, Recipes, Genes, Smart Haul, Work Manager, Durability & QoL Suite.");
         }
 
         public override string SettingsCategory()
@@ -128,6 +130,9 @@ namespace SadSeal.MegaMod
                 case MegaModTab.Durability:
                     DurabilitySettingsDrawer.DrawSettings(contentRect, Settings.Durability);
                     break;
+                case MegaModTab.QoL:
+                    QoLSettingsDrawer.DrawSettings(contentRect, Settings.QoL);
+                    break;
             }
 
             base.DoSettingsWindowContents(inRect);
@@ -144,6 +149,7 @@ namespace SadSeal.MegaMod
                 MegaModTab.Hauling => "MegaMod_TabHauling".Translate(),
                 MegaModTab.WorkManager => "MegaMod_TabWorkManager".Translate(),
                 MegaModTab.Durability => "MegaMod_TabDurability".Translate(),
+                MegaModTab.QoL => "MegaMod_TabQoL".Translate(),
                 _ => tab.ToString()
             };
         }

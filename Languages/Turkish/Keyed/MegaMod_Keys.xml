@@ -10,6 +10,7 @@
   <MegaMod_TabHauling>Akıllı Taşıma</MegaMod_TabHauling>
   <MegaMod_TabWorkManager>İş Yöneticisi</MegaMod_TabWorkManager>
   <MegaMod_TabDurability>Dayanıklılık (Durability)</MegaMod_TabDurability>
+  <MegaMod_TabQoL>Yaşam Kalitesi</MegaMod_TabQoL>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Tarif ve Üretim Düzenleyici</MegaMod_RecipeTitle>
@@ -262,5 +263,61 @@
   <MegaMod_RestoreGearNow>Dünyadaki Tüm Eşyaları Şimdi Onar</MegaMod_RestoreGearNow>
   <MegaMod_RestoreGearOnlyInGame>Bu işlem yalnızca aktif bir kayıt oynanırken haritadaki ve envanterlerdeki eşyaları onarmak için kullanılabilir.</MegaMod_RestoreGearOnlyInGame>
   <MegaMod_RestoredGearCount>{0} adet hasarlı giysi ve silah %100 kondisyona onarıldı.</MegaMod_RestoredGearCount>
+  <MegaMod_DurabilityPerfNote>⚡ 0-Tick Performans Mimarisi:\nBu mod, Harmony tick dinleyicileri veya arka plan sayaçları yerine doğrudan RimWorld ThingDef motor flag'lerini (useHitPoints = false) manipüle eder. Bu sayede haritanızda 10.000 eşya dahi olsa TPS'te sıfır (0) düşüş yaşanır.</MegaMod_DurabilityPerfNote>
+
+  <!-- QoL Suite Module -->
+  <MegaMod_QoLTitle>Yaşam Kalitesi Modülü</MegaMod_QoLTitle>
+  <MegaMod_QoLDesc>Koloni yaşam kalitesini artıran, piyon davranışlarını iyileştiren, gereksiz mikro yönetimi azaltan ve baskın mekaniklerini özelleştiren kapsamlı modül paketi.</MegaMod_QoLDesc>
+  <MegaMod_QoLPresetsHeader>Hızlı Önayarlar:</MegaMod_QoLPresetsHeader>
+  <MegaMod_QoLPresetBalanced>Dengeli</MegaMod_QoLPresetBalanced>
+  <MegaMod_QoLPresetMaxComfort>Maksimum Konfor</MegaMod_QoLPresetMaxComfort>
+  <MegaMod_QoLPresetVanilla>Vanilla</MegaMod_QoLPresetVanilla>
+
+  <MegaMod_QoLSectionPawn>Piyon Davranışları</MegaMod_QoLSectionPawn>
+  <MegaMod_QoLUghYouGotMe>Ugh You Got Me (Barışçıl Kavga Bitişi)</MegaMod_QoLUghYouGotMe>
+  <MegaMod_QoLUghYouGotMe_Desc>Taraflardan biri ciddi acı (>%50) hissettiğinde veya yaralandığında sosyal kavgayı barışçıl şekilde sonlandırarak uzuv kaybı ve ölümleri engeller.</MegaMod_QoLUghYouGotMe_Desc>
+  <MegaMod_QoLUghYouGotMeStopped>{0} ve {1} durum kontrolden çıkmadan önce kavgayı bıraktı.</MegaMod_QoLUghYouGotMeStopped>
+  <MegaMod_QoLWhereIsMyWeapon>Where Is My Weapon (Silahını Hatırla)</MegaMod_QoLWhereIsMyWeapon>
+  <MegaMod_QoLWhereIsMyWeapon_Desc>Yere serilen bir kolonici ayağa kalktığında, erişilebilir durumdaysa yere düşürdüğü birincil silahını otomatik olarak yeniden kuşanır.</MegaMod_QoLWhereIsMyWeapon_Desc>
+  <MegaMod_QoLPrioritizeSleep>Yatakta Dinlenmeye Öncelik Ver</MegaMod_QoLPrioritizeSleep>
+  <MegaMod_QoLPrioritizeSleep_Desc>Kolonicinin dinlenme ihtiyacı %75'in altındayken herhangi bir geçerli yatağa sağ tıklayarak dinlenmesini emretmenizi sağlar.</MegaMod_QoLPrioritizeSleep_Desc>
+  <MegaMod_QoLPrioritizeRest>{0} içinde dinlenmeye öncelik ver</MegaMod_QoLPrioritizeRest>
+  <MegaMod_QoLDontBlockDoors>Kapıları Eşyalarla Tıkama</MegaMod_QoLDontBlockDoors>
+  <MegaMod_QoLDontBlockDoors_Desc>Eşyaların kapı karelerine taşınmasını ve depolanmasını engelleyerek geçitlerin açık kalmasını sağlar.</MegaMod_QoLDontBlockDoors_Desc>
+
+  <MegaMod_QoLSectionBase>Üs ve Harita Yönetimi</MegaMod_QoLSectionBase>
+  <MegaMod_QoLMetalDoesntBurn>Metal Yanmaz (Çelik ve Plastelik)</MegaMod_QoLMetalDoesntBurn>
+  <MegaMod_QoLMetalDoesntBurn_Desc>Çelik ve Plastelik yapıların, duvarların ve eşyaların alev alabilirlik değerini sıfırlayarak metali ateşe dayanıklı hale getirir.</MegaMod_QoLMetalDoesntBurn_Desc>
+  <MegaMod_QoLFilthVanishes>Kirler Yağmurda ve Zamanla Yok Olur</MegaMod_QoLFilthVanishes>
+  <MegaMod_QoLFilthVanishes_Desc>Açık alandaki kirlerin yağmur/kar ile hızla temizlenmesini ve eski kirlerin zamanla kendiliğinden kaybolmasını sağlar.</MegaMod_QoLFilthVanishes_Desc>
+  <MegaMod_QoLStackableChunks>İstiflenebilir Taş ve Cüruf Parçaları</MegaMod_QoLStackableChunks>
+  <MegaMod_QoLStackableChunks_Desc>Kaya parçalarının ve metal cürufların tek bir karede üst üste istiflenebilmesini sağlayarak devasa depolama alanı kazandırır.</MegaMod_QoLStackableChunks_Desc>
+  <MegaMod_QoLChunkStackLimit>Parça İstif Limiti</MegaMod_QoLChunkStackLimit>
+  <MegaMod_QoLTreesDontDie>Ağaçlar Yaşlılıktan Kurumaz</MegaMod_QoLTreesDontDie>
+  <MegaMod_QoLTreesDontDie_Desc>Yetişkin yabani ağaçların yaşlanarak çürümesini ve yok olmasını engelleyerek orman örtüsünü ve odun kaynaklarını korur.</MegaMod_QoLTreesDontDie_Desc>
+  <MegaMod_QoLPrettyPreciousMetals>Değerli Metallere Güzellik Bonusu</MegaMod_QoLPrettyPreciousMetals>
+  <MegaMod_QoLPrettyPreciousMetals_Desc>İşlenmemiş altın ve gümüş yığınlarının çevreye yaydığı güzellik değerini artırarak hazine odalarını estetik hale getirir.</MegaMod_QoLPrettyPreciousMetals_Desc>
+
+  <MegaMod_QoLSectionWork>Atölye ve İşler</MegaMod_QoLSectionWork>
+  <MegaMod_QoLNoJobAuthors>No Job Authors (Ortak Zanaat)</MegaMod_QoLNoJobAuthors>
+  <MegaMod_QoLNoJobAuthors_Desc>Bir kolonicinin yarım bıraktığı üretim ve zanaat eşyalarını başka bir yetkili kolonicinin devam ettirip bitirebilmesini sağlar.</MegaMod_QoLNoJobAuthors_Desc>
+  <MegaMod_QoLSmoothWallsBeforeFloors>Duvarları Zeminlerden Önce Pürüzsüzleştir</MegaMod_QoLSmoothWallsBeforeFloors>
+  <MegaMod_QoLSmoothWallsBeforeFloors_Desc>İnşaatçıların zeminleri cilalamadan önce belirlenmiş tüm kaya duvarlarını pürüzsüzleştirmeye öncelik vermesini sağlar.</MegaMod_QoLSmoothWallsBeforeFloors_Desc>
+  <MegaMod_QoLRepairInZone>Yalnızca İzinli Alanda Tamir Yap</MegaMod_QoLRepairInZone>
+  <MegaMod_QoLRepairInZone_Desc>Tamircilerin belirlenen izinli alanlarının dışına çıkarak tehlikeli bölgelerdeki yapıları tamir etmeye gitmesini engeller.</MegaMod_QoLRepairInZone_Desc>
+  <MegaMod_QoLHaulAfterSlaughter>Kesimden Sonra Cesedi Taşı</MegaMod_QoLHaulAfterSlaughter>
+  <MegaMod_QoLHaulAfterSlaughter_Desc>Hayvan kesimi tamamlandığında kesimi yapan kolonicinin taze leşi anında soğuk depoya taşımasını sıraya ekler.</MegaMod_QoLHaulAfterSlaughter_Desc>
+
+  <MegaMod_QoLSectionRaids>Baskınlar ve Olaylar</MegaMod_QoLSectionRaids>
+  <MegaMod_QoLDisableBreachRaids>Yarma (Breach) Baskınlarını Kapat</MegaMod_QoLDisableBreachRaids>
+  <MegaMod_QoLDisableBreachRaids_Desc>Düşman fraksiyonların üs duvarlarını kazan ve delen yarma baskınları düzenlemesini engeller.</MegaMod_QoLDisableBreachRaids_Desc>
+  <MegaMod_QoLDisableDropPodRaids>Kapsül (Drop Pod) Baskınlarını Kapat</MegaMod_QoLDisableDropPodRaids>
+  <MegaMod_QoLDisableDropPodRaids_Desc>Düşmanların doğrudan üssün içine veya çatılardan içeri kapsülle inmesini engeller.</MegaMod_QoLDisableDropPodRaids_Desc>
+  <MegaMod_QoLNoDeathAcidifiers>Ölüm Asitlendiricilerini (Death Acidifier) İptal Et</MegaMod_QoLNoDeathAcidifiers>
+  <MegaMod_QoLNoDeathAcidifiers_Desc>İmparatorluk askerleri ve ileri seviye düşmanlar öldüğünde teçhizatlarının asitle eriyip yok olmasını engeller, eşyalar sağlam düşer.</MegaMod_QoLNoDeathAcidifiers_Desc>
+  <MegaMod_QoLTraderAlerts>Tüccar Ziyareti Uyarısı</MegaMod_QoLTraderAlerts>
+  <MegaMod_QoLTraderAlerts_Desc>Haritada bir ticaret kervanı veya yörüngede bir ticaret gemisi bulunduğunda ekranda belirgin bir uyarı gösterir.</MegaMod_QoLTraderAlerts_Desc>
+  <MegaMod_AlertTraderTitle>Tüccar ziyarette</MegaMod_AlertTraderTitle>
+  <MegaMod_AlertTraderDesc>Koloninizle ticaret yapabilecek bir ticaret kervanı veya yörünge gemisi mevcut. Ayrılmadan önce ticaret yapmayı unutmayın!</MegaMod_AlertTraderDesc>
   <MegaMod_DurabilityPerfNote>⚡ 0-Tick Performans Mimarisi:\nBu mod, Harmony tick dinleyicileri veya arka plan sayaçları yerine doğrudan RimWorld ThingDef motor flag'lerini (useHitPoints = false) manipüle eder. Bu sayede haritanızda 10.000 eşya dahi olsa TPS'te sıfır (0) düşüş yaşanır.</MegaMod_DurabilityPerfNote>
 </LanguageData>
