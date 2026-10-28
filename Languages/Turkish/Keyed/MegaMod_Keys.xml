@@ -11,6 +11,10 @@
   <MegaMod_TabWorkManager>İş Yöneticisi</MegaMod_TabWorkManager>
   <MegaMod_TabDurability>Dayanıklılık (Durability)</MegaMod_TabDurability>
   <MegaMod_TabQoL>Yaşam Kalitesi</MegaMod_TabQoL>
+  <MegaMod_TabMedical>Tıbbi &amp; Otopsi</MegaMod_TabMedical>
+  <MegaMod_TabAllowTool>Araçlar &amp; Emirler</MegaMod_TabAllowTool>
+  <MegaMod_TabTimeFlow>Zaman &amp; Hız</MegaMod_TabTimeFlow>
+  <MegaMod_TabQuarry>Derin Taşocağı</MegaMod_TabQuarry>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Tarif ve Üretim Düzenleyici</MegaMod_RecipeTitle>
@@ -320,4 +324,96 @@
   <MegaMod_AlertTraderTitle>Tüccar ziyarette</MegaMod_AlertTraderTitle>
   <MegaMod_AlertTraderDesc>Koloninizle ticaret yapabilecek bir ticaret kervanı veya yörünge gemisi mevcut. Ayrılmadan önce ticaret yapmayı unutmayın!</MegaMod_AlertTraderDesc>
   <MegaMod_DurabilityPerfNote>⚡ 0-Tick Performans Mimarisi:\nBu mod, Harmony tick dinleyicileri veya arka plan sayaçları yerine doğrudan RimWorld ThingDef motor flag'lerini (useHitPoints = false) manipüle eder. Bu sayede haritanızda 10.000 eşya dahi olsa TPS'te sıfır (0) düşüş yaşanır.</MegaMod_DurabilityPerfNote>
+  <!-- Medical & Autopsy Suite -->
+  <MegaMod_Medical_Title>Tıbbi &amp; Otopsi Sistemi</MegaMod_Medical_Title>
+  <MegaMod_Medical_Desc>Gelişmiş otopsi ve organ çıkarma, sahada anında tedavi ve akıllı ilaç tüketim yönetimi.</MegaMod_Medical_Desc>
+  <MegaMod_Medical_AutopsySection>Ölüm Sonrası Otopsi &amp; Organ Çıkarma</MegaMod_Medical_AutopsySection>
+  <MegaMod_Medical_EnableAutopsy>Ceset Otopsisini Etkinleştir</MegaMod_Medical_EnableAutopsy>
+  <MegaMod_Medical_EnableAutopsy_Desc>Kolonicilerin kasap masasında veya tıbbi noktalarda taze insan ve mekanoid cesetlerine otopsi yapmasını sağlar.</MegaMod_Medical_EnableAutopsy_Desc>
+  <MegaMod_Medical_AutopsyBaseChance>Temel Otopsi Başarı Şansı</MegaMod_Medical_AutopsyBaseChance>
+  <MegaMod_Medical_AutopsyBaseChance_Desc>Organ ve parçaları zedelemeden başarıyla çıkarma temel ihtimali.</MegaMod_Medical_AutopsyBaseChance_Desc>
+  <MegaMod_Medical_AutopsyBionicChance>Biyonik &amp; İmplant Çıkarma Şansı</MegaMod_Medical_AutopsyBionicChance>
+  <MegaMod_Medical_AutopsyBionicChance_Desc>Müteveffada takılı olan biyonik uzuv ve implantları kurtarma başarı ihtimali.</MegaMod_Medical_AutopsyBionicChance_Desc>
+  <MegaMod_Medical_ExtractMechParts>Mekanoidlerden Bileşen &amp; Plasteel Sök</MegaMod_Medical_ExtractMechParts>
+  <MegaMod_Medical_ExtractMechParts_Desc>Mekanoid cesetlerinden yüksek kaliteli çelik, plasteel ve endüstriyel bileşenler sökülmesine izin verir.</MegaMod_Medical_ExtractMechParts_Desc>
+  <MegaMod_Medical_MoodSection>Organ Hasadı Ruh Hali Cezaları</MegaMod_Medical_MoodSection>
+  <MegaMod_Medical_SoftenMood>Organ Hasadı Ruh Hali Cezasini Yumuşat</MegaMod_Medical_SoftenMood>
+  <MegaMod_Medical_SoftenMood_Desc>Otopsi veya organ hasadının kolonicilerde yarattığı moral cezasını azaltır.</MegaMod_Medical_SoftenMood_Desc>
+  <MegaMod_Medical_MoodMultiplier>Moral Cezası Çarpanı</MegaMod_Medical_MoodMultiplier>
+  <MegaMod_Medical_MoodMultiplier_Desc>%0 seçildiğinde ceza tamamen kalkar, %20-50 dengeli ve hafif bir ceza sağlar.</MegaMod_Medical_MoodMultiplier_Desc>
+  <MegaMod_Medical_FieldSection>Saha Tıbbı &amp; Acil Tedavi</MegaMod_Medical_FieldSection>
+  <MegaMod_Medical_EnableField>Saha Tıbbını Etkinleştir</MegaMod_Medical_EnableField>
+  <MegaMod_Medical_EnableField_Desc>Doktorlar yaralıları hastane yatağına taşımak yerine vurulup düştükleri yerde derhal tedavi eder.</MegaMod_Medical_EnableField_Desc>
+  <MegaMod_Medical_FieldDocInv>Doktorun Envanterindeki İlacı Kullan</MegaMod_Medical_FieldDocInv>
+  <MegaMod_Medical_FieldDocInv_Desc>Doktorlar kendi ceplerinde taşıdıkları ilaçları öncelikle kullanır.</MegaMod_Medical_FieldDocInv_Desc>
+  <MegaMod_Medical_FieldPatInv>Hastanın Envanterindeki İlacı Kullan</MegaMod_Medical_FieldPatInv>
+  <MegaMod_Medical_FieldPatInv_Desc>Doktorların yaralının kendi çantasındaki ilacı kullanarak tedavi etmesini sağlar.</MegaMod_Medical_FieldPatInv_Desc>
+  <MegaMod_Medical_SmartSection>Akıllı İlaç Yönetimi</MegaMod_Medical_SmartSection>
+  <MegaMod_Medical_EnableSmart>Akıllı İlaç Dağıtımını Etkinleştir</MegaMod_Medical_EnableSmart>
+  <MegaMod_Medical_EnableSmart_Desc>Pahalı ilaçları rastgele harcamak yerine yaranın ciddiyetine göre en uygun ilacı seçer.</MegaMod_Medical_EnableSmart_Desc>
+  <MegaMod_Medical_NoGlitterScratches>Basit Sıyrıklarda Parıltıdünya İlacını Engelle</MegaMod_Medical_NoGlitterScratches>
+  <MegaMod_Medical_NoGlitterScratches_Desc>Doktorlar önemsiz çizik veya morluklar için ultra değerli parıltıdünya ilaçlarını asla harcamaz.</MegaMod_Medical_NoGlitterScratches_Desc>
+  <MegaMod_Medical_SaveBestLethal>En İyi İlaçları Ölümcül Durumlara Sakla</MegaMod_Medical_SaveBestLethal>
+  <MegaMod_Medical_SaveBestLethal_Desc>En iyi tıbbi malzemeleri kan kaybından ölüm riski, ağır enfeksiyonlar ve ameliyatlar için saklar.</MegaMod_Medical_SaveBestLethal_Desc>
+  <MegaMod_Medical_BleedThreshold>Tehlikeli Kan Kaybı Eşiği</MegaMod_Medical_BleedThreshold>
+  <MegaMod_Medical_BleedThreshold_Desc>Bu oranın üzerindeki kanamalar gelişmiş ilaçların kullanılmasını tetikler.</MegaMod_Medical_BleedThreshold_Desc>
+  <MegaMod_AutopsySuccess>{0}, {1} cesedine başarıyla otopsi yaptı ve {2} adet organ/parça çıkardı.</MegaMod_AutopsySuccess>
+  <MegaMod_AutopsyMechanoidSuccess>{0}, {1} mekanoidini söktü ve {2} adet bileşen/maden kurtardı.</MegaMod_AutopsyMechanoidSuccess>
+  <MegaMod_AutopsyFailed>{0}, {1} cesedine otopsi yaptı ancak organlar zedelendiği için kurtarılamadı.</MegaMod_AutopsyFailed>
+
+  <!-- Allow Tool & Utility Commands -->
+  <MegaMod_AllowTool_Title>İzin Araçları &amp; Faydalı Emirler</MegaMod_AllowTool_Title>
+  <MegaMod_AllowTool_Desc>Harita yönetim araçları: tüm yasakları aç, acil taşı, benzerleri seç ve merhamet infazı.</MegaMod_AllowTool_Desc>
+  <MegaMod_AllowTool_EnableUnforbid>Yasak Kaldırma Aracını Etkinleştir</MegaMod_AllowTool_EnableUnforbid>
+  <MegaMod_AllowTool_EnableUnforbid_Desc>Kutucuk sürükleyerek veya tek tıkla tüm haritadaki yasakları kaldırın.</MegaMod_AllowTool_EnableUnforbid_Desc>
+  <MegaMod_AllowTool_EnableHaulUrgently>Acil Taşımayı Etkinleştir</MegaMod_AllowTool_EnableHaulUrgently>
+  <MegaMod_AllowTool_EnableHaulUrgently_Desc>Akıllı Taşıma ile tam entegre çalışan yüksek öncelikli acil taşıma emri.</MegaMod_AllowTool_EnableHaulUrgently_Desc>
+  <MegaMod_AllowTool_EnableSelectSimilar>Benzerlerini Seç Aracını Etkinleştir</MegaMod_AllowTool_EnableSelectSimilar>
+  <MegaMod_AllowTool_EnableSelectSimilar_Desc>Ekranda veya tüm haritada aynı türdeki tüm nesneleri, madenleri ve yapıları tek seferde seçin.</MegaMod_AllowTool_EnableSelectSimilar_Desc>
+  <MegaMod_AllowTool_EnableFinishOff>Merhamet İnfazı Aracını Etkinleştir</MegaMod_AllowTool_EnableFinishOff>
+  <MegaMod_AllowTool_EnableFinishOff_Desc>Yere düşmüş, çaresiz düşmanları veya hayvanları mermi israf etmeden acısızca infaz edin.</MegaMod_AllowTool_EnableFinishOff_Desc>
+  <MegaMod_Designator_Unforbid>Yasağı Kaldır</MegaMod_Designator_Unforbid>
+  <MegaMod_Designator_Unforbid_Desc>Seçilen alandaki nesnelerin yasağını kaldırır. Tüm haritadaki yasakları açmak için sağ tıklayın.</MegaMod_Designator_Unforbid_Desc>
+  <MegaMod_UnforbidAllOnMap>Tüm Haritadaki Yasakları Kaldır</MegaMod_UnforbidAllOnMap>
+  <MegaMod_UnforbiddenMapCount>Harita genelindeki {0} nesnenin yasağı kaldırıldı.</MegaMod_UnforbiddenMapCount>
+  <MegaMod_Designator_HaulUrgently>Acil Taşı</MegaMod_Designator_HaulUrgently>
+  <MegaMod_Designator_HaulUrgently_Desc>Eşyaların bozulmadan veya yıpranmadan önce en yüksek öncelikle derhal taşınmasını sağlar.</MegaMod_Designator_HaulUrgently_Desc>
+  <MegaMod_Designator_SelectSimilar>Benzerlerini Seç</MegaMod_Designator_SelectSimilar>
+  <MegaMod_Designator_SelectSimilar_Desc>Ekranda benzer olan tüm nesneleri seçmek için tıklayın. Tüm harita seçimi için sağ tıklayın.</MegaMod_Designator_SelectSimilar_Desc>
+  <MegaMod_SelectSimilar_Screen>Ekrandaki Benzerleri Seç</MegaMod_SelectSimilar_Screen>
+  <MegaMod_SelectSimilar_Map>Tüm Haritadaki Benzerleri Seç</MegaMod_SelectSimilar_Map>
+  <MegaMod_SelectSimilar_Gizmo>Benzerlerini Seç</MegaMod_SelectSimilar_Gizmo>
+  <MegaMod_SelectSimilar_Gizmo_Desc>Bu türdeki tüm eşleşen nesneleri ekranda seçin.</MegaMod_SelectSimilar_Gizmo_Desc>
+  <MegaMod_SelectedSimilarCount>{0} adet {1} seçildi.</MegaMod_SelectedSimilarCount>
+  <MegaMod_Designator_FinishOff>İnfaz Et</MegaMod_Designator_FinishOff>
+  <MegaMod_Designator_FinishOff_Desc>Yere serilmiş bir düşmanı veya yaratığı hızlı ve insancıl bir infaz için işaretleyin.</MegaMod_Designator_FinishOff_Desc>
+  <MegaMod_FinishedOffSuccess>{0}, {1} hedefini acısız bir şekilde infaz etti.</MegaMod_FinishedOffSuccess>
+
+  <!-- Smart Speed & Time Flow -->
+  <MegaMod_TimeFlow_Title>Akıllı Hız &amp; Zaman Akışı</MegaMod_TimeFlow_Title>
+  <MegaMod_TimeFlow_Desc>Geliştirici modu olmadan 4x süper hız, çatışmada zorunlu yavaşlamaları engelleme ve akıllı uyku hızlandırması.</MegaMod_TimeFlow_Desc>
+  <MegaMod_TimeFlow_UnlockSuperSpeed>4x Süper Hız Kilidini Aç</MegaMod_TimeFlow_UnlockSuperSpeed>
+  <MegaMod_TimeFlow_UnlockSuperSpeed_Desc>Geliştirici moduna ihtiyaç duymadan 4x ultra hız butonunu ve '4' kısayolunu arayüzde etkinleştirir.</MegaMod_TimeFlow_UnlockSuperSpeed_Desc>
+  <MegaMod_TimeFlow_DisableForcedSlowdown>Zorunlu Olay Yavaşlamasını Devre Dışı Bırak</MegaMod_TimeFlow_DisableForcedSlowdown>
+  <MegaMod_TimeFlow_DisableForcedSlowdown_Desc>Baskınlar, çatışmalar ve hasar anında oyun hızının zorla 1x hızına düşürülmesini engeller.</MegaMod_TimeFlow_DisableForcedSlowdown_Desc>
+  <MegaMod_TimeFlow_SmartSleep>Akıllı Uyku Hızlandırması</MegaMod_TimeFlow_SmartSleep>
+  <MegaMod_TimeFlow_SmartSleep_Desc>Bütün koloniciler uyuduğunda ve haritada tehlike yokken hızı otomatik olarak en yükseğe alır, uyandıklarında eski hıza döner.</MegaMod_TimeFlow_SmartSleep_Desc>
+  <MegaMod_TimeFlow_SleepSpeedTarget>Uyku Sırasında Hedeflenen Hız:</MegaMod_TimeFlow_SleepSpeedTarget>
+
+  <!-- Deep Quarry & Resource Extractor -->
+  <MegaMod_Quarry_Title>Derin Taşocağı &amp; Maden Çıkarıcı</MegaMod_Quarry_Title>
+  <MegaMod_Quarry_Desc>Taş blokları, çelik, plasteel, uranyum ve bileşenler kazmak için inşa edilebilir derin taşocağı.</MegaMod_Quarry_Desc>
+  <MegaMod_Quarry_InfiniteQuarry>Sonsuz Taşocağı (Asla Tükenmez)</MegaMod_Quarry_InfiniteQuarry>
+  <MegaMod_Quarry_InfiniteQuarry_Desc>İşaretlendiğinde taşocağı tükenmeden sonsuza kadar kazılabilir.</MegaMod_Quarry_InfiniteQuarry_Desc>
+  <MegaMod_Quarry_MiningSpeed>Kazma Hızı Çarpanı</MegaMod_Quarry_MiningSpeed>
+  <MegaMod_Quarry_MiningSpeed_Desc>Kolonicilerin kazı işlemlerini tamamlama ve madencilik tecrübesi kazanma hızını ayarlar.</MegaMod_Quarry_MiningSpeed_Desc>
+  <MegaMod_Quarry_ResourceWeightsHeader>Maden Çıkma Ağırlıkları (Yüksek = Daha Sık)</MegaMod_Quarry_ResourceWeightsHeader>
+  <MegaMod_Quarry_WeightSteel>Çelik</MegaMod_Quarry_WeightSteel>
+  <MegaMod_Quarry_WeightPlasteel>Plasteel</MegaMod_Quarry_WeightPlasteel>
+  <MegaMod_Quarry_WeightUranium>Uranyum</MegaMod_Quarry_WeightUranium>
+  <MegaMod_Quarry_WeightComponents>Bileşenler</MegaMod_Quarry_WeightComponents>
+  <MegaMod_Quarry_WeightGold>Altın</MegaMod_Quarry_WeightGold>
+  <MegaMod_Quarry_WeightSilver>Gümüş</MegaMod_Quarry_WeightSilver>
+  <MegaMod_Quarry_InspectString>Tamamlanan kazı sayısı: {0}</MegaMod_Quarry_InspectString>
+  <MegaMod_QuarryMinedItem>{0}, derin taşocağından {1} çıkardı.</MegaMod_QuarryMinedItem>
 </LanguageData>

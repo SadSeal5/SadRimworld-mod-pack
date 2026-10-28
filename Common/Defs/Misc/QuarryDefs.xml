@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- Quarry Structure ThingDef -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>Sad_DeepQuarry</defName>
+    <label>deep quarry</label>
+    <description>A large ground excavation pit equipped with heavy rigging and winches to extract rock chunks, metal veins, and raw components from deep subterranean strata.</description>
+    <thingClass>SadSeal.MegaMod.Quarry.Building_Quarry</thingClass>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>60</pathCost>
+    <castEdgeShadows>true</castEdgeShadows>
+    <fillPercent>0.5</fillPercent>
+    <designationCategory>Production</designationCategory>
+    <canOverlapZones>false</canOverlapZones>
+    <statBases>
+      <MaxHitPoints>1000</MaxHitPoints>
+      <WorkToBuild>2800</WorkToBuild>
+      <Flammability>0.2</Flammability>
+    </statBases>
+    <size>(5,5)</size>
+    <costList>
+      <Steel>60</Steel>
+      <WoodLog>120</WoodLog>
+    </costList>
+    <graphicData>
+      <texPath>Things/Building/Production/TableSculpting</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(5,5)</drawSize>
+    </graphicData>
+    <interactionCellOffset>(0,0,-3)</interactionCellOffset>
+    <hasInteractionCell>true</hasInteractionCell>
+    <surfaceType>Item</surfaceType>
+    <recipes>
+      <li>SadQuarry_MineChunks</li>
+      <li>SadQuarry_MineResources</li>
+      <li>SadQuarry_MineComponents</li>
+    </recipes>
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+    </inspectorTabs>
+    <building>
+      <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+    </building>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <designationHotkey>Misc1</designationHotkey>
+  </ThingDef>
+
+  <!-- Quarry Recipes -->
+  <RecipeDef>
+    <defName>SadQuarry_MineChunks</defName>
+    <label>quarry stone chunks</label>
+    <description>Excavate stone chunks from the quarry floor.</description>
+    <jobString>Excavating stone chunks.</jobString>
+    <workAmount>2000</workAmount>
+    <workSpeedStat>MiningSpeed</workSpeedStat>
+    <workSkill>Mining</workSkill>
+    <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
+    <effectWorking>Mine</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>SadQuarry_MineResources</defName>
+    <label>quarry raw minerals</label>
+    <description>Excavate deep subterranean veins to extract steel, plasteel, uranium, gold, or silver.</description>
+    <jobString>Excavating minerals.</jobString>
+    <workAmount>2600</workAmount>
+    <workSpeedStat>MiningSpeed</workSpeedStat>
+    <workSkill>Mining</workSkill>
+    <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
+    <effectWorking>Mine</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>SadQuarry_MineComponents</defName>
+    <label>salvage deep components</label>
+    <description>Carefully dig for compact machinery and components embedded in ancient debris.</description>
+    <jobString>Salvaging components.</jobString>
+    <workAmount>3200</workAmount>
+    <workSpeedStat>MiningSpeed</workSpeedStat>
+    <workSkill>Mining</workSkill>
+    <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
+    <effectWorking>Mine</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+  </RecipeDef>
+</Defs>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/DesignationCategoryDef[defName="Orders"]/specialDesignatorClasses</xpath>
+    <value>
+      <li>SadSeal.MegaMod.AllowTool.Unforbid.Designator_Unforbid</li>
+      <li>SadSeal.MegaMod.AllowTool.HaulUrgently.Designator_HaulUrgently</li>
+      <li>SadSeal.MegaMod.AllowTool.SelectSimilar.Designator_SelectSimilar</li>
+      <li>SadSeal.MegaMod.AllowTool.FinishOff.Designator_FinishOff</li>
+    </value>
+  </Operation>
+</Patch>

@@ -1,13 +1,17 @@
 using System;
 using System.Collections.Generic;
 using HarmonyLib;
+using SadSeal.MegaMod.AllowTool.UI;
 using SadSeal.MegaMod.Combat.UI;
 using SadSeal.MegaMod.Durability.UI;
 using SadSeal.MegaMod.Genes.UI;
 using SadSeal.MegaMod.Hauling.UI;
+using SadSeal.MegaMod.Medical.UI;
 using SadSeal.MegaMod.QoL.UI;
+using SadSeal.MegaMod.Quarry.UI;
 using SadSeal.MegaMod.Recipes.UI;
 using SadSeal.MegaMod.Skills.UI;
+using SadSeal.MegaMod.TimeFlow.UI;
 using SadSeal.MegaMod.WorkManager.UI;
 using UnityEngine;
 using Verse;
@@ -23,7 +27,11 @@ namespace SadSeal.MegaMod
         Hauling,
         WorkManager,
         Durability,
-        QoL
+        QoL,
+        Medical,
+        AllowTool,
+        TimeFlow,
+        Quarry
     }
 
     public class MegaMod : Mod
@@ -46,7 +54,7 @@ namespace SadSeal.MegaMod
             var harmony = new Harmony("sadseal.megamod");
             harmony.PatchAll();
 
-            Log.Message("[SadSeal's Mega Mod] Successfully initialized: Combat, Skills, Recipes, Genes, Smart Haul, Work Manager, Durability & QoL Suite.");
+            Log.Message("[SadSeal's Mega Mod] Successfully initialized: Combat, Skills, Recipes, Genes, Smart Haul, Work Manager, Durability, QoL, Medical, AllowTool, TimeFlow & Deep Quarry.");
         }
 
         public override string SettingsCategory()
@@ -133,6 +141,18 @@ namespace SadSeal.MegaMod
                 case MegaModTab.QoL:
                     QoLSettingsDrawer.DrawSettings(contentRect, Settings.QoL);
                     break;
+                case MegaModTab.Medical:
+                    MedicalSettingsDrawer.DrawSettings(contentRect, Settings.Medical);
+                    break;
+                case MegaModTab.AllowTool:
+                    AllowToolSettingsDrawer.DrawSettings(contentRect, Settings.AllowTool);
+                    break;
+                case MegaModTab.TimeFlow:
+                    TimeFlowSettingsDrawer.DrawSettings(contentRect, Settings.TimeFlow);
+                    break;
+                case MegaModTab.Quarry:
+                    QuarrySettingsDrawer.DrawSettings(contentRect, Settings.Quarry);
+                    break;
             }
 
             base.DoSettingsWindowContents(inRect);
@@ -150,6 +170,10 @@ namespace SadSeal.MegaMod
                 MegaModTab.WorkManager => "MegaMod_TabWorkManager".Translate(),
                 MegaModTab.Durability => "MegaMod_TabDurability".Translate(),
                 MegaModTab.QoL => "MegaMod_TabQoL".Translate(),
+                MegaModTab.Medical => "MegaMod_TabMedical".Translate(),
+                MegaModTab.AllowTool => "MegaMod_TabAllowTool".Translate(),
+                MegaModTab.TimeFlow => "MegaMod_TabTimeFlow".Translate(),
+                MegaModTab.Quarry => "MegaMod_TabQuarry".Translate(),
                 _ => tab.ToString()
             };
         }

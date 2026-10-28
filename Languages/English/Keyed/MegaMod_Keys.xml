@@ -11,6 +11,10 @@
   <MegaMod_TabWorkManager>Work Manager</MegaMod_TabWorkManager>
   <MegaMod_TabDurability>Durability</MegaMod_TabDurability>
   <MegaMod_TabQoL>QoL Suite</MegaMod_TabQoL>
+  <MegaMod_TabMedical>Medical &amp; Autopsy</MegaMod_TabMedical>
+  <MegaMod_TabAllowTool>Utility &amp; Orders</MegaMod_TabAllowTool>
+  <MegaMod_TabTimeFlow>Speed &amp; Time</MegaMod_TabTimeFlow>
+  <MegaMod_TabQuarry>Deep Quarry</MegaMod_TabQuarry>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Recipe &amp; Crafting Tweaker</MegaMod_RecipeTitle>
@@ -320,4 +324,96 @@
   <MegaMod_AlertTraderTitle>Trader visiting</MegaMod_AlertTraderTitle>
   <MegaMod_AlertTraderDesc>A trade caravan or orbital trade ship is available for trading with your colony. Don't forget to trade before they leave!</MegaMod_AlertTraderDesc>
   <MegaMod_DurabilityPerfNote>⚡ Zero-Tick Performance Architecture:\nThis mod manipulates core RimWorld ThingDef engine flags (useHitPoints = false) rather than relying on per-tick Harmony hooks or background loops. Even with 10,000+ items on the map, there is absolute zero TPS drop.</MegaMod_DurabilityPerfNote>
+  <!-- Medical & Autopsy Suite -->
+  <MegaMod_Medical_Title>Medical &amp; Autopsy Suite</MegaMod_Medical_Title>
+  <MegaMod_Medical_Desc>Advanced post-mortem organ extraction, combat field medicine, and smart medicine tier management.</MegaMod_Medical_Desc>
+  <MegaMod_Medical_AutopsySection>Post-Mortem Autopsy &amp; Harvesting</MegaMod_Medical_AutopsySection>
+  <MegaMod_Medical_EnableAutopsy>Enable Autopsies on Corpses</MegaMod_Medical_EnableAutopsy>
+  <MegaMod_Medical_EnableAutopsy_Desc>Allows colonists to perform surgical autopsies on fresh humanlike and mechanoid corpses at butcher tables or medical spots.</MegaMod_Medical_EnableAutopsy_Desc>
+  <MegaMod_Medical_AutopsyBaseChance>Base Autopsy Success Chance</MegaMod_Medical_AutopsyBaseChance>
+  <MegaMod_Medical_AutopsyBaseChance_Desc>Baseline probability to successfully extract viable natural organs and parts without damaging them.</MegaMod_Medical_AutopsyBaseChance_Desc>
+  <MegaMod_Medical_AutopsyBionicChance>Bionic &amp; Implant Extraction Chance</MegaMod_Medical_AutopsyBionicChance>
+  <MegaMod_Medical_AutopsyBionicChance_Desc>Probability of successfully salvaging bionic limbs and internal implants installed in the deceased.</MegaMod_Medical_AutopsyBionicChance_Desc>
+  <MegaMod_Medical_ExtractMechParts>Extract Mechanoid Components &amp; Plasteel</MegaMod_Medical_ExtractMechParts>
+  <MegaMod_Medical_ExtractMechParts_Desc>Allows disassembling mechanoids for high-grade steel, plasteel, and industrial components.</MegaMod_Medical_ExtractMechParts_Desc>
+  <MegaMod_Medical_MoodSection>Organ Harvesting Mood Penalties</MegaMod_Medical_MoodSection>
+  <MegaMod_Medical_SoftenMood>Soften Organ Harvest Mood Debuffs</MegaMod_Medical_SoftenMood>
+  <MegaMod_Medical_SoftenMood_Desc>Reduces the negative thoughts colonists suffer from harvesting or autopsying corpses.</MegaMod_Medical_SoftenMood_Desc>
+  <MegaMod_Medical_MoodMultiplier>Mood Penalty Multiplier</MegaMod_Medical_MoodMultiplier>
+  <MegaMod_Medical_MoodMultiplier_Desc>Set to 0% to completely eliminate penalties, or 20-50% for realistic balanced debuffs.</MegaMod_Medical_MoodMultiplier_Desc>
+  <MegaMod_Medical_FieldSection>Field Medicine &amp; Emergency Doctoring</MegaMod_Medical_FieldSection>
+  <MegaMod_Medical_EnableField>Enable Field Medicine</MegaMod_Medical_EnableField>
+  <MegaMod_Medical_EnableField_Desc>Doctors will treat wounded pawns directly where they fall instead of carrying them all the way to a hospital bed first.</MegaMod_Medical_EnableField_Desc>
+  <MegaMod_Medical_FieldDocInv>Use Doctor's Inventory Medicine</MegaMod_Medical_FieldDocInv>
+  <MegaMod_Medical_FieldDocInv_Desc>Doctors will prioritize medicine they carry in their own pockets.</MegaMod_Medical_FieldDocInv_Desc>
+  <MegaMod_Medical_FieldPatInv>Use Patient's Inventory Medicine</MegaMod_Medical_FieldPatInv>
+  <MegaMod_Medical_FieldPatInv_Desc>Allows doctors to tend using medicines found in the patient's own inventory.</MegaMod_Medical_FieldPatInv_Desc>
+  <MegaMod_Medical_SmartSection>Smart Medicine Distribution</MegaMod_Medical_SmartSection>
+  <MegaMod_Medical_EnableSmart>Enable Smart Medicine Tiering</MegaMod_Medical_EnableSmart>
+  <MegaMod_Medical_EnableSmart_Desc>Intelligently chooses medicine tiers based on severity of injury rather than blindly burning expensive medicine.</MegaMod_Medical_EnableSmart_Desc>
+  <MegaMod_Medical_NoGlitterScratches>Prevent Glitterworld Waste on Scratches</MegaMod_Medical_NoGlitterScratches>
+  <MegaMod_Medical_NoGlitterScratches_Desc>Doctors will never consume valuable Glitterworld medicine for harmless scratches or minor bruises.</MegaMod_Medical_NoGlitterScratches_Desc>
+  <MegaMod_Medical_SaveBestLethal>Reserve Best Medicine for Lethal Wounds</MegaMod_Medical_SaveBestLethal>
+  <MegaMod_Medical_SaveBestLethal_Desc>Saves top medical supplies for life-threatening blood loss, severe infections, or emergency surgery.</MegaMod_Medical_SaveBestLethal_Desc>
+  <MegaMod_Medical_BleedThreshold>Dangerous Bleed Rate Threshold</MegaMod_Medical_BleedThreshold>
+  <MegaMod_Medical_BleedThreshold_Desc>Bleed rates above this value will trigger priority usage of advanced medicine.</MegaMod_Medical_BleedThreshold_Desc>
+  <MegaMod_AutopsySuccess>{0} successfully autopsied {1} and salvaged {2} viable organs/items.</MegaMod_AutopsySuccess>
+  <MegaMod_AutopsyMechanoidSuccess>{0} dismantled mechanoid {1} and recovered {2} components and resources.</MegaMod_AutopsyMechanoidSuccess>
+  <MegaMod_AutopsyFailed>{0} performed autopsy on {1}, but organs were damaged or ruined.</MegaMod_AutopsyFailed>
+
+  <!-- Allow Tool & Utility Commands -->
+  <MegaMod_AllowTool_Title>Allow Tool &amp; Utility Commands</MegaMod_AllowTool_Title>
+  <MegaMod_AllowTool_Desc>Essential map utility designators: unforbid all, haul urgently, select similar, and mercy finish off.</MegaMod_AllowTool_Desc>
+  <MegaMod_AllowTool_EnableUnforbid>Enable Unforbid Tool</MegaMod_AllowTool_EnableUnforbid>
+  <MegaMod_AllowTool_EnableUnforbid_Desc>Unlock forbidden items via drag box or one-click entire map unforbid.</MegaMod_AllowTool_EnableUnforbid_Desc>
+  <MegaMod_AllowTool_EnableHaulUrgently>Enable Haul Urgently</MegaMod_AllowTool_EnableHaulUrgently>
+  <MegaMod_AllowTool_EnableHaulUrgently_Desc>High-priority hauling designator integrated seamlessly with Smart Haul.</MegaMod_AllowTool_EnableHaulUrgently_Desc>
+  <MegaMod_AllowTool_EnableSelectSimilar>Enable Select Similar</MegaMod_AllowTool_EnableSelectSimilar>
+  <MegaMod_AllowTool_EnableSelectSimilar_Desc>Select all identical items, resources, ores, or buildings on screen or across the map.</MegaMod_AllowTool_EnableSelectSimilar_Desc>
+  <MegaMod_AllowTool_EnableFinishOff>Enable Finish Off / Mercy Kill</MegaMod_AllowTool_EnableFinishOff>
+  <MegaMod_AllowTool_EnableFinishOff_Desc>Quickly and humanely dispatch downed incapacitated enemies or creatures.</MegaMod_AllowTool_EnableFinishOff_Desc>
+  <MegaMod_Designator_Unforbid>Unforbid</MegaMod_Designator_Unforbid>
+  <MegaMod_Designator_Unforbid_Desc>Remove forbidden status from items in the selected area. Right-click to unforbid the entire map.</MegaMod_Designator_Unforbid_Desc>
+  <MegaMod_UnforbidAllOnMap>Unforbid Entire Map</MegaMod_UnforbidAllOnMap>
+  <MegaMod_UnforbiddenMapCount>Unforbidden {0} items across the map.</MegaMod_UnforbiddenMapCount>
+  <MegaMod_Designator_HaulUrgently>Haul Urgently</MegaMod_Designator_HaulUrgently>
+  <MegaMod_Designator_HaulUrgently_Desc>Designate items for immediate emergency hauling before they deteriorate or rot.</MegaMod_Designator_HaulUrgently_Desc>
+  <MegaMod_Designator_SelectSimilar>Select Similar</MegaMod_Designator_SelectSimilar>
+  <MegaMod_Designator_SelectSimilar_Desc>Click any item to select all similar items on screen. Right-click to switch to entire map.</MegaMod_Designator_SelectSimilar_Desc>
+  <MegaMod_SelectSimilar_Screen>Select Similar on Screen</MegaMod_SelectSimilar_Screen>
+  <MegaMod_SelectSimilar_Map>Select Similar across Entire Map</MegaMod_SelectSimilar_Map>
+  <MegaMod_SelectSimilar_Gizmo>Select Similar</MegaMod_SelectSimilar_Gizmo>
+  <MegaMod_SelectSimilar_Gizmo_Desc>Select all matching items of this type on screen.</MegaMod_SelectSimilar_Gizmo_Desc>
+  <MegaMod_SelectedSimilarCount>Selected {0}x {1}.</MegaMod_SelectedSimilarCount>
+  <MegaMod_Designator_FinishOff>Finish Off</MegaMod_Designator_FinishOff>
+  <MegaMod_Designator_FinishOff_Desc>Designate a downed hostile or creature for quick humane execution.</MegaMod_Designator_FinishOff_Desc>
+  <MegaMod_FinishedOffSuccess>{0} humanely finished off {1}.</MegaMod_FinishedOffSuccess>
+
+  <!-- Smart Speed & Time Flow -->
+  <MegaMod_TimeFlow_Title>Smart Speed &amp; Time Flow</MegaMod_TimeFlow_Title>
+  <MegaMod_TimeFlow_Desc>4x Super Speed without dev mode, prevention of forced combat slowdowns, and smart sleep fast-forward.</MegaMod_TimeFlow_Desc>
+  <MegaMod_TimeFlow_UnlockSuperSpeed>Unlock 4x Super Speed</MegaMod_TimeFlow_UnlockSuperSpeed>
+  <MegaMod_TimeFlow_UnlockSuperSpeed_Desc>Enables the 4x ultrafast speed button in the main UI and enables the '4' hotkey without needing Developer Mode.</MegaMod_TimeFlow_UnlockSuperSpeed_Desc>
+  <MegaMod_TimeFlow_DisableForcedSlowdown>Disable Forced Event Slowdown</MegaMod_TimeFlow_DisableForcedSlowdown>
+  <MegaMod_TimeFlow_DisableForcedSlowdown_Desc>Prevents raids, combat, and damage events from forcibly dropping game speed to 1x.</MegaMod_TimeFlow_DisableForcedSlowdown_Desc>
+  <MegaMod_TimeFlow_SmartSleep>Smart Sleep Fast-Forward</MegaMod_TimeFlow_SmartSleep>
+  <MegaMod_TimeFlow_SmartSleep_Desc>Automatically switches time speed to maximum when all colonists are sleeping and no dangers exist, restoring normal speed upon waking.</MegaMod_TimeFlow_SmartSleep_Desc>
+  <MegaMod_TimeFlow_SleepSpeedTarget>Sleep Fast-Forward Target Speed:</MegaMod_TimeFlow_SleepSpeedTarget>
+
+  <!-- Deep Quarry & Resource Extractor -->
+  <MegaMod_Quarry_Title>Deep Quarry &amp; Resource Extractor</MegaMod_Quarry_Title>
+  <MegaMod_Quarry_Desc>Buildable quarry structure for mining stone chunks, steel, plasteel, uranium, and machinery components.</MegaMod_Quarry_Desc>
+  <MegaMod_Quarry_InfiniteQuarry>Infinite Quarry (Never Depletes)</MegaMod_Quarry_InfiniteQuarry>
+  <MegaMod_Quarry_InfiniteQuarry_Desc>When checked, the quarry can be mined indefinitely without depleting subterranean resources.</MegaMod_Quarry_InfiniteQuarry_Desc>
+  <MegaMod_Quarry_MiningSpeed>Mining Speed Multiplier</MegaMod_Quarry_MiningSpeed>
+  <MegaMod_Quarry_MiningSpeed_Desc>Adjusts how quickly colonists complete excavation bills and gain mining skill.</MegaMod_Quarry_MiningSpeed_Desc>
+  <MegaMod_Quarry_ResourceWeightsHeader>Mineral Drop Weights (Higher = More Common)</MegaMod_Quarry_ResourceWeightsHeader>
+  <MegaMod_Quarry_WeightSteel>Steel</MegaMod_Quarry_WeightSteel>
+  <MegaMod_Quarry_WeightPlasteel>Plasteel</MegaMod_Quarry_WeightPlasteel>
+  <MegaMod_Quarry_WeightUranium>Uranium</MegaMod_Quarry_WeightUranium>
+  <MegaMod_Quarry_WeightComponents>Components</MegaMod_Quarry_WeightComponents>
+  <MegaMod_Quarry_WeightGold>Gold</MegaMod_Quarry_WeightGold>
+  <MegaMod_Quarry_WeightSilver>Silver</MegaMod_Quarry_WeightSilver>
+  <MegaMod_Quarry_InspectString>Excavations completed: {0}</MegaMod_Quarry_InspectString>
+  <MegaMod_QuarryMinedItem>{0} excavated {1} from the deep quarry.</MegaMod_QuarryMinedItem>
 </LanguageData>

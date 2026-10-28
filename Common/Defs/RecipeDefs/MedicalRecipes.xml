@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <RecipeDef>
+    <defName>SadMedical_AutopsyCorpseHuman</defName>
+    <label>perform autopsy on corpse</label>
+    <description>Carefully dissect a fresh corpse to salvage natural organs, bionic prosthetics, and artificial implants.</description>
+    <jobString>Performing autopsy.</jobString>
+    <workAmount>3500</workAmount>
+    <workSpeedStat>MedicalSurgerySuccessChance</workSpeedStat>
+    <workSkill>Medicine</workSkill>
+    <workerClass>SadSeal.MegaMod.Medical.Autopsy.Recipe_Autopsy</workerClass>
+    <effectWorking>ButcherFlesh</effectWorking>
+    <soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>CorpsesHumanlike</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>CorpsesHumanlike</li>
+      </categories>
+      <specialFiltersToDisallow>
+        <li>AllowRotten</li>
+      </specialFiltersToDisallow>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <categories>
+        <li>CorpsesHumanlike</li>
+      </categories>
+      <specialFiltersToDisallow>
+        <li>AllowRotten</li>
+      </specialFiltersToDisallow>
+    </defaultIngredientFilter>
+    <recipeUsers>
+      <li>TableButcher</li>
+      <li>ButcherSpot</li>
+    </recipeUsers>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>SadMedical_AutopsyCorpseMechanoid</defName>
+    <label>dissect mechanoid chassis</label>
+    <description>Carefully disassemble a mechanoid corpse to salvage precision components, plasteel, and structural steel.</description>
+    <jobString>Dissecting mechanoid.</jobString>
+    <workAmount>3000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <workSkill>Crafting</workSkill>
+    <workerClass>SadSeal.MegaMod.Medical.Autopsy.Recipe_Autopsy</workerClass>
+    <effectWorking>ButcherMechanoid</effectWorking>
+    <soundWorking>Recipe_ButcherCorpseMechanoid</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>CorpsesMechanoid</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>CorpsesMechanoid</li>
+      </categories>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <categories>
+        <li>CorpsesMechanoid</li>
+      </categories>
+    </defaultIngredientFilter>
+    <recipeUsers>
+      <li>TableButcher</li>
+      <li>CraftingSpot</li>
+      <li>TableMachining</li>
+    </recipeUsers>
+  </RecipeDef>
+</Defs>
