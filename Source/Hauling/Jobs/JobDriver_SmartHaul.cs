@@ -51,7 +51,7 @@ namespace SadSeal.MegaMod.Hauling.Jobs
             if (job.targetB.IsValid)
             {
                 SlotGroup slotGroup = job.targetB.Cell.GetSlotGroup(Map);
-                if (slotGroup != null)
+                if (slotGroup != null && slotGroup.parent != null)
                 {
                     destLabel = slotGroup.parent.SlotYielderLabel();
                 }
@@ -101,165 +101,141 @@ namespace SadSeal.MegaMod.Hauling.Jobs
             };
             yield return pickupPrimary;
 
-            // Toil 3: Dynamic gathering toil
-            yield return CreateGatheringToil();
+            // --- Multi-item gathering loop ---
+            Toil findNextCandidate = ToilMaker.MakeToil("FindNextCandidate");
+            Toil gotoCandidate = Toils_Goto.GotoThing(HaulableInd, PathEndMode.ClosestTouch);
+            Toil pickupCandidate = ToilMaker.MakeToil("PickupCandidate");
+            Toil gotoDestination = Toils_Goto.GotoCell(StoreCellInd, PathEndMode.ClosestTouch);
 
-            // Toil 4: Goto destination storage cell
-            yield return Toils_Goto.GotoCell(StoreCellInd, PathEndMode.ClosestTouch);
-
-            // Toil 5: Deposit carried primary thing into storage cell
-            yield return Toils_Haul.PlaceHauledThingInCell(StoreCellInd, null, true, true);
-
-            // Toil 6: Batch unload all gathered cargo from inventory
-            yield return CreateBatchUnloadToil();
-        }
-
-        private Toil CreateGatheringToil()
-        {
-            Toil gatherToil = ToilMaker.MakeToil("DynamicGatherNearby");
-            gatherToil.defaultCompleteMode = ToilCompleteMode.Never;
-
-            gatherToil.initAction = () =>
+            findNextCandidate.initAction = () =>
             {
-                haulCandidates.Clear();
-                candidateIndex = 0;
-
                 bool smartHaulEnabled = MegaMod.Settings?.Hauling?.EnableSmartHaul ?? true;
-                if (smartHaulEnabled)
+                if (!smartHaulEnabled)
                 {
-                    Thing primary = pawn.carryTracker.CarriedThing ?? job.GetTarget(HaulableInd).Thing;
-                    if (primary != null)
-                    {
-                        HaulHelper.FindNearbyHaulables(pawn, primary, job.GetTarget(StoreCellInd).Cell, haulCandidates);
-                    }
-                }
-
-                if (haulCandidates.Count == 0)
-                {
-                    ReadyForNextToil();
+                    pawn.jobs.curDriver.JumpToToil(gotoDestination);
                     return;
                 }
 
-                StartNextCandidatePath();
-            };
-
-            gatherToil.tickAction = () =>
-            {
                 var settings = MegaMod.Settings?.Hauling;
                 float maxMassRatio = settings != null ? settings.MassLimitPercent : 0.95f;
                 float capacity = MassUtility.Capacity(pawn);
                 float currentMass = MassUtility.GearAndInventoryMass(pawn);
+                int maxItems = settings != null ? settings.MaxItemsPerTrip : 8;
 
                 if (MassUtility.FreeSpace(pawn) < 0.1f ||
                     currentMass >= capacity * maxMassRatio ||
-                    HauledCargoTracker.GetHauledThings(pawn).Count >= (settings != null ? settings.MaxItemsPerTrip : 8) ||
-                    candidateIndex >= haulCandidates.Count)
+                    HauledCargoTracker.GetHauledThings(pawn).Count >= maxItems)
                 {
-                    ReadyForNextToil();
+                    pawn.jobs.curDriver.JumpToToil(gotoDestination);
                     return;
                 }
 
-                Thing candidate = haulCandidates[candidateIndex];
-                if (candidate == null || !candidate.Spawned || candidate.Destroyed || candidate.IsForbidden(pawn))
-                {
-                    AdvanceCandidate();
-                    return;
-                }
+                haulCandidates.Clear();
+                HaulHelper.FindNearbyHaulables(pawn, pawn.Position, pawn.carryTracker.CarriedThing, job.GetTarget(StoreCellInd).Cell, haulCandidates);
 
-                if (pawn.pather.Moving)
+                Thing nextCandidate = null;
+                for (int i = 0; i < haulCandidates.Count; i++)
                 {
-                    return;
-                }
-
-                if (pawn.Position.AdjacentTo8WayOrInside(candidate))
-                {
-                    int maxPickable = MassUtility.CountToPickUpUntilOverEncumbered(pawn, candidate);
-                    int countToTake = Mathf.Min(candidate.stackCount, maxPickable);
-
-                    if (countToTake <= 0)
+                    Thing c = haulCandidates[i];
+                    if (c != null && c.Spawned && !c.Destroyed && !c.IsForbidden(pawn) &&
+                        pawn.CanReserve(c, 1, -1, null, false) &&
+                        pawn.CanReach(c, PathEndMode.ClosestTouch, Danger.Some))
                     {
-                        ReadyForNextToil();
-                        return;
-                    }
-
-                    Thing taken = candidate.SplitOff(countToTake);
-
-                    bool hasPersonalStack = false;
-                    for (int i = 0; i < pawn.inventory.innerContainer.Count; i++)
-                    {
-                        Thing invThing = pawn.inventory.innerContainer[i];
-                        if (invThing != null && invThing.CanStackWith(taken) && !HauledCargoTracker.IsHauled(pawn, invThing))
+                        if (pawn.Reserve(c, job, 1, -1, null, false))
                         {
-                            hasPersonalStack = true;
+                            nextCandidate = c;
                             break;
                         }
                     }
+                }
 
-                    bool added = pawn.inventory.innerContainer.TryAdd(taken, !hasPersonalStack);
-                    if (added)
-                    {
-                        HauledCargoTracker.Register(pawn, taken);
-                    }
-                    else
-                    {
-                        if (!taken.Spawned)
-                        {
-                            GenPlace.TryPlaceThing(taken, pawn.Position, pawn.Map, ThingPlaceMode.Near);
-                        }
-                        ReadyForNextToil();
-                        return;
-                    }
-
-                    AdvanceCandidate();
+                if (nextCandidate != null)
+                {
+                    job.SetTarget(HaulableInd, nextCandidate);
+                    pawn.jobs.curDriver.JumpToToil(gotoCandidate);
                 }
                 else
                 {
-                    AdvanceCandidate();
+                    pawn.jobs.curDriver.JumpToToil(gotoDestination);
                 }
             };
+            yield return findNextCandidate;
 
-            return gatherToil;
-        }
+            gotoCandidate.FailOnDespawnedNullOrForbidden(HaulableInd);
+            yield return gotoCandidate;
 
-        private void AdvanceCandidate()
-        {
-            candidateIndex++;
-
-            var settings = MegaMod.Settings?.Hauling;
-            float maxMassRatio = settings != null ? settings.MassLimitPercent : 0.95f;
-            float capacity = MassUtility.Capacity(pawn);
-            float currentMass = MassUtility.GearAndInventoryMass(pawn);
-
-            if (candidateIndex >= haulCandidates.Count ||
-                MassUtility.FreeSpace(pawn) < 0.1f ||
-                currentMass >= capacity * maxMassRatio ||
-                HauledCargoTracker.GetHauledThings(pawn).Count >= (settings != null ? settings.MaxItemsPerTrip : 8))
+            pickupCandidate.initAction = () =>
             {
-                ReadyForNextToil();
-                return;
-            }
-
-            StartNextCandidatePath();
-        }
-
-        private void StartNextCandidatePath()
-        {
-            while (candidateIndex < haulCandidates.Count)
-            {
-                Thing candidate = haulCandidates[candidateIndex];
-                if (candidate != null && candidate.Spawned && !candidate.Destroyed && !candidate.IsForbidden(pawn) &&
-                    pawn.CanReach(candidate, PathEndMode.Touch, Danger.Some))
+                Thing candidate = job.GetTarget(HaulableInd).Thing;
+                if (candidate == null || !candidate.Spawned || candidate.Destroyed || candidate.IsForbidden(pawn))
                 {
-                    if (pawn.Reserve(candidate, job, 1, -1, null, false))
+                    pawn.jobs.curDriver.JumpToToil(findNextCandidate);
+                    return;
+                }
+
+                int maxPickable = MassUtility.CountToPickUpUntilOverEncumbered(pawn, candidate);
+                int countToTake = Mathf.Min(candidate.stackCount, maxPickable);
+
+                if (countToTake <= 0)
+                {
+                    pawn.jobs.curDriver.JumpToToil(gotoDestination);
+                    return;
+                }
+
+                Thing taken = candidate.SplitOff(countToTake);
+
+                bool hasPersonalStack = false;
+                Thing existingHauledStack = null;
+                for (int i = 0; i < pawn.inventory.innerContainer.Count; i++)
+                {
+                    Thing invThing = pawn.inventory.innerContainer[i];
+                    if (invThing != null && invThing.CanStackWith(taken))
                     {
-                        pawn.pather.StartPath(candidate, PathEndMode.Touch);
-                        return;
+                        if (HauledCargoTracker.IsHauled(pawn, invThing))
+                        {
+                            existingHauledStack = invThing;
+                        }
+                        else
+                        {
+                            hasPersonalStack = true;
+                        }
                     }
                 }
-                candidateIndex++;
-            }
 
-            ReadyForNextToil();
+                bool added = pawn.inventory.innerContainer.TryAdd(taken, !hasPersonalStack);
+                if (added)
+                {
+                    if (existingHauledStack != null && !taken.Spawned && !pawn.inventory.innerContainer.Contains(taken))
+                    {
+                        HauledCargoTracker.Register(pawn, existingHauledStack);
+                    }
+                    else
+                    {
+                        HauledCargoTracker.Register(pawn, taken);
+                    }
+                }
+                else
+                {
+                    if (!taken.Spawned)
+                    {
+                        GenPlace.TryPlaceThing(taken, pawn.Position, pawn.Map, ThingPlaceMode.Near);
+                    }
+                    pawn.jobs.curDriver.JumpToToil(gotoDestination);
+                    return;
+                }
+
+                pawn.jobs.curDriver.JumpToToil(findNextCandidate);
+            };
+            yield return pickupCandidate;
+
+            // Destination Toil: Goto destination storage cell
+            yield return gotoDestination;
+
+            // Deposit carried primary thing into storage cell
+            yield return Toils_Haul.PlaceHauledThingInCell(StoreCellInd, null, true, true);
+
+            // Batch unload all gathered cargo from inventory
+            yield return CreateBatchUnloadToil();
         }
 
         private Toil CreateBatchUnloadToil()
@@ -350,9 +326,7 @@ namespace SadSeal.MegaMod.Hauling.Jobs
                         }
                     }
 
-                    // 3. Option A: If not placed, DO NOT drop with ThingPlaceMode.Near onto the floor!
-                    // Leaving the unplaced item safely in pawn.inventory prevents the infinite drop-and-haul loop.
-                    // Always unregister from HauledCargoTracker so tracker is clean.
+                    // 3. If still not placed, keep safely in inventory to prevent infinite drop/haul loops
                     HauledCargoTracker.Unregister(pawn, item);
                 }
 

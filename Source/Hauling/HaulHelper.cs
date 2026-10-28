@@ -15,17 +15,57 @@ namespace SadSeal.MegaMod.Hauling
             return settings != null && settings.AllowedToAccept(thing);
         }
 
-        public static void FindNearbyHaulables(Pawn pawn, Thing primaryThing, IntVec3 storeCell, List<Thing> outCandidates)
+        public static bool CanStorageAcceptMore(SlotGroup slotGroup, Thing thing, Map map)
+        {
+            if (slotGroup == null || thing == null || map == null) return true;
+            if (slotGroup.Settings == null || !slotGroup.Settings.AllowedToAccept(thing)) return false;
+
+            List<IntVec3> cells = slotGroup.CellsList;
+            if (cells == null || cells.Count == 0) return false;
+
+            for (int i = 0; i < cells.Count; i++)
+            {
+                IntVec3 c = cells[i];
+                if (!c.InBounds(map)) continue;
+
+                int maxAllowed = GridsUtility.GetMaxItemsAllowedInCell(c, map);
+                List<Thing> thingList = c.GetThingList(map);
+                int currentItemCount = 0;
+                bool canStack = false;
+
+                for (int j = 0; j < thingList.Count; j++)
+                {
+                    Thing th = thingList[j];
+                    if (th.def.category == ThingCategory.Item)
+                    {
+                        currentItemCount++;
+                        if (th.CanStackWith(thing) && th.stackCount < th.def.stackLimit)
+                        {
+                            canStack = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (canStack || currentItemCount < maxAllowed)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static void FindNearbyHaulables(Pawn pawn, IntVec3 rootPos, Thing primaryThing, IntVec3 storeCell, List<Thing> outCandidates)
         {
             if (outCandidates == null) return;
             outCandidates.Clear();
 
-            if (pawn == null || primaryThing == null || pawn.Map == null) return;
+            if (pawn == null || pawn.Map == null) return;
 
             var settings = MegaMod.Settings?.Hauling;
             int searchRadius = settings != null ? settings.SearchRadius : 12;
             int maxItems = settings != null ? settings.MaxItemsPerTrip : 8;
-            bool strictClustering = settings == null || settings.StrictClustering;
 
             if (MassUtility.FreeSpace(pawn) <= 0.1f || maxItems <= 0)
             {
@@ -35,42 +75,12 @@ namespace SadSeal.MegaMod.Hauling
             SlotGroup targetSlotGroup = storeCell.IsValid ? storeCell.GetSlotGroup(pawn.Map) : null;
             StoragePriority targetPriority = targetSlotGroup != null ? targetSlotGroup.Settings.Priority : StoragePriority.Unstored;
 
-            // Calculate destination remaining capacity to avoid over-collecting and shelf overflow
-            int destinationRemainingSlots = int.MaxValue;
-            if (targetSlotGroup != null)
+            // Safe search center: rootPos passed in, falling back to pawn position
+            IntVec3 searchCenter = rootPos.IsValid ? rootPos : pawn.Position;
+
+            foreach (Thing thing in GenRadial.RadialDistinctThingsAround(searchCenter, pawn.Map, searchRadius, true))
             {
-                destinationRemainingSlots = 0;
-                List<IntVec3> cells = targetSlotGroup.CellsList;
-                for (int i = 0; i < cells.Count; i++)
-                {
-                    IntVec3 c = cells[i];
-                    int maxAllowed = GridsUtility.GetMaxItemsAllowedInCell(c, pawn.Map);
-                    List<Thing> thingList = c.GetThingList(pawn.Map);
-                    int currentItemCount = 0;
-                    for (int j = 0; j < thingList.Count; j++)
-                    {
-                        if (thingList[j].def.category == ThingCategory.Item)
-                        {
-                            currentItemCount++;
-                        }
-                    }
-                    destinationRemainingSlots += Mathf.Max(0, maxAllowed - currentItemCount);
-                }
-
-                // The primary carried item will occupy 1 slot
-                destinationRemainingSlots = Mathf.Max(0, destinationRemainingSlots - 1);
-                if (destinationRemainingSlots <= 0)
-                {
-                    // Target storage has no extra capacity for gathered items
-                    return;
-                }
-            }
-
-            int effectiveLimit = Mathf.Min(maxItems, destinationRemainingSlots);
-
-            foreach (Thing thing in GenRadial.RadialDistinctThingsAround(primaryThing.Position, pawn.Map, searchRadius, true))
-            {
-                if (outCandidates.Count >= effectiveLimit || MassUtility.FreeSpace(pawn) <= 0.1f)
+                if (outCandidates.Count >= maxItems || MassUtility.FreeSpace(pawn) <= 0.1f)
                 {
                     break;
                 }
@@ -90,11 +100,13 @@ namespace SadSeal.MegaMod.Hauling
                     continue;
                 }
 
-                // Never loot from the destination cell or destination storage unit
+                // Never loot from the destination cell
                 if (thing.Position == storeCell)
                 {
                     continue;
                 }
+
+                // Never loot from within the destination slot group itself
                 if (targetSlotGroup != null && targetSlotGroup.CellsList.Contains(thing.Position))
                 {
                     continue;
@@ -128,16 +140,18 @@ namespace SadSeal.MegaMod.Hauling
                     continue;
                 }
 
-                // Check destination acceptance
-                if (targetSlotGroup != null && targetSlotGroup.parent != null)
+                // Destination acceptance & capacity check
+                if (targetSlotGroup != null && !CanStorageAcceptMore(targetSlotGroup, thing, pawn.Map))
                 {
-                    if (!targetSlotGroup.parent.Accepts(thing))
-                    {
-                        continue;
-                    }
+                    continue;
                 }
 
-                if (!pawn.CanReach(thing, PathEndMode.Touch, Danger.Some))
+                if (!pawn.CanReach(thing, PathEndMode.ClosestTouch, Danger.Some))
+                {
+                    continue;
+                }
+
+                if (MassUtility.CountToPickUpUntilOverEncumbered(pawn, thing) <= 0)
                 {
                     continue;
                 }
