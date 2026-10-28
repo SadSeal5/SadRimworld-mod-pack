@@ -51,10 +51,16 @@ namespace SadSeal.MegaMod
             Instance = this;
             Settings = GetSettings<MegaModSettings>();
 
-            var harmony = new Harmony("sadseal.megamod");
-            harmony.PatchAll();
-
-            Log.Message("[SadSeal's Mega Mod] Successfully initialized: Combat, Skills, Recipes, Genes, Smart Haul, Work Manager, Durability, QoL, Medical, AllowTool, TimeFlow & Deep Quarry.");
+            try
+            {
+                var harmony = new Harmony("sadseal.megamod");
+                harmony.PatchAll();
+                Log.Message("[SadSeal's Mega Mod] Successfully initialized: Combat, Skills, Recipes, Genes, Smart Haul, Work Manager, Durability, QoL, Medical, AllowTool, TimeFlow & Deep Quarry.");
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"[SadSeal's Mega Mod] Error during initialization: {ex}");
+            }
         }
 
         public override string SettingsCategory()

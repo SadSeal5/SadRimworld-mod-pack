@@ -43,7 +43,7 @@
       <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
     </building>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-    <designationHotkey>Misc1</designationHotkey>
+    <designationHotKey>Misc1</designationHotKey>
   </ThingDef>
 
   <!-- Quarry Recipes -->

@@ -6,10 +6,10 @@ using Verse.AI;
 
 namespace SadSeal.MegaMod.QoL.Patches.Work
 {
-    [HarmonyPatch(typeof(WorkGiver_ConstructSmoothFloor), nameof(WorkGiver_ConstructSmoothFloor.JobOnThing))]
+    [HarmonyPatch(typeof(WorkGiver_ConstructSmoothFloor), nameof(WorkGiver_ConstructSmoothFloor.JobOnCell))]
     public static class Patch_SmoothWallsFirst
     {
-        public static bool Prefix(Verse.Pawn pawn, Thing t, bool forced, ref Job __result)
+        public static bool Prefix(Verse.Pawn pawn, IntVec3 c, bool forced, ref Job __result)
         {
             if (forced) return true;
             if (MegaMod.Settings?.QoL?.smoothWallsBeforeFloors != true) return true;
