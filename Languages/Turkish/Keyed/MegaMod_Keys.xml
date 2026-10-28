@@ -375,6 +375,7 @@
   <MegaMod_Designator_Unforbid>Yasağı Kaldır</MegaMod_Designator_Unforbid>
   <MegaMod_Designator_Unforbid_Desc>Seçilen alandaki nesnelerin yasağını kaldırır. Tüm haritadaki yasakları açmak için sağ tıklayın.</MegaMod_Designator_Unforbid_Desc>
   <MegaMod_UnforbidAllOnMap>Tüm Haritadaki Yasakları Kaldır</MegaMod_UnforbidAllOnMap>
+  <MegaMod_Designator_UnforbidAll_Desc>Alan seçmeye gerek kalmadan harita genelindeki tüm görünür nesnelerin yasağını tek tıkla kaldırır.</MegaMod_Designator_UnforbidAll_Desc>
   <MegaMod_UnforbiddenMapCount>Harita genelindeki {0} nesnenin yasağı kaldırıldı.</MegaMod_UnforbiddenMapCount>
   <MegaMod_Designator_HaulUrgently>Acil Taşı</MegaMod_Designator_HaulUrgently>
   <MegaMod_Designator_HaulUrgently_Desc>Eşyaların bozulmadan veya yıpranmadan önce en yüksek öncelikle derhal taşınmasını sağlar.</MegaMod_Designator_HaulUrgently_Desc>
@@ -415,5 +416,7 @@
   <MegaMod_Quarry_WeightGold>Altın</MegaMod_Quarry_WeightGold>
   <MegaMod_Quarry_WeightSilver>Gümüş</MegaMod_Quarry_WeightSilver>
   <MegaMod_Quarry_InspectString>Tamamlanan kazı sayısı: {0}</MegaMod_Quarry_InspectString>
+  <MegaMod_Quarry_InspectStringRemaining>Tamamlanan kazı sayısı: {0} ({1} kaldı)</MegaMod_Quarry_InspectStringRemaining>
+  <MegaMod_QuarryDepleted>Derin taşocağının yeraltı rezervleri tamamen kazıldı ve tükendi.</MegaMod_QuarryDepleted>
   <MegaMod_QuarryMinedItem>{0}, derin taşocağından {1} çıkardı.</MegaMod_QuarryMinedItem>
 </LanguageData>

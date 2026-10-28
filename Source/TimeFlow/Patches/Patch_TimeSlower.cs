@@ -3,6 +3,21 @@ using Verse;
 
 namespace SadSeal.MegaMod.TimeFlow.Patches
 {
+    [HarmonyPatch(typeof(TimeSlower), nameof(TimeSlower.ForcedNormalSpeed), MethodType.Getter)]
+    public static class Patch_TimeSlower_ForcedNormalSpeed
+    {
+        public static bool Prefix(ref bool __result)
+        {
+            var settings = MegaMod.Settings?.TimeFlow;
+            if (settings != null && settings.DisableForcedSlowdown)
+            {
+                __result = false;
+                return false;
+            }
+            return true;
+        }
+    }
+
     [HarmonyPatch(typeof(TimeSlower), nameof(TimeSlower.SignalForceNormalSpeed))]
     public static class Patch_TimeSlower_ForceNormal
     {

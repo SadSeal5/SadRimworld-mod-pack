@@ -13,11 +13,10 @@ namespace SadSeal.MegaMod.Medical.Autopsy
             { "Heart", "Heart" },
             { "Lung", "Lung" },
             { "Kidney", "Kidney" },
-            { "Liver", "Liver" },
-            { "Stomach", "Stomach" }
+            { "Liver", "Liver" }
         };
 
-        public static void PerformAutopsy(Pawn billDoer, Corpse corpse)
+        public static void PerformAutopsy(Pawn billDoer, Corpse corpse, Thing medicineUsed = null)
         {
             if (billDoer == null || corpse == null || corpse.InnerPawn == null) return;
 
@@ -29,8 +28,23 @@ namespace SadSeal.MegaMod.Medical.Autopsy
             IntVec3 pos = billDoer.Position;
 
             float doctorSkill = billDoer.skills != null ? billDoer.skills.GetSkill(SkillDefOf.Medicine).Level : 5f;
-            float successChance = Mathf.Clamp(settings.AutopsySuccessBaseChance + (doctorSkill * settings.AutopsySkillFactor), 0.10f, 0.98f);
+            float baseChance = settings.AutopsySuccessBaseChance + (doctorSkill * settings.AutopsySkillFactor);
 
+            // Medicine scaling
+            float medicineBonus = 0f;
+            if (medicineUsed != null)
+            {
+                float potency = medicineUsed.GetStatValue(StatDefOf.MedicalPotency);
+                // Scaled bonus based on potency: herbal (+2.5%), industrial (+12.5%), ultratech (+27.5%)
+                medicineBonus = (potency - 0.5f) * 0.25f;
+            }
+            else if (settings.AutopsyRequiresMedicine)
+            {
+                // Severe penalty if medicine was required by settings but none was provided
+                baseChance *= 0.50f;
+            }
+
+            float successChance = Mathf.Clamp(baseChance + medicineBonus, 0.10f, 0.98f);
             int extractedCount = 0;
 
             if (pawn.RaceProps.IsMechanoid && settings.ExtractMechanoidParts)

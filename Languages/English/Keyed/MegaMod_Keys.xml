@@ -375,6 +375,7 @@
   <MegaMod_Designator_Unforbid>Unforbid</MegaMod_Designator_Unforbid>
   <MegaMod_Designator_Unforbid_Desc>Remove forbidden status from items in the selected area. Right-click to unforbid the entire map.</MegaMod_Designator_Unforbid_Desc>
   <MegaMod_UnforbidAllOnMap>Unforbid Entire Map</MegaMod_UnforbidAllOnMap>
+  <MegaMod_Designator_UnforbidAll_Desc>Unforbid all visible items across the map in a single click without having to drag an area.</MegaMod_Designator_UnforbidAll_Desc>
   <MegaMod_UnforbiddenMapCount>Unforbidden {0} items across the map.</MegaMod_UnforbiddenMapCount>
   <MegaMod_Designator_HaulUrgently>Haul Urgently</MegaMod_Designator_HaulUrgently>
   <MegaMod_Designator_HaulUrgently_Desc>Designate items for immediate emergency hauling before they deteriorate or rot.</MegaMod_Designator_HaulUrgently_Desc>
@@ -415,5 +416,7 @@
   <MegaMod_Quarry_WeightGold>Gold</MegaMod_Quarry_WeightGold>
   <MegaMod_Quarry_WeightSilver>Silver</MegaMod_Quarry_WeightSilver>
   <MegaMod_Quarry_InspectString>Excavations completed: {0}</MegaMod_Quarry_InspectString>
+  <MegaMod_Quarry_InspectStringRemaining>Excavations completed: {0} ({1} remaining)</MegaMod_Quarry_InspectStringRemaining>
+  <MegaMod_QuarryDepleted>Deep quarry has been completely excavated and depleted of resources.</MegaMod_QuarryDepleted>
   <MegaMod_QuarryMinedItem>{0} excavated {1} from the deep quarry.</MegaMod_QuarryMinedItem>
 </LanguageData>

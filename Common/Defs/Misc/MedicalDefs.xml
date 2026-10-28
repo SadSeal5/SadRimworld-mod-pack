@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- Medical Autopsy Table -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>SadMedical_AutopsyTable</defName>
+    <label>medical autopsy table</label>
+    <description>A dedicated stainless steel surgical dissection table equipped with drainage conduits, sterile tool trays, and bright surgical lighting for clean post-mortem examinations and organ harvesting.</description>
+    <thingClass>Building_WorkTable</thingClass>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <WorkToBuild>2000</WorkToBuild>
+      <Flammability>0.2</Flammability>
+      <Cleanliness>-2</Cleanliness>
+      <SurgerySuccessChanceFactor>1.10</SurgerySuccessChanceFactor>
+    </statBases>
+    <size>(3,1)</size>
+    <costList>
+      <Steel>120</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <graphicData>
+      <texPath>Things/Building/Ruins/AncientOperatingTable</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(3,1)</drawSize>
+      <shadowData>
+        <volume>(2.8, 0.6, 0.8)</volume>
+      </shadowData>
+    </graphicData>
+    <designationCategory>Production</designationCategory>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <surfaceType>Item</surfaceType>
+    <recipes>
+      <li>SadMedical_AutopsyCorpseHuman</li>
+      <li>SadMedical_AutopsyCorpseMechanoid</li>
+    </recipes>
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+    </inspectorTabs>
+    <building>
+      <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+    </building>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+  </ThingDef>
+</Defs>

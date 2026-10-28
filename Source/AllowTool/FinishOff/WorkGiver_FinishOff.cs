@@ -19,30 +19,52 @@ namespace SadSeal.MegaMod.AllowTool.FinishOff
         public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn)
         {
             if (pawn?.Map?.designationManager == null) yield break;
+            if (pawn.WorkTagIsDisabled(WorkTags.Violent)) yield break;
 
             DesignationDef def = Designator_FinishOff.FinishOffDef;
             if (def == null) yield break;
 
-            foreach (Designation des in pawn.Map.designationManager.SpawnedDesignationsOfDef(def))
+            List<Designation> designations = new List<Designation>(pawn.Map.designationManager.SpawnedDesignationsOfDef(def));
+            for (int i = 0; i < designations.Count; i++)
             {
-                if (des.target.HasThing && des.target.Thing.Spawned)
+                Designation des = designations[i];
+                if (des.target.HasThing && des.target.Thing is Pawn victim)
                 {
-                    yield return des.target.Thing;
+                    if (victim.Dead || !victim.Downed || !victim.Spawned)
+                    {
+                        // Stale designation: victim died or got back up. Clean it up to save TPS!
+                        pawn.Map.designationManager.RemoveDesignation(des);
+                        continue;
+                    }
+                    yield return victim;
                 }
             }
         }
 
         public override bool ShouldSkip(Pawn pawn, bool forced = false)
         {
+            if (pawn == null || pawn.WorkTagIsDisabled(WorkTags.Violent)) return true;
+
             DesignationDef def = Designator_FinishOff.FinishOffDef;
-            if (def == null || pawn?.Map?.designationManager == null) return true;
+            if (def == null || pawn.Map?.designationManager == null) return true;
             return !pawn.Map.designationManager.AnySpawnedDesignationOfDef(def);
         }
 
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
+            if (pawn.WorkTagIsDisabled(WorkTags.Violent)) return null;
+
             if (!(t is Pawn victim) || victim.Dead || !victim.Downed || !victim.Spawned)
             {
+                if (t != null && pawn?.Map?.designationManager != null)
+                {
+                    DesignationDef def = Designator_FinishOff.FinishOffDef;
+                    if (def != null)
+                    {
+                        Designation des = pawn.Map.designationManager.DesignationOn(t, def);
+                        if (des != null) pawn.Map.designationManager.RemoveDesignation(des);
+                    }
+                }
                 return null;
             }
 

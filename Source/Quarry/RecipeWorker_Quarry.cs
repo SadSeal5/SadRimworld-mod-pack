@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using HarmonyLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -7,6 +8,8 @@ namespace SadSeal.MegaMod.Quarry
 {
     public class RecipeWorker_Quarry : RecipeWorker
     {
+        private static List<ThingDef> cachedStoneChunks;
+
         public override void Notify_IterationCompleted(Pawn billDoer, List<Thing> ingredients)
         {
             base.Notify_IterationCompleted(billDoer, ingredients);
@@ -16,6 +19,18 @@ namespace SadSeal.MegaMod.Quarry
             var settings = MegaMod.Settings?.Quarry;
             Map map = billDoer.Map;
             IntVec3 pos = billDoer.Position;
+
+            // Increment excavation count on quarry building
+            Building_Quarry quarry = billDoer.CurJob?.GetTarget(Verse.AI.TargetIndex.A).Thing as Building_Quarry
+                                  ?? pos.GetFirstThing<Building_Quarry>(map);
+            if (quarry != null)
+            {
+                quarry.TotalExcavationsCompleted++;
+                if (quarry.IsDepleted)
+                {
+                    Messages.Message("MegaMod_QuarryDepleted".Translate(), quarry, MessageTypeDefOf.CautionInput, false);
+                }
+            }
 
             // Grant mining skill experience
             if (billDoer.skills != null)
@@ -31,13 +46,11 @@ namespace SadSeal.MegaMod.Quarry
 
             if (recipeName.Contains("MineChunks"))
             {
-                // Stone chunks
                 outputDef = GetRandomStoneChunkDef();
                 outputCount = 1;
             }
             else if (recipeName.Contains("MineComponents"))
             {
-                // Industrial components
                 outputDef = ThingDefOf.ComponentIndustrial;
                 outputCount = Rand.RangeInclusive(1, 2);
 
@@ -49,7 +62,6 @@ namespace SadSeal.MegaMod.Quarry
             }
             else
             {
-                // General resources (Steel, Plasteel, Uranium, etc.)
                 outputDef = PickWeightedResource(settings, out outputCount);
             }
 
@@ -66,18 +78,21 @@ namespace SadSeal.MegaMod.Quarry
 
         private static ThingDef GetRandomStoneChunkDef()
         {
-            List<ThingDef> chunks = new List<ThingDef>();
-            foreach (ThingDef td in DefDatabase<ThingDef>.AllDefs)
+            if (cachedStoneChunks == null)
             {
-                if (td.thingCategories != null && td.thingCategories.Contains(ThingCategoryDefOf.StoneChunks))
+                cachedStoneChunks = new List<ThingDef>();
+                foreach (ThingDef td in DefDatabase<ThingDef>.AllDefs)
                 {
-                    chunks.Add(td);
+                    if (td.thingCategories != null && td.thingCategories.Contains(ThingCategoryDefOf.StoneChunks))
+                    {
+                        cachedStoneChunks.Add(td);
+                    }
                 }
             }
 
-            if (chunks.Count > 0)
+            if (cachedStoneChunks.Count > 0)
             {
-                return chunks.RandomElement();
+                return cachedStoneChunks.RandomElement();
             }
 
             return ThingDefOf.Steel;
@@ -85,14 +100,20 @@ namespace SadSeal.MegaMod.Quarry
 
         private static ThingDef PickWeightedResource(QuarrySettings settings, out int count)
         {
-            float wSteel = settings?.WeightSteel ?? 40f;
-            float wPlasteel = settings?.WeightPlasteel ?? 15f;
-            float wUranium = settings?.WeightUranium ?? 10f;
-            float wComp = settings?.WeightComponents ?? 15f;
-            float wGold = settings?.WeightGold ?? 8f;
-            float wSilver = settings?.WeightSilver ?? 12f;
+            float wSteel = Mathf.Max(0f, settings?.WeightSteel ?? 40f);
+            float wPlasteel = Mathf.Max(0f, settings?.WeightPlasteel ?? 15f);
+            float wUranium = Mathf.Max(0f, settings?.WeightUranium ?? 10f);
+            float wComp = Mathf.Max(0f, settings?.WeightComponents ?? 15f);
+            float wGold = Mathf.Max(0f, settings?.WeightGold ?? 8f);
+            float wSilver = Mathf.Max(0f, settings?.WeightSilver ?? 12f);
 
             float total = wSteel + wPlasteel + wUranium + wComp + wGold + wSilver;
+            if (total <= 0f)
+            {
+                wSteel = 40f;
+                total = 40f;
+            }
+
             float roll = Rand.Range(0f, total);
 
             if (roll < wSteel)
@@ -131,6 +152,22 @@ namespace SadSeal.MegaMod.Quarry
 
             count = Rand.RangeInclusive(30, 75);
             return ThingDefOf.Silver;
+        }
+    }
+
+    [HarmonyPatch(typeof(RecipeDef), nameof(RecipeDef.WorkAmountTotal))]
+    public static class Patch_RecipeDef_WorkAmountTotal
+    {
+        public static void Postfix(RecipeDef __instance, ref float __result)
+        {
+            if (__instance?.workerClass == typeof(RecipeWorker_Quarry))
+            {
+                float mult = MegaMod.Settings?.Quarry?.MiningSpeedMultiplier ?? 1.0f;
+                if (mult > 0.05f)
+                {
+                    __result /= mult;
+                }
+            }
         }
     }
 }

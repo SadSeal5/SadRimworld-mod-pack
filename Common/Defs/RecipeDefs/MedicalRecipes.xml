@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
+  <!-- Basic Humanlike Autopsy (No Medicine Required) -->
   <RecipeDef>
     <defName>SadMedical_AutopsyCorpseHuman</defName>
     <label>perform autopsy on corpse</label>
@@ -40,9 +41,68 @@
     <recipeUsers>
       <li>TableButcher</li>
       <li>ButcherSpot</li>
+      <li>SadMedical_AutopsyTable</li>
+      <li>AncientOperatingTable</li>
     </recipeUsers>
   </RecipeDef>
 
+  <!-- Sterile Humanlike Autopsy (With Medicine) -->
+  <RecipeDef>
+    <defName>SadMedical_AutopsyCorpseHumanAdvanced</defName>
+    <label>perform sterile autopsy (with medicine)</label>
+    <description>Carefully dissect a fresh corpse using surgical medicine and preservatives. Success chance and organ quality scale with medicine potency.</description>
+    <jobString>Performing sterile autopsy.</jobString>
+    <workAmount>3000</workAmount>
+    <workSpeedStat>MedicalSurgerySuccessChance</workSpeedStat>
+    <workSkill>Medicine</workSkill>
+    <workerClass>SadSeal.MegaMod.Medical.Autopsy.Recipe_Autopsy</workerClass>
+    <effectWorking>ButcherFlesh</effectWorking>
+    <soundWorking>Recipe_ButcherCorpseFlesh</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>CorpsesHumanlike</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+      <li>
+        <filter>
+          <categories>
+            <li>Medicine</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>CorpsesHumanlike</li>
+        <li>Medicine</li>
+      </categories>
+      <specialFiltersToDisallow>
+        <li>AllowRotten</li>
+      </specialFiltersToDisallow>
+    </fixedIngredientFilter>
+    <defaultIngredientFilter>
+      <categories>
+        <li>CorpsesHumanlike</li>
+        <li>Medicine</li>
+      </categories>
+      <specialFiltersToDisallow>
+        <li>AllowRotten</li>
+      </specialFiltersToDisallow>
+    </defaultIngredientFilter>
+    <recipeUsers>
+      <li>TableButcher</li>
+      <li>ButcherSpot</li>
+      <li>SadMedical_AutopsyTable</li>
+      <li>AncientOperatingTable</li>
+    </recipeUsers>
+  </RecipeDef>
+
+  <!-- Mechanoid Dissection -->
   <RecipeDef>
     <defName>SadMedical_AutopsyCorpseMechanoid</defName>
     <label>dissect mechanoid chassis</label>
@@ -78,6 +138,7 @@
       <li>TableButcher</li>
       <li>CraftingSpot</li>
       <li>TableMachining</li>
+      <li>SadMedical_AutopsyTable</li>
     </recipeUsers>
   </RecipeDef>
 </Defs>

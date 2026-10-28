@@ -12,13 +12,25 @@ namespace SadSeal.MegaMod.Medical.Autopsy
 
             if (ingredients == null || billDoer == null) return;
 
+            Corpse corpse = null;
+            Thing medicineUsed = null;
+
             for (int i = 0; i < ingredients.Count; i++)
             {
-                if (ingredients[i] is Corpse corpse)
+                Thing ing = ingredients[i];
+                if (ing is Corpse c)
                 {
-                    AutopsyHelper.PerformAutopsy(billDoer, corpse);
-                    break;
+                    corpse = c;
                 }
+                else if (ing?.def != null && (ing.def.IsMedicine || (ing.def.thingCategories != null && ing.def.thingCategories.Contains(ThingCategoryDefOf.Medicine))))
+                {
+                    medicineUsed = ing;
+                }
+            }
+
+            if (corpse != null)
+            {
+                AutopsyHelper.PerformAutopsy(billDoer, corpse, medicineUsed);
             }
         }
 

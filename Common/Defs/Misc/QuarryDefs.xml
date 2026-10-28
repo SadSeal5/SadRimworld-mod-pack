@@ -24,7 +24,7 @@
       <WoodLog>120</WoodLog>
     </costList>
     <graphicData>
-      <texPath>Things/Building/Production/TableSculpting</texPath>
+      <texPath>Things/Building/Production/DeepDrill</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(5,5)</drawSize>
     </graphicData>

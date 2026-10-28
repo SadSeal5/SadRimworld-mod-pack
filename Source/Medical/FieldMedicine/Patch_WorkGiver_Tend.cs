@@ -14,9 +14,23 @@ namespace SadSeal.MegaMod.Medical.FieldMedicine
             var settings = MegaMod.Settings?.Medical;
             if (settings == null || !settings.EnableFieldMedicine) return;
 
-            if (patient != null && !patient.Dead && patient.health != null && patient.health.HasHediffsNeedingTend())
+            if (patient == null || doctor == null || patient.Dead || patient.health == null) return;
+
+            // Never tend hostile enemies or wild aggressive threats in the field
+            if (patient.HostileTo(doctor) || patient.InAggroMentalState)
             {
-                // Allow tending in the field if patient is wounded and needs immediate medical attention
+                return;
+            }
+
+            // Allow tending colonists, allies, colony animals, and prisoners/slaves on the spot
+            bool isFriendlyOrColony = patient.Faction == doctor.Faction ||
+                                      patient.HostFaction == doctor.Faction ||
+                                      patient.IsPrisonerOfColony ||
+                                      patient.IsSlaveOfColony ||
+                                      (patient.Faction != null && !patient.Faction.HostileTo(doctor.Faction));
+
+            if (isFriendlyOrColony && patient.health.HasHediffsNeedingTend())
+            {
                 __result = true;
             }
         }

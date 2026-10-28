@@ -20,7 +20,7 @@ namespace SadSeal.MegaMod.AllowTool.Unforbid
 
         public override AcceptanceReport CanDesignateCell(IntVec3 loc)
         {
-            if (!loc.InBounds(Map)) return false;
+            if (!loc.InBounds(Map) || loc.Fogged(Map)) return false;
 
             List<Thing> thingList = loc.GetThingList(Map);
             for (int i = 0; i < thingList.Count; i++)
@@ -37,6 +37,8 @@ namespace SadSeal.MegaMod.AllowTool.Unforbid
 
         public override void DesignateSingleCell(IntVec3 loc)
         {
+            if (!loc.InBounds(Map) || loc.Fogged(Map)) return;
+
             List<Thing> thingList = loc.GetThingList(Map);
             for (int i = 0; i < thingList.Count; i++)
             {
@@ -50,7 +52,8 @@ namespace SadSeal.MegaMod.AllowTool.Unforbid
 
         public override AcceptanceReport CanDesignateThing(Thing t)
         {
-            if (t != null && t.Spawned && t.Map == Map && t.def.category == ThingCategory.Item && t.IsForbidden(Faction.OfPlayer))
+            if (t != null && t.Spawned && t.Map == Map && !t.Position.Fogged(Map) &&
+                t.def.category == ThingCategory.Item && t.IsForbidden(Faction.OfPlayer))
             {
                 return true;
             }
@@ -82,7 +85,8 @@ namespace SadSeal.MegaMod.AllowTool.Unforbid
             for (int i = 0; i < allThings.Count; i++)
             {
                 Thing t = allThings[i];
-                if (t.def.category == ThingCategory.Item && t.IsForbidden(Faction.OfPlayer))
+                // Exclude fogged items to prevent revealing unrevealed ancient dangers
+                if (t.Spawned && !t.Position.Fogged(map) && t.def.category == ThingCategory.Item && t.IsForbidden(Faction.OfPlayer))
                 {
                     ForbidUtility.SetForbidden(t, false);
                     count++;

@@ -6,10 +6,10 @@ using Verse;
 
 namespace SadSeal.MegaMod.AllowTool.SelectSimilar
 {
-    [HarmonyPatch(typeof(ThingWithComps), nameof(ThingWithComps.GetGizmos))]
+    [HarmonyPatch(typeof(Thing), nameof(Thing.GetGizmos))]
     public static class Patch_Thing_GetGizmos
     {
-        public static IEnumerable<Gizmo> Postfix(IEnumerable<Gizmo> __result, ThingWithComps __instance)
+        public static IEnumerable<Gizmo> Postfix(IEnumerable<Gizmo> __result, Thing __instance)
         {
             if (__result != null)
             {
@@ -22,12 +22,12 @@ namespace SadSeal.MegaMod.AllowTool.SelectSimilar
             var settings = MegaMod.Settings?.AllowTool;
             if (settings == null || !settings.EnableSelectSimilar) yield break;
 
-            if (__instance == null || !__instance.Spawned || __instance.Faction != null && __instance.Faction.HostileTo(Faction.OfPlayer))
+            if (__instance == null || !__instance.Spawned || (__instance.Faction != null && __instance.Faction.HostileTo(Faction.OfPlayer)))
             {
                 yield break;
             }
 
-            // Provide Select Similar gizmo for items, structures, ores, and plants
+            // Provide Select Similar gizmo for items (including stone chunks), structures, ores, and plants
             if (__instance.def.category == ThingCategory.Item ||
                 __instance.def.category == ThingCategory.Building ||
                 __instance.def.category == ThingCategory.Plant)

@@ -23,6 +23,23 @@ namespace SadSeal.MegaMod.AllowTool.FinishOff
                 return victim == null || victim.Dead || !victim.Downed;
             });
 
+            AddFinishAction(cond =>
+            {
+                Pawn victim = TargetA.Pawn;
+                if (victim != null && (victim.Dead || !victim.Downed))
+                {
+                    DesignationDef def = Designator_FinishOff.FinishOffDef;
+                    if (def != null && Map?.designationManager != null)
+                    {
+                        Designation des = Map.designationManager.DesignationOn(victim, def);
+                        if (des != null)
+                        {
+                            Map.designationManager.RemoveDesignation(des);
+                        }
+                    }
+                }
+            });
+
             yield return Toils_Goto.GotoThing(VictimInd, PathEndMode.Touch);
 
             Toil executeWait = ToilMaker.MakeToil("ExecuteWait");

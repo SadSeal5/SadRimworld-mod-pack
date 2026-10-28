@@ -32,7 +32,9 @@ namespace SadSeal.MegaMod.TimeFlow.Patches
             var settings = MegaMod.Settings?.TimeFlow;
             if (settings != null && settings.UnlockSuperSpeed)
             {
-                if (KeyBindingDefOf.TimeSpeed_Ultrafast.KeyDownEvent)
+                // Only trigger hotkey when not typing in text fields or modal dialogs
+                if (KeyBindingDefOf.TimeSpeed_Ultrafast.KeyDownEvent &&
+                    (Find.WindowStack == null || !Find.WindowStack.WindowsPreventCameraMotion))
                 {
                     Find.TickManager.CurTimeSpeed = TimeSpeed.Ultrafast;
                     Event.current.Use();
