@@ -3,13 +3,13 @@
   <!-- Designations -->
   <DesignationDef>
     <defName>SadHaul_HaulUrgently</defName>
-    <texturePath>UI/Designators/Haul</texturePath>
+    <texturePath>UI/Designators/HaulUrgently</texturePath>
     <targetType>Thing</targetType>
   </DesignationDef>
 
   <DesignationDef>
     <defName>Sad_Designation_FinishOff</defName>
-    <texturePath>UI/Commands/Attack</texturePath>
+    <texturePath>UI/Designators/FinishOff</texturePath>
     <targetType>Thing</targetType>
   </DesignationDef>
 

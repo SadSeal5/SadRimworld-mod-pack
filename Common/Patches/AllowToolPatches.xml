@@ -8,6 +8,8 @@
       <li>SadSeal.MegaMod.AllowTool.HaulUrgently.Designator_HaulUrgently</li>
       <li>SadSeal.MegaMod.AllowTool.SelectSimilar.Designator_SelectSimilar</li>
       <li>SadSeal.MegaMod.AllowTool.FinishOff.Designator_FinishOff</li>
+      <li>SadSeal.MegaMod.AllowTool.Area.Designator_StripArea</li>
+      <li>SadSeal.MegaMod.AllowTool.Area.Designator_CancelArea</li>
     </value>
   </Operation>
 </Patch>

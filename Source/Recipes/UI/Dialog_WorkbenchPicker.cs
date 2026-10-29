@@ -45,20 +45,20 @@ namespace SadSeal.MegaMod.Recipes.UI
         public override void DoWindowContents(Rect inRect)
         {
             Text.Font = GameFont.Medium;
-            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 30f), "Tezgah Sec");
+            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 30f), "MegaMod_Recipe_PickWorkbench".Translate());
             Text.Font = GameFont.Small;
 
             _search = Widgets.TextField(new Rect(inRect.x, inRect.y + 34f, inRect.width, 28f), _search);
 
             float actionY = inRect.y + 66f;
-            if (Widgets.ButtonText(new Rect(inRect.x, actionY, 110f, 26f), "Tumunu Sec"))
+            if (Widgets.ButtonText(new Rect(inRect.x, actionY, 110f, 26f), "MegaMod_SelectAll".Translate()))
             {
                 for (int i = 0; i < _allWorkbenches.Count; i++)
                 {
                     if (MatchesSearch(_allWorkbenches[i])) _selected.Add(_allWorkbenches[i].defName);
                 }
             }
-            if (Widgets.ButtonText(new Rect(inRect.x + 116f, actionY, 120f, 26f), "Tumunu Temizle"))
+            if (Widgets.ButtonText(new Rect(inRect.x + 116f, actionY, 120f, 26f), "MegaMod_ClearAll".Translate()))
             {
                 _selected.Clear();
             }
@@ -110,12 +110,12 @@ namespace SadSeal.MegaMod.Recipes.UI
             Widgets.EndScrollView();
 
             float btnY = inRect.y + inRect.height - 34f;
-            if (Widgets.ButtonText(new Rect(inRect.x, btnY, 130f, 32f), "Tamam (" + _selected.Count + ")"))
+            if (Widgets.ButtonText(new Rect(inRect.x, btnY, 130f, 32f), "MegaMod_ConfirmCount".Translate(_selected.Count)))
             {
                 _onConfirm?.Invoke(new List<string>(_selected));
                 Close();
             }
-            if (Widgets.ButtonText(new Rect(inRect.x + 140f, btnY, 110f, 32f), "Iptal"))
+            if (Widgets.ButtonText(new Rect(inRect.x + 140f, btnY, 110f, 32f), "MegaMod_Cancel".Translate()))
             {
                 Close();
             }

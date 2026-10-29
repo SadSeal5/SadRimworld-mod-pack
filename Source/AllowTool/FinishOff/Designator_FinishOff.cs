@@ -16,7 +16,7 @@ namespace SadSeal.MegaMod.AllowTool.FinishOff
         {
             defaultLabel = "MegaMod_Designator_FinishOff".Translate();
             defaultDesc = "MegaMod_Designator_FinishOff_Desc".Translate();
-            icon = ContentFinder<Texture2D>.Get("UI/Commands/Attack", false) ?? BaseContent.WhiteTex;
+            icon = ContentFinder<Texture2D>.Get("UI/Designators/FinishOff", false) ?? ContentFinder<Texture2D>.Get("UI/Commands/FinishOff", false) ?? BaseContent.WhiteTex;
             useMouseIcon = true;
             soundDragSustain = SoundDefOf.Designate_DragStandard;
             soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;

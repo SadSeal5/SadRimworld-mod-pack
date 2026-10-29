@@ -20,7 +20,7 @@ namespace SadSeal.MegaMod.AllowTool.HaulUrgently
         {
             defaultLabel = "MegaMod_Designator_HaulUrgently".Translate();
             defaultDesc = "MegaMod_Designator_HaulUrgently_Desc".Translate();
-            icon = ContentFinder<Texture2D>.Get("UI/Designators/Haul", false) ?? BaseContent.WhiteTex;
+            icon = ContentFinder<Texture2D>.Get("UI/Designators/HaulUrgently", false) ?? ContentFinder<Texture2D>.Get("UI/Commands/HaulUrgently", false) ?? BaseContent.WhiteTex;
             useMouseIcon = true;
             soundDragSustain = SoundDefOf.Designate_DragStandard;
             soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;

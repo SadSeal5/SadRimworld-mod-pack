@@ -60,7 +60,52 @@
   <MegaMod_ResetAllRecipes>Tüm Değişiklikleri Sıfırla</MegaMod_ResetAllRecipes>
   <MegaMod_ResetAllConfirm>Tüm özel tarif değişikliklerini vanilla varsayılanlarına döndürmek istediğinizden emin misiniz? Bu işlem kaydedilen tüm ayarlarınızı silecektir.</MegaMod_ResetAllConfirm>
   <MegaMod_ResetAllSuccess>Tüm tarifler varsayılan ayarlarına başarıyla döndürüldü.</MegaMod_ResetAllSuccess>
-  <MegaMod_RecipeHelp>İpucu: Tarif Düzenleyicide yapılan tüm değişiklikler anında devreye girer ve oyun yeniden başlatılsa bile korunur.</MegaMod_RecipeHelp>
+    <MegaMod_RecipeHelp>İpucu: Tarif Düzenleyicide yapılan tüm değişiklikler anında devreye girer ve oyun yeniden başlatılsa bile korunur.</MegaMod_RecipeHelp>
+  <MegaMod_Recipe_AddCustom>+ Yeni Tarif Ekle</MegaMod_Recipe_AddCustom>
+  <MegaMod_RecipeTweaker_Title>Tarif Düzenleyici - SadSeal Mega Mod</MegaMod_RecipeTweaker_Title>
+  <MegaMod_Recipe_SelectFromLeft>Sol listeden bir tarif seçin.</MegaMod_Recipe_SelectFromLeft>
+  <MegaMod_Recipe_CustomBadge>[Özel Tarif]</MegaMod_Recipe_CustomBadge>
+  <MegaMod_Recipe_DefAndMod>defName: {0} | Mod: {1}</MegaMod_Recipe_DefAndMod>
+  <MegaMod_Recipe_Label>Gösterim Adı:</MegaMod_Recipe_Label>
+  <MegaMod_Recipe_WorkAmount>Üretim Süresi (İş):</MegaMod_Recipe_WorkAmount>
+  <MegaMod_Recipe_Disable>Tarifi Devre Dışı Bırak</MegaMod_Recipe_Disable>
+  <MegaMod_Recipe_Ingredients>Malzemeler</MegaMod_Recipe_Ingredients>
+  <MegaMod_Recipe_AddIngredient>+ Malzeme Ekle</MegaMod_Recipe_AddIngredient>
+  <MegaMod_Delete>Sil</MegaMod_Delete>
+  <MegaMod_Save>Kaydet</MegaMod_Save>
+  <MegaMod_Cancel>İptal</MegaMod_Cancel>
+  <MegaMod_SelectAll>Tümünü Seç</MegaMod_SelectAll>
+  <MegaMod_ClearAll>Tümünü Temizle</MegaMod_ClearAll>
+  <MegaMod_ConfirmCount>Tamam ({0})</MegaMod_ConfirmCount>
+  <MegaMod_Recipe_ResetToFactory>Orijinale Sıfırla</MegaMod_Recipe_ResetToFactory>
+  <MegaMod_Recipe_DeleteCustom>Tarifi Sil</MegaMod_Recipe_DeleteCustom>
+  <MegaMod_Recipe_DeleteConfirm>'{0}' özel tarifini tamamen silmek istediğinizden emin misiniz?</MegaMod_Recipe_DeleteConfirm>
+  <MegaMod_Recipe_CustomDeleted>Özel tarif silindi.</MegaMod_Recipe_CustomDeleted>
+  <MegaMod_Recipe_Updated>Tarif güncellendi: {0}</MegaMod_Recipe_Updated>
+  <MegaMod_Recipe_CannotResetCustom>Özel tariflerin orijinal hali yoktur. Silmek için 'Tarifi Sil' butonunu kullanın.</MegaMod_Recipe_CannotResetCustom>
+  <MegaMod_Recipe_ResetSuccess>Tarif orijinal haline döndürüldü: {0}</MegaMod_Recipe_ResetSuccess>
+  <MegaMod_Recipe_CreateTitle>Yeni Özel Tarif Ekle</MegaMod_Recipe_CreateTitle>
+  <MegaMod_Recipe_ProductToMake>Üretilecek Eşya:</MegaMod_Recipe_ProductToMake>
+  <MegaMod_Recipe_SelectProduct>Eşya Seç...</MegaMod_Recipe_SelectProduct>
+  <MegaMod_Recipe_MakePrefix>Üret: {0}</MegaMod_Recipe_MakePrefix>
+  <MegaMod_Recipe_RecipeName>Tarif Adı:</MegaMod_Recipe_RecipeName>
+  <MegaMod_Recipe_ProductCount>Üretim Adedi:</MegaMod_Recipe_ProductCount>
+  <MegaMod_Recipe_WorkAmountShort>Üretim Süresi:</MegaMod_Recipe_WorkAmountShort>
+  <MegaMod_Recipe_MinSkill>Min. El Becerisi:</MegaMod_Recipe_MinSkill>
+  <MegaMod_Recipe_WorkbenchesSelected>Tezgâhlar ({0} seçili)</MegaMod_Recipe_WorkbenchesSelected>
+  <MegaMod_Recipe_NoneSelected>Hiçbiri seçilmedi</MegaMod_Recipe_NoneSelected>
+  <MegaMod_Recipe_ResearchSelected>Gereken Araştırmalar ({0} seçili)</MegaMod_Recipe_ResearchSelected>
+  <MegaMod_Recipe_NoResearch>Yok (Hemen Açık)</MegaMod_Recipe_NoResearch>
+  <MegaMod_Recipe_CreateButton>Tarifi Oluştur</MegaMod_Recipe_CreateButton>
+  <MegaMod_Recipe_ErrNoProduct>Lütfen üretilecek bir eşya seçin.</MegaMod_Recipe_ErrNoProduct>
+  <MegaMod_Recipe_ErrNoName>Lütfen tarif için bir isim girin.</MegaMod_Recipe_ErrNoName>
+  <MegaMod_Recipe_ErrInvalidWork>Lütfen geçerli bir iş süresi girin (pozitif sayı).</MegaMod_Recipe_ErrInvalidWork>
+  <MegaMod_Recipe_ErrNoWorkbench>Lütfen en az bir çalışma tezgâhı seçin.</MegaMod_Recipe_ErrNoWorkbench>
+  <MegaMod_Recipe_ErrNoIngredients>Lütfen en az bir malzeme ekleyin.</MegaMod_Recipe_ErrNoIngredients>
+  <MegaMod_Recipe_Created>Yeni tarif oluşturuldu: {0}</MegaMod_Recipe_Created>
+  <MegaMod_Recipe_PickIngredient>Malzeme Seç</MegaMod_Recipe_PickIngredient>
+  <MegaMod_Recipe_PickResearch>Araştırma Projesi Seç</MegaMod_Recipe_PickResearch>
+  <MegaMod_Recipe_PickWorkbench>Tezgâh Seç</MegaMod_Recipe_PickWorkbench>
 
   <!-- Skill Multipliers Module -->
   <SLM_ModTitle>Yetenek Öğrenme Çarpanı</SLM_ModTitle>
@@ -114,7 +159,11 @@
   <LethalRanged_ApMult>Zırh Delme (AP) Çarpanı</LethalRanged_ApMult>
   <LethalRanged_ApMult_Desc>Mermilerin zırh delme yeteneğini artırır, zırh kalitesini hayati kılar.</LethalRanged_ApMult_Desc>
   <LethalRanged_SpeedMult>Mermi Hızı Çarpanı</LethalRanged_SpeedMult>
-  <LethalRanged_SpeedMult_Desc>Mermilerin uçuş hızını artırarak daha akıcı ve tepkisel bir çatışma hissi sağlar.</LethalRanged_SpeedMult_Desc>
+    <LethalRanged_SpeedMult_Desc>Mermilerin uçuş hızını artırarak daha akıcı ve tepkisel bir çatışma hissi sağlar.</LethalRanged_SpeedMult_Desc>
+  <LethalRanged_MeleeDamageMult>Yakın Dövüş Hasar Çarpanı</LethalRanged_MeleeDamageMult>
+  <LethalRanged_MeleeDamageMult_Desc>Tüm yakın dövüş saldırılarının ve silahlarının temel hasarını bu oranla çarpar.</LethalRanged_MeleeDamageMult_Desc>
+  <LethalRanged_MeleeApMult>Yakın Dövüş Zırh Delme Çarpanı</LethalRanged_MeleeApMult>
+  <LethalRanged_MeleeApMult_Desc>Tüm yakın dövüş saldırılarının zırh delme değerini bu oranla çarpar.</LethalRanged_MeleeApMult_Desc>
 
   <LethalRanged_SectionMechanics>Kinetik Sersemletme ve Ölümcüllük</LethalRanged_SectionMechanics>
   <LethalRanged_EnableStagger>Kinetik Mermi Sersemletmesi</LethalRanged_EnableStagger>
@@ -423,7 +472,11 @@
   <MegaMod_SelectedSimilarCount>{0} adet {1} seçildi.</MegaMod_SelectedSimilarCount>
   <MegaMod_Designator_FinishOff>İnfaz Et</MegaMod_Designator_FinishOff>
   <MegaMod_Designator_FinishOff_Desc>Yere serilmiş bir düşmanı veya yaratığı hızlı ve insancıl bir infaz için işaretleyin.</MegaMod_Designator_FinishOff_Desc>
-  <MegaMod_FinishedOffSuccess>{0}, {1} hedefini acısız bir şekilde infaz etti.</MegaMod_FinishedOffSuccess>
+    <MegaMod_FinishedOffSuccess>{0}, {1} hedefini acısız bir şekilde infaz etti.</MegaMod_FinishedOffSuccess>
+  <MegaMod_Designator_StripArea>Bölgeyi Soy</MegaMod_Designator_StripArea>
+  <MegaMod_Designator_StripArea_Desc>Seçilen alandaki tüm cesetlerin ve düşman yaralıların eşyalarını çıkarmak için emir verir.</MegaMod_Designator_StripArea_Desc>
+  <MegaMod_Designator_CancelArea>Emirleri İptal Et</MegaMod_Designator_CancelArea>
+  <MegaMod_Designator_CancelArea_Desc>Seçilen alandaki tüm iş emirlerini, inşaat planlarını ve işaretlemeleri iptal eder.</MegaMod_Designator_CancelArea_Desc>
 
   <!-- Smart Speed & Time Flow -->
   <MegaMod_TimeFlow_Title>Akıllı Hız &amp; Zaman Akışı</MegaMod_TimeFlow_Title>
@@ -453,7 +506,22 @@
   <MegaMod_Quarry_InspectString>Tamamlanan kazı sayısı: {0}</MegaMod_Quarry_InspectString>
   <MegaMod_Quarry_InspectStringRemaining>Tamamlanan kazı sayısı: {0} ({1} kaldı)</MegaMod_Quarry_InspectStringRemaining>
   <MegaMod_QuarryDepleted>Derin taşocağının yeraltı rezervleri tamamen kazıldı ve tükendi.</MegaMod_QuarryDepleted>
-  <MegaMod_QuarryMinedItem>{0}, derin taşocağından {1} çıkardı.</MegaMod_QuarryMinedItem>
+    <MegaMod_QuarryMinedItem>{0}, derin taşocağından {1} çıkardı.</MegaMod_QuarryMinedItem>
+  <SadQuarry_MineChunks_Marble_Label>mermer bloğu kaz</SadQuarry_MineChunks_Marble_Label>
+  <SadQuarry_MineChunks_Marble_Desc>Taşocağından mermer kaya kütleleri çıkar.</SadQuarry_MineChunks_Marble_Desc>
+  <SadQuarry_MineChunks_Marble_Job>Mermer kütlesi kazılıyor.</SadQuarry_MineChunks_Marble_Job>
+  <SadQuarry_MineChunks_Granite_Label>granit bloğu kaz</SadQuarry_MineChunks_Granite_Label>
+  <SadQuarry_MineChunks_Granite_Desc>Taşocağından granit kaya kütleleri çıkar.</SadQuarry_MineChunks_Granite_Desc>
+  <SadQuarry_MineChunks_Granite_Job>Granit kütlesi kazılıyor.</SadQuarry_MineChunks_Granite_Job>
+  <SadQuarry_MineChunks_Slate_Label>kayrak taşı bloğu kaz</SadQuarry_MineChunks_Slate_Label>
+  <SadQuarry_MineChunks_Slate_Desc>Taşocağından kayrak taşı kütleleri çıkar.</SadQuarry_MineChunks_Slate_Desc>
+  <SadQuarry_MineChunks_Slate_Job>Kayrak taşı kütlesi kazılıyor.</SadQuarry_MineChunks_Slate_Job>
+  <SadQuarry_MineChunks_Limestone_Label>kireçtaşı bloğu kaz</SadQuarry_MineChunks_Limestone_Label>
+  <SadQuarry_MineChunks_Limestone_Desc>Taşocağından kireçtaşı kütleleri çıkar.</SadQuarry_MineChunks_Limestone_Desc>
+  <SadQuarry_MineChunks_Limestone_Job>Kireçtaşı kütlesi kazılıyor.</SadQuarry_MineChunks_Limestone_Job>
+  <SadQuarry_MineChunks_Sandstone_Label>kumtaşı bloğu kaz</SadQuarry_MineChunks_Sandstone_Label>
+  <SadQuarry_MineChunks_Sandstone_Desc>Taşocağından kumtaşı kütleleri çıkar.</SadQuarry_MineChunks_Sandstone_Desc>
+  <SadQuarry_MineChunks_Sandstone_Job>Kumtaşı kütlesi kazılıyor.</SadQuarry_MineChunks_Sandstone_Job>
 
   <!-- Autopsy Research -->
   <SadMedical_AutopsyResearch_Label>Kadavra Otopsisi</SadMedical_AutopsyResearch_Label>

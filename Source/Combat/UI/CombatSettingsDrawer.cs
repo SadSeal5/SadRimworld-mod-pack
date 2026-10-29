@@ -11,7 +11,7 @@ namespace SadSeal.MegaMod.Combat.UI
 
         public static void DrawSettings(Rect inRect, CombatSettings settings)
         {
-            Rect viewRect = new Rect(0f, 0f, inRect.width - 24f, 780f);
+            Rect viewRect = new Rect(0f, 0f, inRect.width - 24f, 920f);
             Widgets.BeginScrollView(inRect, ref scrollPosition, viewRect);
 
             Listing_Standard listing = new Listing_Standard();
@@ -80,6 +80,20 @@ namespace SadSeal.MegaMod.Combat.UI
                 settings.projectileSpeedMultiplier, 1.00f, 2.50f, 0.5f,
                 "LethalRanged_SpeedMult_Desc".Translate());
             if (Math.Abs(oldSpeed - settings.projectileSpeedMultiplier) > 0.005f) settings.activePreset = LethalityPreset.Custom;
+
+            float oldMeleeDmg = settings.meleeDamageMultiplier;
+            settings.meleeDamageMultiplier = listing.SliderLabeled(
+                "LethalRanged_MeleeDamageMult".Translate() + $": {settings.meleeDamageMultiplier:P0}",
+                settings.meleeDamageMultiplier, 0.50f, 3.00f, 0.5f,
+                "LethalRanged_MeleeDamageMult_Desc".Translate());
+            if (Math.Abs(oldMeleeDmg - settings.meleeDamageMultiplier) > 0.005f) settings.activePreset = LethalityPreset.Custom;
+
+            float oldMeleeAp = settings.meleeArmorPenetrationMultiplier;
+            settings.meleeArmorPenetrationMultiplier = listing.SliderLabeled(
+                "LethalRanged_MeleeApMult".Translate() + $": {settings.meleeArmorPenetrationMultiplier:P0}",
+                settings.meleeArmorPenetrationMultiplier, 0.50f, 3.00f, 0.5f,
+                "LethalRanged_MeleeApMult_Desc".Translate());
+            if (Math.Abs(oldMeleeAp - settings.meleeArmorPenetrationMultiplier) > 0.005f) settings.activePreset = LethalityPreset.Custom;
 
             listing.Gap(12f);
 

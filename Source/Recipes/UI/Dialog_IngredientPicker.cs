@@ -36,7 +36,7 @@ namespace SadSeal.MegaMod.Recipes.UI
         public override void DoWindowContents(Rect inRect)
         {
             Text.Font = GameFont.Medium;
-            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 30f), "Malzeme Sec");
+            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 30f), "MegaMod_Recipe_PickIngredient".Translate());
             Text.Font = GameFont.Small;
 
             _search = Widgets.TextField(new Rect(inRect.x, inRect.y + 36f, inRect.width, 28f), _search);

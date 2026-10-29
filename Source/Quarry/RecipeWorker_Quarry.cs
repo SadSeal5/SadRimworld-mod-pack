@@ -46,7 +46,30 @@ namespace SadSeal.MegaMod.Quarry
 
             if (recipeName.Contains("MineChunks"))
             {
-                outputDef = GetRandomStoneChunkDef();
+                if (recipeName.Contains("Marble"))
+                {
+                    outputDef = DefDatabase<ThingDef>.GetNamedSilentFail("ChunkMarble") ?? GetRandomStoneChunkDef();
+                }
+                else if (recipeName.Contains("Granite"))
+                {
+                    outputDef = DefDatabase<ThingDef>.GetNamedSilentFail("ChunkGranite") ?? GetRandomStoneChunkDef();
+                }
+                else if (recipeName.Contains("Slate"))
+                {
+                    outputDef = DefDatabase<ThingDef>.GetNamedSilentFail("ChunkSlate") ?? GetRandomStoneChunkDef();
+                }
+                else if (recipeName.Contains("Limestone"))
+                {
+                    outputDef = DefDatabase<ThingDef>.GetNamedSilentFail("ChunkLimestone") ?? GetRandomStoneChunkDef();
+                }
+                else if (recipeName.Contains("Sandstone"))
+                {
+                    outputDef = DefDatabase<ThingDef>.GetNamedSilentFail("ChunkSandstone") ?? GetRandomStoneChunkDef();
+                }
+                else
+                {
+                    outputDef = GetRandomStoneChunkDef();
+                }
                 outputCount = 1;
             }
             else if (recipeName.Contains("MineComponents"))

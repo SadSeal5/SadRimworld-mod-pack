@@ -39,6 +39,11 @@
     <surfaceType>Item</surfaceType>
     <recipes>
       <li>SadQuarry_MineChunks</li>
+      <li>SadQuarry_MineChunks_Marble</li>
+      <li>SadQuarry_MineChunks_Granite</li>
+      <li>SadQuarry_MineChunks_Slate</li>
+      <li>SadQuarry_MineChunks_Limestone</li>
+      <li>SadQuarry_MineChunks_Sandstone</li>
       <li>SadQuarry_MineResources</li>
       <li>SadQuarry_MineComponents</li>
     </recipes>
@@ -63,7 +68,72 @@
     <workSkill>Mining</workSkill>
     <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
     <effectWorking>Mine</effectWorking>
-    <soundWorking>Recipe_Machining</soundWorking>
+    <soundWorking>Recipe_Sculpting</soundWorking>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>SadQuarry_MineChunks_Marble</defName>
+    <label>quarry marble chunks</label>
+    <description>Excavate marble stone chunks from the quarry floor.</description>
+    <jobString>Excavating marble chunks.</jobString>
+    <workAmount>2000</workAmount>
+    <workSpeedStat>MiningSpeed</workSpeedStat>
+    <workSkill>Mining</workSkill>
+    <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
+    <effectWorking>Mine</effectWorking>
+    <soundWorking>Recipe_Sculpting</soundWorking>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>SadQuarry_MineChunks_Granite</defName>
+    <label>quarry granite chunks</label>
+    <description>Excavate granite stone chunks from the quarry floor.</description>
+    <jobString>Excavating granite chunks.</jobString>
+    <workAmount>2000</workAmount>
+    <workSpeedStat>MiningSpeed</workSpeedStat>
+    <workSkill>Mining</workSkill>
+    <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
+    <effectWorking>Mine</effectWorking>
+    <soundWorking>Recipe_Sculpting</soundWorking>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>SadQuarry_MineChunks_Slate</defName>
+    <label>quarry slate chunks</label>
+    <description>Excavate slate stone chunks from the quarry floor.</description>
+    <jobString>Excavating slate chunks.</jobString>
+    <workAmount>2000</workAmount>
+    <workSpeedStat>MiningSpeed</workSpeedStat>
+    <workSkill>Mining</workSkill>
+    <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
+    <effectWorking>Mine</effectWorking>
+    <soundWorking>Recipe_Sculpting</soundWorking>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>SadQuarry_MineChunks_Limestone</defName>
+    <label>quarry limestone chunks</label>
+    <description>Excavate limestone stone chunks from the quarry floor.</description>
+    <jobString>Excavating limestone chunks.</jobString>
+    <workAmount>2000</workAmount>
+    <workSpeedStat>MiningSpeed</workSpeedStat>
+    <workSkill>Mining</workSkill>
+    <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
+    <effectWorking>Mine</effectWorking>
+    <soundWorking>Recipe_Sculpting</soundWorking>
+  </RecipeDef>
+
+  <RecipeDef>
+    <defName>SadQuarry_MineChunks_Sandstone</defName>
+    <label>quarry sandstone chunks</label>
+    <description>Excavate sandstone stone chunks from the quarry floor.</description>
+    <jobString>Excavating sandstone chunks.</jobString>
+    <workAmount>2000</workAmount>
+    <workSpeedStat>MiningSpeed</workSpeedStat>
+    <workSkill>Mining</workSkill>
+    <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
+    <effectWorking>Mine</effectWorking>
+    <soundWorking>Recipe_Sculpting</soundWorking>
   </RecipeDef>
 
   <RecipeDef>
@@ -76,7 +146,7 @@
     <workSkill>Mining</workSkill>
     <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
     <effectWorking>Mine</effectWorking>
-    <soundWorking>Recipe_Machining</soundWorking>
+    <soundWorking>Recipe_Sculpting</soundWorking>
   </RecipeDef>
 
   <RecipeDef>
@@ -89,7 +159,7 @@
     <workSkill>Mining</workSkill>
     <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
     <effectWorking>Mine</effectWorking>
-    <soundWorking>Recipe_Machining</soundWorking>
+    <soundWorking>Recipe_Sculpting</soundWorking>
   </RecipeDef>
 
   <WorkGiverDef>

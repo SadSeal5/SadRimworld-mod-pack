@@ -60,7 +60,52 @@
   <MegaMod_ResetAllRecipes>Reset All Tweaks to Vanilla</MegaMod_ResetAllRecipes>
   <MegaMod_ResetAllConfirm>Are you sure you want to revert all custom recipe tweaks to vanilla defaults? This will erase all your saved recipe modifications.</MegaMod_ResetAllConfirm>
   <MegaMod_ResetAllSuccess>All recipes have been reset to vanilla defaults.</MegaMod_ResetAllSuccess>
-  <MegaMod_RecipeHelp>Tip: Edits made in the Recipe Editor take effect immediately and are saved automatically across game restarts.</MegaMod_RecipeHelp>
+    <MegaMod_RecipeHelp>Tip: Edits made in the Recipe Editor take effect immediately and are saved automatically across game restarts.</MegaMod_RecipeHelp>
+  <MegaMod_Recipe_AddCustom>+ Add Custom Recipe</MegaMod_Recipe_AddCustom>
+  <MegaMod_RecipeTweaker_Title>Recipe Tweaker - SadSeal Mega Mod</MegaMod_RecipeTweaker_Title>
+  <MegaMod_Recipe_SelectFromLeft>Select a recipe from the list on the left.</MegaMod_Recipe_SelectFromLeft>
+  <MegaMod_Recipe_CustomBadge>[Custom Recipe]</MegaMod_Recipe_CustomBadge>
+  <MegaMod_Recipe_DefAndMod>defName: {0} | Mod: {1}</MegaMod_Recipe_DefAndMod>
+  <MegaMod_Recipe_Label>Display Name:</MegaMod_Recipe_Label>
+  <MegaMod_Recipe_WorkAmount>Work Amount:</MegaMod_Recipe_WorkAmount>
+  <MegaMod_Recipe_Disable>Disable Recipe</MegaMod_Recipe_Disable>
+  <MegaMod_Recipe_Ingredients>Ingredients</MegaMod_Recipe_Ingredients>
+  <MegaMod_Recipe_AddIngredient>+ Add Ingredient</MegaMod_Recipe_AddIngredient>
+  <MegaMod_Delete>Delete</MegaMod_Delete>
+  <MegaMod_Save>Save</MegaMod_Save>
+  <MegaMod_Cancel>Cancel</MegaMod_Cancel>
+  <MegaMod_SelectAll>Select All</MegaMod_SelectAll>
+  <MegaMod_ClearAll>Clear All</MegaMod_ClearAll>
+  <MegaMod_ConfirmCount>Confirm ({0})</MegaMod_ConfirmCount>
+  <MegaMod_Recipe_ResetToFactory>Reset to Default</MegaMod_Recipe_ResetToFactory>
+  <MegaMod_Recipe_DeleteCustom>Delete Recipe</MegaMod_Recipe_DeleteCustom>
+  <MegaMod_Recipe_DeleteConfirm>Are you sure you want to delete custom recipe '{0}'?</MegaMod_Recipe_DeleteConfirm>
+  <MegaMod_Recipe_CustomDeleted>Custom recipe deleted.</MegaMod_Recipe_CustomDeleted>
+  <MegaMod_Recipe_Updated>Recipe updated: {0}</MegaMod_Recipe_Updated>
+  <MegaMod_Recipe_CannotResetCustom>Custom recipes have no default state. Use 'Delete Recipe' to remove it.</MegaMod_Recipe_CannotResetCustom>
+  <MegaMod_Recipe_ResetSuccess>Recipe reset to default: {0}</MegaMod_Recipe_ResetSuccess>
+  <MegaMod_Recipe_CreateTitle>Create Custom Recipe</MegaMod_Recipe_CreateTitle>
+  <MegaMod_Recipe_ProductToMake>Product to Make:</MegaMod_Recipe_ProductToMake>
+  <MegaMod_Recipe_SelectProduct>Select Product...</MegaMod_Recipe_SelectProduct>
+  <MegaMod_Recipe_MakePrefix>Make: {0}</MegaMod_Recipe_MakePrefix>
+  <MegaMod_Recipe_RecipeName>Recipe Name:</MegaMod_Recipe_RecipeName>
+  <MegaMod_Recipe_ProductCount>Product Count:</MegaMod_Recipe_ProductCount>
+  <MegaMod_Recipe_WorkAmountShort>Work Amount:</MegaMod_Recipe_WorkAmountShort>
+  <MegaMod_Recipe_MinSkill>Min. Skill:</MegaMod_Recipe_MinSkill>
+  <MegaMod_Recipe_WorkbenchesSelected>Workbenches ({0} selected)</MegaMod_Recipe_WorkbenchesSelected>
+  <MegaMod_Recipe_NoneSelected>None selected</MegaMod_Recipe_NoneSelected>
+  <MegaMod_Recipe_ResearchSelected>Required Research ({0} selected)</MegaMod_Recipe_ResearchSelected>
+  <MegaMod_Recipe_NoResearch>None (Available Immediately)</MegaMod_Recipe_NoResearch>
+  <MegaMod_Recipe_CreateButton>Create Recipe</MegaMod_Recipe_CreateButton>
+  <MegaMod_Recipe_ErrNoProduct>Please select a product to make.</MegaMod_Recipe_ErrNoProduct>
+  <MegaMod_Recipe_ErrNoName>Please enter a recipe name.</MegaMod_Recipe_ErrNoName>
+  <MegaMod_Recipe_ErrInvalidWork>Please enter a valid work amount (positive number).</MegaMod_Recipe_ErrInvalidWork>
+  <MegaMod_Recipe_ErrNoWorkbench>Please select at least one workbench.</MegaMod_Recipe_ErrNoWorkbench>
+  <MegaMod_Recipe_ErrNoIngredients>Please add at least one ingredient.</MegaMod_Recipe_ErrNoIngredients>
+  <MegaMod_Recipe_Created>Custom recipe created: {0}</MegaMod_Recipe_Created>
+  <MegaMod_Recipe_PickIngredient>Select Ingredient</MegaMod_Recipe_PickIngredient>
+  <MegaMod_Recipe_PickResearch>Select Research Project</MegaMod_Recipe_PickResearch>
+  <MegaMod_Recipe_PickWorkbench>Select Workbench</MegaMod_Recipe_PickWorkbench>
 
   <!-- Skill Multipliers Module -->
   <SLM_ModTitle>Skill Learning Multiplier</SLM_ModTitle>
@@ -114,7 +159,11 @@
   <LethalRanged_ApMult>Armor Penetration Multiplier</LethalRanged_ApMult>
   <LethalRanged_ApMult_Desc>Increases bullet armor penetration, making armor quality crucial.</LethalRanged_ApMult_Desc>
   <LethalRanged_SpeedMult>Projectile Speed Multiplier</LethalRanged_SpeedMult>
-  <LethalRanged_SpeedMult_Desc>Increases projectile travel velocity for snappier gunplay.</LethalRanged_SpeedMult_Desc>
+    <LethalRanged_SpeedMult_Desc>Increases projectile travel velocity for snappier gunplay.</LethalRanged_SpeedMult_Desc>
+  <LethalRanged_MeleeDamageMult>Melee Damage Multiplier</LethalRanged_MeleeDamageMult>
+  <LethalRanged_MeleeDamageMult_Desc>Multiplies base damage for all melee attacks and weapons.</LethalRanged_MeleeDamageMult_Desc>
+  <LethalRanged_MeleeApMult>Melee Armor Penetration Multiplier</LethalRanged_MeleeApMult>
+  <LethalRanged_MeleeApMult_Desc>Multiplies armor penetration for all melee attacks and weapons.</LethalRanged_MeleeApMult_Desc>
 
   <LethalRanged_SectionMechanics>Kinetic Stagger &amp; Fatalities</LethalRanged_SectionMechanics>
   <LethalRanged_EnableStagger>Kinetic Bullet Stagger</LethalRanged_EnableStagger>
@@ -423,7 +472,11 @@
   <MegaMod_SelectedSimilarCount>Selected {0}x {1}.</MegaMod_SelectedSimilarCount>
   <MegaMod_Designator_FinishOff>Finish Off</MegaMod_Designator_FinishOff>
   <MegaMod_Designator_FinishOff_Desc>Designate a downed hostile or creature for quick humane execution.</MegaMod_Designator_FinishOff_Desc>
-  <MegaMod_FinishedOffSuccess>{0} humanely finished off {1}.</MegaMod_FinishedOffSuccess>
+    <MegaMod_FinishedOffSuccess>{0} humanely finished off {1}.</MegaMod_FinishedOffSuccess>
+  <MegaMod_Designator_StripArea>Strip Area</MegaMod_Designator_StripArea>
+  <MegaMod_Designator_StripArea_Desc>Designate all corpses and downed hostile pawns in the selected area to be stripped.</MegaMod_Designator_StripArea_Desc>
+  <MegaMod_Designator_CancelArea>Cancel Orders</MegaMod_Designator_CancelArea>
+  <MegaMod_Designator_CancelArea_Desc>Cancel all work orders, construction blueprints, and designations in the selected area.</MegaMod_Designator_CancelArea_Desc>
 
   <!-- Smart Speed & Time Flow -->
   <MegaMod_TimeFlow_Title>Smart Speed &amp; Time Flow</MegaMod_TimeFlow_Title>
@@ -453,7 +506,22 @@
   <MegaMod_Quarry_InspectString>Excavations completed: {0}</MegaMod_Quarry_InspectString>
   <MegaMod_Quarry_InspectStringRemaining>Excavations completed: {0} ({1} remaining)</MegaMod_Quarry_InspectStringRemaining>
   <MegaMod_QuarryDepleted>Deep quarry has been completely excavated and depleted of resources.</MegaMod_QuarryDepleted>
-  <MegaMod_QuarryMinedItem>{0} excavated {1} from the deep quarry.</MegaMod_QuarryMinedItem>
+    <MegaMod_QuarryMinedItem>{0} excavated {1} from the deep quarry.</MegaMod_QuarryMinedItem>
+  <SadQuarry_MineChunks_Marble_Label>quarry marble chunks</SadQuarry_MineChunks_Marble_Label>
+  <SadQuarry_MineChunks_Marble_Desc>Excavate marble stone chunks from the quarry floor.</SadQuarry_MineChunks_Marble_Desc>
+  <SadQuarry_MineChunks_Marble_Job>Excavating marble chunks.</SadQuarry_MineChunks_Marble_Job>
+  <SadQuarry_MineChunks_Granite_Label>quarry granite chunks</SadQuarry_MineChunks_Granite_Label>
+  <SadQuarry_MineChunks_Granite_Desc>Excavate granite stone chunks from the quarry floor.</SadQuarry_MineChunks_Granite_Desc>
+  <SadQuarry_MineChunks_Granite_Job>Excavating granite chunks.</SadQuarry_MineChunks_Granite_Job>
+  <SadQuarry_MineChunks_Slate_Label>quarry slate chunks</SadQuarry_MineChunks_Slate_Label>
+  <SadQuarry_MineChunks_Slate_Desc>Excavate slate stone chunks from the quarry floor.</SadQuarry_MineChunks_Slate_Desc>
+  <SadQuarry_MineChunks_Slate_Job>Excavating slate chunks.</SadQuarry_MineChunks_Slate_Job>
+  <SadQuarry_MineChunks_Limestone_Label>quarry limestone chunks</SadQuarry_MineChunks_Limestone_Label>
+  <SadQuarry_MineChunks_Limestone_Desc>Excavate limestone stone chunks from the quarry floor.</SadQuarry_MineChunks_Limestone_Desc>
+  <SadQuarry_MineChunks_Limestone_Job>Excavating limestone chunks.</SadQuarry_MineChunks_Limestone_Job>
+  <SadQuarry_MineChunks_Sandstone_Label>quarry sandstone chunks</SadQuarry_MineChunks_Sandstone_Label>
+  <SadQuarry_MineChunks_Sandstone_Desc>Excavate sandstone stone chunks from the quarry floor.</SadQuarry_MineChunks_Sandstone_Desc>
+  <SadQuarry_MineChunks_Sandstone_Job>Excavating sandstone chunks.</SadQuarry_MineChunks_Sandstone_Job>
 
   <!-- Autopsy Research -->
   <SadMedical_AutopsyResearch_Label>Post-Mortem Autopsy</SadMedical_AutopsyResearch_Label>

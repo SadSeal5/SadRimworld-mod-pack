@@ -32,12 +32,13 @@ SadSeal's Mega Mod allows you to manage all 13 modules completely independently:
 
 ---
 
-## 🌟 12 Integrated Core Modules
+## 🌟 13 Integrated Core Modules
 
-### 1. 🏹 Lethal & Accurate Ranged Combat
+### 1. 🏹 Lethal & Accurate Combat (Ranged & Melee Parity)
 * **Smooth Ballistic Accuracy:** Eliminates vanilla's arbitrary distance roll penalties, making skilled marksmen lethal at realistic engagement ranges.
 * **4 Distinct Ballistic Curves:** `Soft Ballistic` (default), `Hyperbolic`, `Skill-Focused`, and configurable `Vanilla`.
 * **Scalable Multipliers:** Independent sliders for raw bullet damage (1.00x - 2.50x), armor penetration (1.00x - 2.00x), and projectile flight speed (1.00x - 2.50x).
+* **⚔️ Melee Combat Parity:** Configurable Melee Damage Multiplier (default 1.25x) and Melee Armor Penetration Multiplier (default 1.20x), ensuring sword and mace fighters remain deadly alongside boosted firearms.
 * **Kinetic Stagger (Stopping Power):** Enables bullets to reliably stagger incoming chargers regardless of target body size (Centipedes, Thrumbos, and melee rushers are staggered).
 * **Remove 1-HP Preservation:** Disables vanilla's forced 1-HP limb/torso survival mechanics, allowing realistic fatal headshots and devastating organ strikes.
 * **Preset Profiles:** `Vanilla+`, `Tactical Lethal`, `Harsh Realism`, and `Custom Profile`.
@@ -120,9 +121,11 @@ SadSeal's Mega Mod allows you to manage all 13 modules completely independently:
 
 ### 10. ✋ Allow Tool & Utility Commands
 * **Unforbid All:** Unlocks all forbidden items across the map in a single click with fogged/ancient danger exclusion.
-* **Haul Urgently:** High-priority hauling designation seamlessly integrated with Smart Haul.
-* **Select Similar:** Quickly selects all matching items on screen (e.g., all stone chunks or weapons).
-* **Finish Off:** Mercy-kill downed enemies in a single swift blow without drawn-out melee brawls.
+* **Haul Urgently:** High-priority hauling designation with area drag selection and custom vibrant orange icon.
+* **Select Similar:** Quickly selects all matching items on screen or across the whole map.
+* **Finish Off:** Mercy-kill downed enemies in a single swift blow with custom dagger icon and hunting work priority.
+* **Strip Area:** Drag-box designation to batch strip all enemy corpses and downed hostiles in the selected area.
+* **Cancel Area:** Drag-box designation to cancel all hauling, mining, smoothing, and finish-off orders across an area.
 
 ---
 
@@ -136,7 +139,8 @@ SadSeal's Mega Mod allows you to manage all 13 modules completely independently:
 ### 12. ⛏️ Deep Quarry & Resource Extractor
 * **Excavated 5x4 Ground Pit:** Deep mining pit facility for stone chunks, raw metals, and compact machinery (`Sad_DeepQuarry`).
 * **Custom 2D Art:** High-detail authentic Mineshaft multi-sprites from *Mines*.
-* **Excavation Recipes:** Quarry stone chunks silently without notification popups, extract deep mineral veins (steel, plasteel, uranium, gold, silver), and salvage components.
+* **Targeted Stone Mining:** Selectively quarry specific stone types including **Marble**, **Granite**, **Slate**, **Limestone**, and **Sandstone** alongside generic chunks.
+* **Sculpting Sound:** Replaced workshop humming with authentic hammer and chisel rock carving sounds (`Recipe_Sculpting`).
 * **Research Requirement:** Requires vanilla **Deep Drilling (`DeepDrilling`)** research before construction.
 * **Depletion & Multipliers:** Configurable infinite quarry mode or 1,000 excavation limit with adjustable mining speed scaling.
 

@@ -34,10 +34,11 @@ SadSeal's Mega Mod, mod paketindeki 13 modülü tamamen bağımsız olarak yöne
 
 ## 🌟 Entegre 12 Ana Modül
 
-### 1. 🏹 Ölümcül ve İsabetli Menzilli Çatışma (Lethal Combat)
+### 1. 🏹 Ölümcül ve İsabetli Çatışma (Lethal Combat & Melee Parity)
 * **Akıcı Balistik İsabet Formülü:** Vanilla'nın yapay mesafe cezalarını kaldırarak yetenekli atıcıları gerçekçi menzillerde ölümcül kılar.
 * **4 Farklı Balistik Eğri:** `Soft Ballistic` (varsayılan), `Hyperbolic`, `Skill-Focused` ve ayarlanabilir `Vanilla`.
 * **Ölçeklenebilir Çarpanlar:** Mermi ham hasarı (1.00x - 2.50x), zırh delme oranı (1.00x - 2.00x) ve mermi uçuş hızı (1.00x - 2.50x).
+* **⚔️ Yakın Dövüş Denge Paketi (Melee Parity):** Menzilli ölümcüllükle tam uyumlu ayarlanabilir Yakın Dövüş Hasar Çarpanı (varsayılan 1.25x) ve Yakın Dövüş Zırh Delme Çarpanı (varsayılan 1.20x). Kılıç ve gürz kullanan savaşçılar menzilli silahlar karşısında ezilmez.
 * **Kinetik Sarsma (Stopping Power):** Mermilerin isabet ettiği hedefleri vücut boyutu sınırına takılmaksızın yavaşlatmasını sağlar (Centipede, Thrumbo ve yakın dövüş saldırganları sarsılır).
 * **1-Can Koruma Sistemini Kaldırma:** Ağır isabet alan organların yapay olarak 1 HP ile hayatta kalmasını sağlayan vanilla mekaniğini devre dışı bırakır.
 * **Hazır Şablonlar:** `Vanilla+`, `Taktiksel Ölümcül`, `Sert Gerçekçilik` ve `Özel Profil`.
@@ -120,9 +121,11 @@ SadSeal's Mega Mod, mod paketindeki 13 modülü tamamen bağımsız olarak yöne
 
 ### 10. ✋ Allow Tool ve Harita Komutları (Allow Tool & Utility Commands)
 * **Tüm Yasakları Kaldır (Unforbid All):** Haritadaki tüm kilitli eşyaları tek tıkla açar; sisli/keşfedilmemiş antik tehlike alanlarını güvenle filtreler.
-* **Acil Taşıma (Haul Urgently):** Seçilen eşyaları en yüksek öncelikle taşınmak üzere etiketler. Smart Haul ile kusursuz entegre çalışır.
-* **Benzerini Seç (Select Similar):** Harita ekranında seçilen bir eşyanın (örneğin tüm kaya parçaları veya mermiler) ekrandaki tüm benzerlerini tek tıkla seçer.
-* **İnfaz Et (Finish Off):** Can çekişen, yere serilmiş düşmanları acı çekmeden tek vuruşta infaz etme emri verir.
+* **Acil Taşıma (Haul Urgently):** Seçilen eşyaları veya tüm dikdörtgen alanı en yüksek öncelikle taşınmak üzere etiketler. Özel turuncu öncelik simgesiyle görselleştirilmiştir.
+* **Benzerini Seç (Select Similar):** Ekranda veya tüm haritada aynı türdeki tüm cevherleri, ağaçları veya düşman silahlarını tek tıkla topluca seçer.
+* **İnfaz Et (Finish Off):** Can çekişen, yere serilmiş düşmanları acı çekmeden tek vuruşta infaz etme emri verir. Özel hançer/kafatası simgesine ve avcılık iş önceliğine sahiptir.
+* **Alanı Soy (Strip Area):** Seçilen dikdörtgen alandaki tüm cesetleri ve düşmüş düşmanları tek seferde soyma emri verir.
+* **Emirleri İptal Et (Cancel Area):** Seçilen alandaki tüm taşıma, madencilik, infaz ve inşaat emirlerini topluca iptal eder.
 
 ---
 
@@ -136,7 +139,8 @@ SadSeal's Mega Mod, mod paketindeki 13 modülü tamamen bağımsız olarak yöne
 ### 12. ⛏️ Derin Taş Ocağı (Deep Quarry & Resource Extractor)
 * **Özel 5x4 Zemin Hafriyat Ocağı:** Koloninizin maden ve taş ihtiyacını karşılayan zemin kazı tesisi (`Sad_DeepQuarry`).
 * **Özel 2D Sanat ve Doku:** Ahşap istinat kirişleri, basamaklı derin kaya katmanları, metal kova ve makara vinç mekanizması içeren otantik Mineshaft spriteları.
-* **Üretim Tarifleri:** Sessiz taş blokları çıkarma, derin maden damarlarından çelik/plasteel/uranyum/altın/gümüş kazma ve kompakt makine bileşenleri kurtarma (bildirim spamı engellendi).
+* **Hedefe Yönelik Taş Çıkarma:** Genel rastgele parçaların yanı sıra doğrudan **Mermer**, **Granit**, **Kayrak Taşı**, **Kireçtaşı** veya **Kumtaşı** hedefleyerek kazı yapabilme.
+* **Otantik Kazı Sesi:** Metal atölyesi sesi yerine taş heykeltıraş çekiçleme sesiyle (`Recipe_Sculpting`) çalışan sessiz ve akıcı madencilik.
 * **Araştırma Şartı:** İnşa edilebilmesi için vanilla **Derin Sondaj (`DeepDrilling`)** araştırması gereklidir.
 * **Tükenme ve Çarpan Ayarları:** Sınırsız madencilik seçeneği veya 1.000 kazı sınırı ile ayarlanabilir madencilik hızı çarpanları.
 
