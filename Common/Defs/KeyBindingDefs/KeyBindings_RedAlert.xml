@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <KeyBindingCategoryDef>
+    <defName>SadSeal_Controls</defName>
+    <label>SadSeal Controls</label>
+    <description>Controls and shortcuts for SadSeal's Mega Mod.</description>
+    <isGameUniversal>true</isGameUniversal>
+  </KeyBindingCategoryDef>
+
+  <KeyBindingDef>
+    <defName>Sad_KeyBinding_RedAlert</defName>
+    <label>Toggle Red Alert</label>
+    <description>Toggle the Red Alert emergency defense protocol.</description>
+    <category>SadSeal_Controls</category>
+    <defaultKeyCodeA>BackQuote</defaultKeyCodeA>
+  </KeyBindingDef>
+</Defs>

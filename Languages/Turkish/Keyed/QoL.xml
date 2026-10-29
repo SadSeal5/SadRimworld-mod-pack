@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MegaMod_RedAlert_Activated>Kırmızı Alarm ETKİNLEŞTİRİLDİ! Savaşçı olmayanlar ve hayvanlar sığınağa çekildi; savaşçılar hazır duruma getirildi.</MegaMod_RedAlert_Activated>
+  <MegaMod_RedAlert_Deactivated>Kırmızı Alarm KAPATILDI. Bölge kısıtlamaları eski haline getirildi ve savaşçıların nöbeti kaldırıldı.</MegaMod_RedAlert_Deactivated>
+  <MegaMod_RedAlert_TooltipActive>Kırmızı Alarm AKTİF! Koloni acil savunma modunda. Alarmı kapatmak için tıklayın veya kısayol tuşuna basın.</MegaMod_RedAlert_TooltipActive>
+  <MegaMod_RedAlert_TooltipInactive>Kırmızı Alarm kapalı. Acil savunma protokolünü başlatmak için tıklayın veya kısayol tuşuna basın.</MegaMod_RedAlert_TooltipInactive>
+  <Sad_KeyBinding_RedAlert>Kırmızı Alarmı Aç/Kapat</Sad_KeyBinding_RedAlert>
+  <SadSeal_Controls>SadSeal Mega Mod</SadSeal_Controls>
+</LanguageData>

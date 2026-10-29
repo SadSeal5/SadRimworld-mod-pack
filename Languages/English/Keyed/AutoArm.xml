@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MegaMod_AutoArm_ManageBlacklist>Manage Weapon Blacklist</MegaMod_AutoArm_ManageBlacklist>
+  <MegaMod_AutoArm_ManageBlacklist_Desc>Configure which weapons should never be automatically equipped by colonists.</MegaMod_AutoArm_ManageBlacklist_Desc>
+  <MegaMod_AutoArm_BlacklistTitle>Auto-Arm: Weapon Blacklist Manager</MegaMod_AutoArm_BlacklistTitle>
+  <MegaMod_AutoArm_BlacklistSearch>Search weapons:</MegaMod_AutoArm_BlacklistSearch>
+  <MegaMod_AutoArm_BlacklistCount>Blacklisted: {0} / {1} weapons</MegaMod_AutoArm_BlacklistCount>
+  <MegaMod_AutoArm_ExcludeAllExplosives>Exclude All Explosives</MegaMod_AutoArm_ExcludeAllExplosives>
+  <MegaMod_AutoArm_ResetDefaults>Reset to Recommended Defaults</MegaMod_AutoArm_ResetDefaults>
+  <MegaMod_AutoArm_ClearAll>Clear All</MegaMod_AutoArm_ClearAll>
+  <MegaMod_AutoArm_Close>Close</MegaMod_AutoArm_Close>
+  <MegaMod_AutoArm_CategoryRanged>Ranged</MegaMod_AutoArm_CategoryRanged>
+  <MegaMod_AutoArm_CategoryMelee>Melee</MegaMod_AutoArm_CategoryMelee>
+</LanguageData>

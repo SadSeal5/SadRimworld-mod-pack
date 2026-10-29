@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MegaMod_RedAlert_Activated>Red Alert ACTIVATED! Non-violent colonists and animals have retreated to the shelter; combatants have been auto-drafted.</MegaMod_RedAlert_Activated>
+  <MegaMod_RedAlert_Deactivated>Red Alert DEACTIVATED. Area restrictions have been restored and colonists undrafted.</MegaMod_RedAlert_Deactivated>
+  <MegaMod_RedAlert_TooltipActive>Red Alert is ACTIVE! Colony is in emergency defense mode. Click or press hotkey to stand down.</MegaMod_RedAlert_TooltipActive>
+  <MegaMod_RedAlert_TooltipInactive>Red Alert is inactive. Click or press hotkey to mobilize emergency defense protocol.</MegaMod_RedAlert_TooltipInactive>
+  <Sad_KeyBinding_RedAlert>Toggle Red Alert</Sad_KeyBinding_RedAlert>
+  <SadSeal_Controls>SadSeal's Mega Mod</SadSeal_Controls>
+</LanguageData>

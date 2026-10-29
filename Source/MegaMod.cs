@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using HarmonyLib;
+using SadSeal.Common;
 using SadSeal.MegaMod.AllowTool.UI;
 using SadSeal.MegaMod.AutoArm.UI;
 using SadSeal.MegaMod.Combat.UI;
@@ -99,8 +100,23 @@ namespace SadSeal.MegaMod
             Log.Message($"[SadSeal's Mega Mod] Applied active modules: {enabledCount} patch classes enabled, {skippedCount} skipped.");
         }
 
+        private static bool loggedCeNotice = false;
+
         private bool IsPatchTypeEnabled(Type type)
         {
+            if (ModBridge.IsCombatExtendedActive)
+            {
+                if (type.Name == "Patch_ShotReport_HitFactor" || type.Name.StartsWith("Patch_Projectile"))
+                {
+                    if (!loggedCeNotice)
+                    {
+                        Log.Message("[SadSeal's Mega Mod] Combat Extended detected. Gracefully delegating ballistic/projectile patches to CE.");
+                        loggedCeNotice = true;
+                    }
+                    return false;
+                }
+            }
+
             var modules = Settings?.Modules;
             if (modules == null) return true;
 

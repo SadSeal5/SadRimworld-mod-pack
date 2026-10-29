@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <MegaMod_AutoArm_ManageBlacklist>Silah Kara Listesini Yönet</MegaMod_AutoArm_ManageBlacklist>
+  <MegaMod_AutoArm_ManageBlacklist_Desc>Kolonicilerin otomatik olarak kuşanmasını istemediğiniz silahları kara listeye alın.</MegaMod_AutoArm_ManageBlacklist_Desc>
+  <MegaMod_AutoArm_BlacklistTitle>Auto-Arm: Silah Kara Liste Yöneticisi</MegaMod_AutoArm_BlacklistTitle>
+  <MegaMod_AutoArm_BlacklistSearch>Silah ara:</MegaMod_AutoArm_BlacklistSearch>
+  <MegaMod_AutoArm_BlacklistCount>Kara Listede: {0} / {1} silah</MegaMod_AutoArm_BlacklistCount>
+  <MegaMod_AutoArm_ExcludeAllExplosives>Tüm Patlayıcıları Hariç Tut</MegaMod_AutoArm_ExcludeAllExplosives>
+  <MegaMod_AutoArm_ResetDefaults>Önerilen Varsayılanlara Sıfırla</MegaMod_AutoArm_ResetDefaults>
+  <MegaMod_AutoArm_ClearAll>Tümünü Temizle</MegaMod_AutoArm_ClearAll>
+  <MegaMod_AutoArm_Close>Kapat</MegaMod_AutoArm_Close>
+  <MegaMod_AutoArm_CategoryRanged>Menzilli</MegaMod_AutoArm_CategoryRanged>
+  <MegaMod_AutoArm_CategoryMelee>Yakın Dövüş</MegaMod_AutoArm_CategoryMelee>
+</LanguageData>

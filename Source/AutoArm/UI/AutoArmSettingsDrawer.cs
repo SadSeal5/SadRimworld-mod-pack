@@ -12,7 +12,7 @@ namespace SadSeal.MegaMod.AutoArm.UI
         {
             if (settings == null) return;
 
-            Rect viewRect = new Rect(0f, 0f, inRect.width - 24f, 780f);
+            Rect viewRect = new Rect(0f, 0f, inRect.width - 24f, 840f);
             Widgets.BeginScrollView(inRect, ref scrollPosition, viewRect);
 
             Listing_Standard listing = new Listing_Standard();
@@ -38,6 +38,12 @@ namespace SadSeal.MegaMod.AutoArm.UI
                 listing.Gap(6f);
 
                 listing.CheckboxLabeled("MegaMod_AutoArm_UnforbidDropped".Translate(), ref settings.autoUnforbidDropped, "MegaMod_AutoArm_UnforbidDropped_Desc".Translate());
+                listing.Gap(10f);
+
+                if (listing.ButtonText("MegaMod_AutoArm_ManageBlacklist".Translate()))
+                {
+                    Find.WindowStack.Add(new Dialog_AutoArmBlacklist(settings));
+                }
                 listing.Gap(12f);
 
                 settings.minScoreDifference = listing.SliderLabeled(
