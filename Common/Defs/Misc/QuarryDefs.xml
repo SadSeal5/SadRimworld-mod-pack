@@ -8,17 +8,18 @@
     <thingClass>SadSeal.MegaMod.Quarry.Building_Quarry</thingClass>
     <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>
-    <pathCost>60</pathCost>
+    <pathCost>70</pathCost>
     <castEdgeShadows>true</castEdgeShadows>
-    <fillPercent>0.5</fillPercent>
+    <fillPercent>0.75</fillPercent>
     <designationCategory>Production</designationCategory>
     <canOverlapZones>false</canOverlapZones>
+    <rotatable>true</rotatable>
     <statBases>
       <MaxHitPoints>1000</MaxHitPoints>
       <WorkToBuild>2800</WorkToBuild>
       <Flammability>0.2</Flammability>
     </statBases>
-    <size>(5,5)</size>
+    <size>(5,4)</size>
     <costList>
       <Steel>60</Steel>
       <WoodLog>120</WoodLog>
@@ -27,11 +28,13 @@
       <li>DeepDrilling</li>
     </researchPrerequisites>
     <graphicData>
-      <texPath>Things/Building/Production/Quarry</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/Production/Quarry/Mineshaft</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
       <drawSize>(5,5)</drawSize>
+      <drawRotated>false</drawRotated>
     </graphicData>
-    <interactionCellOffset>(0,0,-3)</interactionCellOffset>
+    <interactionCellOffset>(0,0,-2)</interactionCellOffset>
     <hasInteractionCell>true</hasInteractionCell>
     <surfaceType>Item</surfaceType>
     <recipes>

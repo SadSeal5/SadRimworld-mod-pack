@@ -26,6 +26,25 @@ namespace SadSeal.MegaMod.QoL
             ApplyChunkStackLimits(settings.stackableChunks, settings.chunkStackLimit);
             ApplySmoothPriorities(settings.smoothWallsBeforeFloors);
             ApplyTreeLifespan(settings.treesDontDie);
+            ApplyQoLSettings();
+        }
+
+        public static void ApplyQoLSettings()
+        {
+            if (MegaMod.Settings?.QoL?.filthVanishes == true)
+            {
+                foreach (ThingDef td in DefDatabase<ThingDef>.AllDefs)
+                {
+                    if (td.filth != null)
+                    {
+                        td.filth.rainWashes = true;
+                        if (td.filth.disappearsInDays.TrueMax <= 0f || td.filth.disappearsInDays.TrueMax > 15f)
+                        {
+                            td.filth.disappearsInDays = new FloatRange(5f, 10f);
+                        }
+                    }
+                }
+            }
         }
 
         public static void ApplyMetalFlammability(bool noBurn)

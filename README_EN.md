@@ -195,4 +195,6 @@ X. SadSeal's Mega Mod
 
 * **Work Manager:** Concept and original design by [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262).
 * **Smart Haul:** Concept inspired by *Pick Up And Haul*.
+* **Mineshaft Sprite:** Special thanks to [WRelicK](https://steamcommunity.com/sharedfiles/filedetails/?id=1545681321) (Mines mod) for the mineshaft structure sprite.
+* **Operating Table Sprite:** Special thanks to [Oskar Potocki & Vanilla Expanded Team](https://steamcommunity.com/workshop/filedetails/?id=1884025115) for the surgical operating table sprite.
 * **Developed & Maintained by:** SadSeal5.

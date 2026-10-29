@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reflection;
 using HarmonyLib;
 using RimWorld;
 using UnityEngine;
@@ -7,9 +8,12 @@ using Verse.AI;
 
 namespace SadSeal.MegaMod.QoL.Patches.Pawn
 {
-    [HarmonyPatch(typeof(FloatMenuMakerMap), "AddHumanlikeOrders")]
+    [HarmonyPatch]
     public static class Patch_FloatMenu_Sleep
     {
+        public static bool Prepare() => AccessTools.Method(typeof(FloatMenuMakerMap), "AddHumanlikeOrders") != null;
+        public static MethodBase TargetMethod() => AccessTools.Method(typeof(FloatMenuMakerMap), "AddHumanlikeOrders");
+
         public static void Postfix(Vector3 clickPos, Verse.Pawn pawn, List<FloatMenuOption> opts)
         {
             if (MegaMod.Settings?.QoL?.prioritizeSleep != true) return;

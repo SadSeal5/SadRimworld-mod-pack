@@ -16,7 +16,7 @@
       <Cleanliness>-2</Cleanliness>
       <SurgerySuccessChanceFactor>1.10</SurgerySuccessChanceFactor>
     </statBases>
-    <size>(3,1)</size>
+    <size>(1,2)</size>
     <costList>
       <Steel>120</Steel>
       <ComponentIndustrial>2</ComponentIndustrial>
@@ -25,12 +25,10 @@
       <li>SadMedical_AutopsyResearch</li>
     </researchPrerequisites>
     <graphicData>
-      <texPath>Things/Building/Production/AutopsyTable/AutopsyTable</texPath>
+      <texPath>Things/Building/Production/AutopsyTable/OperatingTable</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(3.5,1.5)</drawSize>
-      <shadowData>
-        <volume>(2.8, 0.6, 0.8)</volume>
-      </shadowData>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2,2)</drawSize>
     </graphicData>
     <designationCategory>Production</designationCategory>
     <hasInteractionCell>true</hasInteractionCell>

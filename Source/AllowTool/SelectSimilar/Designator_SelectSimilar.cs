@@ -13,7 +13,7 @@ namespace SadSeal.MegaMod.AllowTool.SelectSimilar
         {
             defaultLabel = "MegaMod_Designator_SelectSimilar".Translate();
             defaultDesc = "MegaMod_Designator_SelectSimilar_Desc".Translate();
-            icon = ContentFinder<Texture2D>.Get("UI/Commands/SelectNextInCell", false) ?? BaseContent.WhiteTex;
+            icon = ContentFinder<Texture2D>.Get("UI/Commands/SelectSimilar", false) ?? ContentFinder<Texture2D>.Get("UI/Designators/SelectSimilar", false) ?? BaseContent.WhiteTex;
             useMouseIcon = true;
             soundSucceeded = SoundDefOf.Click;
         }

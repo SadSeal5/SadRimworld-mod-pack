@@ -10,7 +10,7 @@ namespace SadSeal.MegaMod.AllowTool.HaulUrgently
     [HarmonyPatch(typeof(Toils_Haul), nameof(Toils_Haul.PlaceHauledThingInCell))]
     public static class Patch_HaulCompleteDesignation
     {
-        public static void Postfix(TargetIndex carrierInd, TargetIndex cellInd, bool flag, Toil __result)
+        public static void Postfix(TargetIndex cellInd, Toil __result)
         {
             if (__result == null) return;
 

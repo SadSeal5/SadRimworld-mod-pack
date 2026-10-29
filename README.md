@@ -195,4 +195,6 @@ X. SadSeal's Mega Mod
 
 * **Work Manager:** Fikir, tasarım ve arayüz konsepti için [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'a teşekkür ederiz.
 * **Smart Haul:** *Pick Up And Haul* konsepti ve orijinal mod fikirleri için topluluk geliştiricilerine teşekkürler.
+* **Maden Ocağı Sprite:** Mines moduna ait maden kuyusu (mineshaft) sprite'ı için [WRelicK](https://steamcommunity.com/sharedfiles/filedetails/?id=1545681321)'e teşekkür ederiz.
+* **Cerrahi Masa Sprite:** Cerrahi operasyon masası sprite'ı için [Oskar Potocki & Vanilla Expanded Ekibi](https://steamcommunity.com/workshop/filedetails/?id=1884025115)'ne teşekkür ederiz.
 * **Geliştirici & Paket:** SadSeal5 tarafından geliştirilip sürdürülmektedir.

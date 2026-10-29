@@ -70,9 +70,6 @@ namespace SadSeal.MegaMod.Quarry
                 Thing minedThing = ThingMaker.MakeThing(outputDef);
                 minedThing.stackCount = Mathf.Clamp(outputCount, 1, outputDef.stackLimit);
                 GenSpawn.Spawn(minedThing, pos, map);
-
-                Messages.Message("MegaMod_QuarryMinedItem".Translate(billDoer.LabelShort, minedThing.Label),
-                    MessageTypeDefOf.PositiveEvent, false);
             }
         }
 
