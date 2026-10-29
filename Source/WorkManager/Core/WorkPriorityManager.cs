@@ -279,7 +279,14 @@ namespace SadSeal.MegaMod.WorkManager.Core
                 }
                 else
                 {
-                    entry.Pawn.workSettings.SetPriority(workType, 4);
+                    if (workType.relevantSkills != null && workType.relevantSkills.Count > 0 && entry.Score < 25f)
+                    {
+                        entry.Pawn.workSettings.SetPriority(workType, 0);
+                    }
+                    else
+                    {
+                        entry.Pawn.workSettings.SetPriority(workType, 4);
+                    }
                 }
             }
         }

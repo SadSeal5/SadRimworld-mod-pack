@@ -102,10 +102,17 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
 
                 if (comp.DroppedWeapons.TryGetValue(pawn, out ThingWithComps weapon))
                 {
+                    if ((pawn.health?.hediffSet?.BleedRateTotal ?? 0f) > 0.10f) return;
+
                     comp.DroppedWeapons.Remove(pawn);
 
                     if (weapon != null && !weapon.Destroyed && weapon.Spawned && weapon.Map == pawn.Map && pawn.equipment?.Primary == null)
                     {
+                        if (weapon.IsForbidden(pawn))
+                        {
+                            weapon.SetForbidden(false, false);
+                        }
+
                         if (pawn.CanReach(weapon, PathEndMode.ClosestTouch, Danger.Some))
                         {
                             Job job = JobMaker.MakeJob(JobDefOf.Equip, weapon);

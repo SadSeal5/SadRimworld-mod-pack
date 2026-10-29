@@ -27,6 +27,15 @@ namespace SadSeal.MegaMod.AutoArm
             CompAutoArm comp = pawn.TryGetComp<CompAutoArm>();
             if (comp != null && !comp.enabled) return null;
 
+            if (pawn.equipment?.Primary != null)
+            {
+                CompBladelinkWeapon blade = pawn.equipment.Primary.TryGetComp<CompBladelinkWeapon>();
+                if (blade != null && blade.Biocoded && blade.CodedPawn == pawn)
+                {
+                    return null;
+                }
+            }
+
             int currentTick = Find.TickManager.TicksGame;
             if (comp != null)
             {
@@ -45,6 +54,22 @@ namespace SadSeal.MegaMod.AutoArm
                 targetCategory = WeaponClassifier.GetCategory(pawn.equipment.Primary);
             }
 
+            if (pawn.story?.traits?.HasTrait(TraitDefOf.Brawler) == true)
+            {
+                if (comp != null && comp.isCategoryLocked && comp.preferredCategory == WeaponCategory.MeleeBlunt)
+                {
+                    targetCategory = WeaponCategory.MeleeBlunt;
+                }
+                else if (pawn.equipment?.Primary != null && WeaponClassifier.GetCategory(pawn.equipment.Primary) == WeaponCategory.MeleeBlunt)
+                {
+                    targetCategory = WeaponCategory.MeleeBlunt;
+                }
+                else
+                {
+                    targetCategory = WeaponCategory.MeleeSharp;
+                }
+            }
+
             if (targetCategory == WeaponCategory.None && settings.autoAssignBySkill)
             {
                 bool prefersMelee = (pawn.story?.traits?.HasTrait(TraitDefOf.Brawler) == true)
@@ -54,13 +79,26 @@ namespace SadSeal.MegaMod.AutoArm
                 {
                     targetCategory = WeaponCategory.MeleeSharp;
                 }
-                else if ((pawn.skills?.GetSkill(SkillDefOf.Shooting)?.Level ?? 0) >= 10)
-                {
-                    targetCategory = WeaponCategory.RangedSingleShot;
-                }
                 else
                 {
-                    targetCategory = WeaponCategory.RangedBurst;
+                    TraitDef shootDef = DefDatabase<TraitDef>.GetNamedSilentFail("ShootingAccuracy");
+                    Trait shootTrait = (shootDef != null && pawn.story?.traits != null) ? pawn.story.traits.GetTrait(shootDef) : null;
+                    if (shootTrait != null && shootTrait.Degree == -1)
+                    {
+                        targetCategory = WeaponCategory.RangedBurst;
+                    }
+                    else if (shootTrait != null && shootTrait.Degree == 1)
+                    {
+                        targetCategory = WeaponCategory.RangedSingleShot;
+                    }
+                    else if ((pawn.skills?.GetSkill(SkillDefOf.Shooting)?.Level ?? 0) >= 10)
+                    {
+                        targetCategory = WeaponCategory.RangedSingleShot;
+                    }
+                    else
+                    {
+                        targetCategory = WeaponCategory.RangedBurst;
+                    }
                 }
             }
             else if (targetCategory == WeaponCategory.None)

@@ -92,7 +92,7 @@ namespace SadSeal.MegaMod.Quarry
             {
                 Thing minedThing = ThingMaker.MakeThing(outputDef);
                 minedThing.stackCount = Mathf.Clamp(outputCount, 1, outputDef.stackLimit);
-                GenSpawn.Spawn(minedThing, pos, map);
+                GenPlace.TryPlaceThing(minedThing, pos, map, ThingPlaceMode.Near);
             }
         }
 

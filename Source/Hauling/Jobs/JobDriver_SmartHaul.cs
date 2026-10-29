@@ -326,7 +326,15 @@ namespace SadSeal.MegaMod.Hauling.Jobs
                         }
                     }
 
-                    // 3. If still not placed, keep safely in inventory to prevent infinite drop/haul loops
+                    // 3. Fallback: drop near current position if storage full to prevent cargo from being trapped
+                    if (!placed)
+                    {
+                        if (pawn.inventory.innerContainer.TryDrop(item, pawn.Position, pawn.Map, ThingPlaceMode.Near, out Thing _))
+                        {
+                            placed = true;
+                        }
+                    }
+
                     HauledCargoTracker.Unregister(pawn, item);
                 }
 

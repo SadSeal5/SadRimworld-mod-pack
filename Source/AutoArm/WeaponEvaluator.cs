@@ -156,6 +156,11 @@ namespace SadSeal.MegaMod.AutoArm
                 }
             }
 
+            if (blade != null && blade.Biocoded && blade.CodedPawn == pawn)
+            {
+                score = score * 5.0f + 500f;
+            }
+
             return Mathf.Max(0.1f, score);
         }
     }
