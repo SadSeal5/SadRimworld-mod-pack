@@ -1,4 +1,4 @@
-# 🦭 SadSeal's Mega Mod (Combat, Skills, Recipes, Genes, Smart Haul, Work Manager & Zero Durability Suite)
+# 🦭 SadSeal's Mega Mod (12-in-1 Modular Expansion Suite)
 
 > 🇹🇷 **[Türkçe README için buraya tıklayın](README.md)**
 
@@ -15,129 +15,160 @@
 </p>
 
 <p align="center">
-  <b>An all-in-one in-game management suite combining 7 integrated core modules (Combat, Skills, Recipes, Gene Synthesis, Smart Haul, Work &amp; Schedule Manager, and Zero-Tick Durability) to revolutionize your RimWorld experience under a single optimized package.</b>
+  <b>An all-in-one in-game management suite combining 12 independent core modules and a dynamic Module Manager to revolutionize your RimWorld experience under a single optimized package.</b>
 </p>
 
 ---
 
-## 🌟 Module Features
+## ⚙️ Module Manager
 
-### 1. 🏹 Lethal &amp; Accurate Ranged Combat
-* **Smooth Ballistic Accuracy Formula:** Eliminates vanilla's arbitrary distance roll penalties, making skilled marksmen lethal at realistic engagement ranges.
-* **4 Distinct Ballistic Curves:**
-  * **Soft Ballistic (Default):** Smooth square-root falloff curve. High realism with balanced gunplay.
-  * **Hyperbolic:** Rational falloff curve providing rock-solid long-range consistency.
-  * **Skill-Focused:** Preserves high shooter accuracy largely independent of distance.
-  * **Vanilla:** Original vanilla algorithm with configurable distance falloff multipliers.
+SadSeal's Mega Mod allows you to manage all 12 modules completely independently:
+
+* **Individual Toggle Control:** Enable or disable any module with a single click.
+* **Dynamic Harmony Filtering:** When the game launches, only Harmony patch classes for active modules are loaded into memory; disabled modules have their code and hooks completely bypassed.
+* **Clean Architect Menu:** Buildings belonging to disabled modules (Deep Quarry, Autopsy Table, etc.) are automatically hidden from the Architect menu.
+* **Restart Persistence:** Toggle changes are saved to disk and cleanly applied upon restarting RimWorld.
+* **Batch Actions:** "Enable All" and "Disable All" quick action buttons.
+
+---
+
+## 🌟 12 Integrated Core Modules
+
+### 1. 🏹 Lethal & Accurate Ranged Combat
+* **Smooth Ballistic Accuracy:** Eliminates vanilla's arbitrary distance roll penalties, making skilled marksmen lethal at realistic engagement ranges.
+* **4 Distinct Ballistic Curves:** `Soft Ballistic` (default), `Hyperbolic`, `Skill-Focused`, and configurable `Vanilla`.
 * **Scalable Multipliers:** Independent sliders for raw bullet damage (1.00x - 2.50x), armor penetration (1.00x - 2.00x), and projectile flight speed (1.00x - 2.50x).
 * **Kinetic Stagger (Stopping Power):** Enables bullets to reliably stagger incoming chargers regardless of target body size (Centipedes, Thrumbos, and melee rushers are staggered).
-* **1-HP Anti-Preservation:** Disables vanilla's forced 1-HP limb/torso survival mechanics, allowing realistic fatal headshots and devastating organ strikes.
+* **Remove 1-HP Preservation:** Disables vanilla's forced 1-HP limb/torso survival mechanics, allowing realistic fatal headshots and devastating organ strikes.
 * **Preset Profiles:** `Vanilla+`, `Tactical Lethal`, `Harsh Realism`, and `Custom Profile`.
 
 ---
 
-### 2. 🎓 Skill Learning Multiplier &amp; Decay Control
+### 2. 🎓 Skill Learning Multiplier & Decay Control
 * **Comprehensive XP Multipliers:** Scalable from 0.0x (disable learning) up to 100.0x (ultra-fast mastery).
-* **Global &amp; Per-Skill Independent Control:** Use a single global multiplier or customize each vanilla and modded skill (Shooting, Melee, Crafting, Medicine, etc.) independently.
+* **Global & Per-Skill Independent Control:** Use a single global multiplier or customize each vanilla and modded skill independently.
 * **Remove Daily XP Soft-Cap:** Bypasses RimWorld's 80% learning rate penalty applied after 4,000 XP per day.
 * **Prevent Skill Decay:** Disables experience point loss over time for skills above level 10.
-* **Colonist-Exclusive Protection:** Ensures XP multipliers only apply to player-owned colonists, preventing raiders and enemies from gaining unfair advantages.
-* **Mute Masterwork &amp; Legendary Alerts:** Suppresses intrusive letter popups and sound effects for high-frequency Masterwork and Legendary crafted items.
-* **Quick Preset Buttons:** `1x`, `2x`, `5x`, `10x`, `25x`, `50x`, `100x`, and `Reset to Default`.
+* **Colonist-Exclusive Protection:** Ensures XP multipliers only apply to player-owned colonists.
+* **Mute Masterwork & Legendary Alerts:** Suppresses intrusive letter popups and sound effects for high-frequency Masterwork and Legendary crafted items.
 
 ---
 
-### 3. 🛠️ Recipe &amp; Crafting Tweaker
-* **Live In-Game Recipe Editor:** Search, filter, and tweak all vanilla and modded recipes (`RecipeDef`) on the fly.
-* **Work Amount Synchronization:** Synchronizes recipe `workAmount` with product `WorkToMake` stat in real-time.
-* **Custom Ingredient Picker:** Swap, add, or alter ingredient requirements using materials from any loaded mod.
-* **Disable Recipes:** Disable unwanted or unbalanced recipes with a single toggle.
-* **1-Click XML Patch Exporter:** Export custom recipe tweaks into standard RimWorld `PatchOperation` XML files (`Config/SadSealMegaMod/GeneratedPatches.xml`) for easy sharing.
-* **Reset to Vanilla:** Safely revert individual recipes or all tweaks to factory defaults with confirmation dialogs.
+### 3. 🛠️ Recipe & Crafting Tweaker
+* **In-Game Live Recipe Editor:** Real-time search and filtering across all vanilla and modded recipes (`RecipeDef`).
+* **Work Amount Synchronization:** Automatically synchronizes `workAmount` with the item's `WorkToMake` stat.
+* **Custom Ingredient Selector:** Add, remove, or adjust ingredients from any loaded mod.
+* **Recipe Blacklisting:** Disable unwanted or unbalanced recipes with a single toggle.
+* **One-Click XML Patch Export:** Export all custom recipe modifications as a clean RimWorld `PatchOperation` XML file.
 
 ---
 
 ### 4. 🧬 Gene Synthesizer
-* **Direct Synthesis at Gene Assembler:** Craft any vanilla or modded gene directly as a pure `Genepack` via the "Synthesize Gene" command.
-* **Craft with Neutroamine:** Synthesize genetic material in exchange for Neutroamine (configurable cost in Mod Settings, default: 100).
-* **Universal Mod Compatibility:** Dynamically queries RimWorld's `DefDatabase<GeneDef>`; automatically supports Alpha Genes, Biotech Expansion, and all third-party gene mods.
-* **Rich Filtering &amp; Search:** Real-time text search, mod-based filtering, category filters (biochemical, cosmetic, archite, etc.), and complexity/metabolism/archite stats preview.
-* **Sequential Colony Pipeline:** Haulers deliver Neutroamine to the assembler, and researchers perform the synthesis. Canceling safely drops all invested materials on the floor.
-* **Quick Presets:** `Free` (0 cost / instant), `Cheap` (25 Neutroamine), `Standard` (100 Neutroamine), `Hardcore` (250 Neutroamine), and `Reset`.
+* **Craft Any Gene at the Gene Assembler:** Order specific genes (Vanilla + all modded genes) directly from the Gene Assembler as pure `Genepack` items.
+* **Neutroamine Cost:** Synthesize genetic material using Neutroamine (default 100, fully configurable).
+* **Universal Mod Compatibility:** Automatically scans `DefDatabase<GeneDef>` for Alpha Genes, Biotech Expansion, and all custom gene mods.
+* **Advanced Search & Filtering:** Filter by mod, category (biochemical, cosmetic, archite), and preview metabolic and complexity stats.
 
 ---
 
-### 5. 📦 Smart Haul (High-Performance Multi-Item Hauling)
-* **High-Efficiency Multi-Hauling:** Colonists collect nearby compatible items until their inventory weight limit is reached, instead of making trips for single items.
-* **Single-Job Batch Unloading:** Eliminates ThinkTree restarts and TPS hitches by unloading both carried and inventory-stored items in a continuous single job.
-* **Affinity Cache:** Rapidly validates target stockpile compatibility for candidate items, bypassing ~95% of map-wide storage scans.
-* **Personal Inventory Safety:** Only designated hauling cargo is tagged; colonist weapons, apparel, meals, and emergency medicines are strictly preserved.
-* **Draft Ejection:** Drafting a colonist instantly drops gathered hauling cargo on the spot so they are immediately combat-ready.
-* **Quick Presets:** `Balanced`, `Performance (Ultra TPS)`, `Maximum Capacity`, and `Reset to Default`.
+### 5. 📦 Smart Haul (Pick Up And Haul)
+* **High-Performance Multi-Hauling:** Colonists carry multiple items up to their personal inventory capacity rather than hauling single items.
+* **Single-Job Batch Unload:** Unloads inventory items sequentially into stockpiles within the same job workflow to conserve TPS.
+* **Affinity Cache:** Caches stockpile compatibility checks to bypass 95% of heavy map-wide item searches.
+* **Gear & Equipment Safety:** Only items gathered specifically for hauling are unloaded; personal food, medicine, and sidearms are safe.
+* **Draft Emergency Drop:** Immediately drops carried loads when drafted for military readiness.
 
 ---
 
-### 6. 💼 Work &amp; Schedule Manager (Work Manager 1.6 &amp; 1.7)
-* **Original Mod Attribution:** Modern community adaptation of [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'s acclaimed **Work Manager** mod for RimWorld 1.6 and 1.7 (.NET 10).
-* **Modern Performance Architecture:** Prioritization passes utilize pre-allocated static buffer arrays, and schedule evaluation routines hook into hourly ticks (2,500 ticks) for high-TPS large colonies.
-* **Dynamic Suitability Scoring:** Combines colonist skill levels, passions, health capacities (sight, manipulation, moving), traits, and ideology roles to determine the optimal worker for each task.
-* **Specialist &amp; Emergency Work Delegation:** Emergency duties like Doctor, Firefight, and Warden receive instant priority; specialized roles like Cook, Research, and Smith are capped to the most competent workers per map.
-* **Idle Worker Redirection:** Automatically flexes priorities of idle specialists toward secondary tasks such as hauling and cleaning when primary tasks are exhausted.
-* **Automated Schedule Management:** Automatically schedules Night Owl colonists to night shifts, while optimizing day, sleep, and recreation blocks for the rest of the colony.
-* **Direct Work Tab Integration:** Custom automation toggle columns on the Work and Schedule tabs allow per-colonist automation toggles, alongside header buttons for instant manual evaluation.
-* **Quick Presets:** `Balanced`, `Performance (Ultra TPS)`, `Strict Specialization`, and `Reset to Default`.
+### 6. 💼 Work & Schedule Manager
+* **Original Adaptation:** Community adaptation and performance overhaul of [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'s **Work Manager** for RimWorld 1.6 & 1.7 (.NET 10).
+* **Dynamic Suitability Scoring:** Combines skills, passions, health capacities, traits, and ideology roles to determine optimal work assignments.
+* **Emergency & Specialist Distribution:** Prioritizes critical emergency duties (Doctor, Firefight, Warden) while assigning top specialists to complex crafts (Cook, Research, Smith).
+* **Smart Sleep & Schedule Optimization:** Automatically places Night Owls on night shifts and configures optimal work/rest cycles for others.
+* **Work Tab Direct Integration:** Dedicated automation toggle columns and one-click refresh buttons in the vanilla Work and Schedule tabs.
 
 ---
 
-### 7. 🛡️ Zero-Tick Durability (Weapons &amp; Apparel)
-* **Zero-Tick Architecture:** Manipulates RimWorld's core engine `ThingDef.useHitPoints = false` flags directly rather than executing costly per-tick comp hooks. 100% TPS neutral.
-* **Weapon Wearout Prevention:** All ranged and melee weapons never degrade, take damage, or wear down during combat or use.
-* **Apparel &amp; Armor Protection:** Clothing and armor never deteriorate from weather (rain, snow, water), combat damage, or passage of time.
-* **Mood Penalty Prevention:** Colonists never suffer negative thoughts from worn-out or frayed clothing (`tattered/frayed apparel`).
-* **Instant Map-Wide Restoration:** Mod Settings button instantly restores all damaged weapons and apparel across all active maps, caravans, and inventories to 100% condition.
-* **Prevent Tainted Apparel:** Optional toggle to prevent apparel from being marked as tainted (`tainted`) when enemies perish.
-* **Quick Presets:** `Disable All`, `Weapons Only`, `Apparel Only`, `Immortal Everything (Default)`, and `Reset to Default`.
+### 7. 🛡️ Zero-Tick Weapon & Apparel Durability
+* **Zero-Tick Engine Architecture:** Operates directly at the engine level (`ThingDef.useHitPoints = false`) without periodic tick overhead for maximum TPS.
+* **Prevent Gear Wear:** Weapons and armor never degrade in combat or from regular usage.
+* **Weather & Environmental Protection:** Items left outdoors, in rain, or in snow never rot or deteriorate.
+* **Mood Penalty Removal:** Colonists never suffer negative mood debuffs from wearing tattered or frayed apparel.
+* **One-Click Repair:** Instantly restore all map and caravan items to 100% condition.
+* **Optional Tainted Removal:** Option to disable the tainted apparel penalty upon death.
 
 ---
 
-## 🖥️ User Interface &amp; Mod Settings
+### 8. ✨ Quality of Life (QoL) Suite
+* **Don't Block Doors:** Prevents haulers and drop pods from leaving items in doorways, preventing stuck-open security breaches.
+* **Filth Vanishes Over Time:** Outdoor blood, mud, and dirt naturally decay and vanish over time, keeping maps clean and saving memory.
+* **Immortal Trees:** Prevents mature trees from dying of old age to preserve forests and timber reserves.
+* **Smooth Walls Before Floors:** Prioritizes smoothing rough rock walls before smoothing floor tiles.
+* **No Death Acidifier:** Prevents Imperial soldiers and pirates from dissolving their weapons and armor upon death.
+* **Raid Strategy Toggles:** Selectively disable frustrating raid arrival strategies (Sappers, Breachers, Sieges).
 
-Navigate to **Options ➔ Mod Settings ➔ SadSeal Mega Mod** to access all modules using a dropdown navigation menu and directional arrows (`◄ [Module Name] ►`):
+---
 
-| Module | Description |
+### 9. 🩺 Medical & Autopsy Suite
+* **Post-Mortem Autopsy:** Dissect fresh humanlike corpses to salvage natural organs (heart, kidney, lung, liver), bionics, and implants.
+* **Dedicated Surgical Autopsy Table:** Heavy stainless steel dissection table with drainage conduits, lamp, and instrument tray (`SadMedical_AutopsyTable`).
+* **Research Tree Prerequisite:** Requires researching **Post-Mortem Autopsy (`SadMedical_AutopsyResearch`)** before construction (`DrugProduction` prerequisite).
+* **Field Medicine:** Allows doctors to tend wounded colonists directly on the battlefield using inventory medicine.
+* **Smart Medicine Choice:** Intelligently allocates medicine based on injury severity to prevent wasting Glitterworld medicine on minor bruises.
+
+---
+
+### 10. ✋ Allow Tool & Utility Commands
+* **Unforbid All:** Unlocks all forbidden items across the map in a single click with fogged/ancient danger exclusion.
+* **Haul Urgently:** High-priority hauling designation seamlessly integrated with Smart Haul.
+* **Select Similar:** Quickly selects all matching items on screen (e.g., all stone chunks or weapons).
+* **Finish Off:** Mercy-kill downed enemies in a single swift blow without drawn-out melee brawls.
+
+---
+
+### 11. ⏩ Smart Speed & Time Flow
+* **4x Super Speed:** Unlocks 4x game speed without requiring Developer Mode via the `4` hotkey or UI button.
+* **Bypass Forced Event Slowdowns:** Eliminates the forced 1x speed lock during combat, fires, and raids.
+* **Smart Sleep Fast-Forward:** Automatically accelerates time when all colonists are asleep and restores normal speed upon awakening or alerts.
+
+---
+
+### 12. ⛏️ Deep Quarry & Resource Extractor
+* **Excavated 5x5 Ground Pit:** Deep mining pit facility for stone chunks, raw metals, and compact machinery (`Sad_DeepQuarry`).
+* **Custom 2D Art:** High-detail excavated pit textures with timber framing, rock ledges, ore bucket, and hoist winch.
+* **Excavation Recipes:** Quarry stone chunks, extract deep mineral veins (steel, plasteel, uranium, gold, silver), and salvage components.
+* **Research Requirement:** Requires vanilla **Deep Drilling (`DeepDrilling`)** research before construction.
+* **Depletion & Multipliers:** Configurable infinite quarry mode or 1,000 excavation limit with adjustable mining speed scaling.
+
+---
+
+## 🖥️ In-Game Settings Window
+
+Access the configuration suite via **Options ➔ Mod Settings ➔ SadSeal's Mega Mod**:
+
+| Tab | Description |
 |---|---|
-| `[🏹 Ranged Combat]` | Ballistic formulas, damage, armor penetration, and velocity multipliers |
-| `[🎓 Skill Multipliers]` | Global and per-skill XP rates, decay prevention, and soft-cap removal |
-| `[🛠️ Recipe Tweaker]` | Live recipe editor, custom ingredient picker, and XML patch exporter |
-| `[🧬 Gene Synthesizer]` | Neutroamine costs, synthesis duration, archite rules, and presets |
-| `[📦 Smart Haul]` | Multi-haul collection radius, mass threshold, and affinity cache settings |
-| `[💼 Work Manager]` | Prioritization intervals, specialist limits, schedule manager, and idle redirection |
-| `[🛡️ Durability]` | Weapon/apparel durability toggles, instant repair button, and tainted prevention |
+| `[⚙️ Modules]` | Toggle individual modules on/off and batch enable/disable (Requires restart) |
+| `[🏹 Ranged Combat]` | Ballistics, damage, armor penetration, projectile speed, and stopping power |
+| `[🎓 Skill Multipliers]` | Global and individual XP multipliers, decay toggles, and daily soft-cap bypass |
+| `[🛠️ Recipe Tweaker]` | Live recipe search, ingredient editor, work amount sync, and XML patch exporter |
+| `[🧬 Gene Synthesizer]` | Neutroamine costs, production work time, archite rules, and presets |
+| `[📦 Smart Haul]` | Multi-item hauling, search radius, mass limits, and stockpile affinity caching |
+| `[💼 Work Manager]` | Assignment intervals, specialist targets, auto-scheduling, and idle redirection |
+| `[🛡️ Durability]` | Weapon and apparel durability remover, instant repair, and tainted toggles |
+| `[✨ QoL Suite]` | Door blocking, filth decay, tree immortality, smooth wall priority, and raid options |
+| `[🩺 Medical & Autopsy]` | Autopsy success scaling, field medicine thresholds, and mood penalty toggles |
+| `[✋ Allow Tool]` | Urgent hauling priorities and finish-off commands |
+| `[⏩ Time Flow]` | 4x speed toggle, forced slowdown bypass, and smart sleep acceleration |
+| `[⛏️ Deep Quarry]` | Mining speed multipliers, infinite quarry toggle, and mineral drop weights |
 
-* Full native localization support for both **English** and **Turkish**.
-* Most setting adjustments take effect immediately without requiring a game restart.
-
----
-
-## 🧩 Standalone &amp; Ecosystem Mod Repositories
-
-If you prefer using individual modules independently or exploring other custom mods in the ecosystem, visit the dedicated repositories:
-
-* 🎓 [Rimworld-Skill-learning-multiplier](https://github.com/SadSeal5/Rimworld-Skill-learning-multiplier) - Skill learning multipliers and decay prevention
-* 🏹 [rimworld-lethal-ranged-combat-1.6](https://github.com/SadSeal5/rimworld-lethal-ranged-combat-1.6) - Accurate and lethal ballistic combat
-* 🛠️ [rimworld-recipe-tweaker](https://github.com/SadSeal5/rimworld-recipe-tweaker) - Real-time in-game crafting recipe editor and XML exporter
-* 🧬 [rimworld-gene-synthesizer](https://github.com/SadSeal5/rimworld-gene-synthesizer) - Pure Genepack synthesis for Neutroamine (Biotech)
-* 📦 [rimworld-smart-haul](https://github.com/SadSeal5/rimworld-smart-haul) - High-TPS multi-item hauling alternative (Pick Up And Haul)
-* 💼 [rimworld-work-manager](https://github.com/SadSeal5/rimworld-work-manager) - Automated colonist work and schedule management (Work Manager 1.6 &amp; 1.7)
-* 🛡️ [rimworld-no-durability](https://github.com/SadSeal5/rimworld-no-durability) - Zero-tick weapon &amp; apparel durability remover
-* 🧪 [Rimworld-Unified-Research-Tree](https://github.com/SadSeal5/Rimworld-Unified-Research-Tree) - Modern research canvas with DAG auto-layout, Anomaly dual research, and auto-queuing
-* 🩸 [SadRimworld-Cellular-Regeneration](https://github.com/SadSeal5/SadRimworld-Cellular-Regeneration) - 4-stage prioritized cellular healing gene suite (clotting, wound closure, limb regrowth, scar cure)
+* Full English and Turkish localization included.
 
 ---
 
-## ⚙️ Requirements &amp; Load Order
+## ⚙️ Requirements & Load Order
 
-* **RimWorld Versions:** `1.5`, `1.6`, or `1.7` (Beta)
+* **RimWorld Versions:** `1.5`, `1.6`, or `1.7` (Beta / CoreCLR .NET 10)
 * **Required Dependency:** [Harmony (brrainz.harmony)](https://github.com/pardeike/HarmonyRimWorld)
 
 ```
@@ -151,18 +182,17 @@ X. SadSeal's Mega Mod
 
 ## 📁 Installation
 
-1. Download the latest release from the [Releases](https://github.com/SadSeal5/SadRimworld-mod-pack/releases) page or clone this repository.
-2. Place the folder into your RimWorld mods directory:
+1. Download `SadSealMegaMod-v1.5.0.zip` from the [Releases](https://github.com/SadSeal5/SadRimworld-mod-pack/releases) page.
+2. Extract the archive into your RimWorld mods directory:
    ```
    RimWorld/Mods/SadSealMegaMod/
    ```
-3. Launch the game, enable Harmony first, then enable **SadSeal's Mega Mod** in the Mod Manager.
+3. Launch RimWorld, navigate to the Mod Manager, place SadSeal's Mega Mod below Harmony, and activate it.
 
 ---
 
-## 🙏 Credits &amp; Attribution
+## 🙏 Credits & Attribution
 
-* **Work Manager:** Concept, design, and UI layout by [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262). Work Manager in this suite is a community adaptation for modern RimWorld 1.6 &amp; 1.7 (.NET 10).
-* **Smart Haul:** Inspired by the *Pick Up And Haul* concept and community modding pioneers.
-* **Unified Research Tree:** Built from scratch with DAG auto-layout for modern RimWorld 1.6 &amp; 1.7 (.NET 10) and Anomaly DLC, inspired by *Research Tree* and *Research Reinvented*.
-* **Developer &amp; Maintainer:** Developed and maintained by SadSeal5.
+* **Work Manager:** Concept and original design by [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262).
+* **Smart Haul:** Concept inspired by *Pick Up And Haul*.
+* **Developed & Maintained by:** SadSeal5.

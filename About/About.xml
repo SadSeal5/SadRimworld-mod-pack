@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-  <name>SadSeal's Mega Mod (Combat, Skills, Recipes, Genes, Smart Haul, Work Manager &amp; Durability)</name>
+  <name>SadSeal's Mega Mod (12-in-1 Complete Expansion Suite &amp; Module Manager)</name>
   <author>SadSeal5</author>
   <packageId>sadseal.megamod</packageId>
   <supportedVersions>
@@ -19,50 +19,22 @@
   <loadAfter>
     <li>brrainz.harmony</li>
   </loadAfter>
-  <description>SadSeal's Mega Mod, RimWorld deneyiminizi tepeden tırnağa geliştiren yedi büyük modu tek bir optimize edilmiş süite altında birleştirir:
+  <description>SadSeal's Mega Mod, RimWorld deneyiminizi tepeden tırnağa geliştiren 12 büyük bağımsız modülü ve dinamik modül yöneticisini tek bir optimize edilmiş süite altında birleştirir:
 
-1. 🏹 Lethal &amp; Accurate Ranged Combat (Ölümcül ve İsabetli Menzilli Çatışma):
-- Akıcı Balistik İsabet Formülü: Vanilla'nın orantısız mesafe cezalarını kaldırarak yetenekli atıcıları ölümcül kılar.
-- Ölçeklenebilir Hasar ve Zırh Delme: Tamamen ayarlanabilir mermi hasarı ve zırh delme çarpanları.
-- Yüksek Mermi Hızı: Mermilerin uçuş hızını artırarak seri ve tepkisel çatışma sunar.
-- Kinetik Sarsma (Stopping Power): Mermilerin isabet ettiği hedefleri boyut sınırı olmaksızın yavaşlatmasını sağlar.
-- 1-Can Koruma Sistemini Kaldırma: Ağır isabet alan organların yapay olarak 1 canda hayatta kalmasını engeller.
-- Hazır Şablonlar: Vanilla+, Taktiksel Ölümcül, Sert Gerçekçilik ve Özel Ayarlar.
+⚙️ Modül Yöneticisi: 12 modülü tek tek açıp kapatabilme imkanı. Seçili olmayan modüllerin Harmony yamaları dinamik olarak atlanır.
 
-2. 🎓 Skill Learning Multiplier &amp; Decay Control (Yetenek Öğrenme Çarpanı):
-- Genel ve bağımsız yetenek tecrübe çarpanları (0.0x - 100.0x).
-- Günlük 4.000 XP yumuşak tavan cezasını kaldırma seçeneği.
-- Seviye 10 üzerindeki yeteneklerin zamanla erimesini/azalmasını devre dışı bırakma seçeneği.
-- Hızlı ön ayarlar (1x, 2x, 5x, 10x, 25x, 50x, 100x).
+1. 🏹 Lethal &amp; Accurate Ranged Combat: Akıcı balistik eğriler (Soft Ballistic, Hyperbolic, Skill-Focused), hasar/zırh delme/mermi hızı çarpanları, kinetik sarsma (stopping power) ve 1-HP korumasını kaldırma.
+2. 🎓 Skill Learning Multiplier &amp; Decay Control: Genel ve yetenek bazlı XP çarpanları (0-100x), günlük 4.000 XP yumuşak tavan cezasını ve yetenek erimesini kaldırma.
+3. 🛠️ Recipe &amp; Crafting Tweaker: Oyun içi canlı üretim tarif editörü, malzeme seçici, WorkToMake senkronizasyonu ve tek tıkla XML yaması dışa aktarımı.
+4. 🧬 Gene Synthesizer: Gene Assembler üzerinde Nötroamin ile istenen tüm vanilla ve modlu genleri Genepack olarak sentezleme.
+5. 📦 Smart Haul (Pick Up And Haul): Çoklu eşya toplama, tek iş akışında toplu depolama, stok kümeleme ve askere alma koruması.
+6. 💼 Work &amp; Schedule Manager: Kolonistlerin yetenek, tutku, sağlık ve rollerine göre dinamik önceliklendirme ve akıllı gündüz/gece uyku optimizasyonu.
+7. 🛡️ Zero-Tick Durability: Silah ve kıyafet dayanıklılık mekaniğini motor düzeyinde sıfır TPS yüküyle kaldırma, çürüme/aşınma engelleme ve tainted iptali.
+8. ✨ QoL Suite: Kapıların eşyalarla tıkanmasını önleme, zemin pisliklerinin zamanla yok olması, ağaçların yaşlılıktan ölmemesi, zemin öncesi duvar düzeltme önceliği, ölüm asitleştirici iptali ve akıncı strateji kontrolleri.
+9. 🩺 Medical &amp; Autopsy Suite: Taze kadavralardan organ ve protez çıkarma (Kadavra Otopsisi araştırması ve özel çelik ameliyat masası ile), sahada doğrudan çantadan tedavi ve akıllı ilaç seçimi.
+10. ✋ Allow Tool &amp; Utility Commands: Sis korumalı harita çapında yasak kaldırma (Unforbid All), acil taşıma (Haul Urgently), benzerini seç ve can çekişen düşmanları tek vuruşta infaz etme.
+11. ⏩ Smart Speed &amp; Time Flow: Geliştirici modu gerekmeden 4x süper hız, akınlarda ve olaylarda zorunlu 1x yavaşlamasını engelleme, tüm koloni uyurken otomatik hızlandırma.
+12. ⛏️ Deep Quarry &amp; Resource Extractor: Özel 5x5 zemin taş ocağı, taş blokları, metaller ve bileşen çıkarma, derin sondaj araştırması şartı, tükenme sınırları ve çarpanlar.
 
-3. 🛠️ Recipe &amp; Crafting Tweaker (Tarif ve Üretim Düzenleyici):
-- Oyun içi tam özellikli tarif (RecipeDef) düzenleme penceresi.
-- Üretim süreleri (iş miktarı), tarif isimleri ve malzeme gereksinimlerini düzenleme.
-- Eşya üretim süresi düzeltmesi (WorkToMake senkronizasyonu).
-- Herhangi bir moddan malzeme seçici ile tarif içeriklerini değiştirme.
-- Yapılan değişiklikleri standart RimWorld XML yaması olarak dışa aktarabilme.
-
-4. 🧬 Gene Synthesizer (Gen Sentezleyici):
-- Gen Birleştirici (Gene Assembler) makinesinde istenilen genleri (Vanilla + tüm modlarla eklenen genler) sentezleyebilme.
-- Nötroamin karşılığında özel gen paketleri (Genepack) üretme.
-- Kategori ve mod filtreleme, anlık metin araması ve biyo-istatistik önizlemesi.
-- Tamamen özelleştirilebilir Nötroamin maliyeti, üretim süresi ve hazır ayarlar.
-
-5. 📦 Smart Haul (Akıllı Çoklu Taşıma - Pick Up And Haul):
-- Yüksek Performanslı Çoklu Toplama: Koloniciler depoya tek bir eşya götürmek yerine yol üstündeki uygun eşyaları envanterlerine alarak tek seferde taşır.
-- Akıllı Boşaltma: Depolama alanına ulaşıldığında envanterdeki tüm toplanan eşyalar tek bir iş akışı içinde ilgili raflara/alanlara otomatik boşaltılır.
-- Güvenli Kargo Takibi: Savaş alarmı (Draft) durumunda veya iş kesintilerinde yalnızca o seferde toplanan kargo eşyaları yere bırakılır; silah, kıyafet, yemek ve ilaçlar korunur.
-- Katı Depo Filtreleme ve Ağırlık Kontrolü: Taşınan eşyaların ana depolama alanına uyumluluğu ve taşıma kapasitesi (Mass Limit) anlık gözetilir.
-
-6. 💼 Work &amp; Schedule Manager (Akıllı İş ve Takvim Yöneticisi):
-- Yüksek Performanslı İş Dağıtımı: Kolonistlerin yetenek, tutku, sağlık ve ideoloji rollerine göre en uygun işleri otomatik atar.
-- Akıllı Takvim Yönetimi: Gece Kuşu kolonistleri otomatik geceye, diğerlerini en verimli uyku ve eğlence döngüsüne alır.
-- İş Sekmesi Entegrasyonu: Koloni İş ve Takvim pencerelerine eklenen otomasyon sütunları ve tek tıkla yenileme kontrolleri.
-
-7. 🛡️ Zero-Tick Durability (Sıfır-Tick Silah ve Kıyafet Dayanıklılık Kaldırıcı):
-- Sıfır-Tick Motor Düzeyinde Optimizasyon: Periyodik tick ve compTick döngüleri olmaksızın silah ve kıyafetlerin dayanıklılık mekaniğini tamamen kaldırır.
-- Yağmurda, karda veya dışarıda bozulma/çürüme yok. Çatışmada zırh ve silah hasarı almaz.
-- Tattered/frayed kıyafet ruh hali cezası almaz. İsteğe bağlı tainted (ceset giysisi) engelleme.
-
-Tüm modüller oyun içi Mod Ayarları menüsünden açılır menü (dropdown) ve ok butonlu modern arayüz ile kolayca yönetilebilir. Türkçe ve İngilizce dil desteği mevcuttur.</description>
+Tüm modüller oyun içi Mod Ayarları menüsünden bağımsız olarak açılıp kapatılabilir. Türkçe ve İngilizce tam dil desteğine sahiptir.</description>
 </ModMetaData>

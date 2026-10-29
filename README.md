@@ -1,4 +1,4 @@
-# 🦭 SadSeal's Mega Mod (Combat, Skills, Recipes, Genes, Smart Haul, Work Manager & Zero Durability Suite)
+# 🦭 SadSeal's Mega Mod (12-in-1 Modular Expansion Suite)
 
 > 🇬🇧 **[Click here for the English README](README_EN.md)**
 
@@ -15,97 +15,140 @@
 </p>
 
 <p align="center">
-  <b>RimWorld deneyiminizi tepeden tırnağa geliştiren 7 entegre ana modülü (Çatışma, Yetenekler, Tarifler, Gen Sentezleme, Akıllı Taşıma, İş Yöneticisi ve Sıfır-Tick Dayanıklılık) tek bir optimize edilmiş süite altında birleştiren hepsi bir arada oyun içi yönetim paketi.</b>
+  <b>RimWorld deneyiminizi tepeden tırnağa geliştiren 12 bağımsız ana modülü ve dinamik Modül Yöneticisini tek bir optimize edilmiş süite altında birleştiren hepsi bir arada oyun içi yönetim paketi.</b>
 </p>
 
 ---
 
-## 🌟 Modül Özellikleri
+## ⚙️ Modül Yöneticisi (Module Manager)
+
+SadSeal's Mega Mod, mod paketindeki 12 modülü tamamen bağımsız olarak yönetmenize olanak tanır:
+
+* **Bireysel Açma/Kapama:** Dilediğiniz modülü tek tıkla devre dışı bırakabilir veya etkinleştirebilirsiniz.
+* **Dinamik Harmony Filtreleme:** Oyun başlatılırken yalnızca etkin modüllerin Harmony yama sınıfları belleğe yüklenir; kapalı modüllerin kodları ve kancaları tamamen atlanır.
+* **Akıllı Mimari Temizliği:** Kapatılan modüllere ait yapılar (Derin Taş Ocağı, Otopsi Masası vb.) mimari inşaat menüsünden tamamen gizlenir.
+* **Yeniden Başlatma Bildirimi:** Modül ayarlarını değiştirdiğinizde, değişikliklerin oyuna temiz bir şekilde uygulanması için RimWorld'ü yeniden başlatmanız yeterlidir.
+* **Toplu Eylemler:** "Tümünü Etkinleştir" ve "Tümünü Devre Dışı Bırak" hızlı butonları.
+
+---
+
+## 🌟 Entegre 12 Ana Modül
 
 ### 1. 🏹 Ölümcül ve İsabetli Menzilli Çatışma (Lethal Combat)
-* **Akıcı Balistik İsabet Formülü:** Vanilla'nın orantısız mesafe cezalarını kaldırarak yetenekli atıcıları mantıklı menzillerde ölümcül kılar.
-* **4 Farklı Balistik Eğri:**
-  * **Soft Ballistic (Varsayılan):** Pürüzsüz karekök düşüş eğrisi. Yüksek gerçekçilik ve dengeli çatışma.
-  * **Hyperbolic:** Rasyonel düşüş eğrisi ile uzun menzilli kararlı isabet.
-  * **Skill-Focused:** Yetenekli nişancıların mesafeden bağımsız yüksek isabetini korur.
-  * **Vanilla:** Ayarlanabilir mesafe çarpanlı orijinal vanilla formülü.
-* **Ölçeklenebilir Çarpanlar:** Mermi ham hasarı (1.00x - 2.50x), zırh delme oranı (1.00x - 2.00x) ve mermi uçuş hızı (1.00x - 2.50x) çarpanları.
+* **Akıcı Balistik İsabet Formülü:** Vanilla'nın yapay mesafe cezalarını kaldırarak yetenekli atıcıları gerçekçi menzillerde ölümcül kılar.
+* **4 Farklı Balistik Eğri:** `Soft Ballistic` (varsayılan), `Hyperbolic`, `Skill-Focused` ve ayarlanabilir `Vanilla`.
+* **Ölçeklenebilir Çarpanlar:** Mermi ham hasarı (1.00x - 2.50x), zırh delme oranı (1.00x - 2.00x) ve mermi uçuş hızı (1.00x - 2.50x).
 * **Kinetik Sarsma (Stopping Power):** Mermilerin isabet ettiği hedefleri vücut boyutu sınırına takılmaksızın yavaşlatmasını sağlar (Centipede, Thrumbo ve yakın dövüş saldırganları sarsılır).
-* **1-Can Koruma Sistemini Kaldırma:** Ağır isabet alan organların ve uzuvların yapay olarak 1 HP ile hayatta kalmasını sağlayan vanilla mekaniğini devre dışı bırakır.
+* **1-Can Koruma Sistemini Kaldırma:** Ağır isabet alan organların yapay olarak 1 HP ile hayatta kalmasını sağlayan vanilla mekaniğini devre dışı bırakır.
 * **Hazır Şablonlar:** `Vanilla+`, `Taktiksel Ölümcül`, `Sert Gerçekçilik` ve `Özel Profil`.
 
 ---
 
 ### 2. 🎓 Yetenek Öğrenme Çarpanı (Skill Multipliers)
 * **Kapsamlı XP Çarpanları:** 0.0x (öğrenmeyi durdurma) ile 100.0x (ultra hızlı uzmanlık) arasında serbest ölçekleme.
-* **Genel ve Bağımsız Yetenek Denetimi:** İster tek bir genel çarpan kullanın, ister Shooting, Melee, Crafting, Medicine gibi tüm vanilla ve modlu yetenekleri tek tek ayarlayın.
+* **Genel ve Bağımsız Denetim:** İster tek bir genel çarpan kullanın, ister tüm vanilla ve modlu yetenekleri tek tek ayarlayın.
 * **Günlük XP Yumuşak Tavanını Kaldırma:** RimWorld'ün günde 4.000 XP sonrasında uyguladığı %80 öğrenme hız cezasını tamamen iptal eder.
 * **Yetenek Erimesini (Decay) Engelleme:** Seviye 10 üzerindeki yeteneklerin zamanla tecrübe puanı kaybetmesini önler.
-* **Koloni Üyelerine Özel Koruma:** Çarpanların yalnızca oyuncu kolonistlerine uygulanmasını sağlayarak akıncıların ve düşmanların haksız avantaj kazanmasını engeller.
-* **Usta & Efsanevi Bildirimlerini Susturma:** Yüksek çarpanlarda sık üretilen Masterwork/Legendary eşyaların ses ve mektup bildirim kirliliğini engeller.
-* **Hızlı Şablon Butonları:** `1x`, `2x`, `5x`, `10x`, `25x`, `50x`, `100x` ve `Varsayılana Sıfırla`.
+* **Koloni Üyelerine Özel Koruma:** Çarpanların yalnızca oyuncu kolonistlerine uygulanmasını sağlar.
+* **Usta & Efsanevi Bildirimlerini Susturma:** Yüksek çarpanlarda sık üretilen Masterwork/Legendary eşyaların bildirim kirliliğini engeller.
 
 ---
 
 ### 3. 🛠️ Tarif ve Üretim Düzenleyici (Recipe Tweaker)
 * **Oyun İçi Canlı Tarif Editörü:** Tüm vanilla ve modlu tarifler (`RecipeDef`) arasında anında arama yapma ve filtreleme.
-* **Üretim Süresi (İş Miktarı) Senkronizasyonu:** Tarifin `workAmount` değeri ile üretilen eşyanın `WorkToMake` statını eşzamanlı günceller.
+* **Üretim Süresi Senkronizasyonu:** Tarifin `workAmount` değeri ile üretilen eşyanın `WorkToMake` statını eşzamanlı günceller.
 * **Özel Malzeme Seçici:** Yüklü herhangi bir moddan malzemeleri tarife ekleme, çıkarma veya gerekli miktarları değiştirme.
 * **Tarif Kapatma:** İstenmeyen veya dengesiz tarifleri tek tıklamayla oyunda devre dışı bırakma.
-* **Tek Tıkla XML Yaması Dışa Aktarımı:** Yapılan tüm özel tarif düzenlemelerini standart RimWorld `PatchOperation` XML dosyası olarak (`Config/SadSealMegaMod/GeneratedPatches.xml`) dışa aktarabilme.
-* **Orijinale Dönme:** Tekil veya tüm tarifleri onay pencereleri ile güvenle vanilla haline döndürme.
+* **Tek Tıkla XML Yaması Dışa Aktarımı:** Yapılan tüm özel tarif düzenlemelerini standart RimWorld `PatchOperation` XML dosyası olarak dışa aktarabilme.
 
 ---
 
 ### 4. 🧬 Gen Sentezleyici (Gene Synthesizer)
 * **Gene Assembler Üzerinden Doğrudan Sentez:** Gene Assembler binasında "Gen Sentezle" komutu ile dilediğiniz geni seçip saf bir `Genepack` olarak üretin.
 * **Neutroamine ile Üretim:** Varsayılan 100 Neutroamine karşılığında genetik sentezleme (mod ayarlarından serbestçe değiştirilebilir).
-* **Bütün Modlu Genlerle Tam Uyum:** Oyunun `DefDatabase<GeneDef>` kütüphanesini dinamik olarak tarar; Alpha Genes, Biotech Expansion ve diğer tüm gen modlarını otomatik olarak listeler.
-* **Gelişmiş Arama ve Filtreleme:** Arayüzde anlık arama, mod bazında filtreleme, kategori (biyokimyasal, kozmetik, archite vb.) filtreleme ve karmaşıklık/metabolizma/archite istatistik önizlemesi.
-* **Sıralı Koloni İş Akışı:** Taşıyıcı kolonistler Neutroamine'leri makineye depolar, ardından araştırmacılar çalışarak sentezi tamamlar. İptal durumunda malzemeler yere dökülerek iade edilir.
-* **Hızlı Şablon Butonları:** `Bedava` (0 maliyet / anında), `Ucuz` (25 Neutroamine), `Standart` (100 Neutroamine), `Zorlu` (250 Neutroamine) ve `Varsayılana Sıfırla`.
+* **Bütün Modlu Genlerle Tam Uyum:** Alpha Genes, Biotech Expansion ve diğer tüm gen modlarını otomatik olarak listeler.
+* **Gelişmiş Arama ve Filtreleme:** Arayüzde anlık arama, mod bazında filtreleme, kategori (biyokimyasal, kozmetik, archite vb.) filtreleme ve istatistik önizlemesi.
 
 ---
 
-### 5. 📦 Akıllı Taşıma (Smart Haul - Pick Up And Haul Varyantı)
+### 5. 📦 Akıllı Taşıma (Smart Haul - Pick Up And Haul)
 * **Yüksek Performanslı Çoklu Taşıma:** Kolonistler tek bir eşya taşımak yerine envanter kapasiteleri dolana kadar yakındaki eşyaları da toplar.
-* **Kesintisiz Toplu Boşaltma (Single-Job Batch Unload):** Orijinal Pick Up And Haul'un aksine her eşya için ThinkTree'yi baştan başlatıp TPS kaybetmez; eldeki ve çantadaki tüm eşyaları aynı iş akışı içinde sırayla depoya yerleştirir.
+* **Kesintisiz Toplu Boşaltma:** Eldeki ve çantadaki tüm eşyaları aynı iş akışı içinde sırayla depoya yerleştirir.
 * **Stok Alanı Kümeleme (Affinity Cache):** Yakındaki aday eşyaların hedef depoya kabul durumunu anında kontrol ederek harita çapı ağır stok taramalarını %95 oranında baypas eder.
 * **Kişisel Eşya Güvenliği:** Yalnızca taşıma amacıyla toplanan yükler etiketlenir; kolonistin yemeği, ilacı ve teçhizatı asla depoya boşaltılmaz.
-* **Askere Alınma (Draft) Koruması:** Kolonist savaşa çağrıldığında taşınan yükler anında yere bırakılarak kolonist muharebeye hazır hale getirilir.
-* **Hazır Şablon Butonları:** `Dengeli`, `Performans (Ultra TPS)`, `Maksimum Kapasite` ve `Varsayılana Sıfırla`.
+* **Askere Alınma (Draft) Koruması:** Kolonist savaşa çağrıldığında taşınan yükler anında yere bırakılır.
 
 ---
 
-### 6. 💼 Akıllı İş & Zaman Yöneticisi (Work & Schedule Manager - Work Manager 1.6 & 1.7)
-* **Orijinal Mod Uyarlaması:** [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'ın sevilen **Work Manager** modunun RimWorld 1.6 ve 1.7 (.NET 10) için resmi olmayan topluluk uyarlamasıdır.
-* **Modern Performans İyileştirmeleri:** Büyük kolonilerde yüksek TPS sağlamak amacıyla öncelik hesaplamaları statik tampon dizilerle optimize edilmiş, takvim kontrolleri saat başlarına (2.500 tick) bağlanmıştır.
-* **Dinamik Uygunluk Puanlaması (Suitability Scoring):** Kolonistlerin yetenek seviyeleri, tutkuları (Passions), sağlık kapasiteleri (görme, manipülasyon, hareket), özellikler (Traits) ve ideoloji rollerini birleştirerek her iş türü için en yetkin kişileri belirler.
-* **Uzman & Acil Durum İş Dağıtımı:** Doktorluk, Yangın ve Gardiyanlık gibi kritik görevleri acil önceliklendirirken; Aşçılık, Araştırma ve Zanaatkarlık gibi uzmanlık gerektiren alanlara harita başına sabit sayıda en yetkin uzmanları adar.
-* **Boşta Kalan Kolonistleri Yönlendirme (Idle Redirection):** Kendi uzmanlık alanında iş kalmayan kolonistlerin önceliklerini otomatik esneterek taşıma ve temizlik gibi ikincil görevlere yönlendirir.
-* **Akıllı Çalışma & Uyku Takvimi (Schedule Manager):** Gece Kuşu (Night Owl) kolonistleri otomatik olarak gece vardiyasına, diğer kolonistleri ise en verimli gündüz/uyku/eğlence döngüsüne 2.500 tick (1 oyun saati) aralıklarla optimize eder.
-* **İş Sekmesi Doğrudan Entegrasyonu:** Koloni İş (Work) ve Takvim (Schedule) pencerelerine eklenen iki yeni sütun ile kolonist bazında otomasyonu açıp kapatabilme; sağ üst köşedeki düğmelerle anında yenileme ve toplu kontrol.
-* **Hazır Şablon Butonları:** `Dengeli`, `Performans (Ultra TPS)`, `Katı Uzmanlaşma` ve `Varsayılana Sıfırla`.
+### 6. 💼 Akıllı İş & Zaman Yöneticisi (Work & Schedule Manager)
+* **Orijinal Mod Uyarlaması:** [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'ın sevilen **Work Manager** modunun RimWorld 1.6 ve 1.7 (.NET 10) için optimize edilmiş topluluk uyarlamasıdır.
+* **Dinamik Uygunluk Puanlaması:** Yetenekler, tutkular, sağlık durumları, özellikler ve rolleri birleştirerek her iş türü için en yetkin kişileri belirler.
+* **Uzman & Acil Durum İş Dağıtımı:** Doktorluk, Yangın ve Gardiyanlık gibi kritik görevleri acil önceliklendirir; Aşçılık, Araştırma ve Zanaatkarlık alanlarına harita başına en yetkin uzmanları adar.
+* **Akıllı Çalışma & Uyku Takvimi:** Gece Kuşu kolonistleri otomatik gece vardiyasına, diğerlerini en verimli gündüz/uyku/eğlence döngüsüne alır.
+* **İş Sekmesi Entegrasyonu:** Koloni İş (Work) ve Takvim (Schedule) pencerelerine eklenen otomasyon sütunları ve tek tıkla yenileme kontrolleri.
 
 ---
 
 ### 7. 🛡️ Sıfır-Tick Silah ve Kıyafet Dayanıklılık Kaldırıcı (Zero-Tick Durability)
-* **Sıfır-Tick Motor Mimarisi:** Periyodik tick (`compTick`) veya döngüsel kod çalıştırmaksızın doğrudan RimWorld motor düzeyinde `ThingDef.useHitPoints = false` bayrağını yönetir. %100 TPS dostudur.
-* **Silah ve Teçhizat Aşınmasını Önleme:** Tüm menzilli ve yakın dövüş silahları çatışmada veya kullanımda asla hasar almaz, aşınmaz ve yıpranmaz.
-* **Kıyafet ve Zırh Bozulmasını Engelleme:** Zırhlar ve giysiler dış ortam koşullarında (yağmur, kar, su), çatışmada veya zamanla hasar almaz.
-* **Ruh Hali Koruması:** Kolonistler aşınmış veya parçalanmış giysi (`tattered/frayed apparel`) nedeniyle negatif ruh hali cezası almaz.
-* **Tek Tıkla Tüm Eşyaları Onarma:** Mod ayarlarındaki buton ile haritadaki, envanterlerdeki ve kervanlardaki tüm yıpranmış eşyaları anında %100 kondisyona getirme seçeneği.
-* **Ceset Kıyafeti (Tainted) Engelleme:** İsteğe bağlı ayar ile düşmanlar öldüğünde üzerlerindeki kıyafetlerin ceset giysisi (`tainted`) olarak etiketlenmesini engelleme desteği.
-* **Hazır Şablon Butonları:** `Tümünü Devre Dışı Bırak`, `Sadece Silahlar`, `Sadece Kıyafetler`, `Her Şey Ölümsüz (Varsayılan)` ve `Varsayılana Sıfırla`.
+* **Sıfır-Tick Motor Mimarisi:** Periyodik tick veya döngüsel kod çalıştırmaksızın doğrudan RimWorld motor düzeyinde `ThingDef.useHitPoints = false` bayrağını yönetir. %100 TPS dostudur.
+* **Silah ve Teçhizat Aşınmasını Önleme:** Tüm menzilli ve yakın dövüş silahları çatışmada asla hasar almaz ve aşınmaz.
+* **Kıyafet ve Zırh Bozulmasını Engelleme:** Giysiler dış ortam koşullarında (yağmur, kar, su), çatışmada veya zamanla hasar almaz.
+* **Ruh Hali Koruması:** Kolonistler aşınmış veya parçalanmış giysi nedeniyle negatif ruh hali cezası almaz.
+* **Tek Tıkla Tüm Eşyaları Onarma:** Haritadaki ve kervanlardaki tüm yıpranmış eşyaları anında %100 kondisyona getirme seçeneği.
+* **Ceset Kıyafeti (Tainted) Engelleme:** İsteğe bağlı olarak ceset giysisi etiketini iptal etme.
+
+---
+
+### 8. ✨ Yaşam Kalitesi Paketi (QoL Suite)
+* **Kapı Önü Engel Koruması:** Kolonistlerin ve taşıyıcıların kapı açıklıklarına eşya bırakmasını engelleyerek kapıların açık kilitlenmesini ve savunma açıklarını önler.
+* **Zamanla Kaybolan Zemin Kirleri:** Açık arazideki kan, çamur ve pisliklerin belirli aralıklarla doğada kendiliğinden yok olmasını sağlar (harita temizliği ve TPS tasarrufu).
+* **Ölümsüz Ağaçlar:** Yaşlılık süresi dolan ağaçların ölmesini engelleyerek orman örtüsünü ve odun kaynaklarını korur.
+* **Zemin Öncesi Duvar Düzeltme:** İnşaatçıların zeminleri cilalamadan önce pürüzlü kaya duvarlarını düzeltmesine öncelik verir.
+* **Ölüm Asitleştirici İptali:** İmparatorluk askerleri veya korsanlar öldüğünde teçhizatlarının erimesini önleyerek ganimeti korur.
+* **Akıncı Taktik Filtreleri:** Sapper, Breach ve Kuşatma gibi can sıkıcı akıncı stratejilerini isteğe bağlı devre dışı bırakabilme.
+
+---
+
+### 9. 🩺 Medikal & Kadavra Otopsisi (Medical & Autopsy Suite)
+* **Kadavra Otopsisi (Post-Mortem Autopsy):** Taze insanımsı kadavralardan doğal organları (kalp, böbrek, akciğer, karaciğer vb.), biyonik protezleri ve implantları kurtarma imkanı.
+* **Özel Cerrahi Otopsi Masası:** Paslanmaz çelikten üretilen, sıvı tahliye kanalları, cerrahi lamba ve alet tepsisine sahip özel ameliyat masası (`SadMedical_AutopsyTable`).
+* **Özel Araştırma Ağacı:** Masayı inşa edebilmek için sıfırdan tasarlanan **Kadavra Otopsisi (`SadMedical_AutopsyResearch`)** araştırması şarttır (`DrugProduction` önkoşullu).
+* **Sahada Tedavi (Field Medicine):** Doktorların yaralı kolonistleri acil durumlarda hemen bulundukları yerde veya hastanın kendi çantasındaki ilaçlarla tedavi edebilmesini sağlar.
+* **Akıllı İlaç Seçimi:** Basit sıyrıklar için Glitterworld veya Endüstriyel ilaçların israf edilmesini önler, hayati tehlikeye göre en uygun ilacı seçer.
+
+---
+
+### 10. ✋ Allow Tool ve Harita Komutları (Allow Tool & Utility Commands)
+* **Tüm Yasakları Kaldır (Unforbid All):** Haritadaki tüm kilitli eşyaları tek tıkla açar; sisli/keşfedilmemiş antik tehlike alanlarını güvenle filtreler.
+* **Acil Taşıma (Haul Urgently):** Seçilen eşyaları en yüksek öncelikle taşınmak üzere etiketler. Smart Haul ile kusursuz entegre çalışır.
+* **Benzerini Seç (Select Similar):** Harita ekranında seçilen bir eşyanın (örneğin tüm kaya parçaları veya mermiler) ekrandaki tüm benzerlerini tek tıkla seçer.
+* **İnfaz Et (Finish Off):** Can çekişen, yere serilmiş düşmanları acı çekmeden tek vuruşta infaz etme emri verir.
+
+---
+
+### 11. ⏩ Zaman ve 4x Hız Akışı (Smart Speed & Time Flow)
+* **Geliştirici Modsuz 4x Hız:** Geliştirici modu (Dev Mode) açmaya gerek kalmadan klavyedeki `4` tuşu veya arayüz butonuyla 4x süper hıza geçiş.
+* **Zorunlu Yavaşlamayı Kaldırma:** Çatışmalarda, yangınlarda veya akınlarda oyunun hızı zorla 1x'e düşürmesini engelleyerek oyuncunun hız kontrolünü korur.
+* **Akıllı Koloni Uykusu:** Haritadaki tüm kolonistler uykuya daldığında hızı otomatik artırır; bir tehlike çıktığında veya birisi uyandığında normal hıza döner.
+
+---
+
+### 12. ⛏️ Derin Taş Ocağı (Deep Quarry & Resource Extractor)
+* **Özel 5x5 Zemin Hafriyat Ocağı:** Koloninizin maden ve taş ihtiyacını karşılayan zemin kazı tesisi (`Sad_DeepQuarry`).
+* **Özel 2D Sanat ve Doku:** Ahşap istinat kirişleri, basamaklı derin kaya katmanları, metal kova ve makara vinç mekanizması içeren özel spritelar.
+* **Üretim Tarifleri:** Taş parçaları çıkarma, derin maden damarlarından çelik/plasteel/uranyum/altın/gümüş kazma ve kompakt makine bileşenleri kurtarma.
+* **Araştırma Şartı:** İnşa edilebilmesi için vanilla **Derin Sondaj (`DeepDrilling`)** araştırması gereklidir.
+* **Tükenme ve Çarpan Ayarları:** Sınırsız madencilik seçeneği veya 1.000 kazı sınırı ile ayarlanabilir madencilik hızı çarpanları.
 
 ---
 
 ## 🖥️ Kullanıcı Arayüzü & Mod Ayarları
 
-Oyun içinde **Seçenekler ➔ Mod Ayarları ➔ SadSeal Mega Mod** menüsüne girdiğinizde üst tarafta açılır menü (dropdown) ve ok butonları (`◄ [Modül Adı] ►`) ile tüm sekmeler arasında akıcı geçiş yapabilirsiniz:
+Oyun içinde **Seçenekler ➔ Mod Ayarları ➔ SadSeal's Mega Mod** menüsüne girdiğinizde üst tarafta açılır menü (dropdown) ve ok butonları (`◄ [Modül Adı] ►`) ile tüm sekmeler arasında akıcı geçiş yapabilirsiniz:
 
-| Modül | Açıklama |
+| Sekme | Açıklama |
 |---|---|
+| `[⚙️ Modüller]` | 12 modülü tek tek açıp kapatma ve toplu eylem kontrolleri (Yeniden başlatma gerektirir) |
 | `[🏹 Menzilli Çatışma]` | Balistik modeller, hasar, zırh delme ve mermi hız ayarları |
 | `[🎓 Yetenek Çarpanı]` | Genel ve tekil XP katsayıları, erime ve yumuşak tavan denetimi |
 | `[🛠️ Tarif Düzenleyici]` | Oyun içi canlı tarif editörü, malzeme seçici ve XML dışa aktarıcı |
@@ -113,31 +156,19 @@ Oyun içinde **Seçenekler ➔ Mod Ayarları ➔ SadSeal Mega Mod** menüsüne g
 | `[📦 Akıllı Taşıma]` | Çoklu eşya toplama, arama yarıçapı, ağırlık eşiği ve stok kümeleme ayarları |
 | `[💼 İş Yöneticisi]` | Öncelik hesaplama sıklığı, uzman hedefleri, takvim yönetimi ve boşta kalma kontrolleri |
 | `[🛡️ Dayanıklılık]` | Silah ve kıyafet dayanıklılık iptali, tek tıkla onarma ve tainted kıyafet engelleme |
+| `[✨ QoL Paketi]` | Kapı engelleme, çürüyen kirler, ölümsüz ağaçlar, duvar önceliği ve akıncı ayarları |
+| `[🩺 Medikal & Otopsi]` | Otopsi başarı çarpanları, sahada tedavi eşikleri ve ruh hali cezası ayarları |
+| `[✋ Allow Tool]` | Acil taşıma öncelikleri ve infaz emri kontrolleri |
+| `[⏩ Zaman Akışı]` | 4x hız kilidi, zorunlu yavaşlama iptali ve akıllı uyku hızlandırma |
+| `[⛏️ Taş Ocağı]` | Kazı hızı çarpanı, sınırsız ocak modu ve maden ağırlık dağılımları |
 
 * Türkçe ve İngilizce tam dil desteğine sahiptir.
-* Değişikliklerin çoğu oyun yeniden başlatılmadan anında yürürlüğe girer.
-
----
-
-## 🧩 Bağımsız (Atomize Edilmiş) ve Ekosistem Mod Depoları
-
-Mega mod süiti içerisindeki modülleri bağımsız olarak kullanmak veya ekosisteme ait diğer özel modları edinmek isterseniz aşağıdaki depolardan yararlanabilirsiniz:
-
-* 🎓 [Rimworld-Skill-learning-multiplier](https://github.com/SadSeal5/Rimworld-Skill-learning-multiplier) - Yetenek öğrenme çarpanı ve tecrübe erimesini engelleme
-* 🏹 [rimworld-lethal-ranged-combat-1.6](https://github.com/SadSeal5/rimworld-lethal-ranged-combat-1.6) - Akıcı balistik menzilli çatışma
-* 🛠️ [rimworld-recipe-tweaker](https://github.com/SadSeal5/rimworld-recipe-tweaker) - Oyun içi canlı üretim tarif editörü ve XML yaması dışa aktarıcı
-* 🧬 [rimworld-gene-synthesizer](https://github.com/SadSeal5/rimworld-gene-synthesizer) - Nötroamin ile saf gen paketi sentezleyici (Biotech)
-* 📦 [rimworld-smart-haul](https://github.com/SadSeal5/rimworld-smart-haul) - Yüksek TPS dostu çoklu taşıma sistemi (Pick Up And Haul)
-* 💼 [rimworld-work-manager](https://github.com/SadSeal5/rimworld-work-manager) - Otomatik iş ve takvim yöneticisi (Work Manager 1.6 & 1.7)
-* 🛡️ [rimworld-no-durability](https://github.com/SadSeal5/rimworld-no-durability) - Sıfır-tick silah ve kıyafet dayanıklılık kaldırıcı
-* 🧪 [Rimworld-Unified-Research-Tree](https://github.com/SadSeal5/Rimworld-Unified-Research-Tree) - Tüm DLC ve modlu araştırmaları tek sonsuz tuvalde toplayan, Anomaly ikili çalışma destekli ve otomatik kuyruklu modern araştırma ağacı
-* 🩸 [SadRimworld-Cellular-Regeneration](https://github.com/SadSeal5/SadRimworld-Cellular-Regeneration) - 4 aşamalı öncelikli iyileşme hatlı (kanama pıhtılaşma, yara kapanması, uzuv yenileme, kalıcı yara izi tedavisi) hücresel rejenerasyon gen paketi
 
 ---
 
 ## ⚙️ Gereksinimler & Yükleme Sırası
 
-* **RimWorld Sürümleri:** `1.5`, `1.6` veya `1.7` (Beta)
+* **RimWorld Sürümleri:** `1.5`, `1.6` veya `1.7` (Beta / CoreCLR .NET 10)
 * **Gerekli Mod:** [Harmony (brrainz.harmony)](https://github.com/pardeike/HarmonyRimWorld)
 
 ```
@@ -151,8 +182,8 @@ X. SadSeal's Mega Mod
 
 ## 📁 Kurulum
 
-1. Deponun en son sürümünü [Releases](https://github.com/SadSeal5/SadRimworld-mod-pack/releases) sayfasından indirin veya depoyu klonlayın.
-2. Klasörü RimWorld mod dizininize yerleştirin:
+1. Deponun en son sürümünü [Releases](https://github.com/SadSeal5/SadRimworld-mod-pack/releases) sayfasından `SadSealMegaMod-v1.5.0.zip` olarak indirin.
+2. Arşiv içeriğini RimWorld mod dizininize çıkartın:
    ```
    RimWorld/Mods/SadSealMegaMod/
    ```
@@ -162,7 +193,6 @@ X. SadSeal's Mega Mod
 
 ## 🙏 Teşekkürler & Krediler (Credits & Attribution)
 
-* **Work Manager:** Fikir, tasarım ve arayüz konsepti için [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'a teşekkür ederiz. Bu modüldeki Work Manager, orijinal modun modern RimWorld 1.6 & 1.7 (.NET 10) sürümlerine topluluk uyarlamasıdır.
+* **Work Manager:** Fikir, tasarım ve arayüz konsepti için [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'a teşekkür ederiz.
 * **Smart Haul:** *Pick Up And Haul* konsepti ve orijinal mod fikirleri için topluluk geliştiricilerine teşekkürler.
-* **Unified Research Tree:** Orijinal *Research Tree* ve *Research Reinvented* konseptlerinden ilham alan, modern RimWorld 1.6 & 1.7 (.NET 10) ve Anomaly DLC için sıfırdan tasarlanan DAG auto-layout araştırma ağacı.
 * **Geliştirici & Paket:** SadSeal5 tarafından geliştirilip sürdürülmektedir.
