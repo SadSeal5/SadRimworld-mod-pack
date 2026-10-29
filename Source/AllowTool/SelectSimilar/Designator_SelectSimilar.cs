@@ -85,6 +85,8 @@ namespace SadSeal.MegaMod.AllowTool.SelectSimilar
 
                 if (!entireMap && !viewRect.Contains(th.Position)) continue;
 
+                if (th.Position.Fogged(map)) continue;
+
                 if (th.def == target.def && th.Stuff == target.Stuff)
                 {
                     Find.Selector.Select(th, playSound: false, forceDesignatorDeselect: false);

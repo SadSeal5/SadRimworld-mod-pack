@@ -335,6 +335,16 @@ namespace SadSeal.MegaMod.Hauling.Jobs
                         }
                     }
 
+                    if (placed)
+                    {
+                        DesignationDef urgentDef = DefDatabase<DesignationDef>.GetNamedSilentFail("Sad_Designation_HaulUrgently");
+                        if (urgentDef != null && pawn.Map?.designationManager != null)
+                        {
+                            Designation des = pawn.Map.designationManager.DesignationOn(item, urgentDef);
+                            if (des != null) pawn.Map.designationManager.RemoveDesignation(des);
+                        }
+                    }
+
                     HauledCargoTracker.Unregister(pawn, item);
                 }
 

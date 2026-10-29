@@ -67,6 +67,13 @@ namespace SadSeal.MegaMod.TimeFlow.SmartSleep
                 }
             }
 
+            bool hasFireDanger = map.fireWatcher != null && map.fireWatcher.LargeFireDangerPresent;
+            bool hasGeneralDanger = map.dangerWatcher != null && map.dangerWatcher.DangerRating != StoryDanger.None;
+            if (hasFireDanger || hasGeneralDanger)
+            {
+                criticalDangerOrBleed = true;
+            }
+
             bool hasDanger = map.dangerWatcher != null && map.dangerWatcher.DangerRating == StoryDanger.High;
 
             if (allSleeping && !hasDanger && !criticalDangerOrBleed)

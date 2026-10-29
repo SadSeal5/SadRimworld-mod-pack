@@ -20,11 +20,19 @@ namespace SadSeal.MegaMod.AllowTool.HaulUrgently
             DesignationDef def = Designator_HaulUrgently.HaulUrgentlyDef;
             if (def == null) yield break;
 
-            foreach (Designation des in pawn.Map.designationManager.SpawnedDesignationsOfDef(def))
+            List<Designation> designations = new List<Designation>(pawn.Map.designationManager.SpawnedDesignationsOfDef(def));
+            for (int i = 0; i < designations.Count; i++)
             {
-                if (des.target.HasThing && des.target.Thing.Spawned)
+                Designation des = designations[i];
+                if (des.target.HasThing && des.target.Thing is Thing targetThing)
                 {
-                    yield return des.target.Thing;
+                    if (!targetThing.Spawned || targetThing.Destroyed || targetThing.IsInValidStorage())
+                    {
+                        pawn.Map.designationManager.RemoveDesignation(des);
+                        continue;
+                    }
+
+                    yield return targetThing;
                 }
             }
         }

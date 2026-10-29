@@ -49,6 +49,11 @@ namespace SadSeal.MegaMod.AllowTool.FinishOff
                     return false;
                 }
 
+                if (p.Faction != null && !p.Faction.HostileTo(Faction.OfPlayer) && !p.IsPrisonerOfColony && !p.IsSlaveOfColony && !p.InAggroMentalState)
+                {
+                    return false;
+                }
+
                 if (FinishOffDef != null && Map.designationManager.DesignationOn(p, FinishOffDef) != null)
                 {
                     return false;

@@ -12,6 +12,8 @@ namespace SadSeal.MegaMod.QoL.Patches.Work
         {
             if (MegaMod.Settings?.QoL?.haulAfterSlaughter != true) return;
             if (executioner == null || !executioner.IsColonist || !executioner.Spawned) return;
+            if (executioner.WorkTagIsDisabled(WorkTags.Hauling)) return;
+            if (WorkTypeDefOf.Hauling != null && executioner.WorkTypeIsDisabled(WorkTypeDefOf.Hauling)) return;
             if (victim == null || victim.Corpse == null || !victim.Corpse.Spawned) return;
 
             Corpse corpse = victim.Corpse;
