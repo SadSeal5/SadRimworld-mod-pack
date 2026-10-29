@@ -419,4 +419,8 @@
   <MegaMod_Quarry_InspectStringRemaining>Tamamlanan kazı sayısı: {0} ({1} kaldı)</MegaMod_Quarry_InspectStringRemaining>
   <MegaMod_QuarryDepleted>Derin taşocağının yeraltı rezervleri tamamen kazıldı ve tükendi.</MegaMod_QuarryDepleted>
   <MegaMod_QuarryMinedItem>{0}, derin taşocağından {1} çıkardı.</MegaMod_QuarryMinedItem>
+
+  <!-- Autopsy Research -->
+  <SadMedical_AutopsyResearch_Label>Kadavra Otopsisi</SadMedical_AutopsyResearch_Label>
+  <SadMedical_AutopsyResearch_Desc>Cerrahi diseksiyon ve organ koruma tekniklerini öğrenin. Taze kadavralardan doğal organları ve protezleri kurtarmak için medikal otopsi masası inşa edilmesini sağlar.</SadMedical_AutopsyResearch_Desc>
 </LanguageData>

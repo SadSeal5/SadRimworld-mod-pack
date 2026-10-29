@@ -419,4 +419,8 @@
   <MegaMod_Quarry_InspectStringRemaining>Excavations completed: {0} ({1} remaining)</MegaMod_Quarry_InspectStringRemaining>
   <MegaMod_QuarryDepleted>Deep quarry has been completely excavated and depleted of resources.</MegaMod_QuarryDepleted>
   <MegaMod_QuarryMinedItem>{0} excavated {1} from the deep quarry.</MegaMod_QuarryMinedItem>
+
+  <!-- Autopsy Research -->
+  <SadMedical_AutopsyResearch_Label>Post-Mortem Autopsy</SadMedical_AutopsyResearch_Label>
+  <SadMedical_AutopsyResearch_Desc>Learn surgical dissection and organ preservation methods. Allows constructing dedicated medical autopsy tables to salvage organs, bionics, and implants from fresh corpses.</SadMedical_AutopsyResearch_Desc>
 </LanguageData>

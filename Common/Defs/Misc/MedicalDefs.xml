@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
   <!-- Medical Autopsy Table -->
-  <ThingDef ParentName="BuildingBase">
+  <ThingDef ParentName="BenchBase">
     <defName>SadMedical_AutopsyTable</defName>
     <label>medical autopsy table</label>
     <description>A dedicated stainless steel surgical dissection table equipped with drainage conduits, sterile tool trays, and bright surgical lighting for clean post-mortem examinations and organ harvesting.</description>
@@ -21,10 +21,13 @@
       <Steel>120</Steel>
       <ComponentIndustrial>2</ComponentIndustrial>
     </costList>
+    <researchPrerequisites>
+      <li>SadMedical_AutopsyResearch</li>
+    </researchPrerequisites>
     <graphicData>
-      <texPath>Things/Building/Ruins/AncientOperatingTable</texPath>
+      <texPath>Things/Building/Production/AutopsyTable/AutopsyTable</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(3,1)</drawSize>
+      <drawSize>(3.5,1.5)</drawSize>
       <shadowData>
         <volume>(2.8, 0.6, 0.8)</volume>
       </shadowData>
@@ -35,6 +38,7 @@
     <surfaceType>Item</surfaceType>
     <recipes>
       <li>SadMedical_AutopsyCorpseHuman</li>
+      <li>SadMedical_AutopsyCorpseHumanAdvanced</li>
       <li>SadMedical_AutopsyCorpseMechanoid</li>
     </recipes>
     <inspectorTabs>
@@ -45,4 +49,34 @@
     </building>
     <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
   </ThingDef>
+
+  <WorkGiverDef>
+    <defName>SadMedical_DoBillsAutopsy</defName>
+    <label>perform autopsies</label>
+    <giverClass>WorkGiver_DoBill</giverClass>
+    <workType>Doctor</workType>
+    <priorityInType>25</priorityInType>
+    <fixedBillGiverDefs>
+      <li>SadMedical_AutopsyTable</li>
+    </fixedBillGiverDefs>
+    <verb>perform autopsy at</verb>
+    <gerund>performing autopsy at</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+
+  <ResearchProjectDef>
+    <defName>SadMedical_AutopsyResearch</defName>
+    <label>post-mortem autopsy</label>
+    <description>Learn surgical dissection and organ preservation methods. Allows constructing dedicated medical autopsy tables to salvage organs, bionics, and implants from fresh corpses.</description>
+    <baseCost>800</baseCost>
+    <techLevel>Industrial</techLevel>
+    <prerequisites>
+      <li>DrugProduction</li>
+    </prerequisites>
+    <researchViewX>11.00</researchViewX>
+    <researchViewY>0.80</researchViewY>
+  </ResearchProjectDef>
 </Defs>

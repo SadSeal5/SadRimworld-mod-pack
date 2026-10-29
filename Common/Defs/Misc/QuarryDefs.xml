@@ -23,8 +23,11 @@
       <Steel>60</Steel>
       <WoodLog>120</WoodLog>
     </costList>
+    <researchPrerequisites>
+      <li>DeepDrilling</li>
+    </researchPrerequisites>
     <graphicData>
-      <texPath>Things/Building/Production/DeepDrill</texPath>
+      <texPath>Things/Building/Production/Quarry</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(5,5)</drawSize>
     </graphicData>
@@ -85,4 +88,21 @@
     <effectWorking>Mine</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>
   </RecipeDef>
+
+  <WorkGiverDef>
+    <defName>SadQuarry_DoBillsQuarry</defName>
+    <label>mine at deep quarry</label>
+    <giverClass>WorkGiver_DoBill</giverClass>
+    <workType>Mining</workType>
+    <priorityInType>60</priorityInType>
+    <fixedBillGiverDefs>
+      <li>Sad_DeepQuarry</li>
+    </fixedBillGiverDefs>
+    <verb>quarry at</verb>
+    <gerund>quarrying at</gerund>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
 </Defs>

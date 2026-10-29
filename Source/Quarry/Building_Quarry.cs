@@ -5,12 +5,15 @@ using Verse;
 
 namespace SadSeal.MegaMod.Quarry
 {
-    public class Building_Quarry : Building_WorkTable
+    public class Building_Quarry : Building_WorkTable, IBillGiver
     {
         public int TotalExcavationsCompleted = 0;
         public const int MaxExcavations = 1000;
 
         public bool IsDepleted => MegaMod.Settings?.Quarry?.InfiniteQuarry == false && TotalExcavationsCompleted >= MaxExcavations;
+
+        public new bool CurrentlyUsableForBills() => !IsDepleted && base.CurrentlyUsableForBills();
+        bool IBillGiver.CurrentlyUsableForBills() => CurrentlyUsableForBills();
 
         public override void ExposeData()
         {
