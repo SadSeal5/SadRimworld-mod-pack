@@ -1,4 +1,4 @@
-# 🦭 SadSeal's Mega Mod (12-in-1 Modular Expansion Suite)
+# 🦭 SadSeal's Mega Mod (13-in-1 Modular Expansion Suite)
 
 > 🇹🇷 **[Türkçe README için buraya tıklayın](README.md)**
 
@@ -15,14 +15,14 @@
 </p>
 
 <p align="center">
-  <b>An all-in-one in-game management suite combining 12 independent core modules and a dynamic Module Manager to revolutionize your RimWorld experience under a single optimized package.</b>
+  <b>An all-in-one in-game management suite combining 13 independent core modules and a dynamic Module Manager to revolutionize your RimWorld experience under a single optimized package.</b>
 </p>
 
 ---
 
 ## ⚙️ Module Manager
 
-SadSeal's Mega Mod allows you to manage all 12 modules completely independently:
+SadSeal's Mega Mod allows you to manage all 13 modules completely independently:
 
 * **Individual Toggle Control:** Enable or disable any module with a single click.
 * **Dynamic Harmony Filtering:** When the game launches, only Harmony patch classes for active modules are loaded into memory; disabled modules have their code and hooks completely bypassed.
@@ -134,11 +134,23 @@ SadSeal's Mega Mod allows you to manage all 12 modules completely independently:
 ---
 
 ### 12. ⛏️ Deep Quarry & Resource Extractor
-* **Excavated 5x5 Ground Pit:** Deep mining pit facility for stone chunks, raw metals, and compact machinery (`Sad_DeepQuarry`).
-* **Custom 2D Art:** High-detail excavated pit textures with timber framing, rock ledges, ore bucket, and hoist winch.
-* **Excavation Recipes:** Quarry stone chunks, extract deep mineral veins (steel, plasteel, uranium, gold, silver), and salvage components.
+* **Excavated 5x4 Ground Pit:** Deep mining pit facility for stone chunks, raw metals, and compact machinery (`Sad_DeepQuarry`).
+* **Custom 2D Art:** High-detail authentic Mineshaft multi-sprites from *Mines*.
+* **Excavation Recipes:** Quarry stone chunks silently without notification popups, extract deep mineral veins (steel, plasteel, uranium, gold, silver), and salvage components.
 * **Research Requirement:** Requires vanilla **Deep Drilling (`DeepDrilling`)** research before construction.
 * **Depletion & Multipliers:** Configurable infinite quarry mode or 1,000 excavation limit with adjustable mining speed scaling.
+
+---
+
+### 13. 🎯 Auto-Arm (Automatic Weapon Upgrade Suite)
+* **4-Tier Weapon Class Hierarchy:**
+  * **Single-Shot Precision:** Pistol / Revolver < Bolt-Action Rifle / Bow < Sniper Rifle / Charge Lance (fine-tuned by quality multipliers).
+  * **Burst & Rapid-Fire:** Autopistol < Machine Pistol < Heavy SMG < Assault Rifle < Minigun / LMG / Charge Rifle.
+  * **Sharp Melee:** Knife < Ikwa < Gladius < Longsword < Monosword / Plasmasword (Plasteel material bonus).
+  * **Blunt Melee:** Club < Mace < Warhammer < Zeushammer (Uranium material bonus).
+* **Stockpile & Storage Guard:** Colonists only retrieve weapons located inside designated stockpiles (`Zone_Stockpile`) or storage furniture (`Building_Storage` / shelves), preventing suicide runs into dangerous map corners.
+* **Zero UI Clutter:** No intrusive buttons or gizmos on colonist selection; pawns dynamically evaluate and upgrade weapons in the background based on what they are currently holding.
+* **Deep Settings:** Customizable upgrade threshold (default 15%), background check frequency (30s), quality/durability weighting, and automatic unforbidding of replaced weapons.
 
 ---
 
@@ -153,6 +165,15 @@ Access the configuration suite via **Options ➔ Mod Settings ➔ SadSeal's Mega
 | `[🎓 Skill Multipliers]` | Global and individual XP multipliers, decay toggles, and daily soft-cap bypass |
 | `[🛠️ Recipe Tweaker]` | Live recipe search, ingredient editor, work amount sync, and XML patch exporter |
 | `[🧬 Gene Synthesizer]` | Neutroamine costs, production work time, archite rules, and presets |
+| `[📦 Smart Haul]` | Multi-item hauling, search radius, mass limits, and stockpile affinity caching |
+| `[💼 Work Manager]` | Assignment intervals, specialist targets, auto-scheduling, and idle redirection |
+| `[🛡️ Durability]` | Weapon and apparel durability remover, instant repair, and tainted toggles |
+| `[✨ QoL Suite]` | Door blocking, filth decay, tree immortality, smooth wall priority, and raid options |
+| `[🩺 Medical & Autopsy]` | Autopsy success scaling, field medicine thresholds, and mood penalty toggles |
+| `[✋ Allow Tool]` | Urgent hauling priorities and finish-off commands |
+| `[⏩ Time Flow]` | 4x speed toggle, forced slowdown bypass, and smart sleep acceleration |
+| `[⛏️ Deep Quarry]` | Mining speed multipliers, infinite quarry toggle, and mineral drop weights |
+| `[🎯 Auto-Arm]` | 4-tier weapon class hierarchy, stockpile/shelf filtering, minimum improvement threshold, and background upgrades |
 | `[📦 Smart Haul]` | Multi-item hauling, search radius, mass limits, and stockpile affinity caching |
 | `[💼 Work Manager]` | Assignment intervals, specialist targets, auto-scheduling, and idle redirection |
 | `[🛡️ Durability]` | Weapon and apparel durability remover, instant repair, and tainted toggles |

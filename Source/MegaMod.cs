@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using HarmonyLib;
 using SadSeal.MegaMod.AllowTool.UI;
+using SadSeal.MegaMod.AutoArm.UI;
 using SadSeal.MegaMod.Combat.UI;
 using SadSeal.MegaMod.Durability.UI;
 using SadSeal.MegaMod.Genes.UI;
@@ -33,7 +34,8 @@ namespace SadSeal.MegaMod
         Medical,
         AllowTool,
         TimeFlow,
-        Quarry
+        Quarry,
+        AutoArm
     }
 
     public class MegaMod : Mod
@@ -116,6 +118,7 @@ namespace SadSeal.MegaMod
             if (ns.StartsWith("SadSeal.MegaMod.AllowTool")) return modules.enableAllowTool;
             if (ns.StartsWith("SadSeal.MegaMod.TimeFlow")) return modules.enableTimeFlow;
             if (ns.StartsWith("SadSeal.MegaMod.Quarry")) return modules.enableQuarry;
+            if (ns.StartsWith("SadSeal.MegaMod.AutoArm")) return modules.enableAutoArm;
 
             return true;
         }
@@ -219,6 +222,9 @@ namespace SadSeal.MegaMod
                 case MegaModTab.Quarry:
                     QuarrySettingsDrawer.DrawSettings(contentRect, Settings.Quarry);
                     break;
+                case MegaModTab.AutoArm:
+                    AutoArmSettingsDrawer.DrawSettings(contentRect, Settings.AutoArm);
+                    break;
             }
 
             base.DoSettingsWindowContents(inRect);
@@ -241,6 +247,7 @@ namespace SadSeal.MegaMod
                 MegaModTab.AllowTool => "MegaMod_TabAllowTool".Translate(),
                 MegaModTab.TimeFlow => "MegaMod_TabTimeFlow".Translate(),
                 MegaModTab.Quarry => "MegaMod_TabQuarry".Translate(),
+                MegaModTab.AutoArm => "MegaMod_TabAutoArm".Translate(),
                 _ => tab.ToString()
             };
 

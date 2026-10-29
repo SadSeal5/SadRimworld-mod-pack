@@ -1,4 +1,4 @@
-# 🦭 SadSeal's Mega Mod (12-in-1 Modular Expansion Suite)
+# 🦭 SadSeal's Mega Mod (13-in-1 Modular Expansion Suite)
 
 > 🇬🇧 **[Click here for the English README](README_EN.md)**
 
@@ -15,14 +15,14 @@
 </p>
 
 <p align="center">
-  <b>RimWorld deneyiminizi tepeden tırnağa geliştiren 12 bağımsız ana modülü ve dinamik Modül Yöneticisini tek bir optimize edilmiş süite altında birleştiren hepsi bir arada oyun içi yönetim paketi.</b>
+  <b>RimWorld deneyiminizi tepeden tırnağa geliştiren 13 bağımsız ana modülü ve dinamik Modül Yöneticisini tek bir optimize edilmiş süite altında birleştiren hepsi bir arada oyun içi yönetim paketi.</b>
 </p>
 
 ---
 
 ## ⚙️ Modül Yöneticisi (Module Manager)
 
-SadSeal's Mega Mod, mod paketindeki 12 modülü tamamen bağımsız olarak yönetmenize olanak tanır:
+SadSeal's Mega Mod, mod paketindeki 13 modülü tamamen bağımsız olarak yönetmenize olanak tanır:
 
 * **Bireysel Açma/Kapama:** Dilediğiniz modülü tek tıkla devre dışı bırakabilir veya etkinleştirebilirsiniz.
 * **Dinamik Harmony Filtreleme:** Oyun başlatılırken yalnızca etkin modüllerin Harmony yama sınıfları belleğe yüklenir; kapalı modüllerin kodları ve kancaları tamamen atlanır.
@@ -134,11 +134,23 @@ SadSeal's Mega Mod, mod paketindeki 12 modülü tamamen bağımsız olarak yöne
 ---
 
 ### 12. ⛏️ Derin Taş Ocağı (Deep Quarry & Resource Extractor)
-* **Özel 5x5 Zemin Hafriyat Ocağı:** Koloninizin maden ve taş ihtiyacını karşılayan zemin kazı tesisi (`Sad_DeepQuarry`).
-* **Özel 2D Sanat ve Doku:** Ahşap istinat kirişleri, basamaklı derin kaya katmanları, metal kova ve makara vinç mekanizması içeren özel spritelar.
-* **Üretim Tarifleri:** Taş parçaları çıkarma, derin maden damarlarından çelik/plasteel/uranyum/altın/gümüş kazma ve kompakt makine bileşenleri kurtarma.
+* **Özel 5x4 Zemin Hafriyat Ocağı:** Koloninizin maden ve taş ihtiyacını karşılayan zemin kazı tesisi (`Sad_DeepQuarry`).
+* **Özel 2D Sanat ve Doku:** Ahşap istinat kirişleri, basamaklı derin kaya katmanları, metal kova ve makara vinç mekanizması içeren otantik Mineshaft spriteları.
+* **Üretim Tarifleri:** Sessiz taş blokları çıkarma, derin maden damarlarından çelik/plasteel/uranyum/altın/gümüş kazma ve kompakt makine bileşenleri kurtarma (bildirim spamı engellendi).
 * **Araştırma Şartı:** İnşa edilebilmesi için vanilla **Derin Sondaj (`DeepDrilling`)** araştırması gereklidir.
 * **Tükenme ve Çarpan Ayarları:** Sınırsız madencilik seçeneği veya 1.000 kazı sınırı ile ayarlanabilir madencilik hızı çarpanları.
+
+---
+
+### 13. 🎯 Otomatik Silah Kuşanma & Yükseltme (Auto-Arm)
+* **4 Sınıflı Akıllı Silah Hiyerarşisi:**
+  * **Tek Atışlı (Single-Shot):** Tabanca / Altıpatlar < Sürgülü Tüfek / Yay < Keskin Nişancı Tüfeği / Charge Lance.
+  * **Seri Atışlı (Burst):** Otomatik Tabanca < Hafif Makineli < Taarruz Tüfeği < Minigun / LMG / Charge Rifle.
+  * **Kesici Yakın Dövüş (Melee Sharp):** Bıçak < Kısa Kılıç < Uzun Kılıç < Mono / Plazma Kılıcı (Plasteel bonuslu).
+  * **Ezici Yakın Dövüş (Melee Blunt):** Sopa < Gürz < Savaş Çekici < Zeus Çekici (Uranyum bonuslu).
+* **Depo ve Raf Güvencesi:** Kolonistler haritanın ucundaki tehlikeli bölgelere koşmaz; yalnızca stok alanları (`Zone_Stockpile`) ve silah raflarındaki (`Building_Storage`) silahlara gider.
+* **Arayüz Kalabalığı Yok:** Kolonist eylem çubuğunda buton kalabalığı yaratmaz; kolonistler ellerindeki silaha göre (ve silahsız iseler yeteneklerine göre) arka planda dinamik olarak en iyi silaha geçer.
+* **Gelişmiş Ayarlar:** Minimum gelişme eşiği (%15), tarama sıklığı (30 sn), kalite ve dayanıklılık çarpanları, düşen eski silahın yasağını otomatik kaldırma.
 
 ---
 
@@ -148,11 +160,20 @@ Oyun içinde **Seçenekler ➔ Mod Ayarları ➔ SadSeal's Mega Mod** menüsüne
 
 | Sekme | Açıklama |
 |---|---|
-| `[⚙️ Modüller]` | 12 modülü tek tek açıp kapatma ve toplu eylem kontrolleri (Yeniden başlatma gerektirir) |
+| `[⚙️ Modüller]` | 13 modülü tek tek açıp kapatma ve toplu eylem kontrolleri (Yeniden başlatma gerektirir) |
 | `[🏹 Menzilli Çatışma]` | Balistik modeller, hasar, zırh delme ve mermi hız ayarları |
 | `[🎓 Yetenek Çarpanı]` | Genel ve tekil XP katsayıları, erime ve yumuşak tavan denetimi |
 | `[🛠️ Tarif Düzenleyici]` | Oyun içi canlı tarif editörü, malzeme seçici ve XML dışa aktarıcı |
 | `[🧬 Gen Sentezleyici]` | Neutroamine maliyeti, üretim süresi, archite kuralları ve hazır şablonlar |
+| `[📦 Akıllı Taşıma]` | Çoklu eşya toplama, arama yarıçapı, ağırlık eşiği ve stok kümeleme ayarları |
+| `[💼 İş Yöneticisi]` | Öncelik hesaplama sıklığı, uzman hedefleri, takvim yönetimi ve boşta kalma kontrolleri |
+| `[🛡️ Dayanıklılık]` | Silah ve kıyafet dayanıklılık iptali, tek tıkla onarma ve tainted kıyafet engelleme |
+| `[✨ QoL Paketi]` | Kapı engelleme, çürüyen kirler, ölümsüz ağaçlar, duvar önceliği ve akıncı ayarları |
+| `[🩺 Medikal & Otopsi]` | Otopsi başarı çarpanları, sahada tedavi eşikleri ve ruh hali cezası ayarları |
+| `[✋ Allow Tool]` | Acil taşıma öncelikleri ve infaz emri kontrolleri |
+| `[⏩ Zaman Akışı]` | 4x hız kilidi, zorunlu yavaşlama iptali ve akıllı uyku hızlandırma |
+| `[⛏️ Taş Ocağı]` | Kazı hızı çarpanı, sınırsız ocak modu ve maden ağırlık dağılımları |
+| `[🎯 Auto-Arm]` | 4 sınıflı silah hiyerarşisi, depo/raf filtrelemesi, minimum gelişme eşiği ve arka plan yükseltme ayarları |
 | `[📦 Akıllı Taşıma]` | Çoklu eşya toplama, arama yarıçapı, ağırlık eşiği ve stok kümeleme ayarları |
 | `[💼 İş Yöneticisi]` | Öncelik hesaplama sıklığı, uzman hedefleri, takvim yönetimi ve boşta kalma kontrolleri |
 | `[🛡️ Dayanıklılık]` | Silah ve kıyafet dayanıklılık iptali, tek tıkla onarma ve tainted kıyafet engelleme |

@@ -21,6 +21,7 @@
   <MegaMod_TabAllowTool>Utility &amp; Orders</MegaMod_TabAllowTool>
   <MegaMod_TabTimeFlow>Speed &amp; Time</MegaMod_TabTimeFlow>
   <MegaMod_TabQuarry>Deep Quarry</MegaMod_TabQuarry>
+  <MegaMod_TabAutoArm>Auto-Arm</MegaMod_TabAutoArm>
 
   <!-- Module Toggles -->
   <MegaMod_ModuleCombat>Lethal Ranged Combat</MegaMod_ModuleCombat>
@@ -47,6 +48,8 @@
   <MegaMod_ModuleTimeFlow_Desc>4x speed button, smart sleep auto-fast-forward, and combat slow-down controls.</MegaMod_ModuleTimeFlow_Desc>
   <MegaMod_ModuleQuarry>Deep Quarry</MegaMod_ModuleQuarry>
   <MegaMod_ModuleQuarry_Desc>Excavate rock chunks, steel, plasteel, components, and precious resources.</MegaMod_ModuleQuarry_Desc>
+  <MegaMod_ModuleAutoArm>Auto-Arm (Weapon Upgrades)</MegaMod_ModuleAutoArm>
+  <MegaMod_ModuleAutoArm_Desc>Automatically upgrade colonist weapons to superior equipment from stockpiles based on tier hierarchy.</MegaMod_ModuleAutoArm_Desc>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Recipe &amp; Crafting Tweaker</MegaMod_RecipeTitle>
@@ -455,4 +458,48 @@
   <!-- Autopsy Research -->
   <SadMedical_AutopsyResearch_Label>Post-Mortem Autopsy</SadMedical_AutopsyResearch_Label>
   <SadMedical_AutopsyResearch_Desc>Learn surgical dissection and organ preservation methods. Allows constructing dedicated medical autopsy tables to salvage organs, bionics, and implants from fresh corpses.</SadMedical_AutopsyResearch_Desc>
+
+  <!-- Auto-Arm System -->
+  <MegaMod_AutoArm_Title>Auto-Arm System</MegaMod_AutoArm_Title>
+  <MegaMod_AutoArm_Desc>Colonists periodically inspect stockpiles and shelves to automatically upgrade to better weapons within their assigned weapon class.</MegaMod_AutoArm_Desc>
+  <MegaMod_AutoArm_Enable>Enable Auto-Arm</MegaMod_AutoArm_Enable>
+  <MegaMod_AutoArm_Enable_Desc>Allows colonists to automatically search for and equip better weapons.</MegaMod_AutoArm_Enable_Desc>
+  <MegaMod_AutoArm_OnlyStockpile>Only From Storage Zones &amp; Shelves</MegaMod_AutoArm_OnlyStockpile>
+  <MegaMod_AutoArm_OnlyStockpile_Desc>When enabled, colonists will only pick weapons stored in stockpiles or shelves, ignoring unhauled ground loot.</MegaMod_AutoArm_OnlyStockpile_Desc>
+  <MegaMod_AutoArm_AutoSkill>Auto-Assign Class by Skills</MegaMod_AutoArm_AutoSkill>
+  <MegaMod_AutoArm_AutoSkill_Desc>Unarmed colonists will automatically be assigned an optimal weapon category based on traits (Brawler) and Shooting/Melee skills.</MegaMod_AutoArm_AutoSkill_Desc>
+  <MegaMod_AutoArm_ConsiderQuality>Consider Weapon Quality</MegaMod_AutoArm_ConsiderQuality>
+  <MegaMod_AutoArm_ConsiderQuality_Desc>Scales weapon score by quality (Masterwork and Legendary weapons receive substantial score boosts).</MegaMod_AutoArm_ConsiderQuality_Desc>
+  <MegaMod_AutoArm_ConsiderHP>Consider Weapon Durability (HP)</MegaMod_AutoArm_ConsiderHP>
+  <MegaMod_AutoArm_ConsiderHP_Desc>Weapons below 50% hit points suffer a score penalty to encourage swapping to durable gear.</MegaMod_AutoArm_ConsiderHP_Desc>
+  <MegaMod_AutoArm_UnforbidDropped>Auto-Unforbid Dropped Weapons</MegaMod_AutoArm_UnforbidDropped>
+  <MegaMod_AutoArm_UnforbidDropped_Desc>Automatically unforbids the replaced weapon so haulers can immediately haul it back to storage.</MegaMod_AutoArm_UnforbidDropped_Desc>
+  <MegaMod_AutoArm_MinDiff>Minimum Score Improvement</MegaMod_AutoArm_MinDiff>
+  <MegaMod_AutoArm_MinDiff_Desc>The new weapon must be at least this much better than the current one to justify equipping it.</MegaMod_AutoArm_MinDiff_Desc>
+  <MegaMod_AutoArm_Interval>Check Interval</MegaMod_AutoArm_Interval>
+  <MegaMod_AutoArm_Interval_Desc>Frequency in seconds with which colonists re-scan stockpiles for weapon upgrades.</MegaMod_AutoArm_Interval_Desc>
+
+  <MegaMod_AutoArm_HierarchyHeader>4-Tier Weapon Class Hierarchy</MegaMod_AutoArm_HierarchyHeader>
+  <MegaMod_AutoArm_Tier1_Title>Tier 1: Ranged Single-Shot</MegaMod_AutoArm_Tier1_Title>
+  <MegaMod_AutoArm_Tier1_Desc>Pistol &lt; Bolt-Action Rifle / Bow &lt; Sniper Rifle / Charge Lance</MegaMod_AutoArm_Tier1_Desc>
+  <MegaMod_AutoArm_Tier2_Title>Tier 2: Ranged Burst</MegaMod_AutoArm_Tier2_Title>
+  <MegaMod_AutoArm_Tier2_Desc>Autopistol &lt; Heavy SMG &lt; Assault Rifle &lt; Minigun / LMG</MegaMod_AutoArm_Tier2_Desc>
+  <MegaMod_AutoArm_Tier3_Title>Tier 3: Melee Sharp</MegaMod_AutoArm_Tier3_Title>
+  <MegaMod_AutoArm_Tier3_Desc>Knife &lt; Shortsword &lt; Longsword &lt; Monosword / Plasma (Plasteel bonus)</MegaMod_AutoArm_Tier3_Desc>
+  <MegaMod_AutoArm_Tier4_Title>Tier 4: Melee Blunt</MegaMod_AutoArm_Tier4_Title>
+  <MegaMod_AutoArm_Tier4_Desc>Club &lt; Mace &lt; Warhammer &lt; Zeushammer (Uranium bonus)</MegaMod_AutoArm_Tier4_Desc>
+
+  <AutoArm_GizmoDesc>Auto-Arm: Automatic weapon upgrade settings. Click to switch or lock weapon category.</AutoArm_GizmoDesc>
+  <AutoArm_OptionDynamic>Dynamic (Follow Equipped Weapon)</AutoArm_OptionDynamic>
+  <AutoArm_OptionSingleShot>Tier 1: Single-Shot (Pistol &lt; Rifle &lt; Sniper)</AutoArm_OptionSingleShot>
+  <AutoArm_OptionBurst>Tier 2: Burst (SMG &lt; Assault &lt; Minigun)</AutoArm_OptionBurst>
+  <AutoArm_OptionMeleeSharp>Tier 3: Melee Sharp (Swords)</AutoArm_OptionMeleeSharp>
+  <AutoArm_OptionMeleeBlunt>Tier 4: Melee Blunt (Mace / Hammer)</AutoArm_OptionMeleeBlunt>
+  <AutoArm_OptionDisabled>Disabled (Do Not Auto-Equip)</AutoArm_OptionDisabled>
+  <AutoArm_LabelDisabled>Auto-Arm: Off</AutoArm_LabelDisabled>
+  <AutoArm_LabelDynamic>Auto-Arm: Dynamic</AutoArm_LabelDynamic>
+  <AutoArm_LabelSingleShot>Auto-Arm: Single-Shot</AutoArm_LabelSingleShot>
+  <AutoArm_LabelBurst>Auto-Arm: Burst</AutoArm_LabelBurst>
+  <AutoArm_LabelMeleeSharp>Auto-Arm: Sharp</AutoArm_LabelMeleeSharp>
+  <AutoArm_LabelMeleeBlunt>Auto-Arm: Blunt</AutoArm_LabelMeleeBlunt>
 </LanguageData>

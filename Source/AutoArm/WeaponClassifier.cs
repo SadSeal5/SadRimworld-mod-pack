@@ -3,7 +3,7 @@ using System.Linq;
 using RimWorld;
 using Verse;
 
-namespace SadSeal.MegaMod.Combat.AutoArm
+namespace SadSeal.MegaMod.AutoArm
 {
     public static class WeaponClassifier
     {
@@ -22,21 +22,28 @@ namespace SadSeal.MegaMod.Combat.AutoArm
             {
                 VerbProperties verb = def.Verbs?.FirstOrDefault(v => v.isPrimary) ?? def.Verbs?.FirstOrDefault();
                 int burst = verb?.burstShotCount ?? 1;
-                float range = verb?.range ?? 25f;
+                string name = def.defName.ToLowerInvariant();
 
-                if (burst > 1) return WeaponCategory.RangedBurst;
+                bool burstKeyword = name.Contains("machine")
+                    || name.Contains("auto")
+                    || name.Contains("assault")
+                    || name.Contains("minigun")
+                    || name.Contains("lmg")
+                    || name.Contains("burst");
 
-                if (def.weaponTags != null && def.weaponTags.Any(t => t.IndexOf("Autopistol", StringComparison.OrdinalIgnoreCase) >= 0 || t.IndexOf("Automatic", StringComparison.OrdinalIgnoreCase) >= 0))
+                if (def.weaponTags != null && def.weaponTags.Any(t =>
+                    t.IndexOf("autopistol", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    t.IndexOf("automatic", StringComparison.OrdinalIgnoreCase) >= 0))
+                {
+                    burstKeyword = true;
+                }
+
+                if (burst > 1 || burstKeyword)
                 {
                     return WeaponCategory.RangedBurst;
                 }
 
-                if (range > 28f || (def.weaponClasses != null && def.weaponClasses.Any(wc => wc.defName == "LongShots")))
-                {
-                    return WeaponCategory.RangedPrecision;
-                }
-
-                return WeaponCategory.RangedPrecision;
+                return WeaponCategory.RangedSingleShot;
             }
 
             if (def.IsMeleeWeapon)
@@ -54,7 +61,9 @@ namespace SadSeal.MegaMod.Combat.AutoArm
                             {
                                 if (cap == null) continue;
                                 string capName = cap.defName.ToLowerInvariant();
-                                if (capName.Contains("cut") || capName.Contains("stab") || capName.Contains("scratch") || capName.Contains("bite") || capName.Contains("pierce"))
+                                if (capName.Contains("cut") || capName.Contains("stab") ||
+                                    capName.Contains("scratch") || capName.Contains("bite") ||
+                                    capName.Contains("pierce") || capName.Contains("poke"))
                                 {
                                     sharpPower += tool.power;
                                 }
@@ -86,7 +95,8 @@ namespace SadSeal.MegaMod.Combat.AutoArm
             if (lower.Contains("grenade") || lower.Contains("molotov") ||
                 lower.Contains("doomsday") || lower.Contains("rocket") ||
                 lower.Contains("orbital") || lower.Contains("tornado") ||
-                lower.Contains("emp"))
+                lower.Contains("emp") || lower.Contains("smoke") ||
+                lower.Contains("firefoam") || lower.Contains("triple"))
             {
                 return true;
             }
@@ -100,8 +110,12 @@ namespace SadSeal.MegaMod.Combat.AutoArm
                         ProjectileProperties proj = verb.defaultProjectile.projectile;
                         if (proj.explosionRadius > 0f) return true;
                         DamageDef d = proj.damageDef;
-                        if (d == DamageDefOf.Bomb || d == DamageDefOf.Flame || d == DamageDefOf.Extinguish || d == DamageDefOf.EMP)
+                        if (d == DamageDefOf.Bomb || d == DamageDefOf.Flame ||
+                            d == DamageDefOf.Extinguish || d == DamageDefOf.EMP ||
+                            d == DamageDefOf.Smoke || d == DamageDefOf.Stun)
+                        {
                             return true;
+                        }
                     }
                 }
             }

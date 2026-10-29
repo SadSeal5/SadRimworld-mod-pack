@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Patch>
-  <Operation Class="PatchOperationAdd">
-    <xpath>Defs/ThingDef[@Name="BasePawn"]/comps</xpath>
-    <value>
-      <li Class="SadSeal.MegaMod.Combat.AutoArm.CompProperties_AutoArm" />
-    </value>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[@Name="BasePawn"]/comps/li[@Class="SadSeal.MegaMod.AutoArm.CompProperties_AutoArm"]</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[@Name="BasePawn"]/comps</xpath>
+      <value>
+        <li Class="SadSeal.MegaMod.AutoArm.CompProperties_AutoArm" />
+      </value>
+    </nomatch>
   </Operation>
 </Patch>

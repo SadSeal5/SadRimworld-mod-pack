@@ -12,7 +12,7 @@ namespace SadSeal.MegaMod.UI
         {
             if (settings == null) return;
 
-            Rect viewRect = new Rect(0f, 0f, inRect.width - 24f, 680f);
+            Rect viewRect = new Rect(0f, 0f, inRect.width - 24f, 740f);
             Widgets.BeginScrollView(inRect, ref scrollPosition, viewRect);
 
             Listing_Standard listing = new Listing_Standard();
@@ -57,6 +57,8 @@ namespace SadSeal.MegaMod.UI
             listing.CheckboxLabeled("MegaMod_ModuleTimeFlow".Translate(), ref settings.enableTimeFlow, "MegaMod_ModuleTimeFlow_Desc".Translate());
             listing.Gap(6f);
             listing.CheckboxLabeled("MegaMod_ModuleQuarry".Translate(), ref settings.enableQuarry, "MegaMod_ModuleQuarry_Desc".Translate());
+            listing.Gap(6f);
+            listing.CheckboxLabeled("MegaMod_ModuleAutoArm".Translate(), ref settings.enableAutoArm, "MegaMod_ModuleAutoArm_Desc".Translate());
 
             listing.Gap(16f);
 

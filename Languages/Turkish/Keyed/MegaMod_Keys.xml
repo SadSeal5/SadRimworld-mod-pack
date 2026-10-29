@@ -21,6 +21,7 @@
   <MegaMod_TabAllowTool>Araçlar &amp; Emirler</MegaMod_TabAllowTool>
   <MegaMod_TabTimeFlow>Zaman &amp; Hız</MegaMod_TabTimeFlow>
   <MegaMod_TabQuarry>Derin Taşocağı</MegaMod_TabQuarry>
+  <MegaMod_TabAutoArm>Otomatik Silahlanma (Auto-Arm)</MegaMod_TabAutoArm>
 
   <!-- Module Toggles -->
   <MegaMod_ModuleCombat>Ölümcül ve İsabetli Menzilli Çatışma</MegaMod_ModuleCombat>
@@ -47,6 +48,8 @@
   <MegaMod_ModuleTimeFlow_Desc>4x hız, akıllı uyku hızlandırması ve çatışmada zorunlu yavaşlatmayı kaldırma.</MegaMod_ModuleTimeFlow_Desc>
   <MegaMod_ModuleQuarry>Derin Taşocağı (Deep Quarry)</MegaMod_ModuleQuarry>
   <MegaMod_ModuleQuarry_Desc>Koloni sınırları içinde taş, çelik, plasteel ve değerli kaynak kazı alanı.</MegaMod_ModuleQuarry_Desc>
+  <MegaMod_ModuleAutoArm>Otomatik Silahlanma (Auto-Arm)</MegaMod_ModuleAutoArm>
+  <MegaMod_ModuleAutoArm_Desc>Kolonicilerin depolardaki daha üstün ve kaliteli silahları otomatik olarak kuşanması ve silah sınıfı hiyerarşisi.</MegaMod_ModuleAutoArm_Desc>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Tarif ve Üretim Düzenleyici</MegaMod_RecipeTitle>
@@ -455,4 +458,48 @@
   <!-- Autopsy Research -->
   <SadMedical_AutopsyResearch_Label>Kadavra Otopsisi</SadMedical_AutopsyResearch_Label>
   <SadMedical_AutopsyResearch_Desc>Cerrahi diseksiyon ve organ koruma tekniklerini öğrenin. Taze kadavralardan doğal organları ve protezleri kurtarmak için medikal otopsi masası inşa edilmesini sağlar.</SadMedical_AutopsyResearch_Desc>
+
+  <!-- Auto-Arm System -->
+  <MegaMod_AutoArm_Title>Otomatik Silahlanma (Auto-Arm)</MegaMod_AutoArm_Title>
+  <MegaMod_AutoArm_Desc>Kolonicileriniz depolardaki ve raflardaki daha iyi silahları periyodik olarak tarar ve kendi silah sınıflarına göre otomatik yükseltir.</MegaMod_AutoArm_Desc>
+  <MegaMod_AutoArm_Enable>Otomatik Silahlanmayı Etkinleştir</MegaMod_AutoArm_Enable>
+  <MegaMod_AutoArm_Enable_Desc>Kolonicilerin daha iyi silahları otomatik olarak arayıp kuşanmasını sağlar.</MegaMod_AutoArm_Enable_Desc>
+  <MegaMod_AutoArm_OnlyStockpile>Yalnızca Depolama Alanı ve Raflardan Al</MegaMod_AutoArm_OnlyStockpile>
+  <MegaMod_AutoArm_OnlyStockpile_Desc>İşaretlendiğinde koloniciler yalnızca depolama bölgelerindeki (stockpile) veya raflardaki silahları alır, yerdeki sahipsiz ganimetleri aramaz.</MegaMod_AutoArm_OnlyStockpile_Desc>
+  <MegaMod_AutoArm_AutoSkill>Yeteneklere Göre Otomatik Sınıf Belirle</MegaMod_AutoArm_AutoSkill>
+  <MegaMod_AutoArm_AutoSkill_Desc>Silahsız kolonicilere yeteneklerine (Brawler, Yakın Dövüş ve Atıcılık seviyesi) göre en uygun silah sınıfını atar.</MegaMod_AutoArm_AutoSkill_Desc>
+  <MegaMod_AutoArm_ConsiderQuality>Silah Kalitesini Değerlendir</MegaMod_AutoArm_ConsiderQuality>
+  <MegaMod_AutoArm_ConsiderQuality_Desc>Usta İşi veya Efsanevi gibi yüksek kaliteli silahların skorunu artırarak kuşanılmasını teşvik eder.</MegaMod_AutoArm_ConsiderQuality_Desc>
+  <MegaMod_AutoArm_ConsiderHP>Silah Dayanıklılığını (HP) Değerlendir</MegaMod_AutoArm_ConsiderHP>
+  <MegaMod_AutoArm_ConsiderHP_Desc>%50'nin altındaki hasarlı silahların skorunu düşürerek kolonicilerin sağlam silahlara geçmesini sağlar.</MegaMod_AutoArm_ConsiderHP_Desc>
+  <MegaMod_AutoArm_UnforbidDropped>Bırakılan Eski Silahın Yasağını Otomatik Kaldır</MegaMod_AutoArm_UnforbidDropped>
+  <MegaMod_AutoArm_UnforbidDropped_Desc>Daha iyi bir silah kuşanıldığında yere düşen eski silahın yasağını anında kaldırır, böylece taşıyıcılar onu depoya kaldırabilir.</MegaMod_AutoArm_UnforbidDropped_Desc>
+  <MegaMod_AutoArm_MinDiff>Asgari Gelişim Eşiği</MegaMod_AutoArm_MinDiff>
+  <MegaMod_AutoArm_MinDiff_Desc>Yeni silahın mevcut silahtan en az yüzde kaç daha iyi olması gerektiğini belirler (gereksiz silah değişimlerini önler).</MegaMod_AutoArm_MinDiff_Desc>
+  <MegaMod_AutoArm_Interval>Kontrol Sıklığı</MegaMod_AutoArm_Interval>
+  <MegaMod_AutoArm_Interval_Desc>Kolonicilerin depolardaki yeni silahları kaç saniyede bir kontrol edeceğini belirler.</MegaMod_AutoArm_Interval_Desc>
+
+  <MegaMod_AutoArm_HierarchyHeader>4 Seviyeli Silah Sınıfı Hiyerarşisi</MegaMod_AutoArm_HierarchyHeader>
+  <MegaMod_AutoArm_Tier1_Title>1. Sınıf: Tek Atışlı Menzilli</MegaMod_AutoArm_Tier1_Title>
+  <MegaMod_AutoArm_Tier1_Desc>Tabanca &lt; Sürgülü Tüfek / Yay &lt; Keskin Nişancı / Yük Mızrağı</MegaMod_AutoArm_Tier1_Desc>
+  <MegaMod_AutoArm_Tier2_Title>2. Sınıf: Seri Atışlı Menzilli</MegaMod_AutoArm_Tier2_Title>
+  <MegaMod_AutoArm_Tier2_Desc>Otomatik Tabanca &lt; Makineli Tabanca &lt; Taarruz Tüfeği &lt; Minigun / LMG</MegaMod_AutoArm_Tier2_Desc>
+  <MegaMod_AutoArm_Tier3_Title>3. Sınıf: Kesici Yakın Dövüş</MegaMod_AutoArm_Tier3_Title>
+  <MegaMod_AutoArm_Tier3_Desc>Bıçak &lt; Kısa Kılıç &lt; Uzun Kılıç &lt; Mono / Plazma Kılıcı (Plasteel bonusu)</MegaMod_AutoArm_Tier3_Desc>
+  <MegaMod_AutoArm_Tier4_Title>4. Sınıf: Ezici Yakın Dövüş</MegaMod_AutoArm_Tier4_Title>
+  <MegaMod_AutoArm_Tier4_Desc>Sopa &lt; Gürz &lt; Savaş Çekici &lt; Zeus Çekici (Uranyum bonusu)</MegaMod_AutoArm_Tier4_Desc>
+
+  <AutoArm_GizmoDesc>Auto-Arm: Otomatik silah yükseltme ayarları. Tıklayarak kategoriyi değiştirin veya kilitleyin.</AutoArm_GizmoDesc>
+  <AutoArm_OptionDynamic>Dinamik (Mevcut Silaha Göre)</AutoArm_OptionDynamic>
+  <AutoArm_OptionSingleShot>1. Sınıf: Tek Atış (Tabanca &lt; Tüfek &lt; Keskin Nişancı)</AutoArm_OptionSingleShot>
+  <AutoArm_OptionBurst>2. Sınıf: Seri Atış (Makineli / Taarruz)</AutoArm_OptionBurst>
+  <AutoArm_OptionMeleeSharp>3. Sınıf: Kesici Yakın Dövüş (Kılıçlar)</AutoArm_OptionMeleeSharp>
+  <AutoArm_OptionMeleeBlunt>4. Sınıf: Ezici Yakın Dövüş (Gürz / Çekiç)</AutoArm_OptionMeleeBlunt>
+  <AutoArm_OptionDisabled>Devre Dışı (Silah Değiştirme)</AutoArm_OptionDisabled>
+  <AutoArm_LabelDisabled>Auto-Arm: Kapalı</AutoArm_LabelDisabled>
+  <AutoArm_LabelDynamic>Auto-Arm: Dinamik</AutoArm_LabelDynamic>
+  <AutoArm_LabelSingleShot>Auto-Arm: Tek Atış</AutoArm_LabelSingleShot>
+  <AutoArm_LabelBurst>Auto-Arm: Seri Atış</AutoArm_LabelBurst>
+  <AutoArm_LabelMeleeSharp>Auto-Arm: Kesici</AutoArm_LabelMeleeSharp>
+  <AutoArm_LabelMeleeBlunt>Auto-Arm: Ezici</AutoArm_LabelMeleeBlunt>
 </LanguageData>

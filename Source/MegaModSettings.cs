@@ -1,4 +1,5 @@
 using SadSeal.MegaMod.AllowTool;
+using SadSeal.MegaMod.AutoArm;
 using SadSeal.MegaMod.Combat;
 using SadSeal.MegaMod.Durability;
 using SadSeal.MegaMod.Genes;
@@ -29,6 +30,7 @@ namespace SadSeal.MegaMod
         public AllowToolSettings AllowTool = new AllowToolSettings();
         public TimeFlowSettings TimeFlow = new TimeFlowSettings();
         public QuarrySettings Quarry = new QuarrySettings();
+        public AutoArmSettings AutoArm = new AutoArmSettings();
 
         public override void ExposeData()
         {
@@ -46,6 +48,7 @@ namespace SadSeal.MegaMod
             Scribe_Deep.Look(ref AllowTool, "allowTool");
             Scribe_Deep.Look(ref TimeFlow, "timeFlow");
             Scribe_Deep.Look(ref Quarry, "quarry");
+            Scribe_Deep.Look(ref AutoArm, "autoArm");
 
             if (Modules == null) Modules = new ModuleSettings();
             if (Combat == null) Combat = new CombatSettings();
@@ -60,6 +63,7 @@ namespace SadSeal.MegaMod
             if (AllowTool == null) AllowTool = new AllowToolSettings();
             if (TimeFlow == null) TimeFlow = new TimeFlowSettings();
             if (Quarry == null) Quarry = new QuarrySettings();
+            if (AutoArm == null) AutoArm = new AutoArmSettings();
         }
     }
 }

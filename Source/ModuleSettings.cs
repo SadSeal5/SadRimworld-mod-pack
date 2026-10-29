@@ -16,6 +16,7 @@ namespace SadSeal.MegaMod
         public bool enableAllowTool = true;
         public bool enableTimeFlow = true;
         public bool enableQuarry = true;
+        public bool enableAutoArm = true;
 
         public void ExposeData()
         {
@@ -31,6 +32,7 @@ namespace SadSeal.MegaMod
             Scribe_Values.Look(ref enableAllowTool, "enableAllowTool", true);
             Scribe_Values.Look(ref enableTimeFlow, "enableTimeFlow", true);
             Scribe_Values.Look(ref enableQuarry, "enableQuarry", true);
+            Scribe_Values.Look(ref enableAutoArm, "enableAutoArm", true);
         }
 
         public bool IsModuleEnabled(MegaModTab tab)
@@ -50,6 +52,7 @@ namespace SadSeal.MegaMod
                 MegaModTab.AllowTool => enableAllowTool,
                 MegaModTab.TimeFlow => enableTimeFlow,
                 MegaModTab.Quarry => enableQuarry,
+                MegaModTab.AutoArm => enableAutoArm,
                 _ => true
             };
         }
@@ -68,6 +71,7 @@ namespace SadSeal.MegaMod
             enableAllowTool = enabled;
             enableTimeFlow = enabled;
             enableQuarry = enabled;
+            enableAutoArm = enabled;
         }
     }
 }
