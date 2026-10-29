@@ -30,6 +30,7 @@ namespace SadSeal.MegaMod.Medical.Autopsy
 
             if (corpse != null)
             {
+                corpse.Strip();
                 AutopsyHelper.PerformAutopsy(billDoer, corpse, medicineUsed);
             }
         }

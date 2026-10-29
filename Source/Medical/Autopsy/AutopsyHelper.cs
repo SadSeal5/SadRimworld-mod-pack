@@ -13,7 +13,11 @@ namespace SadSeal.MegaMod.Medical.Autopsy
             { "Heart", "Heart" },
             { "Lung", "Lung" },
             { "Kidney", "Kidney" },
-            { "Liver", "Liver" }
+            { "Liver", "Liver" },
+            { "Stomach", "Stomach" },
+            { "Eye", "Eye" },
+            { "Ear", "Ear" },
+            { "Nose", "Nose" }
         };
 
         public static void PerformAutopsy(Pawn billDoer, Corpse corpse, Thing medicineUsed = null)
@@ -89,13 +93,25 @@ namespace SadSeal.MegaMod.Medical.Autopsy
                 Hediff h = hediffs[i];
                 ThingDef dropDef = null;
 
-                if (h is Hediff_AddedPart added)
+                if (h.def.spawnThingOnRemoved != null)
+                {
+                    dropDef = h.def.spawnThingOnRemoved;
+                }
+                else if (h is Hediff_AddedPart added && added.def.spawnThingOnRemoved != null)
                 {
                     dropDef = added.def.spawnThingOnRemoved;
                 }
-                else if (h is Hediff_Implant implant)
+                else if (h is Hediff_Implant implant && implant.def.spawnThingOnRemoved != null)
                 {
                     dropDef = implant.def.spawnThingOnRemoved;
+                }
+                else
+                {
+                    ThingDef direct = DefDatabase<ThingDef>.GetNamedSilentFail(h.def.defName);
+                    if (direct != null && direct.category == ThingCategory.Item)
+                    {
+                        dropDef = direct;
+                    }
                 }
 
                 if (dropDef != null)
@@ -105,6 +121,13 @@ namespace SadSeal.MegaMod.Medical.Autopsy
                         Thing bionic = ThingMaker.MakeThing(dropDef);
                         GenSpawn.Spawn(bionic, pos, map);
                         extractedCount++;
+                    }
+
+                    if (h.Part != null)
+                    {
+                        Hediff_MissingPart missing = (Hediff_MissingPart)HediffMaker.MakeHediff(HediffDefOf.MissingBodyPart, pawn, h.Part);
+                        missing.IsFresh = false;
+                        pawn.health.hediffSet.AddDirect(missing);
                     }
                     pawn.health.RemoveHediff(h);
                 }
@@ -118,6 +141,7 @@ namespace SadSeal.MegaMod.Medical.Autopsy
                 {
                     BodyPartRecord part = notMissingParts[i];
                     if (part == null || part.def == null) continue;
+                    if (pawn.health.hediffSet.GetPartHealth(part) <= 0f) continue;
 
                     string organThingDefName = null;
                     if (OrganDefMapping.TryGetValue(part.def.defName, out string mapped))

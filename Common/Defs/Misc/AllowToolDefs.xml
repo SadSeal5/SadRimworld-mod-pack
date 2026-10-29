@@ -39,7 +39,7 @@
     <defName>Sad_WorkGiver_FinishOff</defName>
     <label>finish off downed targets</label>
     <giverClass>SadSeal.MegaMod.AllowTool.FinishOff.WorkGiver_FinishOff</giverClass>
-    <workType>Doctor</workType>
+    <workType>Hunting</workType>
     <priorityInType>150</priorityInType>
     <verb>mercy kill</verb>
     <gerund>mercy killing</gerund>

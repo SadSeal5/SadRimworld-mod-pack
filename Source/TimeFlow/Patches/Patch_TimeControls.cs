@@ -1,3 +1,4 @@
+using System;
 using HarmonyLib;
 using RimWorld;
 using UnityEngine;
@@ -22,13 +23,8 @@ namespace SadSeal.MegaMod.TimeFlow.Patches
             }
         }
 
-        public static void Postfix(bool __state)
+        public static void Postfix()
         {
-            if (__state)
-            {
-                Prefs.DevMode = false;
-            }
-
             var settings = MegaMod.Settings?.TimeFlow;
             if (settings != null && settings.UnlockSuperSpeed)
             {
@@ -40,6 +36,15 @@ namespace SadSeal.MegaMod.TimeFlow.Patches
                     Event.current.Use();
                 }
             }
+        }
+
+        public static Exception Finalizer(Exception __exception, bool __state)
+        {
+            if (__state)
+            {
+                Prefs.DevMode = false;
+            }
+            return __exception;
         }
     }
 }

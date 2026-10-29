@@ -112,9 +112,9 @@ namespace SadSeal.MegaMod.Hauling
                     {
                         if (pawn.inventory.innerContainer.TryDrop(item, dropPos, map, ThingPlaceMode.Near, out Thing dropped))
                         {
-                            if (forbidden && dropped != null)
+                            if (dropped != null)
                             {
-                                dropped.SetForbidden(true, false);
+                                dropped.SetForbidden(forbidden, false);
                             }
                         }
                     }
