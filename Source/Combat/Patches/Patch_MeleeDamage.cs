@@ -5,8 +5,8 @@ using Verse;
 
 namespace SadSeal.MegaMod.Combat.Patches
 {
-    [HarmonyPatch(typeof(Verb_MeleeAttackDamage), "DamageInfosToHit")]
-    public static class Patch_Verb_MeleeAttackDamage_DamageInfosToHit
+    [HarmonyPatch(typeof(Verb_MeleeAttackDamage), "DamageInfosToApply")]
+    public static class Patch_Verb_MeleeAttackDamage_DamageInfosToApply
     {
         [HarmonyPostfix]
         public static void Postfix(ref IEnumerable<DamageInfo> __result)
@@ -32,7 +32,7 @@ namespace SadSeal.MegaMod.Combat.Patches
                 float newAmount = dinfo.Amount * dmgMult;
                 float newAp = dinfo.ArmorPenetrationInt * apMult;
 
-                yield return new DamageInfo(
+                var copy = new DamageInfo(
                     dinfo.Def,
                     newAmount,
                     newAp,
@@ -43,8 +43,19 @@ namespace SadSeal.MegaMod.Combat.Patches
                     dinfo.Category,
                     dinfo.IntendedTarget,
                     dinfo.InstigatorGuilty,
-                    dinfo.SpawnFilth
+                    dinfo.SpawnFilth,
+                    dinfo.WeaponQuality,
+                    dinfo.CheckForJobOverride,
+                    dinfo.PreventCascade
                 );
+                copy.SetTool(dinfo.Tool);
+                copy.SetWeaponBodyPartGroup(dinfo.WeaponBodyPartGroup);
+                copy.SetWeaponHediff(dinfo.WeaponLinkedHediff);
+                copy.SetAllowDamagePropagation(dinfo.AllowDamagePropagation);
+                copy.SetInstantPermanentInjury(dinfo.InstantPermanentInjury);
+                copy.SetBodyRegion(dinfo.Height, dinfo.Depth);
+
+                yield return copy;
             }
         }
     }
