@@ -134,6 +134,7 @@ namespace SadSeal.MegaMod.Genes.Patches
     {
         static GeneAssemblerDefInitializer()
         {
+            if (MegaMod.Settings?.Modules != null && !MegaMod.Settings.Modules.enableGenes) return;
             if (ModLister.BiotechInstalled && ThingDefOf.GeneAssembler != null)
             {
                 GeneAssemblerPatch.EnsureDefHasComp(ThingDefOf.GeneAssembler);

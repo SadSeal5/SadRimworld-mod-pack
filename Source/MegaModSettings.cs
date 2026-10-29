@@ -16,6 +16,7 @@ namespace SadSeal.MegaMod
 {
     public class MegaModSettings : ModSettings
     {
+        public ModuleSettings Modules = new ModuleSettings();
         public CombatSettings Combat = new CombatSettings();
         public SkillSettings Skills = new SkillSettings();
         public RecipeSettings Recipes = new RecipeSettings();
@@ -32,6 +33,7 @@ namespace SadSeal.MegaMod
         public override void ExposeData()
         {
             base.ExposeData();
+            Scribe_Deep.Look(ref Modules, "modules");
             Scribe_Deep.Look(ref Combat, "combat");
             Scribe_Deep.Look(ref Skills, "skills");
             Scribe_Deep.Look(ref Recipes, "recipes");
@@ -45,6 +47,7 @@ namespace SadSeal.MegaMod
             Scribe_Deep.Look(ref TimeFlow, "timeFlow");
             Scribe_Deep.Look(ref Quarry, "quarry");
 
+            if (Modules == null) Modules = new ModuleSettings();
             if (Combat == null) Combat = new CombatSettings();
             if (Skills == null) Skills = new SkillSettings();
             if (Recipes == null) Recipes = new RecipeSettings();

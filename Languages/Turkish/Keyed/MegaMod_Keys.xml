@@ -3,6 +3,12 @@
   <!-- Mega Mod Shell -->
   <MegaMod_ModTitle>SadSeal Mega Mod</MegaMod_ModTitle>
   <MegaMod_SelectModule>Modül Seç:</MegaMod_SelectModule>
+  <MegaMod_TabModules>Modüller</MegaMod_TabModules>
+  <MegaMod_RestartNotice>Modül açma/kapama ayarları değiştirildiğinde, aktif yamaların ve mimari menülerinin güncellenmesi için RimWorld'ü yeniden başlatmanız gerekir.</MegaMod_RestartNotice>
+  <MegaMod_ModulesDesc>SadSeal Mega Mod bileşenlerini açın veya kapatın. Devre dışı bırakılan modüllerin kod yamaları yüklenmez ve menüleri gizlenir.</MegaMod_ModulesDesc>
+  <MegaMod_EnableAll>Tümünü Etkinleştir</MegaMod_EnableAll>
+  <MegaMod_DisableAll>Tümünü Devre Dışı Bırak</MegaMod_DisableAll>
+  <MegaMod_Disabled>Devre Dışı</MegaMod_Disabled>
   <MegaMod_TabCombat>Ölümcül Çatışma</MegaMod_TabCombat>
   <MegaMod_TabSkills>Yetenek Çarpanları</MegaMod_TabSkills>
   <MegaMod_TabRecipes>Tarif Düzenleyici</MegaMod_TabRecipes>
@@ -15,6 +21,32 @@
   <MegaMod_TabAllowTool>Araçlar &amp; Emirler</MegaMod_TabAllowTool>
   <MegaMod_TabTimeFlow>Zaman &amp; Hız</MegaMod_TabTimeFlow>
   <MegaMod_TabQuarry>Derin Taşocağı</MegaMod_TabQuarry>
+
+  <!-- Module Toggles -->
+  <MegaMod_ModuleCombat>Ölümcül ve İsabetli Menzilli Çatışma</MegaMod_ModuleCombat>
+  <MegaMod_ModuleCombat_Desc>Balistik isabet eğrisi, mermi hızı, hasar ve zırh delme geliştirmeleri.</MegaMod_ModuleCombat_Desc>
+  <MegaMod_ModuleSkills>Yetenek Öğrenme Çarpanı</MegaMod_ModuleSkills>
+  <MegaMod_ModuleSkills_Desc>Öğrenme hız çarpanları, günlük XP sınırı ve yetenek erimesi ayarları.</MegaMod_ModuleSkills_Desc>
+  <MegaMod_ModuleRecipes>Tarif ve Üretim Düzenleyici</MegaMod_ModuleRecipes>
+  <MegaMod_ModuleRecipes_Desc>Tüm tariflerin malzemelerini, iş sürelerini ve kurallarını oyun içinden değiştirme.</MegaMod_ModuleRecipes_Desc>
+  <MegaMod_ModuleGenes>Gen Sentezleyici</MegaMod_ModuleGenes>
+  <MegaMod_ModuleGenes_Desc>Gen Birleştiricide genlerin Nötroamin ile sentezlenmesini sağlar.</MegaMod_ModuleGenes_Desc>
+  <MegaMod_ModuleHauling>Akıllı Taşıma (Smart Haul)</MegaMod_ModuleHauling>
+  <MegaMod_ModuleHauling_Desc>Kolonicilerin envanter ceplerini kullanarak çoklu ve verimli taşıma yapması.</MegaMod_ModuleHauling_Desc>
+  <MegaMod_ModuleWorkManager>İş Yöneticisi</MegaMod_ModuleWorkManager>
+  <MegaMod_ModuleWorkManager_Desc>Yetenek ve tutkulara göre otomatik kolonici iş önceliği ataması.</MegaMod_ModuleWorkManager_Desc>
+  <MegaMod_ModuleDurability>Dayanıklılık (Durability)</MegaMod_ModuleDurability>
+  <MegaMod_ModuleDurability_Desc>Giysi ve silah aşınmasını kapatma, kirlenmiş (tainted) giysi koruması.</MegaMod_ModuleDurability_Desc>
+  <MegaMod_ModuleQoL>Yaşam Kalitesi Paketi (QoL)</MegaMod_ModuleQoL>
+  <MegaMod_ModuleQoL_Desc>Kapı önü temizliği, metal yanmazlığı, ağaç ömrü ve yaşam kalitesi geliştirmeleri.</MegaMod_ModuleQoL_Desc>
+  <MegaMod_ModuleMedical>Tıbbi &amp; Otopsi Sistemi</MegaMod_ModuleMedical>
+  <MegaMod_ModuleMedical_Desc>Sahada tedavi, akıllı ilaç seçimi ve cesetlerden organ çıkarma masası.</MegaMod_ModuleMedical_Desc>
+  <MegaMod_ModuleAllowTool>Araçlar ve Acil Emirler (AllowTool)</MegaMod_ModuleAllowTool>
+  <MegaMod_ModuleAllowTool_Desc>Acil Taşı, Benzerlerini Seç, Yasak Kaldır ve İnfaz Et emirleri.</MegaMod_ModuleAllowTool_Desc>
+  <MegaMod_ModuleTimeFlow>Zaman ve Hız Denetimi (TimeFlow)</MegaMod_ModuleTimeFlow>
+  <MegaMod_ModuleTimeFlow_Desc>4x hız, akıllı uyku hızlandırması ve çatışmada zorunlu yavaşlatmayı kaldırma.</MegaMod_ModuleTimeFlow_Desc>
+  <MegaMod_ModuleQuarry>Derin Taşocağı (Deep Quarry)</MegaMod_ModuleQuarry>
+  <MegaMod_ModuleQuarry_Desc>Koloni sınırları içinde taş, çelik, plasteel ve değerli kaynak kazı alanı.</MegaMod_ModuleQuarry_Desc>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Tarif ve Üretim Düzenleyici</MegaMod_RecipeTitle>

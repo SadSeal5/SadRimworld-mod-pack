@@ -12,6 +12,7 @@ using SadSeal.MegaMod.Quarry.UI;
 using SadSeal.MegaMod.Recipes.UI;
 using SadSeal.MegaMod.Skills.UI;
 using SadSeal.MegaMod.TimeFlow.UI;
+using SadSeal.MegaMod.UI;
 using SadSeal.MegaMod.WorkManager.UI;
 using UnityEngine;
 using Verse;
@@ -20,6 +21,7 @@ namespace SadSeal.MegaMod
 {
     public enum MegaModTab
     {
+        Modules,
         Combat,
         Skills,
         Recipes,
@@ -39,7 +41,7 @@ namespace SadSeal.MegaMod
         public static MegaMod Instance { get; private set; }
         public static MegaModSettings Settings { get; private set; }
 
-        private static MegaModTab currentTab = MegaModTab.Combat;
+        private static MegaModTab currentTab = MegaModTab.Modules;
         public static MegaModTab CurrentTab
         {
             get => currentTab;
@@ -54,13 +56,68 @@ namespace SadSeal.MegaMod
             try
             {
                 var harmony = new Harmony("sadseal.megamod");
-                harmony.PatchAll();
-                Log.Message("[SadSeal's Mega Mod] Successfully initialized: Combat, Skills, Recipes, Genes, Smart Haul, Work Manager, Durability, QoL, Medical, AllowTool, TimeFlow & Deep Quarry.");
+                ApplyModulePatches(harmony);
             }
             catch (Exception ex)
             {
                 Log.Error($"[SadSeal's Mega Mod] Error during initialization: {ex}");
             }
+        }
+
+        private void ApplyModulePatches(Harmony harmony)
+        {
+            int enabledCount = 0;
+            int skippedCount = 0;
+
+            foreach (Type type in typeof(MegaMod).Assembly.GetTypes())
+            {
+                if (!type.IsDefined(typeof(HarmonyPatch), inherit: true))
+                {
+                    continue;
+                }
+
+                if (IsPatchTypeEnabled(type))
+                {
+                    try
+                    {
+                        harmony.CreateClassProcessor(type).Patch();
+                        enabledCount++;
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error($"[SadSeal's Mega Mod] Failed to apply patch class {type.FullName}: {ex}");
+                    }
+                }
+                else
+                {
+                    skippedCount++;
+                }
+            }
+
+            Log.Message($"[SadSeal's Mega Mod] Applied active modules: {enabledCount} patch classes enabled, {skippedCount} skipped.");
+        }
+
+        private bool IsPatchTypeEnabled(Type type)
+        {
+            var modules = Settings?.Modules;
+            if (modules == null) return true;
+
+            string ns = type.Namespace ?? string.Empty;
+
+            if (ns.StartsWith("SadSeal.MegaMod.Combat")) return modules.enableCombat;
+            if (ns.StartsWith("SadSeal.MegaMod.Skills")) return modules.enableSkills;
+            if (ns.StartsWith("SadSeal.MegaMod.Recipes")) return modules.enableRecipes;
+            if (ns.StartsWith("SadSeal.MegaMod.Genes")) return modules.enableGenes;
+            if (ns.StartsWith("SadSeal.MegaMod.Hauling")) return modules.enableHauling;
+            if (ns.StartsWith("SadSeal.MegaMod.WorkManager")) return modules.enableWorkManager;
+            if (ns.StartsWith("SadSeal.MegaMod.Durability")) return modules.enableDurability;
+            if (ns.StartsWith("SadSeal.MegaMod.QoL")) return modules.enableQoL;
+            if (ns.StartsWith("SadSeal.MegaMod.Medical")) return modules.enableMedical;
+            if (ns.StartsWith("SadSeal.MegaMod.AllowTool")) return modules.enableAllowTool;
+            if (ns.StartsWith("SadSeal.MegaMod.TimeFlow")) return modules.enableTimeFlow;
+            if (ns.StartsWith("SadSeal.MegaMod.Quarry")) return modules.enableQuarry;
+
+            return true;
         }
 
         public override string SettingsCategory()
@@ -123,6 +180,9 @@ namespace SadSeal.MegaMod
 
             switch (currentTab)
             {
+                case MegaModTab.Modules:
+                    ModuleSettingsDrawer.DrawSettings(contentRect, Settings.Modules);
+                    break;
                 case MegaModTab.Combat:
                     CombatSettingsDrawer.DrawSettings(contentRect, Settings.Combat);
                     break;
@@ -166,8 +226,9 @@ namespace SadSeal.MegaMod
 
         private static string GetTabLabel(MegaModTab tab)
         {
-            return tab switch
+            string label = tab switch
             {
+                MegaModTab.Modules => "MegaMod_TabModules".Translate(),
                 MegaModTab.Combat => "MegaMod_TabCombat".Translate(),
                 MegaModTab.Skills => "MegaMod_TabSkills".Translate(),
                 MegaModTab.Recipes => "MegaMod_TabRecipes".Translate(),
@@ -182,6 +243,13 @@ namespace SadSeal.MegaMod
                 MegaModTab.Quarry => "MegaMod_TabQuarry".Translate(),
                 _ => tab.ToString()
             };
+
+            if (tab != MegaModTab.Modules && Settings?.Modules != null && !Settings.Modules.IsModuleEnabled(tab))
+            {
+                label += " (" + "MegaMod_Disabled".Translate() + ")";
+            }
+
+            return label;
         }
     }
 }

@@ -17,6 +17,7 @@ namespace SadSeal.MegaMod.QoL
 
         public static void ApplyAll()
         {
+            if (MegaMod.Settings?.Modules != null && !MegaMod.Settings.Modules.enableQoL) return;
             var settings = MegaMod.Settings?.QoL;
             if (settings == null) return;
 

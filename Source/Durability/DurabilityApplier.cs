@@ -14,6 +14,7 @@ namespace SadSeal.MegaMod.Durability
 
         public static void ApplyDurabilitySettings()
         {
+            if (MegaMod.Settings?.Modules != null && !MegaMod.Settings.Modules.enableDurability) return;
             var settings = MegaMod.Settings?.Durability;
             if (settings == null) return;
 

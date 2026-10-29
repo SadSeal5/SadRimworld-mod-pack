@@ -3,6 +3,12 @@
   <!-- Mega Mod Shell -->
   <MegaMod_ModTitle>SadSeal's Mega Mod</MegaMod_ModTitle>
   <MegaMod_SelectModule>Select Module:</MegaMod_SelectModule>
+  <MegaMod_TabModules>Modules</MegaMod_TabModules>
+  <MegaMod_RestartNotice>When module toggles are changed, RimWorld must be restarted for active patches and architecture build menus to update.</MegaMod_RestartNotice>
+  <MegaMod_ModulesDesc>Enable or disable SadSeal Mega Mod modules. Disabled modules will skip Harmony patching and hide associated build menus.</MegaMod_ModulesDesc>
+  <MegaMod_EnableAll>Enable All</MegaMod_EnableAll>
+  <MegaMod_DisableAll>Disable All</MegaMod_DisableAll>
+  <MegaMod_Disabled>Disabled</MegaMod_Disabled>
   <MegaMod_TabCombat>Lethal Combat</MegaMod_TabCombat>
   <MegaMod_TabSkills>Skill Multipliers</MegaMod_TabSkills>
   <MegaMod_TabRecipes>Recipe Tweaker</MegaMod_TabRecipes>
@@ -15,6 +21,32 @@
   <MegaMod_TabAllowTool>Utility &amp; Orders</MegaMod_TabAllowTool>
   <MegaMod_TabTimeFlow>Speed &amp; Time</MegaMod_TabTimeFlow>
   <MegaMod_TabQuarry>Deep Quarry</MegaMod_TabQuarry>
+
+  <!-- Module Toggles -->
+  <MegaMod_ModuleCombat>Lethal Ranged Combat</MegaMod_ModuleCombat>
+  <MegaMod_ModuleCombat_Desc>Ballistic accuracy curve, projectile speed, lethality, and armor penetration enhancements.</MegaMod_ModuleCombat_Desc>
+  <MegaMod_ModuleSkills>Skill Multipliers</MegaMod_ModuleSkills>
+  <MegaMod_ModuleSkills_Desc>Learning speed multipliers, daily XP cap toggle, and skill decay settings.</MegaMod_ModuleSkills_Desc>
+  <MegaMod_ModuleRecipes>Recipe Tweaker</MegaMod_ModuleRecipes>
+  <MegaMod_ModuleRecipes_Desc>In-game real-time editor for recipe ingredients, work amounts, and crafts.</MegaMod_ModuleRecipes_Desc>
+  <MegaMod_ModuleGenes>Gene Synthesizer</MegaMod_ModuleGenes>
+  <MegaMod_ModuleGenes_Desc>Synthesize any xenogerm gene in the Gene Assembler using Neutroamine.</MegaMod_ModuleGenes_Desc>
+  <MegaMod_ModuleHauling>Smart Hauling</MegaMod_ModuleHauling>
+  <MegaMod_ModuleHauling_Desc>Efficient multi-item hauling utilizing colonist inventory pockets.</MegaMod_ModuleHauling_Desc>
+  <MegaMod_ModuleWorkManager>Work Manager</MegaMod_ModuleWorkManager>
+  <MegaMod_ModuleWorkManager_Desc>Intelligent automated colonist work priority assignment based on skills and passions.</MegaMod_ModuleWorkManager_Desc>
+  <MegaMod_ModuleDurability>Durability Tweaks</MegaMod_ModuleDurability>
+  <MegaMod_ModuleDurability_Desc>Disable apparel and weapon wear, tainted clothing overrides, and gear restoration.</MegaMod_ModuleDurability_Desc>
+  <MegaMod_ModuleQoL>QoL Suite</MegaMod_ModuleQoL>
+  <MegaMod_ModuleQoL_Desc>Filth cleanup, non-flammable metals, tree lifespans, death acidifier removal, and raid tweaks.</MegaMod_ModuleQoL_Desc>
+  <MegaMod_ModuleMedical>Medical &amp; Autopsy</MegaMod_ModuleMedical>
+  <MegaMod_ModuleMedical_Desc>Field medicine, smart medicine selection, and autopsy organ harvesting.</MegaMod_ModuleMedical_Desc>
+  <MegaMod_ModuleAllowTool>Utility &amp; Orders (AllowTool)</MegaMod_ModuleAllowTool>
+  <MegaMod_ModuleAllowTool_Desc>Haul Urgently, Select Similar, Unforbid All, and Finish Off designators.</MegaMod_ModuleAllowTool_Desc>
+  <MegaMod_ModuleTimeFlow>Speed &amp; Time Flow</MegaMod_ModuleTimeFlow>
+  <MegaMod_ModuleTimeFlow_Desc>4x speed button, smart sleep auto-fast-forward, and combat slow-down controls.</MegaMod_ModuleTimeFlow_Desc>
+  <MegaMod_ModuleQuarry>Deep Quarry</MegaMod_ModuleQuarry>
+  <MegaMod_ModuleQuarry_Desc>Excavate rock chunks, steel, plasteel, components, and precious resources.</MegaMod_ModuleQuarry_Desc>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Recipe &amp; Crafting Tweaker</MegaMod_RecipeTitle>

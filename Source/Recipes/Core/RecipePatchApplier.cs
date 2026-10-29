@@ -43,6 +43,7 @@ namespace SadSeal.MegaMod.Recipes
 
         public static void ApplyAll()
         {
+            if (MegaMod.Settings?.Modules != null && !MegaMod.Settings.Modules.enableRecipes) return;
             var settings = MegaMod.Settings?.Recipes;
             if (settings?.tweaks == null || settings.tweaks.Count == 0) return;
             for (int i = 0; i < settings.tweaks.Count; i++)
