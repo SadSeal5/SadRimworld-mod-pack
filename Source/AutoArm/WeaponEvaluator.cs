@@ -20,7 +20,7 @@ namespace SadSeal.MegaMod.AutoArm
 
             if (settings == null)
             {
-                settings = MegaMod.Settings?.AutoArm;
+                settings = AutoArmModule.ModSettings;
             }
 
             WeaponCategory cat = WeaponClassifier.GetCategory(weapon);

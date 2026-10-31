@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>SadSeal.QoL</AssemblyName>
+    <RootNamespace>SadSeal.MegaMod.QoL</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\SadSeal.Core.csproj" />
+  </ItemGroup>
+</Project>

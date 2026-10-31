@@ -12,7 +12,7 @@ namespace SadSeal.MegaMod.Recipes
 
         public static void ExportAll()
         {
-            var tweaks = MegaMod.Settings?.Recipes?.tweaks;
+            var tweaks = RecipesModule.ModSettings?.tweaks;
             if (tweaks == null || tweaks.Count == 0)
             {
                 Messages.Message("[MegaMod] Disari aktarilacak tarif degisikligi yok.", MessageTypeDefOf.RejectInput, false);

@@ -147,7 +147,7 @@ namespace SadSeal.MegaMod.Hauling
 
             if (pawn == null || pawn.Map == null) return;
 
-            var settings = MegaMod.Settings?.Hauling;
+            var settings = HaulModule.ModSettings;
             int searchRadius = settings != null ? settings.SearchRadius : 12;
             int maxItems = settings != null ? settings.MaxItemsPerTrip : 8;
 

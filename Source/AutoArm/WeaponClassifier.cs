@@ -90,7 +90,7 @@ namespace SadSeal.MegaMod.AutoArm
         {
             if (def == null || !def.IsWeapon) return true;
             if (def.destroyOnDrop) return true;
-            if (MegaMod.Settings?.AutoArm?.IsBlacklisted(def) == true) return true;
+            if (AutoArmModule.ModSettings?.IsBlacklisted(def) == true) return true;
 
             string lower = def.defName.ToLowerInvariant();
             if (lower.Contains("grenade") || lower.Contains("molotov") ||

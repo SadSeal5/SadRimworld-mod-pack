@@ -38,12 +38,6 @@
         <li>AllowRotten</li>
       </specialFiltersToDisallow>
     </defaultIngredientFilter>
-    <recipeUsers>
-      <li>TableButcher</li>
-      <li>ButcherSpot</li>
-      <li>SadMedical_AutopsyTable</li>
-      <li>AncientOperatingTable</li>
-    </recipeUsers>
   </RecipeDef>
 
   <!-- Sterile Humanlike Autopsy (With Medicine) -->
@@ -94,12 +88,6 @@
         <li>AllowRotten</li>
       </specialFiltersToDisallow>
     </defaultIngredientFilter>
-    <recipeUsers>
-      <li>TableButcher</li>
-      <li>ButcherSpot</li>
-      <li>SadMedical_AutopsyTable</li>
-      <li>AncientOperatingTable</li>
-    </recipeUsers>
   </RecipeDef>
 
   <!-- Mechanoid Dissection -->
@@ -134,11 +122,5 @@
         <li>CorpsesMechanoid</li>
       </categories>
     </defaultIngredientFilter>
-    <recipeUsers>
-      <li>TableButcher</li>
-      <li>CraftingSpot</li>
-      <li>TableMachining</li>
-      <li>SadMedical_AutopsyTable</li>
-    </recipeUsers>
   </RecipeDef>
 </Defs>

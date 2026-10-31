@@ -9,7 +9,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Raids
     {
         public static bool Prefix()
         {
-            if (MegaMod.Settings?.QoL?.noDeathAcidifiers == true)
+            if (QoLModule.ModSettings?.noDeathAcidifiers == true)
             {
                 // Disables acidifier dissolve mechanism entirely; gear drops intact
                 return false;

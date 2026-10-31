@@ -407,6 +407,36 @@
   <MegaMod_QoLTraderAlerts_Desc>Haritada bir ticaret kervanı veya yörüngede bir ticaret gemisi bulunduğunda ekranda belirgin bir uyarı gösterir.</MegaMod_QoLTraderAlerts_Desc>
   <MegaMod_AlertTraderTitle>Tüccar ziyarette</MegaMod_AlertTraderTitle>
   <MegaMod_AlertTraderDesc>Koloninizle ticaret yapabilecek bir ticaret kervanı veya yörünge gemisi mevcut. Ayrılmadan önce ticaret yapmayı unutmayın!</MegaMod_AlertTraderDesc>
+
+  <!-- QoL Expansion Suite v2.0 Keys -->
+  <MegaMod_QoLSectionSafety>İnşaat ve Güvenlik</MegaMod_QoLSectionSafety>
+  <MegaMod_QoLEnableRoofSafety>Çatı Çökme Güvenliği</MegaMod_QoLEnableRoofSafety>
+  <MegaMod_QoLEnableRoofSafety_Desc>Kolonicilerin veya işçilerin üzerine çatı çökmesine yol açacak madencilik veya söküm işlemlerini otomatik olarak engeller.</MegaMod_QoLEnableRoofSafety_Desc>
+  <MegaMod_RoofSafety_Prevented>Çatı güvenliği {0} adlı kolonistin {1} yapısını yıkmasını engelledi: bir kolonistin üstüne çatı çökebilirdi!</MegaMod_RoofSafety_Prevented>
+  <MegaMod_QoLEnableReplaceStuff>Malzeme Değişimi (Replace Stuff)</MegaMod_QoLEnableReplaceStuff>
+  <MegaMod_QoLEnableReplaceStuff_Desc>Aynı kategorideki yapıların üzerine doğrudan yeni taslak koymayı (örn. tahta duvar üzerine taş duvar veya kapı) ve çatıyı düşürmeden değiştirmeyi sağlar.</MegaMod_QoLEnableReplaceStuff_Desc>
+  <MegaMod_QoLEnableShareTheLoad>Ortak Taşıma (Share The Load)</MegaMod_QoLEnableShareTheLoad>
+  <MegaMod_QoLEnableShareTheLoad_Desc>Aynı inşaat taslağına veya iskelete birden fazla kolonistin eşzamanlı malzeme taşımasına izin verir.</MegaMod_QoLEnableShareTheLoad_Desc>
+  <MegaMod_QoLEnableCleanBeforeWork>İş Öncesi Temizlik (Mutfak &amp; Ameliyathane)</MegaMod_QoLEnableCleanBeforeWork>
+  <MegaMod_QoLEnableCleanBeforeWork_Desc>Yemek pişirme veya ameliyat öncesinde işçilerin odadaki pislikleri hızlıca süpürmesini sağlar.</MegaMod_QoLEnableCleanBeforeWork_Desc>
+  <MegaMod_QoLEnableAutoCutBlight>Hastalık Vuran Ekinleri Otomatik Kes</MegaMod_QoLEnableAutoCutBlight>
+  <MegaMod_QoLEnableAutoCutBlight_Desc>Ekinlere hastalık vurduğu anda diğer ekinlere yayılmaması için otomatik kesim emri verir.</MegaMod_QoLEnableAutoCutBlight_Desc>
+  <MegaMod_QoLEnableSnapOut>Kendine Getir! (Snap Out)</MegaMod_QoLEnableSnapOut>
+  <MegaMod_QoLEnableSnapOut_Desc>Sosyal yeteneği yüksek kolonicilerin veya gardiyanların şiddetsiz sinir krizi geçiren kolonicileri sakinleştirmesini sağlar.</MegaMod_QoLEnableSnapOut_Desc>
+  <MegaMod_SnapOut_Option>{0} sakinleştirmeyi dene (Snap Out)</MegaMod_SnapOut_Option>
+  <MegaMod_SnapOut_Success>{0}, {1} adlı kolonisti başarıyla sakinleştirdi!</MegaMod_SnapOut_Success>
+  <MegaMod_SnapOut_Failed>{0}, {1} adlı kolonisti bu sefer sakinleştiremedi.</MegaMod_SnapOut_Failed>
+  <MegaMod_QoLEnableBillQoL>Üretim Yönetimi &amp; Pano (Clipboard)</MegaMod_QoLEnableBillQoL>
+  <MegaMod_QoLEnableBillQoL_Desc>Tezgahlar arası üretim emirlerini kopyalayıp yapıştırmayı ve gerekli malzeme bittiğinde emirleri otomatik askıya almayı sağlar.</MegaMod_QoLEnableBillQoL_Desc>
+  <MegaMod_BillAutoSuspended>{1} tezgahındaki '{0}' emri askıya alındı: gerekli malzemeler eksik.</MegaMod_BillAutoSuspended>
+  <MegaMod_BillAutoResumed>{1} tezgahındaki '{0}' emri devam ettirildi: gerekli malzemeler artık mevcut.</MegaMod_BillAutoResumed>
+  <MegaMod_CopyBills>Emirleri Kopyala</MegaMod_CopyBills>
+  <MegaMod_CopyBills_Desc>Bu tezgahtaki tüm üretim emirlerini panoya kopyalar.</MegaMod_CopyBills_Desc>
+  <MegaMod_PasteBills>Emirleri Yapıştır</MegaMod_PasteBills>
+  <MegaMod_PasteBills_Desc>Panodaki uyumlu üretim emirlerini bu tezgaha yapıştırır.</MegaMod_PasteBills_Desc>
+  <MegaMod_BillsCopied>{1} tezgahından {0} emir kopyalandı.</MegaMod_BillsCopied>
+  <MegaMod_BillsPasted>{1} tezgahına {0} emir yapıştırıldı.</MegaMod_BillsPasted>
+  <MegaMod_CannotPasteBills>Panodaki emirler bu tezgahla uyumlu değil.</MegaMod_CannotPasteBills>
   <MegaMod_DurabilityPerfNote>⚡ 0-Tick Performans Mimarisi:\nBu mod, Harmony tick dinleyicileri veya arka plan sayaçları yerine doğrudan RimWorld ThingDef motor flag'lerini (useHitPoints = false) manipüle eder. Bu sayede haritanızda 10.000 eşya dahi olsa TPS'te sıfır (0) düşüş yaşanır.</MegaMod_DurabilityPerfNote>
   <!-- Medical & Autopsy Suite -->
   <MegaMod_Medical_Title>Tıbbi &amp; Otopsi Sistemi</MegaMod_Medical_Title>

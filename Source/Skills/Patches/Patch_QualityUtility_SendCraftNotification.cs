@@ -9,7 +9,7 @@ namespace SadSeal.MegaMod.Skills.Patches
         [HarmonyPrefix]
         public static bool Prefix()
         {
-            if (MegaMod.Settings?.Skills != null && MegaMod.Settings.Skills.muteMasterworkLegendaryNotifications)
+            if (SkillsModule.ModSettings != null && SkillsModule.ModSettings.muteMasterworkLegendaryNotifications)
             {
                 // Silences the loud letter sound effect and prevents the masterwork/legendary popup letter.
                 return false;

@@ -68,7 +68,7 @@
     <workSkill>Mining</workSkill>
     <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
     <effectWorking>Mine</effectWorking>
-    <soundWorking>Recipe_Sculpting</soundWorking>
+    <soundWorking>Recipe_Sculpt</soundWorking>
   </RecipeDef>
 
   <RecipeDef>
@@ -81,7 +81,7 @@
     <workSkill>Mining</workSkill>
     <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
     <effectWorking>Mine</effectWorking>
-    <soundWorking>Recipe_Sculpting</soundWorking>
+    <soundWorking>Recipe_Sculpt</soundWorking>
   </RecipeDef>
 
   <RecipeDef>
@@ -94,7 +94,7 @@
     <workSkill>Mining</workSkill>
     <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
     <effectWorking>Mine</effectWorking>
-    <soundWorking>Recipe_Sculpting</soundWorking>
+    <soundWorking>Recipe_Sculpt</soundWorking>
   </RecipeDef>
 
   <RecipeDef>
@@ -107,7 +107,7 @@
     <workSkill>Mining</workSkill>
     <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
     <effectWorking>Mine</effectWorking>
-    <soundWorking>Recipe_Sculpting</soundWorking>
+    <soundWorking>Recipe_Sculpt</soundWorking>
   </RecipeDef>
 
   <RecipeDef>
@@ -120,7 +120,7 @@
     <workSkill>Mining</workSkill>
     <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
     <effectWorking>Mine</effectWorking>
-    <soundWorking>Recipe_Sculpting</soundWorking>
+    <soundWorking>Recipe_Sculpt</soundWorking>
   </RecipeDef>
 
   <RecipeDef>
@@ -133,7 +133,7 @@
     <workSkill>Mining</workSkill>
     <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
     <effectWorking>Mine</effectWorking>
-    <soundWorking>Recipe_Sculpting</soundWorking>
+    <soundWorking>Recipe_Sculpt</soundWorking>
   </RecipeDef>
 
   <RecipeDef>
@@ -146,7 +146,7 @@
     <workSkill>Mining</workSkill>
     <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
     <effectWorking>Mine</effectWorking>
-    <soundWorking>Recipe_Sculpting</soundWorking>
+    <soundWorking>Recipe_Sculpt</soundWorking>
   </RecipeDef>
 
   <RecipeDef>
@@ -159,7 +159,7 @@
     <workSkill>Mining</workSkill>
     <workerClass>SadSeal.MegaMod.Quarry.RecipeWorker_Quarry</workerClass>
     <effectWorking>Mine</effectWorking>
-    <soundWorking>Recipe_Sculpting</soundWorking>
+    <soundWorking>Recipe_Sculpt</soundWorking>
   </RecipeDef>
 
   <WorkGiverDef>

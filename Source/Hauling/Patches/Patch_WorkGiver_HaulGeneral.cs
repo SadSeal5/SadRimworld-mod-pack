@@ -18,7 +18,7 @@ namespace SadSeal.MegaMod.Hauling.Patches
                 return;
             }
 
-            var settings = MegaMod.Settings?.Hauling;
+            var settings = HaulModule.ModSettings;
             if (settings == null || !settings.EnableSmartHaul)
             {
                 return;

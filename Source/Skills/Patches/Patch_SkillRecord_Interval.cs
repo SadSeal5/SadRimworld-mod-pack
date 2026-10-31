@@ -8,9 +8,9 @@ namespace SadSeal.MegaMod.Skills.Patches
     {
         public static bool Prefix(SkillRecord __instance)
         {
-            if (MegaMod.Settings?.Skills != null && MegaMod.Settings.Skills.disableSkillDecay)
+            if (SkillsModule.ModSettings != null && SkillsModule.ModSettings.disableSkillDecay)
             {
-                if (__instance != null && MegaMod.Settings.Skills.ShouldApplyTo(__instance.Pawn))
+                if (__instance != null && SkillsModule.ModSettings.ShouldApplyTo(__instance.Pawn))
                 {
                     return false;
                 }

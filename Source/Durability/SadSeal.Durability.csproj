@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>SadSeal.Durability</AssemblyName>
+    <RootNamespace>SadSeal.MegaMod.Durability</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\SadSeal.Core.csproj" />
+  </ItemGroup>
+</Project>

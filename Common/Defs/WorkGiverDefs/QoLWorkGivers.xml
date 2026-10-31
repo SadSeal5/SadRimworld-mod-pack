@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <WorkGiverDef>
+    <defName>SadQoL_CalmDown</defName>
+    <label>calm down colonist</label>
+    <giverClass>SadSeal.MegaMod.QoL.Patches.Pawn.WorkGiver_CalmDown</giverClass>
+    <workType>Warden</workType>
+    <priorityInType>125</priorityInType>
+    <verb>calm down</verb>
+    <gerund>calming down</gerund>
+    <requiredCapacities>
+      <li>Talking</li>
+      <li>Hearing</li>
+    </requiredCapacities>
+    <canBeDoneByMechs>false</canBeDoneByMechs>
+    <prioritizeSustains>true</prioritizeSustains>
+  </WorkGiverDef>
+</Defs>

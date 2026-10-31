@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>SadSeal.AutoArm</AssemblyName>
+    <RootNamespace>SadSeal.MegaMod.AutoArm</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\SadSeal.Core.csproj" />
+  </ItemGroup>
+</Project>

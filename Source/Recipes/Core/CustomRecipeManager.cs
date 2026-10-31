@@ -13,7 +13,7 @@ namespace SadSeal.MegaMod.Recipes
         public static bool IsCustomRecipe(string defName)
         {
             if (string.IsNullOrEmpty(defName)) return false;
-            var list = MegaMod.Settings?.Recipes?.customRecipes;
+            var list = RecipesModule.ModSettings?.customRecipes;
             if (list == null) return false;
             for (int i = 0; i < list.Count; i++)
             {
@@ -25,7 +25,7 @@ namespace SadSeal.MegaMod.Recipes
         public static CustomRecipeData GetCustomRecipe(string defName)
         {
             if (string.IsNullOrEmpty(defName)) return null;
-            var list = MegaMod.Settings?.Recipes?.customRecipes;
+            var list = RecipesModule.ModSettings?.customRecipes;
             if (list == null) return null;
             for (int i = 0; i < list.Count; i++)
             {
@@ -36,7 +36,7 @@ namespace SadSeal.MegaMod.Recipes
 
         public static void InitializeAll()
         {
-            var list = MegaMod.Settings?.Recipes?.customRecipes;
+            var list = RecipesModule.ModSettings?.customRecipes;
             if (list == null || list.Count == 0) return;
             for (int i = 0; i < list.Count; i++)
             {
@@ -157,7 +157,7 @@ namespace SadSeal.MegaMod.Recipes
             // Add to settings
             if (addToSettings)
             {
-                var settings = MegaMod.Settings?.Recipes;
+                var settings = RecipesModule.ModSettings;
                 if (settings != null)
                 {
                     if (settings.customRecipes == null) settings.customRecipes = new List<CustomRecipeData>();
@@ -209,7 +209,7 @@ namespace SadSeal.MegaMod.Recipes
                 removeMethod?.Invoke(null, new object[] { r });
             }
 
-            var settings = MegaMod.Settings?.Recipes;
+            var settings = RecipesModule.ModSettings;
             if (settings?.customRecipes != null)
             {
                 settings.customRecipes.RemoveAll(x => x.defName == data.defName);

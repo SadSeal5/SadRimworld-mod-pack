@@ -10,7 +10,7 @@ namespace SadSeal.MegaMod.Quarry
         public int TotalExcavationsCompleted = 0;
         public const int MaxExcavations = 1000;
 
-        public bool IsDepleted => MegaMod.Settings?.Quarry?.InfiniteQuarry == false && TotalExcavationsCompleted >= MaxExcavations;
+        public bool IsDepleted => QuarryModule.ModSettings?.InfiniteQuarry == false && TotalExcavationsCompleted >= MaxExcavations;
 
         public new bool CurrentlyUsableForBills() => !IsDepleted && base.CurrentlyUsableForBills();
         bool IBillGiver.CurrentlyUsableForBills() => CurrentlyUsableForBills();
@@ -24,7 +24,7 @@ namespace SadSeal.MegaMod.Quarry
         public override string GetInspectString()
         {
             string baseString = base.GetInspectString();
-            var settings = MegaMod.Settings?.Quarry;
+            var settings = QuarryModule.ModSettings;
 
             string customInfo;
             if (settings != null && !settings.InfiniteQuarry)

@@ -52,7 +52,7 @@ namespace SadSeal.MegaMod.Genes.UI
         public Dialog_GeneSynthesizer(CompGeneSynthesizer comp)
         {
             this.comp = comp;
-            this.settings = MegaMod.Settings?.Genes ?? new GeneSynthesizerSettings();
+            this.settings = GenesModule.ModSettings ?? new GeneSynthesizerSettings();
             forcePause = true;
             doCloseX = true;
             closeOnClickedOutside = true;

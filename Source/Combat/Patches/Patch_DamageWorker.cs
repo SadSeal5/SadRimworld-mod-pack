@@ -9,7 +9,7 @@ namespace SadSeal.MegaMod.Combat.Patches
         [HarmonyPrefix]
         public static bool Prefix(ref bool __result)
         {
-            if (MegaMod.Settings?.Combat != null && MegaMod.Settings.Combat.preventOneHpPreservation)
+            if (CombatModule.ModSettings != null && CombatModule.ModSettings.preventOneHpPreservation)
             {
                 __result = false;
                 return false;

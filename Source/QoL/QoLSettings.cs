@@ -30,6 +30,15 @@ namespace SadSeal.MegaMod.QoL
         public bool noDeathAcidifiers = true;
         public bool traderAlerts = true;
 
+        // QoL Expansion Suite v2.0
+        public bool enableRoofSafety = true;
+        public bool enableReplaceStuff = true;
+        public bool enableShareTheLoad = true;
+        public bool enableCleanBeforeWork = true;
+        public bool enableAutoCutBlight = true;
+        public bool enableSnapOut = true;
+        public bool enableBillQoL = true;
+
         public void ExposeData()
         {
             // Pawn
@@ -57,6 +66,15 @@ namespace SadSeal.MegaMod.QoL
             Scribe_Values.Look(ref disableDropPodRaids, "disableDropPodRaids", false);
             Scribe_Values.Look(ref noDeathAcidifiers, "noDeathAcidifiers", true);
             Scribe_Values.Look(ref traderAlerts, "traderAlerts", true);
+
+            // QoL Expansion Suite v2.0
+            Scribe_Values.Look(ref enableRoofSafety, "enableRoofSafety", true);
+            Scribe_Values.Look(ref enableReplaceStuff, "enableReplaceStuff", true);
+            Scribe_Values.Look(ref enableShareTheLoad, "enableShareTheLoad", true);
+            Scribe_Values.Look(ref enableCleanBeforeWork, "enableCleanBeforeWork", true);
+            Scribe_Values.Look(ref enableAutoCutBlight, "enableAutoCutBlight", true);
+            Scribe_Values.Look(ref enableSnapOut, "enableSnapOut", true);
+            Scribe_Values.Look(ref enableBillQoL, "enableBillQoL", true);
         }
 
         public void SetPresetBalanced()
@@ -82,6 +100,14 @@ namespace SadSeal.MegaMod.QoL
             disableDropPodRaids = false;
             noDeathAcidifiers = true;
             traderAlerts = true;
+
+            enableRoofSafety = true;
+            enableReplaceStuff = true;
+            enableShareTheLoad = true;
+            enableCleanBeforeWork = true;
+            enableAutoCutBlight = true;
+            enableSnapOut = true;
+            enableBillQoL = true;
 
             QoLApplier.ApplyAll();
         }
@@ -110,6 +136,14 @@ namespace SadSeal.MegaMod.QoL
             noDeathAcidifiers = true;
             traderAlerts = true;
 
+            enableRoofSafety = true;
+            enableReplaceStuff = true;
+            enableShareTheLoad = true;
+            enableCleanBeforeWork = true;
+            enableAutoCutBlight = true;
+            enableSnapOut = true;
+            enableBillQoL = true;
+
             QoLApplier.ApplyAll();
         }
 
@@ -136,6 +170,14 @@ namespace SadSeal.MegaMod.QoL
             disableDropPodRaids = false;
             noDeathAcidifiers = false;
             traderAlerts = false;
+
+            enableRoofSafety = false;
+            enableReplaceStuff = false;
+            enableShareTheLoad = false;
+            enableCleanBeforeWork = false;
+            enableAutoCutBlight = false;
+            enableSnapOut = false;
+            enableBillQoL = false;
 
             QoLApplier.ApplyAll();
         }

@@ -68,7 +68,7 @@ namespace SadSeal.MegaMod.WorkManager.Core
                 return;
             }
 
-            var settings = MegaMod.Settings?.WorkManager;
+            var settings = WorkManagerModule.ModSettings;
             if (settings == null || !settings.EnableWorkManager || !settings.ManageWorkPriorities)
             {
                 return;
@@ -89,7 +89,7 @@ namespace SadSeal.MegaMod.WorkManager.Core
             // Ensure manual priorities (1-4) are active in game
             Current.Game.playSettings.useWorkPriorities = true;
 
-            var settings = MegaMod.Settings.WorkManager;
+            var settings = WorkManagerModule.ModSettings;
             var comp = WorkManagerGameComponent.Instance;
 
             // Collect capable player colonists on this map

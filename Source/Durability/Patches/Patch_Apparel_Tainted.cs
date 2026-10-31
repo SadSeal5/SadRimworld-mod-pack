@@ -10,7 +10,7 @@ namespace SadSeal.MegaMod.Durability.Patches
 
         public static void Prefix()
         {
-            if (MegaMod.Settings?.Durability?.preventTaintedApparel == true)
+            if (DurabilityModule.ModSettings?.preventTaintedApparel == true)
             {
                 SuppressTaint = true;
             }

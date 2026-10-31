@@ -11,7 +11,7 @@ namespace SadSeal.MegaMod.WorkManager.Patches
     {
         public static void Postfix(Rect rect)
         {
-            var settings = MegaMod.Settings?.WorkManager;
+            var settings = WorkManagerModule.ModSettings;
             if (settings == null) return;
 
             float btnSize = 24f;
@@ -23,8 +23,8 @@ namespace SadSeal.MegaMod.WorkManager.Patches
             Rect settingsRect = new Rect(right - btnSize, top, btnSize, btnSize);
             if (Widgets.ButtonImage(settingsRect, WorkManagerTextures.Settings))
             {
-                MegaMod.CurrentTab = MegaModTab.WorkManager;
-                Find.WindowStack.Add(new Dialog_ModSettings(MegaMod.Instance));
+                SadSeal.Core.SadSealCoreMod.SelectModule("WorkManager");
+                Find.WindowStack.Add(new Dialog_ModSettings(SadSeal.Core.SadSealCoreMod.Instance));
             }
             TooltipHandler.TipRegion(settingsRect, "WorkManager_SettingsTip".Translate());
 

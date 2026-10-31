@@ -4,18 +4,12 @@ using Verse;
 
 namespace SadSeal.MegaMod.Durability
 {
-    [StaticConstructorOnStartup]
     public static class DurabilityApplier
     {
-        static DurabilityApplier()
+public static void ApplyDurabilitySettings()
         {
-            ApplyDurabilitySettings();
-        }
-
-        public static void ApplyDurabilitySettings()
-        {
-            if (MegaMod.Settings?.Modules != null && !MegaMod.Settings.Modules.enableDurability) return;
-            var settings = MegaMod.Settings?.Durability;
+            if (DurabilityModule.Instance?.IsEnabled == false) return;
+            var settings = DurabilityModule.ModSettings;
             if (settings == null) return;
 
             var allDefs = DefDatabase<ThingDef>.AllDefsListForReading;

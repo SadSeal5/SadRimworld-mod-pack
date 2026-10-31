@@ -24,7 +24,7 @@ namespace SadSeal.MegaMod.Medical.Autopsy
         {
             if (billDoer == null || corpse == null || corpse.InnerPawn == null) return;
 
-            var settings = MegaMod.Settings?.Medical;
+            var settings = MedicalModule.ModSettings;
             if (settings == null || !settings.EnableAutopsy) return;
 
             Pawn pawn = corpse.InnerPawn;
@@ -48,7 +48,7 @@ namespace SadSeal.MegaMod.Medical.Autopsy
                 baseChance *= 0.50f;
             }
 
-            float successChance = Mathf.Clamp(baseChance + medicineBonus, 0.10f, 0.98f);
+            float successChance = Mathf.Clamp(baseChance + medicineBonus, 0.40f, 0.98f);
             int extractedCount = 0;
 
             if (pawn.RaceProps.IsMechanoid && settings.ExtractMechanoidParts)
@@ -73,13 +73,12 @@ namespace SadSeal.MegaMod.Medical.Autopsy
                     extractedCount++;
                 }
 
-                if (Rand.Value < successChance * 0.5f)
-                {
-                    Thing comp = ThingMaker.MakeThing(ThingDefOf.ComponentIndustrial);
-                    comp.stackCount = Rand.RangeInclusive(1, 2);
-                    GenSpawn.Spawn(comp, pos, map);
-                    extractedCount++;
-                }
+                // Guaranteed component drop from mechanoid chassis (at least 1, scaling with body size)
+                int compAmount = Mathf.Max(1, Mathf.RoundToInt(pawn.BodySize * 0.8f));
+                Thing comp = ThingMaker.MakeThing(ThingDefOf.ComponentIndustrial);
+                comp.stackCount = compAmount;
+                GenSpawn.Spawn(comp, pos, map);
+                extractedCount++;
 
                 Messages.Message("MegaMod_AutopsyMechanoidSuccess".Translate(billDoer.LabelShort, corpse.LabelShort, extractedCount),
                     MessageTypeDefOf.PositiveEvent, false);
@@ -143,37 +142,33 @@ namespace SadSeal.MegaMod.Medical.Autopsy
                     if (part == null || part.def == null) continue;
                     if (pawn.health.hediffSet.GetPartHealth(part) <= 0f) continue;
 
-                    string organThingDefName = null;
-                    if (OrganDefMapping.TryGetValue(part.def.defName, out string mapped))
+                    ThingDef organDef = part.def.spawnThingOnRemoved;
+                    if (organDef == null && OrganDefMapping.TryGetValue(part.def.defName, out string mapped))
                     {
-                        organThingDefName = mapped;
+                        organDef = DefDatabase<ThingDef>.GetNamedSilentFail(mapped);
                     }
-                    else
+                    if (organDef == null)
                     {
                         ThingDef direct = DefDatabase<ThingDef>.GetNamedSilentFail(part.def.defName);
                         if (direct != null && direct.category == ThingCategory.Item)
                         {
-                            organThingDefName = direct.defName;
+                            organDef = direct;
                         }
                     }
 
-                    if (!string.IsNullOrEmpty(organThingDefName))
+                    if (organDef != null)
                     {
-                        ThingDef organDef = DefDatabase<ThingDef>.GetNamedSilentFail(organThingDefName);
-                        if (organDef != null)
+                        if (Rand.Value < successChance)
                         {
-                            if (Rand.Value < successChance)
-                            {
-                                Thing organ = ThingMaker.MakeThing(organDef);
-                                GenSpawn.Spawn(organ, pos, map);
-                                extractedCount++;
-                            }
-
-                            // Mark part as missing so it cannot be extracted again
-                            Hediff_MissingPart missing = (Hediff_MissingPart)HediffMaker.MakeHediff(HediffDefOf.MissingBodyPart, pawn, part);
-                            missing.IsFresh = false;
-                            pawn.health.hediffSet.AddDirect(missing);
+                            Thing organ = ThingMaker.MakeThing(organDef);
+                            GenSpawn.Spawn(organ, pos, map);
+                            extractedCount++;
                         }
+
+                        // Mark part as missing so it cannot be extracted again
+                        Hediff_MissingPart missing = (Hediff_MissingPart)HediffMaker.MakeHediff(HediffDefOf.MissingBodyPart, pawn, part);
+                        missing.IsFresh = false;
+                        pawn.health.hediffSet.AddDirect(missing);
                     }
                 }
             }

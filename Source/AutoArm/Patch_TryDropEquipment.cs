@@ -12,8 +12,8 @@ namespace SadSeal.MegaMod.AutoArm
         {
             if (resultingEq != null && resultingEq.Spawned && __instance?.pawn?.Faction?.IsPlayer == true)
             {
-                var settings = MegaMod.Settings?.AutoArm;
-                if (MegaMod.Settings?.Modules?.enableAutoArm != false && settings != null && settings.enableAutoArm && settings.autoUnforbidDropped)
+                var settings = AutoArmModule.ModSettings;
+                if (AutoArmModule.Instance?.IsEnabled != false && settings != null && settings.enableAutoArm && settings.autoUnforbidDropped)
                 {
                     resultingEq.SetForbidden(false, false);
                 }

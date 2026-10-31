@@ -16,7 +16,7 @@ namespace SadSeal.MegaMod.Quarry
 
             if (billDoer == null || billDoer.Map == null) return;
 
-            var settings = MegaMod.Settings?.Quarry;
+            var settings = QuarryModule.ModSettings;
             Map map = billDoer.Map;
             IntVec3 pos = billDoer.Position;
 
@@ -182,7 +182,7 @@ namespace SadSeal.MegaMod.Quarry
         {
             if (__instance?.workerClass == typeof(RecipeWorker_Quarry))
             {
-                float mult = MegaMod.Settings?.Quarry?.MiningSpeedMultiplier ?? 1.0f;
+                float mult = QuarryModule.ModSettings?.MiningSpeedMultiplier ?? 1.0f;
                 if (mult > 0.05f)
                 {
                     __result /= mult;

@@ -38,7 +38,7 @@ namespace SadSeal.MegaMod.Recipes
 
         public void Write()
         {
-            MegaMod.Instance?.WriteSettings();
+            SadSeal.Core.SadSealCoreMod.Instance?.WriteSettings();
         }
     }
 }

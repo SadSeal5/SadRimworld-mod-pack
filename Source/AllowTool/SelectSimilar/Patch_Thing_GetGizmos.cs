@@ -19,7 +19,7 @@ namespace SadSeal.MegaMod.AllowTool.SelectSimilar
                 }
             }
 
-            var settings = MegaMod.Settings?.AllowTool;
+            var settings = AllowToolModule.ModSettings;
             if (settings == null || !settings.EnableSelectSimilar) yield break;
 
             if (__instance == null || !__instance.Spawned || (__instance.Faction != null && __instance.Faction.HostileTo(Faction.OfPlayer)))

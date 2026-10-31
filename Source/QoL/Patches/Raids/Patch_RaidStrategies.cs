@@ -14,7 +14,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Raids
             {
                 if (!__result || __instance.def == null) return;
 
-                var settings = MegaMod.Settings?.QoL;
+                var settings = QoLModule.ModSettings;
                 if (settings == null) return;
 
                 string defName = __instance.def.defName;
@@ -52,7 +52,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Raids
             {
                 if (!__result || __instance.def == null) return;
 
-                var settings = MegaMod.Settings?.QoL;
+                var settings = QoLModule.ModSettings;
                 if (settings == null || !settings.disableDropPodRaids) return;
 
                 string defName = __instance.def.defName;

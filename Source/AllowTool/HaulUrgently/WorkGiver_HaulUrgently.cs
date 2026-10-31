@@ -71,7 +71,7 @@ namespace SadSeal.MegaMod.AllowTool.HaulUrgently
                 cachedSmartHaulDef = DefDatabase<JobDef>.GetNamedSilentFail("SadHaul_MultiHaulToCell");
             }
 
-            bool useSmartHaul = MegaMod.Settings?.Hauling?.EnableSmartHaul == true && cachedSmartHaulDef != null;
+            bool useSmartHaul = SadSeal.Core.Registry.ModuleManager.GetModule("Hauling")?.IsEnabled == true && cachedSmartHaulDef != null;
             JobDef chosenJobDef = useSmartHaul ? cachedSmartHaulDef : JobDefOf.HaulToCell;
 
             Job job = JobMaker.MakeJob(chosenJobDef, t, storeCell);

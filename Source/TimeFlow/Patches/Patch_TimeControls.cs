@@ -11,7 +11,7 @@ namespace SadSeal.MegaMod.TimeFlow.Patches
     {
         public static void Prefix(ref bool __state)
         {
-            var settings = MegaMod.Settings?.TimeFlow;
+            var settings = TimeFlowModule.ModSettings;
             if (settings != null && settings.UnlockSuperSpeed && !Prefs.DevMode)
             {
                 Prefs.DevMode = true;
@@ -25,7 +25,7 @@ namespace SadSeal.MegaMod.TimeFlow.Patches
 
         public static void Postfix()
         {
-            var settings = MegaMod.Settings?.TimeFlow;
+            var settings = TimeFlowModule.ModSettings;
             if (settings != null && settings.UnlockSuperSpeed)
             {
                 // Only trigger hotkey when not typing in text fields or modal dialogs

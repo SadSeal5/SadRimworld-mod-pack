@@ -10,7 +10,7 @@ namespace SadSeal.MegaMod.Durability.Patches
         {
             if (__instance?.def == null) return;
 
-            if (MegaMod.Settings?.Durability?.restoreExistingOnLoad == true &&
+            if (DurabilityModule.ModSettings?.restoreExistingOnLoad == true &&
                 !__instance.def.useHitPoints &&
                 (__instance.def.IsWeapon || __instance.def.IsApparel))
             {

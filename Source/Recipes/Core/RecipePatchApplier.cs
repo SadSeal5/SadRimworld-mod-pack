@@ -13,18 +13,10 @@ namespace SadSeal.MegaMod.Recipes
         public List<ThingDef> RecipeUsers;
     }
 
-    [StaticConstructorOnStartup]
     public static class RecipePatchApplier
     {
         public static Dictionary<string, VanillaSnapshot> VanillaSnapshots = new Dictionary<string, VanillaSnapshot>();
-
-        static RecipePatchApplier()
-        {
-            ApplyAll();
-            CustomRecipeManager.InitializeAll();
-        }
-
-        public static void EnsureVanillaSaved(RecipeDef r)
+public static void EnsureVanillaSaved(RecipeDef r)
         {
             if (r == null || VanillaSnapshots.ContainsKey(r.defName)) return;
             var snap = new VanillaSnapshot
@@ -43,8 +35,8 @@ namespace SadSeal.MegaMod.Recipes
 
         public static void ApplyAll()
         {
-            if (MegaMod.Settings?.Modules != null && !MegaMod.Settings.Modules.enableRecipes) return;
-            var settings = MegaMod.Settings?.Recipes;
+            if (RecipesModule.Instance?.IsEnabled == false) return;
+            var settings = RecipesModule.ModSettings;
             if (settings?.tweaks == null || settings.tweaks.Count == 0) return;
             for (int i = 0; i < settings.tweaks.Count; i++)
             {

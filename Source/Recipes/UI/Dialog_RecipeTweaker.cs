@@ -118,7 +118,7 @@ namespace SadSeal.MegaMod.Recipes.UI
 
         private bool HasTweak(string defName)
         {
-            var tweaks = MegaMod.Settings?.Recipes?.tweaks;
+            var tweaks = RecipesModule.ModSettings?.tweaks;
             if (tweaks == null) return false;
             for (int i = 0; i < tweaks.Count; i++)
                 if (tweaks[i].recipeDefName == defName && !tweaks[i].IsVanilla) return true;
@@ -259,7 +259,7 @@ namespace SadSeal.MegaMod.Recipes.UI
         {
             _selected = r;
             RecipePatchApplier.EnsureVanillaSaved(r);
-            var tw = MegaMod.Settings?.Recipes?.GetOrCreate(r.defName) ?? new RecipeTweak { recipeDefName = r.defName };
+            var tw = RecipesModule.ModSettings?.GetOrCreate(r.defName) ?? new RecipeTweak { recipeDefName = r.defName };
 
             _editLabel = tw.newLabel ?? r.LabelCap.ToString();
 
@@ -306,7 +306,7 @@ namespace SadSeal.MegaMod.Recipes.UI
         private void SaveChanges()
         {
             if (_selected == null) return;
-            var tw = MegaMod.Settings.Recipes.GetOrCreate(_selected.defName);
+            var tw = RecipesModule.ModSettings.GetOrCreate(_selected.defName);
             string van = _selected.LabelCap.ToString();
             tw.newLabel = (!string.IsNullOrEmpty(_editLabel) && _editLabel != van) ? _editLabel : null;
             tw.newWorkAmount = float.TryParse(_editWork, out var wp) ? wp : _selected.workAmount;
@@ -343,8 +343,8 @@ namespace SadSeal.MegaMod.Recipes.UI
             }
 
             RecipePatchApplier.ApplyTweak(_selected, tw);
-            MegaMod.Settings.Recipes.PruneVanilla();
-            MegaMod.Settings.Recipes.Write();
+            RecipesModule.ModSettings.PruneVanilla();
+            RecipesModule.ModSettings.Write();
             Messages.Message("MegaMod_Recipe_Updated".Translate(_selected.LabelCap), MessageTypeDefOf.PositiveEvent, false);
         }
 
@@ -357,8 +357,8 @@ namespace SadSeal.MegaMod.Recipes.UI
                 return;
             }
             RecipePatchApplier.ResetToVanilla(_selected);
-            MegaMod.Settings.Recipes.tweaks.RemoveAll(t => t.recipeDefName == _selected.defName);
-            MegaMod.Settings.Recipes.Write();
+            RecipesModule.ModSettings.tweaks.RemoveAll(t => t.recipeDefName == _selected.defName);
+            RecipesModule.ModSettings.Write();
             SelectRecipe(_selected);
             Messages.Message("MegaMod_Recipe_ResetSuccess".Translate(_selected.LabelCap), MessageTypeDefOf.PositiveEvent, false);
         }

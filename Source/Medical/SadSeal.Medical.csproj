@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>SadSeal.Medical</AssemblyName>
+    <RootNamespace>SadSeal.MegaMod.Medical</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\SadSeal.Core.csproj" />
+  </ItemGroup>
+</Project>

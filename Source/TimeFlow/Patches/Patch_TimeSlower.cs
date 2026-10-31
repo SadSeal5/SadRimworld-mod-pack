@@ -8,7 +8,7 @@ namespace SadSeal.MegaMod.TimeFlow.Patches
     {
         public static bool Prefix(ref bool __result)
         {
-            var settings = MegaMod.Settings?.TimeFlow;
+            var settings = TimeFlowModule.ModSettings;
             if (settings != null && settings.DisableForcedSlowdown)
             {
                 __result = false;
@@ -23,7 +23,7 @@ namespace SadSeal.MegaMod.TimeFlow.Patches
     {
         public static bool Prefix()
         {
-            var settings = MegaMod.Settings?.TimeFlow;
+            var settings = TimeFlowModule.ModSettings;
             if (settings != null && settings.DisableForcedSlowdown)
             {
                 return false;
@@ -37,7 +37,7 @@ namespace SadSeal.MegaMod.TimeFlow.Patches
     {
         public static bool Prefix()
         {
-            var settings = MegaMod.Settings?.TimeFlow;
+            var settings = TimeFlowModule.ModSettings;
             if (settings != null && settings.DisableForcedSlowdown)
             {
                 return false;

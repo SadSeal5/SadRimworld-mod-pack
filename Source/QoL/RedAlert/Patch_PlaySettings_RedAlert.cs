@@ -16,7 +16,7 @@ namespace SadSeal.MegaMod.QoL.RedAlert
                 return;
             }
 
-            if (MegaMod.Settings?.Modules?.enableQoL == false)
+            if (QoLModule.Instance?.IsEnabled == false)
             {
                 return;
             }

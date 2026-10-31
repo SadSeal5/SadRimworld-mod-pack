@@ -4,21 +4,14 @@ using Verse;
 
 namespace SadSeal.MegaMod.QoL
 {
-    [StaticConstructorOnStartup]
     public static class QoLApplier
     {
         private static readonly Dictionary<ThingDef, float> originalTreeLifespans = new Dictionary<ThingDef, float>();
         private static bool originalLifespansCached;
-
-        static QoLApplier()
+public static void ApplyAll()
         {
-            ApplyAll();
-        }
-
-        public static void ApplyAll()
-        {
-            if (MegaMod.Settings?.Modules != null && !MegaMod.Settings.Modules.enableQoL) return;
-            var settings = MegaMod.Settings?.QoL;
+            if (QoLModule.Instance?.IsEnabled == false) return;
+            var settings = QoLModule.ModSettings;
             if (settings == null) return;
 
             ApplyMetalFlammability(settings.metalDoesntBurn);
@@ -31,7 +24,7 @@ namespace SadSeal.MegaMod.QoL
 
         public static void ApplyQoLSettings()
         {
-            if (MegaMod.Settings?.QoL?.filthVanishes == true)
+            if (QoLModule.ModSettings?.filthVanishes == true)
             {
                 foreach (ThingDef td in DefDatabase<ThingDef>.AllDefs)
                 {

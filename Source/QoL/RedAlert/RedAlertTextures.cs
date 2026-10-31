@@ -3,7 +3,6 @@ using Verse;
 
 namespace SadSeal.MegaMod.QoL.RedAlert
 {
-    [StaticConstructorOnStartup]
     public static class RedAlertTextures
     {
         private static Texture2D iconActive;

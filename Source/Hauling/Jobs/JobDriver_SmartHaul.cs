@@ -109,14 +109,14 @@ namespace SadSeal.MegaMod.Hauling.Jobs
 
             findNextCandidate.initAction = () =>
             {
-                bool smartHaulEnabled = MegaMod.Settings?.Hauling?.EnableSmartHaul ?? true;
+                bool smartHaulEnabled = HaulModule.ModSettings?.EnableSmartHaul ?? true;
                 if (!smartHaulEnabled)
                 {
                     pawn.jobs.curDriver.JumpToToil(gotoDestination);
                     return;
                 }
 
-                var settings = MegaMod.Settings?.Hauling;
+                var settings = HaulModule.ModSettings;
                 float maxMassRatio = settings != null ? settings.MassLimitPercent : 0.95f;
                 float capacity = MassUtility.Capacity(pawn);
                 float currentMass = MassUtility.GearAndInventoryMass(pawn);

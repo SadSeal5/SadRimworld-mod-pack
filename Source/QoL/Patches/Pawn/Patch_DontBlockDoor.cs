@@ -10,7 +10,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
         public static void Postfix(IntVec3 c, Map map, ref bool __result)
         {
             if (!__result) return;
-            if (MegaMod.Settings?.QoL?.dontBlockDoors != true) return;
+            if (QoLModule.ModSettings?.dontBlockDoors != true) return;
             if (map == null) return;
 
             // Prevent items from being hauled or stored directly onto door tiles

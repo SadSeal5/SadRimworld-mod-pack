@@ -48,7 +48,7 @@ namespace SadSeal.MegaMod.WorkManager.Cache
             }
 
             // Passion bonus: Major passion +30f, Minor passion +15f
-            if (MegaMod.Settings.WorkManager.UsePassionPriorities)
+            if (WorkManagerModule.ModSettings.UsePassionPriorities)
             {
                 Passion passion = skills.MaxPassionOfRelevantSkillsFor(workType);
                 if (passion == Passion.Major)

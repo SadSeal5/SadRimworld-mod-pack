@@ -67,7 +67,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
         {
             public static void Prefix(Pawn_HealthTracker __instance)
             {
-                if (MegaMod.Settings?.QoL?.whereIsMyWeapon != true) return;
+                if (QoLModule.ModSettings?.whereIsMyWeapon != true) return;
 
                 Verse.Pawn pawn = Traverse.Create(__instance).Field("pawn").GetValue<Verse.Pawn>();
                 if (pawn != null && pawn.IsColonist && pawn.equipment?.Primary != null)
@@ -86,7 +86,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
         {
             public static void Postfix(Pawn_HealthTracker __instance)
             {
-                if (MegaMod.Settings?.QoL?.whereIsMyWeapon != true) return;
+                if (QoLModule.ModSettings?.whereIsMyWeapon != true) return;
 
                 Verse.Pawn pawn = Traverse.Create(__instance).Field("pawn").GetValue<Verse.Pawn>();
                 if (pawn == null || !pawn.IsColonist || !pawn.Spawned || pawn.Dead) return;

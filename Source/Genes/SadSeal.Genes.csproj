@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>SadSeal.Genes</AssemblyName>
+    <RootNamespace>SadSeal.MegaMod.Genes</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\SadSeal.Core.csproj" />
+  </ItemGroup>
+</Project>

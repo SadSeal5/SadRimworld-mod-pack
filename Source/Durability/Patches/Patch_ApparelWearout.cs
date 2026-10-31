@@ -9,7 +9,7 @@ namespace SadSeal.MegaMod.Durability.Patches
     {
         public static bool Prefix()
         {
-            if (MegaMod.Settings?.Durability != null && MegaMod.Settings.Durability.removeApparelDurability)
+            if (DurabilityModule.ModSettings != null && DurabilityModule.ModSettings.removeApparelDurability)
             {
                 return false;
             }

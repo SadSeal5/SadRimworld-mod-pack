@@ -10,7 +10,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
     {
         public static void Postfix(MentalState_SocialFighting __instance)
         {
-            if (MegaMod.Settings?.QoL?.ughYouGotMe != true) return;
+            if (QoLModule.ModSettings?.ughYouGotMe != true) return;
 
             Verse.Pawn pawn = __instance.pawn;
             Verse.Pawn other = __instance.otherPawn;

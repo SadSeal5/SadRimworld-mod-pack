@@ -10,9 +10,9 @@ namespace SadSeal.MegaMod.AutoArm
     {
         protected override Job TryGiveJob(Pawn pawn)
         {
-            if (MegaMod.Settings?.Modules != null && !MegaMod.Settings.Modules.enableAutoArm) return null;
+            if (AutoArmModule.Instance?.IsEnabled == false) return null;
 
-            AutoArmSettings settings = MegaMod.Settings?.AutoArm;
+            AutoArmSettings settings = AutoArmModule.ModSettings;
             if (settings != null && !settings.enableAutoArm) return null;
             if (settings == null) settings = new AutoArmSettings();
 

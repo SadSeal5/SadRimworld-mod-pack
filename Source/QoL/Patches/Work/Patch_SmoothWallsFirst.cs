@@ -12,7 +12,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Work
         public static bool Prefix(Verse.Pawn pawn, IntVec3 c, bool forced, ref Job __result)
         {
             if (forced) return true;
-            if (MegaMod.Settings?.QoL?.smoothWallsBeforeFloors != true) return true;
+            if (QoLModule.ModSettings?.smoothWallsBeforeFloors != true) return true;
             if (pawn?.Map == null) return true;
 
             // Prioritize smoothing rough rock walls before smoothing stone floors

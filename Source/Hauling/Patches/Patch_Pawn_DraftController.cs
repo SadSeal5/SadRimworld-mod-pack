@@ -8,7 +8,7 @@ namespace SadSeal.MegaMod.Hauling.Patches
     {
         public static void Postfix(Pawn_DraftController __instance, bool value)
         {
-            if (value && (MegaMod.Settings?.Hauling?.DropOnDraft ?? true))
+            if (value && (HaulModule.ModSettings?.DropOnDraft ?? true))
             {
                 if (__instance?.pawn != null)
                 {

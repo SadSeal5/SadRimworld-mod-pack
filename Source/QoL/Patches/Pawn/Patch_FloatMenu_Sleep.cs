@@ -16,7 +16,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
 
         public static void Postfix(Vector3 clickPos, Verse.Pawn pawn, List<FloatMenuOption> opts)
         {
-            if (MegaMod.Settings?.QoL?.prioritizeSleep != true) return;
+            if (QoLModule.ModSettings?.prioritizeSleep != true) return;
             if (pawn == null || !pawn.IsColonistPlayerControlled || pawn.Drafted || pawn.Map == null) return;
             if (pawn.needs?.rest == null || pawn.needs.rest.CurLevel >= 0.75f) return;
 

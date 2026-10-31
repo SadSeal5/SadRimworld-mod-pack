@@ -11,7 +11,7 @@ namespace SadSeal.MegaMod.Medical.FieldMedicine
         {
             if (__result) return;
 
-            var settings = MegaMod.Settings?.Medical;
+            var settings = MedicalModule.ModSettings;
             if (settings == null || !settings.EnableFieldMedicine) return;
 
             if (patient == null || doctor == null || patient.Dead || patient.health == null) return;

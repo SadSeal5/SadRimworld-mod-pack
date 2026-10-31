@@ -13,7 +13,7 @@ namespace SadSeal.MegaMod.Medical.SmartMedicine
         {
             if (patient == null || patient.health == null) return;
 
-            var settings = MegaMod.Settings?.Medical;
+            var settings = MedicalModule.ModSettings;
             if (settings == null) return;
 
             // 1. Field Medicine: If healer has no medicine, check patient's inventory

@@ -11,7 +11,7 @@ namespace SadSeal.MegaMod.Medical.Mood
         {
             if (__result >= 0f) return; // Only soften negative mood penalties
 
-            var settings = MegaMod.Settings?.Medical;
+            var settings = MedicalModule.ModSettings;
             if (settings == null || !settings.SoftenHarvestMoodPenalty) return;
 
             if (__instance?.def == null) return;

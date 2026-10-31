@@ -15,7 +15,7 @@ namespace SadSeal.MegaMod.QoL.Alerts
 
         public override AlertReport GetReport()
         {
-            if (MegaMod.Settings?.QoL?.traderAlerts != true) return AlertReport.Inactive;
+            if (QoLModule.ModSettings?.traderAlerts != true) return AlertReport.Inactive;
 
             List<Map> maps = Find.Maps;
             if (maps == null) return AlertReport.Inactive;

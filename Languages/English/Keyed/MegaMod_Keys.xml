@@ -407,6 +407,36 @@
   <MegaMod_QoLTraderAlerts_Desc>Displays a prominent on-screen alert whenever a trade caravan or orbital trade ship is present and available for trade.</MegaMod_QoLTraderAlerts_Desc>
   <MegaMod_AlertTraderTitle>Trader visiting</MegaMod_AlertTraderTitle>
   <MegaMod_AlertTraderDesc>A trade caravan or orbital trade ship is available for trading with your colony. Don't forget to trade before they leave!</MegaMod_AlertTraderDesc>
+
+  <!-- QoL Expansion Suite v2.0 Keys -->
+  <MegaMod_QoLSectionSafety>Construction &amp; Safety</MegaMod_QoLSectionSafety>
+  <MegaMod_QoLEnableRoofSafety>Roof Collapse Safety</MegaMod_QoLEnableRoofSafety>
+  <MegaMod_QoLEnableRoofSafety_Desc>Prevents colonists from deconstructing or mining supports when doing so would trigger a roof collapse on a colonist or worker.</MegaMod_QoLEnableRoofSafety_Desc>
+  <MegaMod_RoofSafety_Prevented>Roof safety prevented {0} from removing {1}: this would cause a roof collapse on a colonist!</MegaMod_RoofSafety_Prevented>
+  <MegaMod_QoLEnableReplaceStuff>Replace Stuff (Seamless Replacement)</MegaMod_QoLEnableReplaceStuff>
+  <MegaMod_QoLEnableReplaceStuff_Desc>Allows placing blueprints over existing structures of the same category (e.g. stone wall over wood wall, door over wall) and smoothly replaces them without dropping roofs.</MegaMod_QoLEnableReplaceStuff_Desc>
+  <MegaMod_QoLEnableShareTheLoad>Share The Load (Multi-Pawn Hauling)</MegaMod_QoLEnableShareTheLoad>
+  <MegaMod_QoLEnableShareTheLoad_Desc>Allows multiple colonists to concurrently haul required construction materials to the same unfinished blueprint or frame instead of locking it to one worker.</MegaMod_QoLEnableShareTheLoad_Desc>
+  <MegaMod_QoLEnableCleanBeforeWork>Clean Before Cooking &amp; Surgery</MegaMod_QoLEnableCleanBeforeWork>
+  <MegaMod_QoLEnableCleanBeforeWork_Desc>Orders workers to quickly sweep and clean filth in kitchens and surgery/hospital rooms before starting cooking recipes or medical operations.</MegaMod_QoLEnableCleanBeforeWork_Desc>
+  <MegaMod_QoLEnableAutoCutBlight>Auto-Cut Blighted Crops</MegaMod_QoLEnableAutoCutBlight>
+  <MegaMod_QoLEnableAutoCutBlight_Desc>Automatically designates crops for cutting the exact moment they become blighted to prevent outbreaks from spreading across fields.</MegaMod_QoLEnableAutoCutBlight_Desc>
+  <MegaMod_QoLEnableSnapOut>Snap Out! (Calm Mental Breaks)</MegaMod_QoLEnableSnapOut>
+  <MegaMod_QoLEnableSnapOut_Desc>Allows social colonists and wardens to attempt to calm down fellow colonists suffering from non-violent mental breaks.</MegaMod_QoLEnableSnapOut_Desc>
+  <MegaMod_SnapOut_Option>Attempt to calm down {0} (Snap Out)</MegaMod_SnapOut_Option>
+  <MegaMod_SnapOut_Success>{0} successfully calmed down {1} from their mental break!</MegaMod_SnapOut_Success>
+  <MegaMod_SnapOut_Failed>{0} attempted to calm down {1}, but could not reach them this time.</MegaMod_SnapOut_Failed>
+  <MegaMod_QoLEnableBillQoL>Bill Management &amp; Clipboard</MegaMod_QoLEnableBillQoL>
+  <MegaMod_QoLEnableBillQoL_Desc>Adds bill clipboard copy/paste between workbenches, and automatically suspends production bills when required ingredients are missing.</MegaMod_QoLEnableBillQoL_Desc>
+  <MegaMod_BillAutoSuspended>Bill '{0}' on {1} was auto-suspended: required ingredients are missing.</MegaMod_BillAutoSuspended>
+  <MegaMod_BillAutoResumed>Bill '{0}' on {1} was auto-resumed: required ingredients are now available.</MegaMod_BillAutoResumed>
+  <MegaMod_CopyBills>Copy Bills</MegaMod_CopyBills>
+  <MegaMod_CopyBills_Desc>Copy all production bills from this workbench to the clipboard.</MegaMod_CopyBills_Desc>
+  <MegaMod_PasteBills>Paste Bills</MegaMod_PasteBills>
+  <MegaMod_PasteBills_Desc>Paste compatible copied bills from the clipboard onto this workbench.</MegaMod_PasteBills_Desc>
+  <MegaMod_BillsCopied>Copied {0} bills from {1}.</MegaMod_BillsCopied>
+  <MegaMod_BillsPasted>Pasted {0} bills onto {1}.</MegaMod_BillsPasted>
+  <MegaMod_CannotPasteBills>Clipboard bills are not compatible with this workbench.</MegaMod_CannotPasteBills>
   <MegaMod_DurabilityPerfNote>⚡ Zero-Tick Performance Architecture:\nThis mod manipulates core RimWorld ThingDef engine flags (useHitPoints = false) rather than relying on per-tick Harmony hooks or background loops. Even with 10,000+ items on the map, there is absolute zero TPS drop.</MegaMod_DurabilityPerfNote>
   <!-- Medical & Autopsy Suite -->
   <MegaMod_Medical_Title>Medical &amp; Autopsy Suite</MegaMod_Medical_Title>

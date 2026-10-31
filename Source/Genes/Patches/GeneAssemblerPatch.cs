@@ -128,17 +128,4 @@ namespace SadSeal.MegaMod.Genes.Patches
             return string.IsNullOrEmpty(__result) ? extra : __result + "\n" + extra;
         }
     }
-
-    [StaticConstructorOnStartup]
-    public static class GeneAssemblerDefInitializer
-    {
-        static GeneAssemblerDefInitializer()
-        {
-            if (MegaMod.Settings?.Modules != null && !MegaMod.Settings.Modules.enableGenes) return;
-            if (ModLister.BiotechInstalled && ThingDefOf.GeneAssembler != null)
-            {
-                GeneAssemblerPatch.EnsureDefHasComp(ThingDefOf.GeneAssembler);
-            }
-        }
-    }
 }

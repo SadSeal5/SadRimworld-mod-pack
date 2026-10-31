@@ -11,7 +11,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Work
     {
         public static bool Prefix(Verse.Pawn pawn, Bill_ProductionWithUft bill, ref UnfinishedThing __result)
         {
-            if (MegaMod.Settings?.QoL?.noJobAuthors != true) return true;
+            if (QoLModule.ModSettings?.noJobAuthors != true) return true;
             if (pawn == null || bill == null || pawn.Map == null) return true;
 
             Predicate<Thing> validator = (Thing t) =>

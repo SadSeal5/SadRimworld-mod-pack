@@ -4,7 +4,6 @@ using Verse;
 
 namespace SadSeal.MegaMod.WorkManager.UI
 {
-    [StaticConstructorOnStartup]
     public static class WorkManagerTextures
     {
         private static Texture2D globalOn;

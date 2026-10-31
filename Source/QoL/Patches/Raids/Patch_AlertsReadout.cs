@@ -13,6 +13,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Raids
             var allAlerts = Traverse.Create(__instance).Field<List<Alert>>("AllAlerts").Value;
             if (allAlerts != null)
             {
+                allAlerts.RemoveAll(a => a != null && a.GetType().Name == "Alert_TraderVisiting");
                 allAlerts.Add(new Alert_TraderVisiting());
             }
         }

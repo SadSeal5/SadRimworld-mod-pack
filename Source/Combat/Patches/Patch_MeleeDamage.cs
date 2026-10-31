@@ -11,7 +11,7 @@ namespace SadSeal.MegaMod.Combat.Patches
         [HarmonyPostfix]
         public static void Postfix(ref IEnumerable<DamageInfo> __result)
         {
-            var settings = MegaMod.Settings?.Combat;
+            var settings = CombatModule.ModSettings;
             if (settings == null || __result == null) return;
 
             float dmgMult = settings.meleeDamageMultiplier;

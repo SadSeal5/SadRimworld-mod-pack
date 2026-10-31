@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <JobDef>
+    <defName>SadQoL_CalmDown</defName>
+    <driverClass>SadSeal.MegaMod.QoL.Patches.Pawn.JobDriver_CalmDown</driverClass>
+    <reportString>calming down TargetA.</reportString>
+    <casualInterruptible>true</casualInterruptible>
+    <allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+  </JobDef>
+</Defs>

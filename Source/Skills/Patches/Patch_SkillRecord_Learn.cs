@@ -8,14 +8,14 @@ namespace SadSeal.MegaMod.Skills.Patches
     {
         public static void Prefix(SkillRecord __instance, ref float xp, bool direct, bool ignoreLearnRate)
         {
-            if (xp > 0f && __instance != null && __instance.def != null && MegaMod.Settings?.Skills != null)
+            if (xp > 0f && __instance != null && __instance.def != null && SkillsModule.ModSettings != null)
             {
-                if (!MegaMod.Settings.Skills.ShouldApplyTo(__instance.Pawn))
+                if (!SkillsModule.ModSettings.ShouldApplyTo(__instance.Pawn))
                 {
                     return;
                 }
 
-                float multiplier = MegaMod.Settings.Skills.GetMultiplierForSkill(__instance.def);
+                float multiplier = SkillsModule.ModSettings.GetMultiplierForSkill(__instance.def);
                 xp *= multiplier;
             }
         }

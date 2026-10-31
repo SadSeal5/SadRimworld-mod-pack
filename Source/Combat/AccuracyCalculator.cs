@@ -8,7 +8,7 @@ namespace SadSeal.MegaMod.Combat
     {
         public static float CalculateShooterFactor(Thing caster, float distance, float? acc = null)
         {
-            var settings = MegaMod.Settings?.Combat;
+            var settings = CombatModule.ModSettings;
             if (settings == null || !settings.enableAccuracyOverhaul || settings.accuracyMode == AccuracyFormulaMode.Vanilla)
             {
                 float baseVanillaAcc = acc ?? ((caster is Pawn) ? caster.GetStatValue(StatDefOf.ShootingAccuracyPawn) : (caster?.GetStatValue(StatDefOf.ShootingAccuracyTurret) ?? 1f));

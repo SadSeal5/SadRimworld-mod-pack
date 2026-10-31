@@ -14,7 +14,7 @@ namespace SadSeal.MegaMod.QoL.UI
         {
             if (settings == null) return;
 
-            Rect viewRect = new Rect(0f, 0f, inRect.width - 24f, 850f);
+            Rect viewRect = new Rect(0f, 0f, inRect.width - 24f, 1300f);
             Widgets.BeginScrollView(inRect, ref scrollPosition, viewRect);
 
             Listing_Standard listing = new Listing_Standard();
@@ -86,6 +86,21 @@ namespace SadSeal.MegaMod.QoL.UI
                 "MegaMod_QoLDontBlockDoors".Translate(),
                 ref settings.dontBlockDoors,
                 "MegaMod_QoLDontBlockDoors_Desc".Translate());
+
+            listing.CheckboxLabeled(
+                "MegaMod_QoLEnableCleanBeforeWork".Translate(),
+                ref settings.enableCleanBeforeWork,
+                "MegaMod_QoLEnableCleanBeforeWork_Desc".Translate());
+
+            listing.CheckboxLabeled(
+                "MegaMod_QoLEnableAutoCutBlight".Translate(),
+                ref settings.enableAutoCutBlight,
+                "MegaMod_QoLEnableAutoCutBlight_Desc".Translate());
+
+            listing.CheckboxLabeled(
+                "MegaMod_QoLEnableSnapOut".Translate(),
+                ref settings.enableSnapOut,
+                "MegaMod_QoLEnableSnapOut_Desc".Translate());
 
             listing.Gap(14f);
 
@@ -195,10 +210,40 @@ namespace SadSeal.MegaMod.QoL.UI
                 ref settings.haulAfterSlaughter,
                 "MegaMod_QoLHaulAfterSlaughter_Desc".Translate());
 
+            listing.CheckboxLabeled(
+                "MegaMod_QoLEnableBillQoL".Translate(),
+                ref settings.enableBillQoL,
+                "MegaMod_QoLEnableBillQoL_Desc".Translate());
+
             listing.Gap(14f);
 
             // ----------------------------------------------------
-            // Section 4: Raids & Events
+            // Section 4: Construction & Safety
+            // ----------------------------------------------------
+            Text.Font = GameFont.Medium;
+            listing.Label("MegaMod_QoLSectionSafety".Translate());
+            Text.Font = GameFont.Small;
+            listing.GapLine();
+
+            listing.CheckboxLabeled(
+                "MegaMod_QoLEnableRoofSafety".Translate(),
+                ref settings.enableRoofSafety,
+                "MegaMod_QoLEnableRoofSafety_Desc".Translate());
+
+            listing.CheckboxLabeled(
+                "MegaMod_QoLEnableReplaceStuff".Translate(),
+                ref settings.enableReplaceStuff,
+                "MegaMod_QoLEnableReplaceStuff_Desc".Translate());
+
+            listing.CheckboxLabeled(
+                "MegaMod_QoLEnableShareTheLoad".Translate(),
+                ref settings.enableShareTheLoad,
+                "MegaMod_QoLEnableShareTheLoad_Desc".Translate());
+
+            listing.Gap(14f);
+
+            // ----------------------------------------------------
+            // Section 5: Raids & Events
             // ----------------------------------------------------
             Text.Font = GameFont.Medium;
             listing.Label("MegaMod_QoLSectionRaids".Translate());
