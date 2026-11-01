@@ -93,7 +93,10 @@ namespace SadSeal.MegaMod.QoL.Patches.Production
     {
         public static IEnumerable<Gizmo> Postfix(IEnumerable<Gizmo> __result, Building __instance)
         {
-            foreach (Gizmo g in __result) yield return g;
+            if (__result != null)
+            {
+                foreach (Gizmo g in __result) yield return g;
+            }
             if (QoLModule.ModSettings?.enableBillQoL != true) yield break;
             if (!(__instance is Building_WorkTable workTable)) yield break;
             if (!workTable.Spawned || workTable.Faction != Faction.OfPlayer) yield break;

@@ -51,7 +51,7 @@ namespace SadSeal.MegaMod.Recipes
             var r = DefDatabase<RecipeDef>.GetNamed(data.defName, false) ?? new RecipeDef();
             r.defName = data.defName;
             r.label = data.label;
-            r.jobString = "Üretiyor: " + data.label;
+            r.jobString = "MegaMod_RecipeJobString".CanTranslate() ? "MegaMod_RecipeJobString".Translate(data.label).Resolve() : $"Producing {data.label}";
             r.workAmount = data.workAmount;
             r.workSpeedStat = StatDefOf.GeneralLaborSpeed;
             r.effectWorking = DefDatabase<EffecterDef>.GetNamedSilentFail("Cook");

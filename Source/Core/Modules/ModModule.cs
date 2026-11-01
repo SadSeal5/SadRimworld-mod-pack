@@ -61,7 +61,7 @@ namespace SadSeal.Core.Modules
             if (Scribe.mode == LoadSaveMode.LoadingVars)
             {
                 Scribe_Deep.Look(ref s, ScribeTag);
-                if (s == null && !string.Equals(ScribeTag, Id.ToLowerInvariant(), StringComparison.OrdinalIgnoreCase))
+                if (s == null && !string.Equals(ScribeTag, Id.ToLowerInvariant(), StringComparison.Ordinal))
                 {
                     Scribe_Deep.Look(ref s, Id.ToLowerInvariant());
                 }

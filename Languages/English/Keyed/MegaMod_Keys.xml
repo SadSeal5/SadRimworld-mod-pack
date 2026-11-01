@@ -600,4 +600,5 @@
   <AutoArm_LabelBurst>Auto-Arm: Burst</AutoArm_LabelBurst>
   <AutoArm_LabelMeleeSharp>Auto-Arm: Sharp</AutoArm_LabelMeleeSharp>
   <AutoArm_LabelMeleeBlunt>Auto-Arm: Blunt</AutoArm_LabelMeleeBlunt>
+  <MegaMod_RecipeJobString>Producing {0}</MegaMod_RecipeJobString>
 </LanguageData>

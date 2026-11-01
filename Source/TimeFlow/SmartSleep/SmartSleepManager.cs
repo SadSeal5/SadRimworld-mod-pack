@@ -12,6 +12,15 @@ namespace SadSeal.MegaMod.TimeFlow.SmartSleep
         private static TimeSpeed savedSpeed = TimeSpeed.Normal;
         private static TimeSpeed lastSetSpeed = TimeSpeed.Normal;
         private static int checkInterval = 30;
+        private static int lastMapId = -1;
+
+        public static void ResetState()
+        {
+            isSleepingFastForwarding = false;
+            savedSpeed = TimeSpeed.Normal;
+            lastSetSpeed = TimeSpeed.Normal;
+            lastMapId = -1;
+        }
 
         public static void Postfix()
         {
@@ -29,6 +38,12 @@ namespace SadSeal.MegaMod.TimeFlow.SmartSleep
 
             Map map = Find.CurrentMap;
             if (map == null) return;
+
+            if (map.uniqueID != lastMapId)
+            {
+                lastMapId = map.uniqueID;
+                isSleepingFastForwarding = false;
+            }
 
             // If player manually changed speed during fast-forwarding, respect the player's choice!
             if (isSleepingFastForwarding && Find.TickManager.CurTimeSpeed != lastSetSpeed)

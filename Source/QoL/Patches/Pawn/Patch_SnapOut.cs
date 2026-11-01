@@ -157,6 +157,12 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
 
         public static void Postfix(Vector3 clickPos, Verse.Pawn pawn, List<FloatMenuOption> opts)
         {
+            AddCalmDownOption(clickPos, pawn, opts);
+        }
+
+        public static void AddCalmDownOption(Vector3 clickPos, Verse.Pawn pawn, List<FloatMenuOption> opts)
+        {
+            if (opts == null) return;
             if (QoLModule.ModSettings?.enableSnapOut != true) return;
             if (pawn == null || !pawn.IsColonistPlayerControlled) return;
 
@@ -174,10 +180,25 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
                         opts.Add(new FloatMenuOption("MegaMod_SnapOut_Option".Translate(targetPawn.LabelShort), () =>
                         {
                             Job job = JobMaker.MakeJob(SadQoLDefOf.SadQoL_CalmDown, targetPawn);
-                            pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+                            pawn.jobs?.TryTakeOrderedJob(job, JobTag.Misc);
                         }));
                     }
                 }
+            }
+        }
+    }
+
+    [HarmonyPatch]
+    public static class Patch_FloatMenuMakerMap_SnapOut_1_7
+    {
+        public static bool Prepare() => AccessTools.Method(typeof(FloatMenuMakerMap), "GetOptions") != null;
+        public static MethodBase TargetMethod() => AccessTools.Method(typeof(FloatMenuMakerMap), "GetOptions");
+
+        public static void Postfix(List<Verse.Pawn> selectedPawns, Vector3 clickPos, List<FloatMenuOption> __result)
+        {
+            if (selectedPawns != null && selectedPawns.Count == 1 && __result != null)
+            {
+                Patch_FloatMenuMakerMap_SnapOut.AddCalmDownOption(clickPos, selectedPawns[0], __result);
             }
         }
     }

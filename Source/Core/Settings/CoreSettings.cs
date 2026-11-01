@@ -31,6 +31,7 @@ namespace SadSeal.Core.Settings
             }
 
             Scribe_Deep.Look(ref modulesContainer, "modules");
+            modulesContainer ??= new ModuleStateContainer();
 
             // Delegate to all discovered modules for their typed settings
             ModuleManager.ExposeAllData();

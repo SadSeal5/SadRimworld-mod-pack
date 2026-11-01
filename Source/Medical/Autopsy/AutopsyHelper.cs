@@ -61,7 +61,7 @@ namespace SadSeal.MegaMod.Medical.Autopsy
                 {
                     Thing steel = ThingMaker.MakeThing(ThingDefOf.Steel);
                     steel.stackCount = steelAmount;
-                    GenSpawn.Spawn(steel, pos, map);
+                    GenPlace.TryPlaceThing(steel, pos, map, ThingPlaceMode.Near);
                     extractedCount++;
                 }
 
@@ -69,7 +69,7 @@ namespace SadSeal.MegaMod.Medical.Autopsy
                 {
                     Thing plasteel = ThingMaker.MakeThing(ThingDefOf.Plasteel);
                     plasteel.stackCount = plasteelAmount;
-                    GenSpawn.Spawn(plasteel, pos, map);
+                    GenPlace.TryPlaceThing(plasteel, pos, map, ThingPlaceMode.Near);
                     extractedCount++;
                 }
 
@@ -77,7 +77,7 @@ namespace SadSeal.MegaMod.Medical.Autopsy
                 int compAmount = Mathf.Max(1, Mathf.RoundToInt(pawn.BodySize * 0.8f));
                 Thing comp = ThingMaker.MakeThing(ThingDefOf.ComponentIndustrial);
                 comp.stackCount = compAmount;
-                GenSpawn.Spawn(comp, pos, map);
+                GenPlace.TryPlaceThing(comp, pos, map, ThingPlaceMode.Near);
                 extractedCount++;
 
                 Messages.Message("MegaMod_AutopsyMechanoidSuccess".Translate(billDoer.LabelShort, corpse.LabelShort, extractedCount),
@@ -118,7 +118,7 @@ namespace SadSeal.MegaMod.Medical.Autopsy
                     if (Rand.Value < (settings.AutopsyBionicExtractChance * successChance))
                     {
                         Thing bionic = ThingMaker.MakeThing(dropDef);
-                        GenSpawn.Spawn(bionic, pos, map);
+                        GenPlace.TryPlaceThing(bionic, pos, map, ThingPlaceMode.Near);
                         extractedCount++;
                     }
 
@@ -161,7 +161,7 @@ namespace SadSeal.MegaMod.Medical.Autopsy
                         if (Rand.Value < successChance)
                         {
                             Thing organ = ThingMaker.MakeThing(organDef);
-                            GenSpawn.Spawn(organ, pos, map);
+                            GenPlace.TryPlaceThing(organ, pos, map, ThingPlaceMode.Near);
                             extractedCount++;
                         }
 

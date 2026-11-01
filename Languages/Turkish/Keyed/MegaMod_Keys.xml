@@ -600,4 +600,5 @@
   <AutoArm_LabelBurst>Auto-Arm: Seri Atış</AutoArm_LabelBurst>
   <AutoArm_LabelMeleeSharp>Auto-Arm: Kesici</AutoArm_LabelMeleeSharp>
   <AutoArm_LabelMeleeBlunt>Auto-Arm: Ezici</AutoArm_LabelMeleeBlunt>
+  <MegaMod_RecipeJobString>Üretiyor: {0}</MegaMod_RecipeJobString>
 </LanguageData>

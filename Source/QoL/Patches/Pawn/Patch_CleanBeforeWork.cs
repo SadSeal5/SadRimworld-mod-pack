@@ -77,7 +77,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
 
             if (primaryFilth == null) return null;
 
-            Job cleanJob = JobMaker.MakeJob(JobDefOf.Clean);
+            Job cleanJob = JobMaker.MakeJob(JobDefOf.Clean, primaryFilth);
             cleanJob.AddQueuedTarget(TargetIndex.A, primaryFilth);
             int queued = 0;
             for (int i = 0; i < candidateFilth.Count; i++)
