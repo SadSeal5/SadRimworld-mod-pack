@@ -17,7 +17,7 @@ namespace SadSeal.MegaMod.Recipes
             if (list == null) return false;
             for (int i = 0; i < list.Count; i++)
             {
-                if (list[i].defName == defName) return true;
+                if (list[i] != null && list[i].defName == defName) return true;
             }
             return false;
         }
@@ -29,7 +29,7 @@ namespace SadSeal.MegaMod.Recipes
             if (list == null) return null;
             for (int i = 0; i < list.Count; i++)
             {
-                if (list[i].defName == defName) return list[i];
+                if (list[i] != null && list[i].defName == defName) return list[i];
             }
             return null;
         }
@@ -51,7 +51,7 @@ namespace SadSeal.MegaMod.Recipes
             var r = DefDatabase<RecipeDef>.GetNamed(data.defName, false) ?? new RecipeDef();
             r.defName = data.defName;
             r.label = data.label;
-            r.jobString = "Üretiyor: " + data.label;
+            r.jobString = "MegaMod_RecipeJobString".Translate(data.label).ToString();
             r.workAmount = data.workAmount;
             r.workSpeedStat = StatDefOf.GeneralLaborSpeed;
             r.effectWorking = DefDatabase<EffecterDef>.GetNamedSilentFail("Cook");
@@ -152,6 +152,7 @@ namespace SadSeal.MegaMod.Recipes
             if (DefDatabase<RecipeDef>.GetNamed(data.defName, false) == null)
             {
                 DefDatabase<RecipeDef>.Add(r);
+                try { r.ResolveReferences(); } catch { }
             }
 
             // Add to settings
@@ -161,7 +162,7 @@ namespace SadSeal.MegaMod.Recipes
                 if (settings != null)
                 {
                     if (settings.customRecipes == null) settings.customRecipes = new List<CustomRecipeData>();
-                    settings.customRecipes.RemoveAll(x => x.defName == data.defName);
+                    settings.customRecipes.RemoveAll(x => x == null || x.defName == data.defName);
                     settings.customRecipes.Add(data);
                     settings.Write();
                 }
@@ -210,9 +211,10 @@ namespace SadSeal.MegaMod.Recipes
             }
 
             var settings = MegaMod.Settings?.Recipes;
-            if (settings?.customRecipes != null)
+            if (settings != null)
             {
-                settings.customRecipes.RemoveAll(x => x.defName == data.defName);
+                settings.customRecipes?.RemoveAll(x => x == null || x.defName == data.defName);
+                settings.tweaks?.RemoveAll(t => t != null && t.recipeDefName == data.defName);
                 settings.Write();
             }
 

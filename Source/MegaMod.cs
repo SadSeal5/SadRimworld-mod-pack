@@ -66,17 +66,17 @@ namespace SadSeal.MegaMod
             var allTabs = (MegaModTab[])Enum.GetValues(typeof(MegaModTab));
             int currentIndex = Array.IndexOf(allTabs, currentTab);
 
-            // Left navigation button: ◄ (switches to previous tab)
-            if (Widgets.ButtonText(prevRect, "◄"))
+            // Left navigation button (switches to previous tab)
+            if (Widgets.ButtonText(prevRect, "<"))
             {
                 int prevIndex = (currentIndex - 1 + allTabs.Length) % allTabs.Length;
                 currentTab = allTabs[prevIndex];
             }
 
-            // Center dropdown button: [ 🔽 Modülü Seç: {Localized Tab Name} ]
+            // Center dropdown button: [ Modülü Seç: {Localized Tab Name} ]
             string selectModuleText = "MegaMod_SelectModule".Translate();
             string currentTabLabel = GetTabLabel(currentTab);
-            string dropdownLabel = $"▼ {selectModuleText} {currentTabLabel}";
+            string dropdownLabel = $"v {selectModuleText} {currentTabLabel}";
 
             if (Widgets.ButtonText(centerRect, dropdownLabel))
             {
@@ -87,15 +87,15 @@ namespace SadSeal.MegaMod
                     string optionLabel = GetTabLabel(targetTab);
                     if (targetTab == currentTab)
                     {
-                        optionLabel = "● " + optionLabel;
+                        optionLabel = "* " + optionLabel;
                     }
                     options.Add(new FloatMenuOption(optionLabel, () => currentTab = targetTab));
                 }
                 Find.WindowStack.Add(new FloatMenu(options));
             }
 
-            // Right navigation button: ► (switches to next tab)
-            if (Widgets.ButtonText(nextRect, "►"))
+            // Right navigation button (switches to next tab)
+            if (Widgets.ButtonText(nextRect, ">"))
             {
                 int nextIndex = (currentIndex + 1) % allTabs.Length;
                 currentTab = allTabs[nextIndex];

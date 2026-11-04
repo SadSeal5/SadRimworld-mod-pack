@@ -67,8 +67,11 @@ namespace SadSeal.MegaMod.Genes
             }
             OrderQueue.Add(order);
 
-            // If this is the only order and it requires no work and no neutroamine (or already satisfied), process immediately
-            if (OrderQueue.Count == 1 && order.WorkRequired <= 0f && (innerContainer?.TotalStackCount ?? 0) >= order.NeutroamineCost)
+            // If this is the only order and it requires no work and no neutroamine (or already satisfied),
+            // process immediately. Only do this while spawned so the produced genepack is not lost.
+            if (OrderQueue.Count == 1 && order.WorkRequired <= 0f &&
+                parent != null && parent.Spawned && parent.Map != null &&
+                (innerContainer?.TotalStackCount ?? 0) >= order.NeutroamineCost)
             {
                 FinishCurrentOrder();
             }

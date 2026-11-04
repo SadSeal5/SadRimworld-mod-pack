@@ -140,6 +140,12 @@ namespace SadSeal.MegaMod.Skills
             {
                 skillMultipliers = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
             }
+            else if (Scribe.mode == LoadSaveMode.PostLoadInit &&
+                     !ReferenceEquals(skillMultipliers.Comparer, StringComparer.OrdinalIgnoreCase))
+            {
+                // Scribe rebuilds the dictionary with the default (case-sensitive) comparer.
+                skillMultipliers = new Dictionary<string, float>(skillMultipliers, StringComparer.OrdinalIgnoreCase);
+            }
         }
     }
 }

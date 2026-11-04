@@ -21,9 +21,63 @@
   <MegaMod_ResetAllConfirm>Tüm özel tarif değişikliklerini vanilla varsayılanlarına döndürmek istediğinizden emin misiniz? Bu işlem kaydedilen tüm ayarlarınızı silecektir.</MegaMod_ResetAllConfirm>
   <MegaMod_ResetAllSuccess>Tüm tarifler varsayılan ayarlarına başarıyla döndürüldü.</MegaMod_ResetAllSuccess>
   <MegaMod_RecipeHelp>İpucu: Tarif Düzenleyicide yapılan tüm değişiklikler anında devreye girer ve oyun yeniden başlatılsa bile korunur.</MegaMod_RecipeHelp>
+  <MegaMod_RecipeWindowTitle>Tarif Düzenleyici - SadSeal Mega Mod</MegaMod_RecipeWindowTitle>
+  <MegaMod_RecipeAddNew>+ Yeni Tarif Ekle</MegaMod_RecipeAddNew>
+  <MegaMod_RecipeSelectPrompt>Sol listeden bir tarif seçin.</MegaMod_RecipeSelectPrompt>
+  <MegaMod_RecipeCustomBadge>[Özel Tarif]</MegaMod_RecipeCustomBadge>
+  <MegaMod_RecipeDefNameLine>defName: {0} | Mod: {1}</MegaMod_RecipeDefNameLine>
+  <MegaMod_RecipeLabelField>Gösterim Adı:</MegaMod_RecipeLabelField>
+  <MegaMod_RecipeWorkField>Üretim Süresi (Work):</MegaMod_RecipeWorkField>
+  <MegaMod_RecipeDisableCheckbox>Tarifi Devre Dışı Bırak</MegaMod_RecipeDisableCheckbox>
+  <MegaMod_RecipeIngredientsHeader>Malzemeler</MegaMod_RecipeIngredientsHeader>
+  <MegaMod_RecipeAddIngredient>+ Malzeme Ekle</MegaMod_RecipeAddIngredient>
+  <MegaMod_RecipeRemoveIngredient>Sil</MegaMod_RecipeRemoveIngredient>
+  <MegaMod_RecipeSave>Kaydet</MegaMod_RecipeSave>
+  <MegaMod_RecipeResetToVanilla>Orijinale Sıfırla</MegaMod_RecipeResetToVanilla>
+  <MegaMod_RecipeDelete>Tarifi Sil</MegaMod_RecipeDelete>
+  <MegaMod_RecipeDeleteConfirm>'{0}' özel tarifini tamamen silmek istediğinize emin misiniz?</MegaMod_RecipeDeleteConfirm>
+  <MegaMod_RecipeDeleted>Özel tarif silindi.</MegaMod_RecipeDeleted>
+  <MegaMod_RecipeUpdated>Tarif güncellendi: {0}</MegaMod_RecipeUpdated>
+  <MegaMod_RecipeCustomNoVanilla>Özel tariflerin orijinal hali yoktur. Silmek için 'Tarifi Sil' butonunu kullanın.</MegaMod_RecipeCustomNoVanilla>
+  <MegaMod_RecipeResetDone>Tarif orijinal haline döndürüldü: {0}</MegaMod_RecipeResetDone>
+  <MegaMod_RecipeGroupCustom>Özel Tarifler</MegaMod_RecipeGroupCustom>
+  <MegaMod_RecipeGroupUnknown>Bilinmeyen</MegaMod_RecipeGroupUnknown>
+  <MegaMod_Vanilla>Vanilla</MegaMod_Vanilla>
+  <MegaMod_RecipeJobString>Üretiyor: {0}</MegaMod_RecipeJobString>
+  <MegaMod_RecipeExportEmpty>[MegaMod] Dışa aktarılacak tarif değişikliği yok.</MegaMod_RecipeExportEmpty>
+  <MegaMod_RecipeExportDone>[MegaMod] XML yaması aktarıldı: {0}</MegaMod_RecipeExportDone>
+  <MegaMod_CreateRecipeTitle>Yeni Özel Tarif Ekle</MegaMod_CreateRecipeTitle>
+  <MegaMod_CreateRecipeProduct>Üretilecek Ürün:</MegaMod_CreateRecipeProduct>
+  <MegaMod_CreateRecipeSelectProduct>Ürün Seç...</MegaMod_CreateRecipeSelectProduct>
+  <MegaMod_CreateRecipeDefaultLabel>Üret: {0}</MegaMod_CreateRecipeDefaultLabel>
+  <MegaMod_CreateRecipeName>Tarif Adı:</MegaMod_CreateRecipeName>
+  <MegaMod_CreateRecipeCount>Üretim Adedi:</MegaMod_CreateRecipeCount>
+  <MegaMod_CreateRecipeWork>İş Süresi:</MegaMod_CreateRecipeWork>
+  <MegaMod_CreateRecipeMinSkill>Min El Becerisi:</MegaMod_CreateRecipeMinSkill>
+  <MegaMod_CreateRecipeWorkbenches>Tezgahlar ({0} seçili)</MegaMod_CreateRecipeWorkbenches>
+  <MegaMod_CreateRecipeResearch>Gereken Araştırmalar ({0} seçili)</MegaMod_CreateRecipeResearch>
+  <MegaMod_CreateRecipeIngredients>Malzemeler</MegaMod_CreateRecipeIngredients>
+  <MegaMod_CreateRecipeAddIngredient>+ Malzeme Ekle</MegaMod_CreateRecipeAddIngredient>
+  <MegaMod_CreateRecipeRemove>Sil</MegaMod_CreateRecipeRemove>
+  <MegaMod_CreateRecipeCreate>Tarifi Oluştur</MegaMod_CreateRecipeCreate>
+  <MegaMod_CreateRecipeCancel>İptal</MegaMod_CreateRecipeCancel>
+  <MegaMod_CreateRecipeNoneSelected>Hiçbiri seçilmedi</MegaMod_CreateRecipeNoneSelected>
+  <MegaMod_CreateRecipeNoResearch>Yok (Hemen açık)</MegaMod_CreateRecipeNoResearch>
+  <MegaMod_CreateRecipeNoProduct>Lütfen üretilecek bir ürün seçin.</MegaMod_CreateRecipeNoProduct>
+  <MegaMod_CreateRecipeNoName>Lütfen tarif için bir isim girin.</MegaMod_CreateRecipeNoName>
+  <MegaMod_CreateRecipeBadWork>Lütfen geçerli bir iş süresi girin (pozitif sayı).</MegaMod_CreateRecipeBadWork>
+  <MegaMod_CreateRecipeNoWorkbench>Lütfen en az bir çalışma tezgahı seçin.</MegaMod_CreateRecipeNoWorkbench>
+  <MegaMod_CreateRecipeNoIngredient>Lütfen en az bir malzeme ekleyin.</MegaMod_CreateRecipeNoIngredient>
+  <MegaMod_CreateRecipeCreated>Yeni tarif oluşturuldu: {0}</MegaMod_CreateRecipeCreated>
+  <MegaMod_PickerSelectIngredient>Malzeme Seç</MegaMod_PickerSelectIngredient>
+  <MegaMod_PickerSelectWorkbench>Tezgah Seç</MegaMod_PickerSelectWorkbench>
+  <MegaMod_PickerSelectResearch>Araştırma Projesi Seç</MegaMod_PickerSelectResearch>
+  <MegaMod_PickerSelectAll>Tümünü Seç</MegaMod_PickerSelectAll>
+  <MegaMod_PickerClearAll>Tümünü Temizle</MegaMod_PickerClearAll>
+  <MegaMod_PickerConfirm>Tamam ({0})</MegaMod_PickerConfirm>
+  <MegaMod_PickerCancel>İptal</MegaMod_PickerCancel>
 
   <!-- Skill Multipliers Module -->
-  <SLM_ModTitle>Yetenek Öğrenme Çarpanı</SLM_ModTitle>
   <SLM_GeneralSettings>Genel ve Yaşam Kalitesi</SLM_GeneralSettings>
   <SLM_OnlyColonists>Yalnızca Kolonicilere Uygula</SLM_OnlyColonists>
   <SLM_OnlyColonists_Desc>Etkinleştirildiğinde çarpanlar ve avantajlar yalnızca oyuncu kolonicileri ve fraksiyon üyeleri için geçerli olur.</SLM_OnlyColonists_Desc>
@@ -39,17 +93,9 @@
   <SLM_IndividualMultipliers>Bireysel Yetenek Çarpanları</SLM_IndividualMultipliers>
   <SLM_IndividualNotice>Not: Genel çarpan şu anda aktif. Bireysel değerleri kullanmak için yukarıdaki 'Genel Çarpanı Kullan' kutucuğunun işaretini kaldırın.</SLM_IndividualNotice>
   <SLM_Presets>Hızlı Hazır Ayarlar</SLM_Presets>
-  <SLM_Preset_Vanilla>1x (Vanilla)</SLM_Preset_Vanilla>
-  <SLM_Preset_2x>2x</SLM_Preset_2x>
-  <SLM_Preset_5x>5x</SLM_Preset_5x>
-  <SLM_Preset_10x>10x</SLM_Preset_10x>
-  <SLM_Preset_25x>25x</SLM_Preset_25x>
-  <SLM_Preset_50x>50x</SLM_Preset_50x>
-  <SLM_Preset_100x>100x</SLM_Preset_100x>
   <SLM_ResetDefaults>Varsayılanlara Sıfırla</SLM_ResetDefaults>
 
   <!-- Lethal Ranged Combat Module -->
-  <LethalRanged_ModTitle>Ölümcül ve İsabetli Menzilli Çatışma</LethalRanged_ModTitle>
   <LethalRanged_SettingsTitle>Ölümcül ve İsabetli Menzilli Çatışma Ayarları</LethalRanged_SettingsTitle>
   <LethalRanged_PresetHeader>Hızlı Hazır Ayarlar:</LethalRanged_PresetHeader>
   <LethalRanged_PresetVanillaPlus>Vanilla+</LethalRanged_PresetVanillaPlus>
@@ -134,6 +180,14 @@
   <GeneSynthesis_StatCpx>Karmaşıklık</GeneSynthesis_StatCpx>
   <GeneSynthesis_StatMet>Metabolizma</GeneSynthesis_StatMet>
   <GeneSynthesis_StatArc>Arkit</GeneSynthesis_StatArc>
+  <GeneSynthesis_StatCpxShort>Kpx</GeneSynthesis_StatCpxShort>
+  <GeneSynthesis_StatMetShort>Met</GeneSynthesis_StatMetShort>
+  <GeneSynthesis_StatArcShort>Ark</GeneSynthesis_StatArcShort>
+  <GeneSynthesis_GeneCount>{0} gen</GeneSynthesis_GeneCount>
+  <GeneSynthesis_ArcShort>A:{0}</GeneSynthesis_ArcShort>
+  <GeneSynthesis_Vanilla>Vanilla</GeneSynthesis_Vanilla>
+  <GeneSynthesis_None>Yok</GeneSynthesis_None>
+  <GeneSynthesis_UnknownGene>Bilinmeyen Gen</GeneSynthesis_UnknownGene>
   <GeneSynthesis_NoDesc>Açıklama bulunmuyor.</GeneSynthesis_NoDesc>
   <GeneSynthesis_CostSummary>Gereken Nötroamin: {0}x</GeneSynthesis_CostSummary>
   <GeneSynthesis_WorkSummary>Üretim Süresi: {0} tick (~{1} sn)</GeneSynthesis_WorkSummary>
@@ -198,6 +252,7 @@
   <!-- Work Manager Module -->
   <WorkManager_ModTitle>Otomatik İş ve Vardiya Yöneticisi (Work Manager)</WorkManager_ModTitle>
   <WorkManager_ModDesc>Yüksek performanslı, otomatik iş önceliği ve çalışma çizelgesi yöneticisi. Kolonicileri yeteneklerine, tutkularına, özelliklerine ve sağlık kapasitelerine göre sıfır TPS kaybıyla değerlendirip en uygun iş önceliklerini ve dengeli günlük vardiyalarını belirler.</WorkManager_ModDesc>
+  <WorkManager_OverwriteWarning>Not: Etkin olduğunda bu modül manuel iş önceliklerini ve takvimleri ezer. Manuel kontrolü korumak için "İş Önceliklerini Yönet" / "Takvimi Yönet" seçeneklerini kapatın.</WorkManager_OverwriteWarning>
   <WorkManager_PresetsHeader>Hızlı Hazır Ayarlar:</WorkManager_PresetsHeader>
   <WorkManager_PresetBalanced>Dengeli</WorkManager_PresetBalanced>
   <WorkManager_PresetPerformance>Performans</WorkManager_PresetPerformance>
@@ -241,8 +296,8 @@
   <WorkManager_GlobalDisabledTip>İş Yöneticisi duraklatıldı. Otomatik yönetimi başlatmak için tıklayın.</WorkManager_GlobalDisabledTip>
   <WorkManager_UpdateNowTip>Öncelikleri ve çizelgeleri hemen yeniden hesapla.</WorkManager_UpdateNowTip>
   <WorkManager_SettingsTip>İş Yöneticisi ayarlarını aç.</WorkManager_SettingsTip>
-  <WorkManager_ColumnPriorityHeaderTip>Otomatik İş Öncelikleri\nKoloniciyi otomatik öncelik güncellemesine dahil etmek veya çıkarmak için tıklayın.</WorkManager_ColumnPriorityHeaderTip>
-  <WorkManager_ColumnScheduleHeaderTip>Otomatik Çalışma Çizelgesi\nKoloniciyi otomatik çizelge güncellemesine dahil etmek veya çıkarmak için tıklayın.</WorkManager_ColumnScheduleHeaderTip>
+  <WorkManager_ColumnPriorityHeaderTip>Otomatik İş Öncelikleri&#10;Koloniciyi otomatik öncelik güncellemesine dahil etmek veya çıkarmak için tıklayın.</WorkManager_ColumnPriorityHeaderTip>
+  <WorkManager_ColumnScheduleHeaderTip>Otomatik Çalışma Çizelgesi&#10;Koloniciyi otomatik çizelge güncellemesine dahil etmek veya çıkarmak için tıklayın.</WorkManager_ColumnScheduleHeaderTip>
   <WorkManager_PawnPriorityEnabledTip>{0}: Otomatik iş öncelikleri açık. Kapatmak için tıklayın.</WorkManager_PawnPriorityEnabledTip>
   <WorkManager_PawnPriorityDisabledTip>{0}: Otomatik iş öncelikleri kapalı. Açmak için tıklayın.</WorkManager_PawnPriorityDisabledTip>
   <WorkManager_PawnScheduleEnabledTip>{0}: Otomatik çizelge açık. Kapatmak için tıklayın.</WorkManager_PawnScheduleEnabledTip>
@@ -251,6 +306,12 @@
   <!-- Zero-Tick Durability Module -->
   <MegaMod_DurabilityTitle>Dayanıklılık ve Kondisyon Yönetimi</MegaMod_DurabilityTitle>
   <MegaMod_DurabilityDesc>Silah ve giysilerin dayanıklılık (Hit Points) tüketimini sıfır-tick motor düzeyinde devre dışı bırakın. Hiçbir tick maliyeti veya TPS düşüşü yaratmaz.</MegaMod_DurabilityDesc>
+  <MegaMod_DurabilityPresets>Hızlı Şablonlar</MegaMod_DurabilityPresets>
+  <MegaMod_PresetAllDisabled>Tümünü Devre Dışı Bırak</MegaMod_PresetAllDisabled>
+  <MegaMod_PresetWeaponsOnly>Sadece Silahlar</MegaMod_PresetWeaponsOnly>
+  <MegaMod_PresetApparelOnly>Sadece Kıyafetler</MegaMod_PresetApparelOnly>
+  <MegaMod_PresetAllImmortal>Her Şey Ölümsüz</MegaMod_PresetAllImmortal>
+  <MegaMod_ResetDefaults>Varsayılana Sıfırla</MegaMod_ResetDefaults>
   <MegaMod_RemoveApparelDurability>Giysi Dayanıklılığını Kaldır</MegaMod_RemoveApparelDurability>
   <MegaMod_RemoveApparelDurability_Desc>Tüm kıyafet ve zırhların dayanıklılık sistemini devre dışı bırakır. Giysiler aşınmaz, yıpranmaz ve hasar almaz. Sıfır-tick motor optimizasyonu sayesinde hiçbir performans kaybı yaşanmaz.</MegaMod_RemoveApparelDurability_Desc>
   <MegaMod_RemoveWeaponDurability>Silah Dayanıklılığını Kaldır</MegaMod_RemoveWeaponDurability>
@@ -262,5 +323,5 @@
   <MegaMod_RestoreGearNow>Dünyadaki Tüm Eşyaları Şimdi Onar</MegaMod_RestoreGearNow>
   <MegaMod_RestoreGearOnlyInGame>Bu işlem yalnızca aktif bir kayıt oynanırken haritadaki ve envanterlerdeki eşyaları onarmak için kullanılabilir.</MegaMod_RestoreGearOnlyInGame>
   <MegaMod_RestoredGearCount>{0} adet hasarlı giysi ve silah %100 kondisyona onarıldı.</MegaMod_RestoredGearCount>
-  <MegaMod_DurabilityPerfNote>⚡ 0-Tick Performans Mimarisi:\nBu mod, Harmony tick dinleyicileri veya arka plan sayaçları yerine doğrudan RimWorld ThingDef motor flag'lerini (useHitPoints = false) manipüle eder. Bu sayede haritanızda 10.000 eşya dahi olsa TPS'te sıfır (0) düşüş yaşanır.</MegaMod_DurabilityPerfNote>
+  <MegaMod_DurabilityPerfNote>0-Tick Performans Mimarisi:&#10;Bu mod, Harmony tick dinleyicileri veya arka plan sayaçları yerine doğrudan RimWorld ThingDef motor flag'lerini (useHitPoints = false) manipüle eder. Bu sayede haritanızda 10.000 eşya dahi olsa TPS'te sıfır (0) düşüş yaşanır.</MegaMod_DurabilityPerfNote>
 </LanguageData>

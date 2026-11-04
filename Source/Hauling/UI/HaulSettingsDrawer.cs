@@ -65,21 +65,21 @@ namespace SadSeal.MegaMod.Hauling.UI
             int oldRadius = settings.SearchRadius;
             settings.SearchRadius = (int)listing.SliderLabeled(
                 "SadHaul_Radius".Translate() + $": {settings.SearchRadius} c",
-                settings.SearchRadius, 4f, 20f, 0.5f,
+                settings.SearchRadius, 4f, 20f, 1f,
                 "SadHaul_Radius_Desc".Translate());
             if (oldRadius != settings.SearchRadius) settings.ActivePreset = HaulPreset.Custom;
 
             int oldMaxItems = settings.MaxItemsPerTrip;
             settings.MaxItemsPerTrip = (int)listing.SliderLabeled(
                 "SadHaul_MaxItems".Translate() + $": {settings.MaxItemsPerTrip}",
-                settings.MaxItemsPerTrip, 2f, 16f, 0.5f,
+                settings.MaxItemsPerTrip, 2f, 16f, 1f,
                 "SadHaul_MaxItems_Desc".Translate());
             if (oldMaxItems != settings.MaxItemsPerTrip) settings.ActivePreset = HaulPreset.Custom;
 
             float oldMass = settings.MassLimitPercent;
             settings.MassLimitPercent = listing.SliderLabeled(
                 "SadHaul_MassLimit".Translate() + $": {settings.MassLimitPercent:P0}",
-                settings.MassLimitPercent, 0.50f, 1.00f, 0.5f,
+                settings.MassLimitPercent, 0.50f, 1.00f, 0.01f,
                 "SadHaul_MassLimit_Desc".Translate());
             if (Math.Abs(oldMass - settings.MassLimitPercent) > 0.005f) settings.ActivePreset = HaulPreset.Custom;
 

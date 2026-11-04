@@ -7,36 +7,29 @@ namespace SadSeal.MegaMod.Hauling
     public static class HauledCargoTracker
     {
         private static readonly Dictionary<int, HashSet<int>> trackedCargo = new Dictionary<int, HashSet<int>>();
-        private static readonly object syncLock = new object();
 
         public static void Register(Pawn pawn, Thing thing)
         {
             if (pawn == null || thing == null) return;
 
-            lock (syncLock)
+            if (!trackedCargo.TryGetValue(pawn.thingIDNumber, out var set))
             {
-                if (!trackedCargo.TryGetValue(pawn.thingIDNumber, out var set))
-                {
-                    set = new HashSet<int>();
-                    trackedCargo[pawn.thingIDNumber] = set;
-                }
-                set.Add(thing.thingIDNumber);
+                set = new HashSet<int>();
+                trackedCargo[pawn.thingIDNumber] = set;
             }
+            set.Add(thing.thingIDNumber);
         }
 
         public static void Unregister(Pawn pawn, Thing thing)
         {
             if (pawn == null || thing == null) return;
 
-            lock (syncLock)
+            if (trackedCargo.TryGetValue(pawn.thingIDNumber, out var set))
             {
-                if (trackedCargo.TryGetValue(pawn.thingIDNumber, out var set))
+                set.Remove(thing.thingIDNumber);
+                if (set.Count == 0)
                 {
-                    set.Remove(thing.thingIDNumber);
-                    if (set.Count == 0)
-                    {
-                        trackedCargo.Remove(pawn.thingIDNumber);
-                    }
+                    trackedCargo.Remove(pawn.thingIDNumber);
                 }
             }
         }
@@ -45,14 +38,11 @@ namespace SadSeal.MegaMod.Hauling
         {
             if (pawn == null || thing == null) return false;
 
-            lock (syncLock)
+            if (trackedCargo.TryGetValue(pawn.thingIDNumber, out var set))
             {
-                if (trackedCargo.TryGetValue(pawn.thingIDNumber, out var set))
-                {
-                    return set.Contains(thing.thingIDNumber);
-                }
-                return false;
+                return set.Contains(thing.thingIDNumber);
             }
+            return false;
         }
 
         public static List<Thing> GetHauledThings(Pawn pawn)
@@ -60,18 +50,15 @@ namespace SadSeal.MegaMod.Hauling
             var results = new List<Thing>();
             if (pawn?.inventory?.innerContainer == null) return results;
 
-            lock (syncLock)
+            if (trackedCargo.TryGetValue(pawn.thingIDNumber, out var set) && set.Count > 0)
             {
-                if (trackedCargo.TryGetValue(pawn.thingIDNumber, out var set) && set.Count > 0)
+                var container = pawn.inventory.innerContainer;
+                for (int i = 0; i < container.Count; i++)
                 {
-                    var container = pawn.inventory.innerContainer;
-                    for (int i = 0; i < container.Count; i++)
+                    Thing item = container[i];
+                    if (item != null && set.Contains(item.thingIDNumber))
                     {
-                        Thing item = container[i];
-                        if (item != null && set.Contains(item.thingIDNumber))
-                        {
-                            results.Add(item);
-                        }
+                        results.Add(item);
                     }
                 }
             }
@@ -82,11 +69,7 @@ namespace SadSeal.MegaMod.Hauling
         public static void Clear(Pawn pawn)
         {
             if (pawn == null) return;
-
-            lock (syncLock)
-            {
-                trackedCargo.Remove(pawn.thingIDNumber);
-            }
+            trackedCargo.Remove(pawn.thingIDNumber);
         }
 
         public static void DropAllHauled(Pawn pawn, bool forbidden = false)

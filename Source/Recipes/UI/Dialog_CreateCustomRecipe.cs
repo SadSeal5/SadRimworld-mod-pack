@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using Verse;
 using RimWorld;
@@ -32,15 +33,15 @@ namespace SadSeal.MegaMod.Recipes.UI
         public override void DoWindowContents(Rect inRect)
         {
             Text.Font = GameFont.Medium;
-            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 30f), "Yeni Ozel Tarif Ekle");
+            Widgets.Label(new Rect(inRect.x, inRect.y, inRect.width, 30f), "MegaMod_CreateRecipeTitle".Translate());
             Text.Font = GameFont.Small;
 
             float y = inRect.y + 36f;
             float w = inRect.width;
 
             // 1. Product Selection
-            Widgets.Label(new Rect(inRect.x, y + 2f, 130f, 26f), "Uretilecek Urun:");
-            string prodText = _selectedProduct != null ? _selectedProduct.LabelCap.ToString() : "Urun Sec...";
+            Widgets.Label(new Rect(inRect.x, y + 2f, 130f, 26f), "MegaMod_CreateRecipeProduct".Translate());
+            string prodText = _selectedProduct != null ? _selectedProduct.LabelCap.ToString() : "MegaMod_CreateRecipeSelectProduct".Translate().ToString();
             var prodBtnR = new Rect(inRect.x + 130f, y, w - 130f, 28f);
             if (Widgets.ButtonText(prodBtnR, prodText))
             {
@@ -49,7 +50,7 @@ namespace SadSeal.MegaMod.Recipes.UI
                     _selectedProduct = td;
                     if (string.IsNullOrEmpty(_label))
                     {
-                        _label = "Uret: " + td.LabelCap;
+                        _label = "MegaMod_CreateRecipeDefaultLabel".Translate(td.LabelCap).ToString();
                     }
                 }));
             }
@@ -60,12 +61,12 @@ namespace SadSeal.MegaMod.Recipes.UI
             y += 34f;
 
             // 2. Label
-            Widgets.Label(new Rect(inRect.x, y + 2f, 130f, 24f), "Tarif Adi:");
+            Widgets.Label(new Rect(inRect.x, y + 2f, 130f, 24f), "MegaMod_CreateRecipeName".Translate());
             _label = Widgets.TextField(new Rect(inRect.x + 130f, y, w - 130f, 24f), _label);
             y += 30f;
 
             // 3. Product Count & Work Amount & Min Skill row
-            Widgets.Label(new Rect(inRect.x, y + 2f, 90f, 24f), "Uretim Adedi:");
+            Widgets.Label(new Rect(inRect.x, y + 2f, 90f, 24f), "MegaMod_CreateRecipeCount".Translate());
             if (Widgets.ButtonText(new Rect(inRect.x + 90f, y, 26f, 24f), "-"))
             {
                 if (_productCount > 1) _productCount--;
@@ -77,10 +78,10 @@ namespace SadSeal.MegaMod.Recipes.UI
                 _productCount++;
             }
 
-            Widgets.Label(new Rect(inRect.x + 205f, y + 2f, 85f, 24f), "Is Suresi:");
+            Widgets.Label(new Rect(inRect.x + 205f, y + 2f, 85f, 24f), "MegaMod_CreateRecipeWork".Translate());
             _workAmount = Widgets.TextField(new Rect(inRect.x + 290f, y, 65f, 24f), _workAmount);
 
-            Widgets.Label(new Rect(inRect.x + 375f, y + 2f, 110f, 24f), "Min El Becerisi:");
+            Widgets.Label(new Rect(inRect.x + 375f, y + 2f, 110f, 24f), "MegaMod_CreateRecipeMinSkill".Translate());
             if (Widgets.ButtonText(new Rect(inRect.x + 485f, y, 26f, 24f), "-"))
             {
                 if (_minSkill > 0) _minSkill--;
@@ -94,7 +95,7 @@ namespace SadSeal.MegaMod.Recipes.UI
             y += 32f;
 
             // 4. Workbenches selection
-            string wbBtnText = "Tezgahlar (" + _workbenchDefs.Count + " secili)";
+            string wbBtnText = "MegaMod_CreateRecipeWorkbenches".Translate(_workbenchDefs.Count).ToString();
             if (Widgets.ButtonText(new Rect(inRect.x, y, 220f, 28f), wbBtnText))
             {
                 Find.WindowStack.Add(new Dialog_WorkbenchPicker(_workbenchDefs, list => _workbenchDefs = list));
@@ -106,7 +107,7 @@ namespace SadSeal.MegaMod.Recipes.UI
             y += 32f;
 
             // 5. Research Prerequisites
-            string resBtnText = "Gereken Arastirmalar (" + _researchDefs.Count + " secili)";
+            string resBtnText = "MegaMod_CreateRecipeResearch".Translate(_researchDefs.Count).ToString();
             if (Widgets.ButtonText(new Rect(inRect.x, y, 220f, 28f), resBtnText))
             {
                 Find.WindowStack.Add(new Dialog_ResearchPicker(_researchDefs, list => _researchDefs = list));
@@ -122,10 +123,10 @@ namespace SadSeal.MegaMod.Recipes.UI
             y += 6f;
 
             Text.Font = GameFont.Medium;
-            Widgets.Label(new Rect(inRect.x, y, 160f, 26f), "Malzemeler");
+            Widgets.Label(new Rect(inRect.x, y, 160f, 26f), "MegaMod_CreateRecipeIngredients".Translate());
             Text.Font = GameFont.Small;
 
-            if (Widgets.ButtonText(new Rect(inRect.x + w - 140f, y, 140f, 26f), "+ Malzeme Ekle"))
+            if (Widgets.ButtonText(new Rect(inRect.x + w - 140f, y, 140f, 26f), "MegaMod_CreateRecipeAddIngredient".Translate()))
             {
                 Find.WindowStack.Add(new Dialog_IngredientPicker(td =>
                 {
@@ -139,7 +140,7 @@ namespace SadSeal.MegaMod.Recipes.UI
             }
             y += 30f;
 
-            float listH = inRect.height - (y - inRect.y) - 44f;
+            float listH = Mathf.Max(60f, inRect.height - (y - inRect.y) - 44f);
             var listOutR = new Rect(inRect.x, y, w, listH);
             Widgets.DrawMenuSection(listOutR);
 
@@ -167,7 +168,7 @@ namespace SadSeal.MegaMod.Recipes.UI
                     ing.Count++;
                 }
 
-                if (Widgets.ButtonText(new Rect(rowR.x + rowR.width - 65f, rowR.y + 2f, 60f, 24f), "Sil"))
+                if (Widgets.ButtonText(new Rect(rowR.x + rowR.width - 65f, rowR.y + 2f, 60f, 24f), "MegaMod_CreateRecipeRemove".Translate()))
                 {
                     _ingredients.RemoveAt(i);
                     i--;
@@ -178,11 +179,11 @@ namespace SadSeal.MegaMod.Recipes.UI
 
             // Bottom buttons
             float btnY = inRect.y + inRect.height - 34f;
-            if (Widgets.ButtonText(new Rect(inRect.x, btnY, 150f, 32f), "Tarifi Olustur"))
+            if (Widgets.ButtonText(new Rect(inRect.x, btnY, 150f, 32f), "MegaMod_CreateRecipeCreate".Translate()))
             {
                 TryCreateRecipe();
             }
-            if (Widgets.ButtonText(new Rect(inRect.x + 160f, btnY, 110f, 32f), "Iptal"))
+            if (Widgets.ButtonText(new Rect(inRect.x + 160f, btnY, 110f, 32f), "MegaMod_CreateRecipeCancel".Translate()))
             {
                 Close();
             }
@@ -190,7 +191,7 @@ namespace SadSeal.MegaMod.Recipes.UI
 
         private string GetWorkbenchSummary()
         {
-            if (_workbenchDefs.Count == 0) return "Hicbiri secilmedi";
+            if (_workbenchDefs.Count == 0) return "MegaMod_CreateRecipeNoneSelected".Translate().ToString();
             var names = new List<string>();
             for (int i = 0; i < _workbenchDefs.Count; i++)
             {
@@ -204,7 +205,7 @@ namespace SadSeal.MegaMod.Recipes.UI
 
         private string GetResearchSummary()
         {
-            if (_researchDefs.Count == 0) return "Yok (Hemen acik)";
+            if (_researchDefs.Count == 0) return "MegaMod_CreateRecipeNoResearch".Translate().ToString();
             var names = new List<string>();
             for (int i = 0; i < _researchDefs.Count; i++)
             {
@@ -216,31 +217,40 @@ namespace SadSeal.MegaMod.Recipes.UI
             return full;
         }
 
+        private static bool TryParseFloat(string text, out float value)
+        {
+            if (float.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
+            {
+                return true;
+            }
+            return float.TryParse(text, NumberStyles.Float, CultureInfo.CurrentCulture, out value);
+        }
+
         private void TryCreateRecipe()
         {
             if (_selectedProduct == null)
             {
-                Messages.Message("Lutfen uretilecek bir urun secin.", MessageTypeDefOf.RejectInput, false);
+                Messages.Message("MegaMod_CreateRecipeNoProduct".Translate(), MessageTypeDefOf.RejectInput, false);
                 return;
             }
             if (string.IsNullOrWhiteSpace(_label))
             {
-                Messages.Message("Lutfen tarif icin bir isim girin.", MessageTypeDefOf.RejectInput, false);
+                Messages.Message("MegaMod_CreateRecipeNoName".Translate(), MessageTypeDefOf.RejectInput, false);
                 return;
             }
-            if (!float.TryParse(_workAmount, out float work) || work <= 0f)
+            if (!TryParseFloat(_workAmount, out float work) || work <= 0f)
             {
-                Messages.Message("Lutfen gecerli bir is suresi girin (pozitif sayi).", MessageTypeDefOf.RejectInput, false);
+                Messages.Message("MegaMod_CreateRecipeBadWork".Translate(), MessageTypeDefOf.RejectInput, false);
                 return;
             }
             if (_workbenchDefs.Count == 0)
             {
-                Messages.Message("Lutfen en az bir calisma tezgahi secin.", MessageTypeDefOf.RejectInput, false);
+                Messages.Message("MegaMod_CreateRecipeNoWorkbench".Translate(), MessageTypeDefOf.RejectInput, false);
                 return;
             }
             if (_ingredients.Count == 0)
             {
-                Messages.Message("Lutfen en az bir malzeme ekleyin.", MessageTypeDefOf.RejectInput, false);
+                Messages.Message("MegaMod_CreateRecipeNoIngredient".Translate(), MessageTypeDefOf.RejectInput, false);
                 return;
             }
 
@@ -275,7 +285,7 @@ namespace SadSeal.MegaMod.Recipes.UI
             }
 
             CustomRecipeManager.BuildAndRegister(data, true);
-            Messages.Message("Yeni tarif olusturuldu: " + data.label, MessageTypeDefOf.PositiveEvent, false);
+            Messages.Message("MegaMod_CreateRecipeCreated".Translate(data.label), MessageTypeDefOf.PositiveEvent, false);
             _onCreated?.Invoke();
             Close();
         }

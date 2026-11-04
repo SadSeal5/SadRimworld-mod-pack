@@ -13,13 +13,32 @@ namespace SadSeal.MegaMod.Durability.UI
         {
             if (settings == null) return;
 
-            Rect viewRect = new Rect(0f, 0f, inRect.width - 24f, 520f);
+            Rect viewRect = new Rect(0f, 0f, inRect.width - 24f, 600f);
             Widgets.BeginScrollView(inRect, ref scrollPosition, viewRect);
 
             Listing_Standard listing = new Listing_Standard();
             listing.Begin(viewRect);
 
             SadUI.DrawHeader(listing, "MegaMod_DurabilityTitle", "MegaMod_DurabilityDesc");
+
+            listing.Label("MegaMod_DurabilityPresets".Translate());
+            SadUI.DrawPresetRow(listing, settings.ActivePreset, new (string, DurabilityPreset)[]
+            {
+                ("MegaMod_PresetAllDisabled", DurabilityPreset.AllDisabled),
+                ("MegaMod_PresetWeaponsOnly", DurabilityPreset.WeaponsOnly),
+                ("MegaMod_PresetApparelOnly", DurabilityPreset.ApparelOnly),
+                ("MegaMod_PresetAllImmortal", DurabilityPreset.AllImmortal)
+            }, preset =>
+            {
+                settings.ApplyPreset(preset);
+                DurabilityApplier.ApplyDurabilitySettings();
+            }, () =>
+            {
+                settings.ResetToDefaults();
+                DurabilityApplier.ApplyDurabilitySettings();
+            }, "MegaMod_ResetDefaults");
+
+            listing.Gap(14f);
 
             bool oldApparel = settings.removeApparelDurability;
             listing.CheckboxLabeled(
@@ -28,6 +47,7 @@ namespace SadSeal.MegaMod.Durability.UI
                 "MegaMod_RemoveApparelDurability_Desc".Translate());
             if (oldApparel != settings.removeApparelDurability)
             {
+                settings.ActivePreset = DurabilityPreset.Custom;
                 DurabilityApplier.ApplyDurabilitySettings();
             }
 
@@ -38,6 +58,7 @@ namespace SadSeal.MegaMod.Durability.UI
                 "MegaMod_RemoveWeaponDurability_Desc".Translate());
             if (oldWeapon != settings.removeWeaponDurability)
             {
+                settings.ActivePreset = DurabilityPreset.Custom;
                 DurabilityApplier.ApplyDurabilitySettings();
             }
 

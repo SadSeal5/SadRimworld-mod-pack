@@ -24,7 +24,7 @@ namespace SadSeal.MegaMod.Genes
             {
                 Genes.Add(gene);
             }
-            Label = gene?.LabelCap ?? "Unknown Gene";
+            Label = gene?.LabelCap ?? "GeneSynthesis_UnknownGene".Translate().ToString();
             NeutroamineCost = neutroCost;
             WorkRequired = work;
             WorkDone = 0f;

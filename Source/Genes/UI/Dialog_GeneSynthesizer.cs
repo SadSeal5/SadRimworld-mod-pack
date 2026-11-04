@@ -49,6 +49,8 @@ namespace SadSeal.MegaMod.Genes.UI
 
         public override Vector2 InitialSize => new Vector2(1020f, 720f);
 
+        private static string VanillaLabel => "GeneSynthesis_Vanilla".Translate().ToString();
+
         public Dialog_GeneSynthesizer(CompGeneSynthesizer comp)
         {
             this.comp = comp;
@@ -70,7 +72,7 @@ namespace SadSeal.MegaMod.Genes.UI
                 .ToList();
 
             availableGeneMods = allGenes
-                .Select(g => g.modContentPack?.Name ?? "Vanilla")
+                .Select(g => g.modContentPack?.Name ?? VanillaLabel)
                 .Distinct()
                 .OrderBy(m => m)
                 .ToList();
@@ -96,7 +98,7 @@ namespace SadSeal.MegaMod.Genes.UI
                 .ToList();
 
             availableXenotypeMods = allXenotypes
-                .Select(x => x.modContentPack?.Name ?? "Vanilla")
+                .Select(x => x.modContentPack?.Name ?? VanillaLabel)
                 .Distinct()
                 .OrderBy(m => m)
                 .ToList();
@@ -120,7 +122,7 @@ namespace SadSeal.MegaMod.Genes.UI
 
             if (selectedGeneModFilter != "All")
             {
-                query = query.Where(g => (g.modContentPack?.Name ?? "Vanilla") == selectedGeneModFilter);
+                query = query.Where(g => (g.modContentPack?.Name ?? VanillaLabel) == selectedGeneModFilter);
             }
 
             if (selectedCategoryFilter != null)
@@ -150,7 +152,7 @@ namespace SadSeal.MegaMod.Genes.UI
 
             if (selectedXenotypeModFilter != "All")
             {
-                query = query.Where(x => (x.modContentPack?.Name ?? "Vanilla") == selectedXenotypeModFilter);
+                query = query.Where(x => (x.modContentPack?.Name ?? VanillaLabel) == selectedXenotypeModFilter);
             }
 
             if (!xenotypeSearchText.NullOrEmpty())
@@ -187,21 +189,21 @@ namespace SadSeal.MegaMod.Genes.UI
             Rect tab3 = new Rect(tab2.xMax + 8f, tabRow.y, tabWidth, 30f);
 
             if (currentTab == SynthesizerTab.Genes) Widgets.DrawHighlightSelected(tab1);
-            if (Widgets.ButtonText(tab1, "🧬 " + "GeneSynthesis_TabGenes".Translate()))
+            if (Widgets.ButtonText(tab1, "GeneSynthesis_TabGenes".Translate()))
             {
                 currentTab = SynthesizerTab.Genes;
             }
 
             if (currentTab == SynthesizerTab.Xenotypes) Widgets.DrawHighlightSelected(tab2);
-            if (Widgets.ButtonText(tab2, "👥 " + "GeneSynthesis_TabXenotypes".Translate()))
+            if (Widgets.ButtonText(tab2, "GeneSynthesis_TabXenotypes".Translate()))
             {
                 currentTab = SynthesizerTab.Xenotypes;
             }
 
             int queueCount = comp.OrderQueue?.Count ?? 0;
             string queueLabel = queueCount > 0
-                ? "📋 " + "GeneSynthesis_TabQueueCount".Translate(queueCount)
-                : "📋 " + "GeneSynthesis_TabQueue".Translate();
+                ? "GeneSynthesis_TabQueueCount".Translate(queueCount).ToString()
+                : "GeneSynthesis_TabQueue".Translate().ToString();
             if (currentTab == SynthesizerTab.Queue) Widgets.DrawHighlightSelected(tab3);
             if (Widgets.ButtonText(tab3, queueLabel))
             {
@@ -358,7 +360,7 @@ namespace SadSeal.MegaMod.Genes.UI
 
                 // Label and Mod
                 Rect labelRect = new Rect(iconRect.xMax + 8f, rowRect.y + 2f, 220f, 32f);
-                string modTag = gene.modContentPack != null ? gene.modContentPack.Name : "Vanilla";
+                string modTag = gene.modContentPack != null ? gene.modContentPack.Name : VanillaLabel;
                 Text.Font = GameFont.Small;
                 Widgets.Label(new Rect(labelRect.x, labelRect.y, labelRect.width, 18f), gene.LabelCap);
                 Text.Font = GameFont.Tiny;
@@ -428,8 +430,8 @@ namespace SadSeal.MegaMod.Genes.UI
             Text.Font = GameFont.Medium;
             Widgets.Label(new Rect(headerInfoRect.x, headerInfoRect.y, headerInfoRect.width, 28f), selectedGene.LabelCap);
             Text.Font = GameFont.Small;
-            string modName = selectedGene.modContentPack?.Name ?? "Vanilla";
-            string catName = selectedGene.displayCategory?.LabelCap ?? "None";
+            string modName = selectedGene.modContentPack?.Name ?? VanillaLabel;
+            string catName = selectedGene.displayCategory?.LabelCap ?? "GeneSynthesis_None".Translate().ToString();
             GUI.color = Color.gray;
             Widgets.Label(new Rect(headerInfoRect.x, headerInfoRect.y + 28f, headerInfoRect.width, 20f), $"{modName} • {catName}");
             GUI.color = Color.white;
@@ -627,7 +629,7 @@ namespace SadSeal.MegaMod.Genes.UI
 
                 // Mod Source
                 Rect modSourceRect = new Rect(rowRect.x + 280f, rowRect.y + 10f, 160f, 22f);
-                string modName = xenotype.modContentPack != null ? xenotype.modContentPack.Name : "Vanilla";
+                string modName = xenotype.modContentPack != null ? xenotype.modContentPack.Name : VanillaLabel;
                 GUI.color = new Color(0.85f, 0.85f, 0.85f);
                 Widgets.Label(modSourceRect, modName);
                 GUI.color = Color.white;
@@ -676,7 +678,7 @@ namespace SadSeal.MegaMod.Genes.UI
             Text.Font = GameFont.Medium;
             Widgets.Label(new Rect(headerInfoRect.x, headerInfoRect.y, headerInfoRect.width, 28f), selectedXenotype.LabelCap);
             Text.Font = GameFont.Small;
-            string modName = selectedXenotype.modContentPack?.Name ?? "Vanilla";
+            string modName = selectedXenotype.modContentPack?.Name ?? VanillaLabel;
             string heritageStr = selectedXenotype.inheritable
                 ? "GeneSynthesis_InheritableGermline".Translate().ToString()
                 : "GeneSynthesis_InheritableXenogerm".Translate().ToString();
@@ -695,18 +697,18 @@ namespace SadSeal.MegaMod.Genes.UI
             int totalArc = validGenes.Sum(g => g.biostatArc);
 
             Text.Anchor = TextAnchor.MiddleCenter;
-            Widgets.Label(new Rect(statsBox.x, statsBox.y, colWidth, statsBox.height), $"Cpx: {totalCpx.ToStringWithSign()}");
+            Widgets.Label(new Rect(statsBox.x, statsBox.y, colWidth, statsBox.height), $"{"GeneSynthesis_StatCpxShort".Translate()}: {totalCpx.ToStringWithSign()}");
 
             if (totalMet > 0) GUI.color = Color.green;
             else if (totalMet < 0) GUI.color = Color.red;
-            Widgets.Label(new Rect(statsBox.x + colWidth, statsBox.y, colWidth, statsBox.height), $"Met: {totalMet.ToStringWithSign()}");
+            Widgets.Label(new Rect(statsBox.x + colWidth, statsBox.y, colWidth, statsBox.height), $"{"GeneSynthesis_StatMetShort".Translate()}: {totalMet.ToStringWithSign()}");
             GUI.color = Color.white;
 
             if (totalArc > 0) GUI.color = new Color(0.4f, 0.8f, 1f);
-            Widgets.Label(new Rect(statsBox.x + colWidth * 2f, statsBox.y, colWidth, statsBox.height), $"Arc: {totalArc}");
+            Widgets.Label(new Rect(statsBox.x + colWidth * 2f, statsBox.y, colWidth, statsBox.height), $"{"GeneSynthesis_StatArcShort".Translate()}: {totalArc}");
             GUI.color = Color.white;
 
-            Widgets.Label(new Rect(statsBox.x + colWidth * 3f, statsBox.y, colWidth, statsBox.height), $"{validGenes.Count} genes");
+            Widgets.Label(new Rect(statsBox.x + colWidth * 3f, statsBox.y, colWidth, statsBox.height), "GeneSynthesis_GeneCount".Translate(validGenes.Count));
             Text.Anchor = TextAnchor.UpperLeft;
 
             // Description Box
@@ -775,7 +777,7 @@ namespace SadSeal.MegaMod.Genes.UI
                 if (g.biostatArc > 0)
                 {
                     GUI.color = new Color(0.4f, 0.8f, 1f);
-                    Widgets.Label(gArcRect, $"A:{g.biostatArc}");
+                    Widgets.Label(gArcRect, "GeneSynthesis_ArcShort".Translate(g.biostatArc));
                     GUI.color = Color.white;
                 }
                 Text.Font = GameFont.Small;

@@ -19,5 +19,8 @@ Source/obj/
 # Temporary and Scratch directories
 scratch/
 
+# Per-machine build overrides
+local.props
+
 # Atomized mod directories
 atomized/

@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="#"><img src="https://img.shields.io/badge/RimWorld-1.5%20%7C%201.6%20%7C%201.7%20(Beta)-brightgreen.svg" alt="RimWorld Versions"></a>
+  <a href="#"><img src="https://img.shields.io/badge/RimWorld-1.7%20(Beta)-brightgreen.svg" alt="RimWorld Versions"></a>
   <a href="https://github.com/pardeike/HarmonyRimWorld"><img src="https://img.shields.io/badge/Requires-Harmony-007EC6.svg?logo=unity&logoColor=white" alt="Requires Harmony"></a>
   <a href="#"><img src="https://img.shields.io/badge/Language-C%23-239120.svg?logo=csharp&logoColor=white" alt="Language C#"></a>
   <a href="#"><img src="https://img.shields.io/badge/.NET-10.0-512BD4.svg?logo=dotnet&logoColor=white" alt=".NET 10.0"></a>
@@ -70,22 +70,23 @@
 ### 5. 📦 Smart Haul (High-Performance Multi-Item Hauling)
 * **High-Efficiency Multi-Hauling:** Colonists collect nearby compatible items until their inventory weight limit is reached, instead of making trips for single items.
 * **Single-Job Batch Unloading:** Eliminates ThinkTree restarts and TPS hitches by unloading both carried and inventory-stored items in a continuous single job.
-* **Affinity Cache:** Rapidly validates target stockpile compatibility for candidate items, bypassing ~95% of map-wide storage scans.
+* **Target Storage Cell Priority:** Gathered items are dropped into the reserved destination cell first; a map-wide storage scan only runs when that cell rejects the item, skipping most heavy scans.
 * **Personal Inventory Safety:** Only designated hauling cargo is tagged; colonist weapons, apparel, meals, and emergency medicines are strictly preserved.
 * **Draft Ejection:** Drafting a colonist instantly drops gathered hauling cargo on the spot so they are immediately combat-ready.
-* **Quick Presets:** `Balanced`, `Performance (Ultra TPS)`, `Maximum Capacity`, and `Reset to Default`.
+* **Quick Presets:** `Balanced`, `Performance`, `Max Throughput`, and `Reset to Default`.
 
 ---
 
-### 6. 💼 Work &amp; Schedule Manager (Work Manager 1.6 &amp; 1.7)
-* **Original Mod Attribution:** Modern community adaptation of [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'s acclaimed **Work Manager** mod for RimWorld 1.6 and 1.7 (.NET 10).
+### 6. 💼 Work &amp; Schedule Manager (Work Manager 1.7)
+* **Original Mod Attribution:** Modern community adaptation of [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'s acclaimed **Work Manager** mod for RimWorld 1.7 (.NET 10).
 * **Modern Performance Architecture:** Prioritization passes utilize pre-allocated static buffer arrays, and schedule evaluation routines hook into hourly ticks (2,500 ticks) for high-TPS large colonies.
 * **Dynamic Suitability Scoring:** Combines colonist skill levels, passions, health capacities (sight, manipulation, moving), traits, and ideology roles to determine the optimal worker for each task.
 * **Specialist &amp; Emergency Work Delegation:** Emergency duties like Doctor, Firefight, and Warden receive instant priority; specialized roles like Cook, Research, and Smith are capped to the most competent workers per map.
 * **Idle Worker Redirection:** Automatically flexes priorities of idle specialists toward secondary tasks such as hauling and cleaning when primary tasks are exhausted.
 * **Automated Schedule Management:** Automatically schedules Night Owl colonists to night shifts, while optimizing day, sleep, and recreation blocks for the rest of the colony.
 * **Direct Work Tab Integration:** Custom automation toggle columns on the Work and Schedule tabs allow per-colonist automation toggles, alongside header buttons for instant manual evaluation.
-* **Quick Presets:** `Balanced`, `Performance (Ultra TPS)`, `Strict Specialization`, and `Reset to Default`.
+* **Quick Presets:** `Balanced`, `Performance`, `Micro-focused`, and `Reset to Default`.
+* **Note:** While enabled it overwrites manual work priorities and schedules; disable the relevant sub-options to keep manual control.
 
 ---
 
@@ -110,7 +111,7 @@ Navigate to **Options ➔ Mod Settings ➔ SadSeal Mega Mod** to access all modu
 | `[🎓 Skill Multipliers]` | Global and per-skill XP rates, decay prevention, and soft-cap removal |
 | `[🛠️ Recipe Tweaker]` | Live recipe editor, custom ingredient picker, and XML patch exporter |
 | `[🧬 Gene Synthesizer]` | Neutroamine costs, synthesis duration, archite rules, and presets |
-| `[📦 Smart Haul]` | Multi-haul collection radius, mass threshold, and affinity cache settings |
+| `[📦 Smart Haul]` | Multi-haul collection radius, mass threshold, and storage clustering settings |
 | `[💼 Work Manager]` | Prioritization intervals, specialist limits, schedule manager, and idle redirection |
 | `[🛡️ Durability]` | Weapon/apparel durability toggles, instant repair button, and tainted prevention |
 
@@ -128,7 +129,7 @@ If you prefer using individual modules independently or exploring other custom m
 * 🛠️ [rimworld-recipe-tweaker](https://github.com/SadSeal5/rimworld-recipe-tweaker) - Real-time in-game crafting recipe editor and XML exporter
 * 🧬 [rimworld-gene-synthesizer](https://github.com/SadSeal5/rimworld-gene-synthesizer) - Pure Genepack synthesis for Neutroamine (Biotech)
 * 📦 [rimworld-smart-haul](https://github.com/SadSeal5/rimworld-smart-haul) - High-TPS multi-item hauling alternative (Pick Up And Haul)
-* 💼 [rimworld-work-manager](https://github.com/SadSeal5/rimworld-work-manager) - Automated colonist work and schedule management (Work Manager 1.6 &amp; 1.7)
+* 💼 [rimworld-work-manager](https://github.com/SadSeal5/rimworld-work-manager) - Automated colonist work and schedule management (Work Manager 1.7)
 * 🛡️ [rimworld-no-durability](https://github.com/SadSeal5/rimworld-no-durability) - Zero-tick weapon &amp; apparel durability remover
 * 🧪 [Rimworld-Unified-Research-Tree](https://github.com/SadSeal5/Rimworld-Unified-Research-Tree) - Modern research canvas with DAG auto-layout, Anomaly dual research, and auto-queuing
 * 🩸 [SadRimworld-Cellular-Regeneration](https://github.com/SadSeal5/SadRimworld-Cellular-Regeneration) - 4-stage prioritized cellular healing gene suite (clotting, wound closure, limb regrowth, scar cure)
@@ -137,7 +138,7 @@ If you prefer using individual modules independently or exploring other custom m
 
 ## ⚙️ Requirements &amp; Load Order
 
-* **RimWorld Versions:** `1.5`, `1.6`, or `1.7` (Beta)
+* **RimWorld Version:** `1.7` (Beta)
 * **Required Dependency:** [Harmony (brrainz.harmony)](https://github.com/pardeike/HarmonyRimWorld)
 
 ```
@@ -162,7 +163,7 @@ X. SadSeal's Mega Mod
 
 ## 🙏 Credits &amp; Attribution
 
-* **Work Manager:** Concept, design, and UI layout by [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262). Work Manager in this suite is a community adaptation for modern RimWorld 1.6 &amp; 1.7 (.NET 10).
+* **Work Manager:** Concept, design, and UI layout by [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262). Work Manager in this suite is a community adaptation for modern RimWorld 1.7 (.NET 10).
 * **Smart Haul:** Inspired by the *Pick Up And Haul* concept and community modding pioneers.
-* **Unified Research Tree:** Built from scratch with DAG auto-layout for modern RimWorld 1.6 &amp; 1.7 (.NET 10) and Anomaly DLC, inspired by *Research Tree* and *Research Reinvented*.
+* **Unified Research Tree:** Built from scratch with DAG auto-layout for modern RimWorld 1.7 (.NET 10) and Anomaly DLC, inspired by *Research Tree* and *Research Reinvented*.
 * **Developer &amp; Maintainer:** Developed and maintained by SadSeal5.

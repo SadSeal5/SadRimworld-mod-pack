@@ -16,16 +16,25 @@ namespace SadSeal.MegaMod.Recipes
             {
                 if (tweaks == null) tweaks = new List<RecipeTweak>();
                 if (customRecipes == null) customRecipes = new List<CustomRecipeData>();
+                PruneVanilla();
             }
+        }
+
+        public RecipeTweak FindTweak(string defName)
+        {
+            if (tweaks == null) return null;
+            for (int i = 0; i < tweaks.Count; i++)
+            {
+                if (tweaks[i] != null && tweaks[i].recipeDefName == defName) return tweaks[i];
+            }
+            return null;
         }
 
         public RecipeTweak GetOrCreate(string defName)
         {
             if (tweaks == null) tweaks = new List<RecipeTweak>();
-            for (int i = 0; i < tweaks.Count; i++)
-            {
-                if (tweaks[i].recipeDefName == defName) return tweaks[i];
-            }
+            var existing = FindTweak(defName);
+            if (existing != null) return existing;
             var t = new RecipeTweak { recipeDefName = defName };
             tweaks.Add(t);
             return t;
@@ -33,7 +42,7 @@ namespace SadSeal.MegaMod.Recipes
 
         public void PruneVanilla()
         {
-            tweaks?.RemoveAll(t => t.IsVanilla);
+            tweaks?.RemoveAll(t => t == null || t.IsVanilla);
         }
 
         public void Write()

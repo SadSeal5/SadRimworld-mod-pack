@@ -25,8 +25,8 @@ namespace SadSeal.MegaMod.WorkManager.Core
                 return;
             }
 
-            var settings = MegaMod.Settings.WorkManager;
-            if (!settings.EnableWorkManager || !settings.ManageWorkSchedule)
+            var settings = MegaMod.Settings?.WorkManager;
+            if (settings == null || !settings.EnableWorkManager || !settings.ManageWorkSchedule)
             {
                 return;
             }
@@ -47,7 +47,8 @@ namespace SadSeal.MegaMod.WorkManager.Core
             if (freeColonists == null || freeColonists.Count == 0) return;
 
             var comp = WorkManagerGameComponent.Instance;
-            var settings = MegaMod.Settings.WorkManager;
+            var settings = MegaMod.Settings?.WorkManager;
+            if (settings == null) return;
 
             for (int i = 0; i < freeColonists.Count; i++)
             {

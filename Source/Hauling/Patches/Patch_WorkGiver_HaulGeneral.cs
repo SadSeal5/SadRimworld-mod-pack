@@ -18,6 +18,13 @@ namespace SadSeal.MegaMod.Hauling.Patches
                 return;
             }
 
+            // Vanilla can queue multiple destination cells; the smart-haul driver only
+            // understands a single targetB, so leave those jobs untouched.
+            if (__result.targetQueueB != null && __result.targetQueueB.Count > 1)
+            {
+                return;
+            }
+
             var settings = MegaMod.Settings?.Hauling;
             if (settings == null || !settings.EnableSmartHaul)
             {

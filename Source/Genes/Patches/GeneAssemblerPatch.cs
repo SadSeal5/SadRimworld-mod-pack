@@ -63,7 +63,7 @@ namespace SadSeal.MegaMod.Genes.Patches
         [HarmonyPostfix]
         public static void Postfix(Building_GeneAssembler __instance)
         {
-            if (Scribe.mode == LoadSaveMode.LoadingVars || Scribe.mode == LoadSaveMode.PostLoadInit)
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 GeneAssemblerPatch.EnsureCompOnInstance(__instance);
             }

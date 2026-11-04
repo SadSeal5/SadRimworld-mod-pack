@@ -278,16 +278,33 @@ namespace SadSeal.MegaMod.Hauling.Jobs
                     }
 
                     Thing dropped;
-                    if (StoreUtility.TryFindBestBetterStoreCellFor(item, pawn, pawn.Map, StoragePriority.Unstored, pawn.Faction, out IntVec3 cell, true))
+                    IntVec3 reservedCell = job.GetTarget(StoreCellInd).Cell;
+                    SlotGroup reservedGroup = reservedCell.IsValid && reservedCell.InBounds(pawn.Map)
+                        ? reservedCell.GetSlotGroup(pawn.Map)
+                        : null;
+                    bool droppedIntoReserved = false;
+
+                    // Fast path: the reserved destination cell already accepts this item, so
+                    // skip the map-wide storage scan entirely.
+                    if (reservedGroup?.Settings != null && reservedGroup.Settings.AllowedToAccept(item))
                     {
-                        if (!pawn.inventory.innerContainer.TryDrop(item, cell, pawn.Map, ThingPlaceMode.Direct, out dropped))
+                        droppedIntoReserved = pawn.inventory.innerContainer.TryDrop(
+                            item, reservedCell, pawn.Map, ThingPlaceMode.Direct, out dropped);
+                    }
+
+                    if (!droppedIntoReserved)
+                    {
+                        if (StoreUtility.TryFindBestBetterStoreCellFor(item, pawn, pawn.Map, StoragePriority.Unstored, pawn.Faction, out IntVec3 cell, true))
+                        {
+                            if (!pawn.inventory.innerContainer.TryDrop(item, cell, pawn.Map, ThingPlaceMode.Direct, out dropped))
+                            {
+                                pawn.inventory.innerContainer.TryDrop(item, pawn.Position, pawn.Map, ThingPlaceMode.Near, out dropped);
+                            }
+                        }
+                        else
                         {
                             pawn.inventory.innerContainer.TryDrop(item, pawn.Position, pawn.Map, ThingPlaceMode.Near, out dropped);
                         }
-                    }
-                    else
-                    {
-                        pawn.inventory.innerContainer.TryDrop(item, pawn.Position, pawn.Map, ThingPlaceMode.Near, out dropped);
                     }
 
                     HauledCargoTracker.Unregister(pawn, item);

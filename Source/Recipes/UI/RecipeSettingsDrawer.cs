@@ -52,11 +52,13 @@ namespace SadSeal.MegaMod.Recipes.UI
                         {
                             for (int i = 0; i < settings.tweaks.Count; i++)
                             {
+                                if (settings.tweaks[i] == null) continue;
                                 var r = DefDatabase<RecipeDef>.GetNamed(settings.tweaks[i].recipeDefName, false);
                                 if (r != null) RecipePatchApplier.ResetToVanilla(r);
                             }
                             settings.tweaks.Clear();
                             settings.Write();
+                            RecipeCache.Rebuild();
                             Messages.Message("MegaMod_ResetAllSuccess".Translate(), MessageTypeDefOf.PositiveEvent, false);
                         }
                     },

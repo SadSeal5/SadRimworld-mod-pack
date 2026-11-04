@@ -50,7 +50,7 @@ namespace SadSeal.MegaMod.Combat.UI
                 float oldFalloff = settings.distanceFalloffMultiplier;
                 settings.distanceFalloffMultiplier = listing.SliderLabeled(
                     "LethalRanged_FalloffMult".Translate() + $": {settings.distanceFalloffMultiplier:P0}",
-                    settings.distanceFalloffMultiplier, 0.50f, 2.00f, 0.5f,
+                    settings.distanceFalloffMultiplier, 0.50f, 2.00f, 0.05f,
                     "LethalRanged_FalloffMult_Desc".Translate());
                 if (Math.Abs(oldFalloff - settings.distanceFalloffMultiplier) > 0.005f) settings.activePreset = LethalityPreset.Custom;
             }
@@ -63,21 +63,21 @@ namespace SadSeal.MegaMod.Combat.UI
             float oldDmg = settings.damageMultiplier;
             settings.damageMultiplier = listing.SliderLabeled(
                 "LethalRanged_DamageMult".Translate() + $": {settings.damageMultiplier:P0}",
-                settings.damageMultiplier, 1.00f, 2.50f, 0.5f,
+                settings.damageMultiplier, 1.00f, 2.50f, 0.05f,
                 "LethalRanged_DamageMult_Desc".Translate());
             if (Math.Abs(oldDmg - settings.damageMultiplier) > 0.005f) settings.activePreset = LethalityPreset.Custom;
 
             float oldAp = settings.armorPenetrationMultiplier;
             settings.armorPenetrationMultiplier = listing.SliderLabeled(
                 "LethalRanged_ApMult".Translate() + $": {settings.armorPenetrationMultiplier:P0}",
-                settings.armorPenetrationMultiplier, 1.00f, 2.00f, 0.5f,
+                settings.armorPenetrationMultiplier, 1.00f, 2.00f, 0.05f,
                 "LethalRanged_ApMult_Desc".Translate());
             if (Math.Abs(oldAp - settings.armorPenetrationMultiplier) > 0.005f) settings.activePreset = LethalityPreset.Custom;
 
             float oldSpeed = settings.projectileSpeedMultiplier;
             settings.projectileSpeedMultiplier = listing.SliderLabeled(
                 "LethalRanged_SpeedMult".Translate() + $": {settings.projectileSpeedMultiplier:P0}",
-                settings.projectileSpeedMultiplier, 1.00f, 2.50f, 0.5f,
+                settings.projectileSpeedMultiplier, 1.00f, 2.50f, 0.05f,
                 "LethalRanged_SpeedMult_Desc".Translate());
             if (Math.Abs(oldSpeed - settings.projectileSpeedMultiplier) > 0.005f) settings.activePreset = LethalityPreset.Custom;
 
@@ -95,7 +95,7 @@ namespace SadSeal.MegaMod.Combat.UI
                 float oldStaggerSpeed = settings.staggerMoveSpeedFactor;
                 settings.staggerMoveSpeedFactor = listing.SliderLabeled(
                     "LethalRanged_StaggerSpeedFactor".Translate() + $": {settings.staggerMoveSpeedFactor:P0}",
-                    settings.staggerMoveSpeedFactor, 0.10f, 0.50f, 0.5f,
+                    settings.staggerMoveSpeedFactor, 0.10f, 0.50f, 0.01f,
                     "LethalRanged_StaggerSpeedFactor_Desc".Translate());
                 if (Math.Abs(oldStaggerSpeed - settings.staggerMoveSpeedFactor) > 0.005f) settings.activePreset = LethalityPreset.Custom;
             }

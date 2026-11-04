@@ -1,0 +1,9 @@
+<Project>
+  <!-- Optional per-machine overrides. Copy local.props.example to local.props and edit. -->
+  <Import Project="local.props" Condition="Exists('local.props')" />
+
+  <PropertyGroup>
+    <RimWorldDir Condition="'$(RimWorldDir)' == ''">D:\SteamLibrary\steamapps\common\RimWorld</RimWorldDir>
+    <HarmonyDir Condition="'$(HarmonyDir)' == ''">D:\SteamLibrary\steamapps\workshop\content\294100\2009463077\1.7\Assemblies</HarmonyDir>
+  </PropertyGroup>
+</Project>

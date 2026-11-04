@@ -6,31 +6,27 @@ namespace SadSeal.MegaMod.Durability.Patches
     [HarmonyPatch(typeof(Pawn_ApparelTracker), nameof(Pawn_ApparelTracker.Notify_PawnKilled))]
     public static class Patch_Apparel_Tainted
     {
-        public static bool SuppressTaint = false;
-
-        public static void Prefix()
+        public static void Prefix(out bool __state)
         {
-            if (MegaMod.Settings?.Durability?.preventTaintedApparel == true)
-            {
-                SuppressTaint = true;
-            }
+            __state = MegaMod.Settings?.Durability?.preventTaintedApparel == true;
         }
 
-        public static void Postfix(Pawn_ApparelTracker __instance)
+        public static void Postfix(Pawn_ApparelTracker __instance, bool __state)
         {
-            if (SuppressTaint)
+            if (!__state)
             {
-                SuppressTaint = false;
-                if (__instance?.WornApparel != null)
+                return;
+            }
+
+            if (__instance?.WornApparel != null)
+            {
+                var worn = __instance.WornApparel;
+                for (int i = 0; i < worn.Count; i++)
                 {
-                    var worn = __instance.WornApparel;
-                    for (int i = 0; i < worn.Count; i++)
+                    var apparel = worn[i];
+                    if (apparel != null)
                     {
-                        var apparel = worn[i];
-                        if (apparel != null)
-                        {
-                            apparel.WornByCorpse = false;
-                        }
+                        apparel.WornByCorpse = false;
                     }
                 }
             }

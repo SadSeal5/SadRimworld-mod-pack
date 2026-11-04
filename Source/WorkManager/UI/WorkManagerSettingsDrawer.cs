@@ -22,6 +22,11 @@ namespace SadSeal.MegaMod.WorkManager.UI
 
             SadUI.DrawHeader(listing, "WorkManager_ModTitle", "WorkManager_ModDesc");
 
+            GUI.color = Color.yellow;
+            listing.Label("WorkManager_OverwriteWarning".Translate());
+            GUI.color = Color.white;
+            listing.Gap(8f);
+
             // Preset Buttons Section
             listing.Label("WorkManager_PresetsHeader".Translate());
             SadUI.DrawPresetRow(listing, settings.ActivePreset, new (string, WorkManagerPreset)[]
@@ -78,14 +83,14 @@ namespace SadSeal.MegaMod.WorkManager.UI
             int oldTicks = settings.PriorityUpdateIntervalTicks;
             settings.PriorityUpdateIntervalTicks = (int)listing.SliderLabeled(
                 "WorkManager_PriorityInterval".Translate() + $": {settings.PriorityUpdateIntervalTicks} ticks ({settings.PriorityUpdateIntervalTicks / 60f:F1}s)",
-                settings.PriorityUpdateIntervalTicks, 250f, 2500f, 0.5f,
+                settings.PriorityUpdateIntervalTicks, 250f, 2500f, 1f,
                 "WorkManager_PriorityInterval_Desc".Translate());
             if (oldTicks != settings.PriorityUpdateIntervalTicks) settings.ActivePreset = WorkManagerPreset.Custom;
 
             int oldHours = settings.ScheduleUpdateIntervalHours;
             settings.ScheduleUpdateIntervalHours = (int)listing.SliderLabeled(
                 "WorkManager_ScheduleInterval".Translate() + $": {settings.ScheduleUpdateIntervalHours}h",
-                settings.ScheduleUpdateIntervalHours, 1f, 12f, 0.5f,
+                settings.ScheduleUpdateIntervalHours, 1f, 12f, 1f,
                 "WorkManager_ScheduleInterval_Desc".Translate());
             if (oldHours != settings.ScheduleUpdateIntervalHours) settings.ActivePreset = WorkManagerPreset.Custom;
 
@@ -100,31 +105,31 @@ namespace SadSeal.MegaMod.WorkManager.UI
             int oldDoc = settings.TargetDoctors;
             settings.TargetDoctors = (int)listing.SliderLabeled(
                 "WorkManager_TargetDoctors".Translate() + $": {settings.TargetDoctors}",
-                settings.TargetDoctors, 1f, 5f, 0.5f);
+                settings.TargetDoctors, 1f, 5f, 1f);
             if (oldDoc != settings.TargetDoctors) settings.ActivePreset = WorkManagerPreset.Custom;
 
             int oldCook = settings.TargetCooks;
             settings.TargetCooks = (int)listing.SliderLabeled(
                 "WorkManager_TargetCooks".Translate() + $": {settings.TargetCooks}",
-                settings.TargetCooks, 1f, 5f, 0.5f);
+                settings.TargetCooks, 1f, 5f, 1f);
             if (oldCook != settings.TargetCooks) settings.ActivePreset = WorkManagerPreset.Custom;
 
             int oldRes = settings.TargetResearchers;
             settings.TargetResearchers = (int)listing.SliderLabeled(
                 "WorkManager_TargetResearchers".Translate() + $": {settings.TargetResearchers}",
-                settings.TargetResearchers, 1f, 5f, 0.5f);
+                settings.TargetResearchers, 1f, 5f, 1f);
             if (oldRes != settings.TargetResearchers) settings.ActivePreset = WorkManagerPreset.Custom;
 
             int oldWarden = settings.TargetWardens;
             settings.TargetWardens = (int)listing.SliderLabeled(
                 "WorkManager_TargetWardens".Translate() + $": {settings.TargetWardens}",
-                settings.TargetWardens, 1f, 5f, 0.5f);
+                settings.TargetWardens, 1f, 5f, 1f);
             if (oldWarden != settings.TargetWardens) settings.ActivePreset = WorkManagerPreset.Custom;
 
             int oldHandler = settings.TargetHandlers;
             settings.TargetHandlers = (int)listing.SliderLabeled(
                 "WorkManager_TargetHandlers".Translate() + $": {settings.TargetHandlers}",
-                settings.TargetHandlers, 1f, 5f, 0.5f);
+                settings.TargetHandlers, 1f, 5f, 1f);
             if (oldHandler != settings.TargetHandlers) settings.ActivePreset = WorkManagerPreset.Custom;
 
             listing.Gap(14f);

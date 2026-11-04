@@ -89,7 +89,8 @@ namespace SadSeal.MegaMod.WorkManager.Core
             // Ensure manual priorities (1-4) are active in game
             Current.Game.playSettings.useWorkPriorities = true;
 
-            var settings = MegaMod.Settings.WorkManager;
+            var settings = MegaMod.Settings?.WorkManager;
+            if (settings == null) return;
             var comp = WorkManagerGameComponent.Instance;
 
             // Collect capable player colonists on this map

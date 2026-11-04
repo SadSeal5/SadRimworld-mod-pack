@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using Verse;
 using RimWorld;
@@ -27,6 +28,7 @@ namespace SadSeal.MegaMod.Recipes.UI
 
         private string _editLabel, _editWork;
         private bool _editDisabled;
+        private bool _ingredientsDirty;
         private List<WorkingIngredient> _workingIngredients = new List<WorkingIngredient>();
 
         public Dialog_RecipeTweaker()
@@ -42,7 +44,7 @@ namespace SadSeal.MegaMod.Recipes.UI
         {
             if (_searchText != _prevSearch) { RefreshFilter(); _prevSearch = _searchText; }
 
-            if (Widgets.ButtonText(new Rect(inRect.x, inRect.y, 160f, 30f), "+ Yeni Tarif Ekle"))
+            if (Widgets.ButtonText(new Rect(inRect.x, inRect.y, 160f, 30f), "MegaMod_RecipeAddNew".Translate()))
             {
                 Find.WindowStack.Add(new Dialog_CreateCustomRecipe(() =>
                 {
@@ -51,7 +53,7 @@ namespace SadSeal.MegaMod.Recipes.UI
             }
 
             Text.Font = GameFont.Medium;
-            Widgets.Label(new Rect(inRect.x + 175f, inRect.y + 2f, 450f, 30f), "Recipe Tweaker - SadSeal Mega Mod");
+            Widgets.Label(new Rect(inRect.x + 175f, inRect.y + 2f, 450f, 30f), "MegaMod_RecipeWindowTitle".Translate());
             Text.Font = GameFont.Small;
 
             float cy = inRect.y + 36f, ch = inRect.height - 36f;
@@ -121,7 +123,7 @@ namespace SadSeal.MegaMod.Recipes.UI
             var tweaks = MegaMod.Settings?.Recipes?.tweaks;
             if (tweaks == null) return false;
             for (int i = 0; i < tweaks.Count; i++)
-                if (tweaks[i].recipeDefName == defName && !tweaks[i].IsVanilla) return true;
+                if (tweaks[i] != null && tweaks[i].recipeDefName == defName && !tweaks[i].IsVanilla) return true;
             return false;
         }
 
@@ -130,7 +132,7 @@ namespace SadSeal.MegaMod.Recipes.UI
             if (_selected == null)
             {
                 GUI.color = ColGray;
-                Widgets.Label(new Rect(rect.x + 12f, rect.y + 20f, 300f, 24f), "Sol listeden bir tarif secin.");
+                Widgets.Label(new Rect(rect.x + 12f, rect.y + 20f, 300f, 24f), "MegaMod_RecipeSelectPrompt".Translate());
                 GUI.color = Color.white;
                 return;
             }
@@ -143,35 +145,35 @@ namespace SadSeal.MegaMod.Recipes.UI
             if (isCustom)
             {
                 GUI.color = Color.cyan;
-                Widgets.Label(new Rect(rect.x + w - 110f, y + 2f, 110f, 26f), "[Özel Tarif]");
+                Widgets.Label(new Rect(rect.x + w - 110f, y + 2f, 110f, 26f), "MegaMod_RecipeCustomBadge".Translate());
                 GUI.color = Color.white;
             }
             Text.Font = GameFont.Small;
             y += 32f;
 
             GUI.color = ColGray;
-            Widgets.Label(new Rect(rect.x, y, w, 20f), "defName: " + _selected.defName + " | Mod: " + (_selected.modContentPack?.Name ?? "Vanilla"));
+            Widgets.Label(new Rect(rect.x, y, w, 20f), "MegaMod_RecipeDefNameLine".Translate(_selected.defName, _selected.modContentPack?.Name ?? "MegaMod_Vanilla".Translate().ToString()));
             GUI.color = Color.white;
             y += 24f;
             Widgets.DrawLineHorizontal(rect.x, y, w);
             y += GAP * 2;
 
-            Widgets.Label(new Rect(rect.x, y + 2f, LBL_W, 24f), "Gosterim Adi:");
+            Widgets.Label(new Rect(rect.x, y + 2f, LBL_W, 24f), "MegaMod_RecipeLabelField".Translate());
             _editLabel = Widgets.TextField(new Rect(rect.x + LBL_W, y, w - LBL_W, 24f), _editLabel);
             y += 24f + GAP;
 
-            Widgets.Label(new Rect(rect.x, y + 2f, LBL_W, 24f), "Uretim Suresi (Work):");
+            Widgets.Label(new Rect(rect.x, y + 2f, LBL_W, 24f), "MegaMod_RecipeWorkField".Translate());
             _editWork = Widgets.TextField(new Rect(rect.x + LBL_W, y, 100f, 24f), _editWork);
             y += 24f + GAP;
 
-            Widgets.CheckboxLabeled(new Rect(rect.x, y, 200f, 24f), "Tarifi Devre Disi Birak", ref _editDisabled);
+            Widgets.CheckboxLabeled(new Rect(rect.x, y, 200f, 24f), "MegaMod_RecipeDisableCheckbox".Translate(), ref _editDisabled);
             y += 24f + GAP * 2;
 
             Text.Font = GameFont.Medium;
-            Widgets.Label(new Rect(rect.x, y, 200f, 26f), "Malzemeler");
+            Widgets.Label(new Rect(rect.x, y, 200f, 26f), "MegaMod_RecipeIngredientsHeader".Translate());
             Text.Font = GameFont.Small;
 
-            if (Widgets.ButtonText(new Rect(rect.x + w - 140f, y, 140f, 26f), "+ Malzeme Ekle"))
+            if (Widgets.ButtonText(new Rect(rect.x + w - 140f, y, 140f, 26f), "MegaMod_RecipeAddIngredient".Translate()))
             {
                 Find.WindowStack.Add(new Dialog_IngredientPicker(td =>
                 {
@@ -181,11 +183,12 @@ namespace SadSeal.MegaMod.Recipes.UI
                         Label = td.LabelCap,
                         Count = 1
                     });
+                    _ingredientsDirty = true;
                 }));
             }
             y += 30f;
 
-            float listH = rect.height - (y - rect.y) - (BTN_H + GAP * 2);
+            float listH = Mathf.Max(60f, rect.height - (y - rect.y) - (BTN_H + GAP * 2));
             var ingR = new Rect(rect.x, y, w, listH);
             Widgets.DrawMenuSection(ingR);
 
@@ -199,42 +202,60 @@ namespace SadSeal.MegaMod.Recipes.UI
                 Widgets.Label(new Rect(rowR.x + 4f, iy + 4f, rowR.width - 240f, 22f), ing.Label);
 
                 if (Widgets.ButtonText(new Rect(rowR.x + rowR.width - 210f, iy + 2f, SPINNER_W, 24f), "-"))
-                    if (ing.Count > 1) ing.Count--;
+                {
+                    if (ing.Count > 1)
+                    {
+                        ing.Count--;
+                        _ingredientsDirty = true;
+                    }
+                }
 
                 string cntStr = Widgets.TextField(new Rect(rowR.x + rowR.width - 180f, iy + 2f, COUNT_W, 24f), ing.Count.ToString());
-                if (int.TryParse(cntStr, out int nc)) ing.Count = Mathf.Max(1, nc);
+                if (int.TryParse(cntStr, out int nc))
+                {
+                    int clamped = Mathf.Max(1, nc);
+                    if (clamped != ing.Count)
+                    {
+                        ing.Count = clamped;
+                        _ingredientsDirty = true;
+                    }
+                }
 
                 if (Widgets.ButtonText(new Rect(rowR.x + rowR.width - 132f, iy + 2f, SPINNER_W, 24f), "+"))
+                {
                     ing.Count++;
+                    _ingredientsDirty = true;
+                }
 
-                if (Widgets.ButtonText(new Rect(rowR.x + rowR.width - 70f, iy + 2f, 65f, 24f), "Sil"))
+                if (Widgets.ButtonText(new Rect(rowR.x + rowR.width - 70f, iy + 2f, 65f, 24f), "MegaMod_RecipeRemoveIngredient".Translate()))
                 {
                     _workingIngredients.RemoveAt(i);
+                    _ingredientsDirty = true;
                     i--;
                 }
                 iy += 30f;
             }
 
             float by = rect.y + rect.height - BTN_H;
-            if (Widgets.ButtonText(new Rect(rect.x, by, 120f, BTN_H), "Kaydet")) SaveChanges();
-            if (Widgets.ButtonText(new Rect(rect.x + 130f, by, 140f, BTN_H), "Orijinale Sifirla")) ResetToFactory();
+            if (Widgets.ButtonText(new Rect(rect.x, by, 120f, BTN_H), "MegaMod_RecipeSave".Translate())) SaveChanges();
+            if (Widgets.ButtonText(new Rect(rect.x + 130f, by, 140f, BTN_H), "MegaMod_RecipeResetToVanilla".Translate())) ResetToFactory();
 
             if (isCustom)
             {
                 GUI.color = new Color(1f, 0.4f, 0.4f);
-                if (Widgets.ButtonText(new Rect(rect.x + rect.width - 120f, by, 120f, BTN_H), "Tarifi Sil"))
+                if (Widgets.ButtonText(new Rect(rect.x + rect.width - 120f, by, 120f, BTN_H), "MegaMod_RecipeDelete".Translate()))
                 {
                     var customData = CustomRecipeManager.GetCustomRecipe(_selected.defName);
                     if (customData != null)
                     {
                         Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(
-                            "'" + _selected.LabelCap + "' ozel tarifini tamamen silmek istediginize emin misiniz?",
+                            "MegaMod_RecipeDeleteConfirm".Translate(_selected.LabelCap),
                             () =>
                             {
                                 CustomRecipeManager.RemoveCustomRecipe(customData);
                                 _selected = null;
                                 RefreshFilter();
-                                Messages.Message("Ozel tarif silindi.", MessageTypeDefOf.PositiveEvent, false);
+                                Messages.Message("MegaMod_RecipeDeleted".Translate(), MessageTypeDefOf.PositiveEvent, false);
                             },
                             destructive: true
                         ));
@@ -259,7 +280,7 @@ namespace SadSeal.MegaMod.Recipes.UI
         {
             _selected = r;
             RecipePatchApplier.EnsureVanillaSaved(r);
-            var tw = MegaMod.Settings?.Recipes?.GetOrCreate(r.defName) ?? new RecipeTweak { recipeDefName = r.defName };
+            var tw = MegaMod.Settings?.Recipes?.FindTweak(r.defName) ?? new RecipeTweak { recipeDefName = r.defName };
 
             _editLabel = tw.newLabel ?? r.LabelCap.ToString();
 
@@ -270,9 +291,10 @@ namespace SadSeal.MegaMod.Recipes.UI
             }
             if (currentWork < 0f) currentWork = 450f;
 
-            _editWork = (tw.newWorkAmount >= 0f ? tw.newWorkAmount : currentWork).ToString("F0");
+            _editWork = (tw.newWorkAmount >= 0f ? tw.newWorkAmount : currentWork).ToString("0.##", CultureInfo.InvariantCulture);
             _editDisabled = tw.disabled;
 
+            _ingredientsDirty = false;
             _workingIngredients.Clear();
             if (tw.hasCustomIngredients && tw.customIngredients != null)
             {
@@ -307,12 +329,21 @@ namespace SadSeal.MegaMod.Recipes.UI
         {
             if (_selected == null) return;
             var tw = MegaMod.Settings.Recipes.GetOrCreate(_selected.defName);
+
+            // Compare against the saved vanilla label, not the currently applied label:
+            // otherwise saving an already-tweaked recipe would silently drop the tweak.
             string van = _selected.LabelCap.ToString();
+            if (RecipePatchApplier.VanillaSnapshots.TryGetValue(_selected.defName, out var snap) &&
+                !string.IsNullOrEmpty(snap.Label))
+            {
+                van = snap.Label.CapitalizeFirst();
+            }
+
             tw.newLabel = (!string.IsNullOrEmpty(_editLabel) && _editLabel != van) ? _editLabel : null;
-            tw.newWorkAmount = float.TryParse(_editWork, out var wp) ? wp : _selected.workAmount;
+            tw.newWorkAmount = TryParseFloat(_editWork, _selected.workAmount);
             tw.disabled = _editDisabled;
 
-            tw.hasCustomIngredients = true;
+            tw.hasCustomIngredients = _ingredientsDirty || tw.hasCustomIngredients;
             tw.customIngredients.Clear();
             for (int i = 0; i < _workingIngredients.Count; i++)
             {
@@ -328,7 +359,7 @@ namespace SadSeal.MegaMod.Recipes.UI
             if (customData != null)
             {
                 if (!string.IsNullOrEmpty(_editLabel)) customData.label = _editLabel;
-                if (float.TryParse(_editWork, out var cwp)) customData.workAmount = cwp;
+                customData.workAmount = TryParseFloat(_editWork, customData.workAmount);
                 customData.ingredients.Clear();
                 for (int i = 0; i < _workingIngredients.Count; i++)
                 {
@@ -345,7 +376,22 @@ namespace SadSeal.MegaMod.Recipes.UI
             RecipePatchApplier.ApplyTweak(_selected, tw);
             MegaMod.Settings.Recipes.PruneVanilla();
             MegaMod.Settings.Recipes.Write();
-            Messages.Message("Tarif guncellendi: " + _selected.LabelCap, MessageTypeDefOf.PositiveEvent, false);
+            RecipeCache.Rebuild();
+            RefreshFilter();
+            Messages.Message("MegaMod_RecipeUpdated".Translate(_selected.LabelCap), MessageTypeDefOf.PositiveEvent, false);
+        }
+
+        private static float TryParseFloat(string text, float fallback)
+        {
+            if (float.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out float value))
+            {
+                return value;
+            }
+            if (float.TryParse(text, NumberStyles.Float, CultureInfo.CurrentCulture, out value))
+            {
+                return value;
+            }
+            return fallback;
         }
 
         private void ResetToFactory()
@@ -353,14 +399,16 @@ namespace SadSeal.MegaMod.Recipes.UI
             if (_selected == null) return;
             if (CustomRecipeManager.IsCustomRecipe(_selected.defName))
             {
-                Messages.Message("Ozel tariflerin orijinal hali yoktur. Silmek icin 'Tarifi Sil' butonunu kullanin.", MessageTypeDefOf.RejectInput, false);
+                Messages.Message("MegaMod_RecipeCustomNoVanilla".Translate(), MessageTypeDefOf.RejectInput, false);
                 return;
             }
             RecipePatchApplier.ResetToVanilla(_selected);
             MegaMod.Settings.Recipes.tweaks.RemoveAll(t => t.recipeDefName == _selected.defName);
             MegaMod.Settings.Recipes.Write();
+            RecipeCache.Rebuild();
+            RefreshFilter();
             SelectRecipe(_selected);
-            Messages.Message("Tarif orijinal haline donduruldu: " + _selected.LabelCap, MessageTypeDefOf.PositiveEvent, false);
+            Messages.Message("MegaMod_RecipeResetDone".Translate(_selected.LabelCap), MessageTypeDefOf.PositiveEvent, false);
         }
     }
 }

@@ -21,9 +21,63 @@
   <MegaMod_ResetAllConfirm>Are you sure you want to revert all custom recipe tweaks to vanilla defaults? This will erase all your saved recipe modifications.</MegaMod_ResetAllConfirm>
   <MegaMod_ResetAllSuccess>All recipes have been reset to vanilla defaults.</MegaMod_ResetAllSuccess>
   <MegaMod_RecipeHelp>Tip: Edits made in the Recipe Editor take effect immediately and are saved automatically across game restarts.</MegaMod_RecipeHelp>
+  <MegaMod_RecipeWindowTitle>Recipe Tweaker - SadSeal Mega Mod</MegaMod_RecipeWindowTitle>
+  <MegaMod_RecipeAddNew>+ New Recipe</MegaMod_RecipeAddNew>
+  <MegaMod_RecipeSelectPrompt>Select a recipe from the left list.</MegaMod_RecipeSelectPrompt>
+  <MegaMod_RecipeCustomBadge>[Custom Recipe]</MegaMod_RecipeCustomBadge>
+  <MegaMod_RecipeDefNameLine>defName: {0} | Mod: {1}</MegaMod_RecipeDefNameLine>
+  <MegaMod_RecipeLabelField>Display Name:</MegaMod_RecipeLabelField>
+  <MegaMod_RecipeWorkField>Work Amount:</MegaMod_RecipeWorkField>
+  <MegaMod_RecipeDisableCheckbox>Disable Recipe</MegaMod_RecipeDisableCheckbox>
+  <MegaMod_RecipeIngredientsHeader>Ingredients</MegaMod_RecipeIngredientsHeader>
+  <MegaMod_RecipeAddIngredient>+ Add Ingredient</MegaMod_RecipeAddIngredient>
+  <MegaMod_RecipeRemoveIngredient>Remove</MegaMod_RecipeRemoveIngredient>
+  <MegaMod_RecipeSave>Save</MegaMod_RecipeSave>
+  <MegaMod_RecipeResetToVanilla>Reset to Vanilla</MegaMod_RecipeResetToVanilla>
+  <MegaMod_RecipeDelete>Delete Recipe</MegaMod_RecipeDelete>
+  <MegaMod_RecipeDeleteConfirm>Are you sure you want to permanently delete the custom recipe '{0}'?</MegaMod_RecipeDeleteConfirm>
+  <MegaMod_RecipeDeleted>Custom recipe deleted.</MegaMod_RecipeDeleted>
+  <MegaMod_RecipeUpdated>Recipe updated: {0}</MegaMod_RecipeUpdated>
+  <MegaMod_RecipeCustomNoVanilla>Custom recipes have no vanilla original. Use the 'Delete Recipe' button to remove it.</MegaMod_RecipeCustomNoVanilla>
+  <MegaMod_RecipeResetDone>Recipe reset to original: {0}</MegaMod_RecipeResetDone>
+  <MegaMod_RecipeGroupCustom>Custom Recipes</MegaMod_RecipeGroupCustom>
+  <MegaMod_RecipeGroupUnknown>Unknown</MegaMod_RecipeGroupUnknown>
+  <MegaMod_Vanilla>Vanilla</MegaMod_Vanilla>
+  <MegaMod_RecipeJobString>Crafting: {0}</MegaMod_RecipeJobString>
+  <MegaMod_RecipeExportEmpty>[MegaMod] No recipe changes to export.</MegaMod_RecipeExportEmpty>
+  <MegaMod_RecipeExportDone>[MegaMod] XML patch exported: {0}</MegaMod_RecipeExportDone>
+  <MegaMod_CreateRecipeTitle>Create New Custom Recipe</MegaMod_CreateRecipeTitle>
+  <MegaMod_CreateRecipeProduct>Product:</MegaMod_CreateRecipeProduct>
+  <MegaMod_CreateRecipeSelectProduct>Select product...</MegaMod_CreateRecipeSelectProduct>
+  <MegaMod_CreateRecipeDefaultLabel>Make: {0}</MegaMod_CreateRecipeDefaultLabel>
+  <MegaMod_CreateRecipeName>Recipe Name:</MegaMod_CreateRecipeName>
+  <MegaMod_CreateRecipeCount>Count:</MegaMod_CreateRecipeCount>
+  <MegaMod_CreateRecipeWork>Work:</MegaMod_CreateRecipeWork>
+  <MegaMod_CreateRecipeMinSkill>Min Skill:</MegaMod_CreateRecipeMinSkill>
+  <MegaMod_CreateRecipeWorkbenches>Workbenches ({0} selected)</MegaMod_CreateRecipeWorkbenches>
+  <MegaMod_CreateRecipeResearch>Research ({0} selected)</MegaMod_CreateRecipeResearch>
+  <MegaMod_CreateRecipeIngredients>Ingredients</MegaMod_CreateRecipeIngredients>
+  <MegaMod_CreateRecipeAddIngredient>+ Add Ingredient</MegaMod_CreateRecipeAddIngredient>
+  <MegaMod_CreateRecipeRemove>Remove</MegaMod_CreateRecipeRemove>
+  <MegaMod_CreateRecipeCreate>Create Recipe</MegaMod_CreateRecipeCreate>
+  <MegaMod_CreateRecipeCancel>Cancel</MegaMod_CreateRecipeCancel>
+  <MegaMod_CreateRecipeNoneSelected>None selected</MegaMod_CreateRecipeNoneSelected>
+  <MegaMod_CreateRecipeNoResearch>None (unlocked immediately)</MegaMod_CreateRecipeNoResearch>
+  <MegaMod_CreateRecipeNoProduct>Please select a product to craft.</MegaMod_CreateRecipeNoProduct>
+  <MegaMod_CreateRecipeNoName>Please enter a recipe name.</MegaMod_CreateRecipeNoName>
+  <MegaMod_CreateRecipeBadWork>Please enter a valid work amount (positive number).</MegaMod_CreateRecipeBadWork>
+  <MegaMod_CreateRecipeNoWorkbench>Please select at least one workbench.</MegaMod_CreateRecipeNoWorkbench>
+  <MegaMod_CreateRecipeNoIngredient>Please add at least one ingredient.</MegaMod_CreateRecipeNoIngredient>
+  <MegaMod_CreateRecipeCreated>New recipe created: {0}</MegaMod_CreateRecipeCreated>
+  <MegaMod_PickerSelectIngredient>Select Ingredient</MegaMod_PickerSelectIngredient>
+  <MegaMod_PickerSelectWorkbench>Select Workbench</MegaMod_PickerSelectWorkbench>
+  <MegaMod_PickerSelectResearch>Select Research Project</MegaMod_PickerSelectResearch>
+  <MegaMod_PickerSelectAll>Select All</MegaMod_PickerSelectAll>
+  <MegaMod_PickerClearAll>Clear All</MegaMod_PickerClearAll>
+  <MegaMod_PickerConfirm>OK ({0})</MegaMod_PickerConfirm>
+  <MegaMod_PickerCancel>Cancel</MegaMod_PickerCancel>
 
   <!-- Skill Multipliers Module -->
-  <SLM_ModTitle>Skill Learning Multiplier</SLM_ModTitle>
   <SLM_GeneralSettings>General &amp; Quality of Life</SLM_GeneralSettings>
   <SLM_OnlyColonists>Apply to Colonists Only</SLM_OnlyColonists>
   <SLM_OnlyColonists_Desc>When enabled, multipliers and benefits apply exclusively to player colonists and faction members.</SLM_OnlyColonists_Desc>
@@ -39,17 +93,9 @@
   <SLM_IndividualMultipliers>Individual Skill Multipliers</SLM_IndividualMultipliers>
   <SLM_IndividualNotice>Note: Global multiplier is currently active. Uncheck 'Use Global Multiplier' above to apply individual values.</SLM_IndividualNotice>
   <SLM_Presets>Quick Presets</SLM_Presets>
-  <SLM_Preset_Vanilla>1x (Vanilla)</SLM_Preset_Vanilla>
-  <SLM_Preset_2x>2x</SLM_Preset_2x>
-  <SLM_Preset_5x>5x</SLM_Preset_5x>
-  <SLM_Preset_10x>10x</SLM_Preset_10x>
-  <SLM_Preset_25x>25x</SLM_Preset_25x>
-  <SLM_Preset_50x>50x</SLM_Preset_50x>
-  <SLM_Preset_100x>100x</SLM_Preset_100x>
   <SLM_ResetDefaults>Reset to Defaults</SLM_ResetDefaults>
 
   <!-- Lethal Ranged Combat Module -->
-  <LethalRanged_ModTitle>Lethal &amp; Accurate Ranged Combat</LethalRanged_ModTitle>
   <LethalRanged_SettingsTitle>Lethal &amp; Accurate Ranged Combat Settings</LethalRanged_SettingsTitle>
   <LethalRanged_PresetHeader>Quick Presets:</LethalRanged_PresetHeader>
   <LethalRanged_PresetVanillaPlus>Vanilla+</LethalRanged_PresetVanillaPlus>
@@ -134,6 +180,14 @@
   <GeneSynthesis_StatCpx>Complexity</GeneSynthesis_StatCpx>
   <GeneSynthesis_StatMet>Metabolism</GeneSynthesis_StatMet>
   <GeneSynthesis_StatArc>Archite</GeneSynthesis_StatArc>
+  <GeneSynthesis_StatCpxShort>Cpx</GeneSynthesis_StatCpxShort>
+  <GeneSynthesis_StatMetShort>Met</GeneSynthesis_StatMetShort>
+  <GeneSynthesis_StatArcShort>Arc</GeneSynthesis_StatArcShort>
+  <GeneSynthesis_GeneCount>{0} genes</GeneSynthesis_GeneCount>
+  <GeneSynthesis_ArcShort>A:{0}</GeneSynthesis_ArcShort>
+  <GeneSynthesis_Vanilla>Vanilla</GeneSynthesis_Vanilla>
+  <GeneSynthesis_None>None</GeneSynthesis_None>
+  <GeneSynthesis_UnknownGene>Unknown Gene</GeneSynthesis_UnknownGene>
   <GeneSynthesis_NoDesc>No description available.</GeneSynthesis_NoDesc>
   <GeneSynthesis_CostSummary>Required Neutroamine: {0}x</GeneSynthesis_CostSummary>
   <GeneSynthesis_WorkSummary>Work Duration: {0} ticks (~{1}s)</GeneSynthesis_WorkSummary>
@@ -198,6 +252,7 @@
   <!-- Work Manager Module -->
   <WorkManager_ModTitle>Work Manager</WorkManager_ModTitle>
   <WorkManager_ModDesc>High-performance, automated priority and schedule management. Intelligently scores pawns by skill levels, passions, traits, and physical capacities to assign optimal work priorities and balanced schedules with zero TPS lag.</WorkManager_ModDesc>
+  <WorkManager_OverwriteWarning>Note: While enabled, this module overwrites manual work priorities and schedules. Disable "Manage Work Priorities" / "Manage Schedule" to keep manual control.</WorkManager_OverwriteWarning>
   <WorkManager_PresetsHeader>Quick Presets:</WorkManager_PresetsHeader>
   <WorkManager_PresetBalanced>Balanced</WorkManager_PresetBalanced>
   <WorkManager_PresetPerformance>Performance</WorkManager_PresetPerformance>
@@ -241,8 +296,8 @@
   <WorkManager_GlobalDisabledTip>Work Manager is paused. Click to enable automatic management.</WorkManager_GlobalDisabledTip>
   <WorkManager_UpdateNowTip>Force recalculate priorities and schedules immediately.</WorkManager_UpdateNowTip>
   <WorkManager_SettingsTip>Open Work Manager settings.</WorkManager_SettingsTip>
-  <WorkManager_ColumnPriorityHeaderTip>Automated Priority Management\nToggle per colonist to include or exclude them from automatic priority updates.</WorkManager_ColumnPriorityHeaderTip>
-  <WorkManager_ColumnScheduleHeaderTip>Automated Schedule Management\nToggle per colonist to include or exclude them from automatic timetable updates.</WorkManager_ColumnScheduleHeaderTip>
+  <WorkManager_ColumnPriorityHeaderTip>Automated Priority Management&#10;Toggle per colonist to include or exclude them from automatic priority updates.</WorkManager_ColumnPriorityHeaderTip>
+  <WorkManager_ColumnScheduleHeaderTip>Automated Schedule Management&#10;Toggle per colonist to include or exclude them from automatic timetable updates.</WorkManager_ColumnScheduleHeaderTip>
   <WorkManager_PawnPriorityEnabledTip>{0}: Automatic work priorities enabled. Click to disable.</WorkManager_PawnPriorityEnabledTip>
   <WorkManager_PawnPriorityDisabledTip>{0}: Automatic work priorities disabled. Click to enable.</WorkManager_PawnPriorityDisabledTip>
   <WorkManager_PawnScheduleEnabledTip>{0}: Automatic schedule enabled. Click to disable.</WorkManager_PawnScheduleEnabledTip>
@@ -251,6 +306,12 @@
   <!-- Zero-Tick Durability Module -->
   <MegaMod_DurabilityTitle>Durability &amp; Condition Management</MegaMod_DurabilityTitle>
   <MegaMod_DurabilityDesc>Disable durability (Hit Points) consumption for weapons and apparel at the zero-tick engine level. Generates zero tick overhead and causes no TPS drop.</MegaMod_DurabilityDesc>
+  <MegaMod_DurabilityPresets>Quick Presets</MegaMod_DurabilityPresets>
+  <MegaMod_PresetAllDisabled>Disable All</MegaMod_PresetAllDisabled>
+  <MegaMod_PresetWeaponsOnly>Weapons Only</MegaMod_PresetWeaponsOnly>
+  <MegaMod_PresetApparelOnly>Apparel Only</MegaMod_PresetApparelOnly>
+  <MegaMod_PresetAllImmortal>All Immortal</MegaMod_PresetAllImmortal>
+  <MegaMod_ResetDefaults>Reset to Defaults</MegaMod_ResetDefaults>
   <MegaMod_RemoveApparelDurability>Remove Apparel Durability</MegaMod_RemoveApparelDurability>
   <MegaMod_RemoveApparelDurability_Desc>Disables the durability system for all apparel and armor. Items will not wear out, deteriorate, or take combat damage. Engine-level zero-tick architecture ensures zero performance impact.</MegaMod_RemoveApparelDurability_Desc>
   <MegaMod_RemoveWeaponDurability>Remove Weapon Durability</MegaMod_RemoveWeaponDurability>
@@ -262,5 +323,5 @@
   <MegaMod_RestoreGearNow>Restore All In-Game Gear Now</MegaMod_RestoreGearNow>
   <MegaMod_RestoreGearOnlyInGame>This button can only be used while playing an active save to restore map and inventory items.</MegaMod_RestoreGearOnlyInGame>
   <MegaMod_RestoredGearCount>Successfully restored {0} damaged items to 100% condition.</MegaMod_RestoredGearCount>
-  <MegaMod_DurabilityPerfNote>⚡ Zero-Tick Performance Architecture:\nThis mod manipulates core RimWorld ThingDef engine flags (useHitPoints = false) rather than relying on per-tick Harmony hooks or background loops. Even with 10,000+ items on the map, there is absolute zero TPS drop.</MegaMod_DurabilityPerfNote>
+  <MegaMod_DurabilityPerfNote>Zero-Tick Performance Architecture:&#10;This mod manipulates core RimWorld ThingDef engine flags (useHitPoints = false) rather than relying on per-tick Harmony hooks or background loops. Even with 10,000+ items on the map, there is absolute zero TPS drop.</MegaMod_DurabilityPerfNote>
 </LanguageData>

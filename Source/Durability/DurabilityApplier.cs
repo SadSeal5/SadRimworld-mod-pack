@@ -111,6 +111,20 @@ namespace SadSeal.MegaMod.Durability
                 }
             }
 
+            if (Find.WorldObjects?.Caravans != null)
+            {
+                var caravans = Find.WorldObjects.Caravans;
+                for (int i = 0; i < caravans.Count; i++)
+                {
+                    var caravan = caravans[i];
+                    if (caravan?.AllThings == null) continue;
+                    foreach (Thing caravanThing in caravan.AllThings)
+                    {
+                        TryRestore(caravanThing);
+                    }
+                }
+            }
+
             if (Find.WorldPawns?.AllPawnsAlive != null)
             {
                 var worldPawns = Find.WorldPawns.AllPawnsAlive;

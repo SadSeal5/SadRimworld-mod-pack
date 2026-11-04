@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="#"><img src="https://img.shields.io/badge/RimWorld-1.5%20%7C%201.6%20%7C%201.7%20(Beta)-brightgreen.svg" alt="RimWorld Versions"></a>
+  <a href="#"><img src="https://img.shields.io/badge/RimWorld-1.7%20(Beta)-brightgreen.svg" alt="RimWorld Versions"></a>
   <a href="https://github.com/pardeike/HarmonyRimWorld"><img src="https://img.shields.io/badge/Requires-Harmony-007EC6.svg?logo=unity&logoColor=white" alt="Requires Harmony"></a>
   <a href="#"><img src="https://img.shields.io/badge/Language-C%23-239120.svg?logo=csharp&logoColor=white" alt="Language C#"></a>
   <a href="#"><img src="https://img.shields.io/badge/.NET-10.0-512BD4.svg?logo=dotnet&logoColor=white" alt=".NET 10.0"></a>
@@ -70,22 +70,23 @@
 ### 5. 📦 Akıllı Taşıma (Smart Haul - Pick Up And Haul Varyantı)
 * **Yüksek Performanslı Çoklu Taşıma:** Kolonistler tek bir eşya taşımak yerine envanter kapasiteleri dolana kadar yakındaki eşyaları da toplar.
 * **Kesintisiz Toplu Boşaltma (Single-Job Batch Unload):** Orijinal Pick Up And Haul'un aksine her eşya için ThinkTree'yi baştan başlatıp TPS kaybetmez; eldeki ve çantadaki tüm eşyaları aynı iş akışı içinde sırayla depoya yerleştirir.
-* **Stok Alanı Kümeleme (Affinity Cache):** Yakındaki aday eşyaların hedef depoya kabul durumunu anında kontrol ederek harita çapı ağır stok taramalarını %95 oranında baypas eder.
+* **Hedef Depo Hücresi Önceliği:** Toplanan eşyalar önce rezerve edilmiş hedef depo hücresine bırakılır; hücre eşyayı kabul etmiyorsa harita çapı stok taramasına geçilir. Bu sayede çoğu teslimatta ağır tarama atlanır.
 * **Kişisel Eşya Güvenliği:** Yalnızca taşıma amacıyla toplanan yükler etiketlenir; kolonistin yemeği, ilacı ve teçhizatı asla depoya boşaltılmaz.
 * **Askere Alınma (Draft) Koruması:** Kolonist savaşa çağrıldığında taşınan yükler anında yere bırakılarak kolonist muharebeye hazır hale getirilir.
-* **Hazır Şablon Butonları:** `Dengeli`, `Performans (Ultra TPS)`, `Maksimum Kapasite` ve `Varsayılana Sıfırla`.
+* **Hazır Şablon Butonları:** `Dengeli`, `Performans`, `Maksimum Hacim` ve `Varsayılana Sıfırla`.
 
 ---
 
-### 6. 💼 Akıllı İş & Zaman Yöneticisi (Work & Schedule Manager - Work Manager 1.6 & 1.7)
-* **Orijinal Mod Uyarlaması:** [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'ın sevilen **Work Manager** modunun RimWorld 1.6 ve 1.7 (.NET 10) için resmi olmayan topluluk uyarlamasıdır.
+### 6. 💼 Akıllı İş & Zaman Yöneticisi (Work & Schedule Manager - Work Manager 1.7)
+* **Orijinal Mod Uyarlaması:** [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'ın sevilen **Work Manager** modunun RimWorld 1.7 (.NET 10) için resmi olmayan topluluk uyarlamasıdır.
 * **Modern Performans İyileştirmeleri:** Büyük kolonilerde yüksek TPS sağlamak amacıyla öncelik hesaplamaları statik tampon dizilerle optimize edilmiş, takvim kontrolleri saat başlarına (2.500 tick) bağlanmıştır.
 * **Dinamik Uygunluk Puanlaması (Suitability Scoring):** Kolonistlerin yetenek seviyeleri, tutkuları (Passions), sağlık kapasiteleri (görme, manipülasyon, hareket), özellikler (Traits) ve ideoloji rollerini birleştirerek her iş türü için en yetkin kişileri belirler.
 * **Uzman & Acil Durum İş Dağıtımı:** Doktorluk, Yangın ve Gardiyanlık gibi kritik görevleri acil önceliklendirirken; Aşçılık, Araştırma ve Zanaatkarlık gibi uzmanlık gerektiren alanlara harita başına sabit sayıda en yetkin uzmanları adar.
 * **Boşta Kalan Kolonistleri Yönlendirme (Idle Redirection):** Kendi uzmanlık alanında iş kalmayan kolonistlerin önceliklerini otomatik esneterek taşıma ve temizlik gibi ikincil görevlere yönlendirir.
 * **Akıllı Çalışma & Uyku Takvimi (Schedule Manager):** Gece Kuşu (Night Owl) kolonistleri otomatik olarak gece vardiyasına, diğer kolonistleri ise en verimli gündüz/uyku/eğlence döngüsüne 2.500 tick (1 oyun saati) aralıklarla optimize eder.
 * **İş Sekmesi Doğrudan Entegrasyonu:** Koloni İş (Work) ve Takvim (Schedule) pencerelerine eklenen iki yeni sütun ile kolonist bazında otomasyonu açıp kapatabilme; sağ üst köşedeki düğmelerle anında yenileme ve toplu kontrol.
-* **Hazır Şablon Butonları:** `Dengeli`, `Performans (Ultra TPS)`, `Katı Uzmanlaşma` ve `Varsayılana Sıfırla`.
+* **Hazır Şablon Butonları:** `Dengeli`, `Performans`, `Mikro Yönetim` ve `Varsayılana Sıfırla`.
+* **Not:** Etkin olduğunda manuel iş önceliklerini ve takvimleri otomatik olarak ezer; manuel kontrol için ilgili alt seçenekleri kapatın.
 
 ---
 
@@ -128,7 +129,7 @@ Mega mod süiti içerisindeki modülleri bağımsız olarak kullanmak veya ekosi
 * 🛠️ [rimworld-recipe-tweaker](https://github.com/SadSeal5/rimworld-recipe-tweaker) - Oyun içi canlı üretim tarif editörü ve XML yaması dışa aktarıcı
 * 🧬 [rimworld-gene-synthesizer](https://github.com/SadSeal5/rimworld-gene-synthesizer) - Nötroamin ile saf gen paketi sentezleyici (Biotech)
 * 📦 [rimworld-smart-haul](https://github.com/SadSeal5/rimworld-smart-haul) - Yüksek TPS dostu çoklu taşıma sistemi (Pick Up And Haul)
-* 💼 [rimworld-work-manager](https://github.com/SadSeal5/rimworld-work-manager) - Otomatik iş ve takvim yöneticisi (Work Manager 1.6 & 1.7)
+* 💼 [rimworld-work-manager](https://github.com/SadSeal5/rimworld-work-manager) - Otomatik iş ve takvim yöneticisi (Work Manager 1.7)
 * 🛡️ [rimworld-no-durability](https://github.com/SadSeal5/rimworld-no-durability) - Sıfır-tick silah ve kıyafet dayanıklılık kaldırıcı
 * 🧪 [Rimworld-Unified-Research-Tree](https://github.com/SadSeal5/Rimworld-Unified-Research-Tree) - Tüm DLC ve modlu araştırmaları tek sonsuz tuvalde toplayan, Anomaly ikili çalışma destekli ve otomatik kuyruklu modern araştırma ağacı
 * 🩸 [SadRimworld-Cellular-Regeneration](https://github.com/SadSeal5/SadRimworld-Cellular-Regeneration) - 4 aşamalı öncelikli iyileşme hatlı (kanama pıhtılaşma, yara kapanması, uzuv yenileme, kalıcı yara izi tedavisi) hücresel rejenerasyon gen paketi
@@ -137,7 +138,7 @@ Mega mod süiti içerisindeki modülleri bağımsız olarak kullanmak veya ekosi
 
 ## ⚙️ Gereksinimler & Yükleme Sırası
 
-* **RimWorld Sürümleri:** `1.5`, `1.6` veya `1.7` (Beta)
+* **RimWorld Sürümü:** `1.7` (Beta)
 * **Gerekli Mod:** [Harmony (brrainz.harmony)](https://github.com/pardeike/HarmonyRimWorld)
 
 ```
@@ -162,7 +163,7 @@ X. SadSeal's Mega Mod
 
 ## 🙏 Teşekkürler & Krediler (Credits & Attribution)
 
-* **Work Manager:** Fikir, tasarım ve arayüz konsepti için [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'a teşekkür ederiz. Bu modüldeki Work Manager, orijinal modun modern RimWorld 1.6 & 1.7 (.NET 10) sürümlerine topluluk uyarlamasıdır.
+* **Work Manager:** Fikir, tasarım ve arayüz konsepti için [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'a teşekkür ederiz. Bu modüldeki Work Manager, orijinal modun modern RimWorld 1.7 (.NET 10) sürümlerine topluluk uyarlamasıdır.
 * **Smart Haul:** *Pick Up And Haul* konsepti ve orijinal mod fikirleri için topluluk geliştiricilerine teşekkürler.
-* **Unified Research Tree:** Orijinal *Research Tree* ve *Research Reinvented* konseptlerinden ilham alan, modern RimWorld 1.6 & 1.7 (.NET 10) ve Anomaly DLC için sıfırdan tasarlanan DAG auto-layout araştırma ağacı.
+* **Unified Research Tree:** Orijinal *Research Tree* ve *Research Reinvented* konseptlerinden ilham alan, modern RimWorld 1.7 (.NET 10) ve Anomaly DLC için sıfırdan tasarlanan DAG auto-layout araştırma ağacı.
 * **Geliştirici & Paket:** SadSeal5 tarafından geliştirilip sürdürülmektedir.
