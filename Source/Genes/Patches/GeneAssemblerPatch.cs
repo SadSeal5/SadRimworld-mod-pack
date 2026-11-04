@@ -52,6 +52,12 @@ namespace SadSeal.MegaMod.Genes.Patches
 
             def.comps.Add(new CompProperties_GeneSynthesizer());
         }
+
+        public static void RemoveDefComp(ThingDef def)
+        {
+            if (def?.comps == null) return;
+            def.comps.RemoveAll(c => c is CompProperties_GeneSynthesizer || c?.compClass == typeof(CompGeneSynthesizer));
+        }
     }
 
     [HarmonyPatch(typeof(Building_GeneAssembler), nameof(Building_GeneAssembler.ExposeData))]

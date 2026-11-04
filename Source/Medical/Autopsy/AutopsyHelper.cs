@@ -24,6 +24,7 @@ namespace SadSeal.MegaMod.Medical.Autopsy
         {
             if (billDoer == null || corpse == null || corpse.InnerPawn == null) return;
 
+            if (MedicalModule.Instance?.IsEnabled != true) return;
             var settings = MedicalModule.ModSettings;
             if (settings == null || !settings.EnableAutopsy) return;
 

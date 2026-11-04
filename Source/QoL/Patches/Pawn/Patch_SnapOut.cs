@@ -15,6 +15,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
 
         public static bool CanCalmDown(Verse.Pawn calmer, Verse.Pawn target)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return false;
             if (QoLModule.ModSettings?.enableSnapOut != true) return false;
             if (calmer == null || target == null || calmer == target) return false;
             if (!calmer.Spawned || !target.Spawned) return false;
@@ -121,6 +122,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
 
         public override IEnumerable<Thing> PotentialWorkThingsGlobal(Verse.Pawn pawn)
         {
+            if (QoLModule.Instance?.IsEnabled != true) yield break;
             if (QoLModule.ModSettings?.enableSnapOut != true) yield break;
             if (pawn == null || pawn.Map == null) yield break;
             foreach (Verse.Pawn p in pawn.Map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer))
@@ -163,6 +165,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
         public static void AddCalmDownOption(Vector3 clickPos, Verse.Pawn pawn, List<FloatMenuOption> opts)
         {
             if (opts == null) return;
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (QoLModule.ModSettings?.enableSnapOut != true) return;
             if (pawn == null || !pawn.IsColonistPlayerControlled) return;
 

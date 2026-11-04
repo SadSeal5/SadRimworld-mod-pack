@@ -31,6 +31,13 @@ namespace SadSeal.MegaMod.Medical.UI
                     settings.AutopsySuccessBaseChance, 0.10f, 1.0f, 0.5f,
                     "MegaMod_Medical_AutopsyBaseChance_Desc".Translate());
 
+                settings.AutopsySkillFactor = listing.SliderLabeled(
+                    "MegaMod_Medical_AutopsySkillFactor".Translate() + $": {settings.AutopsySkillFactor:P1}",
+                    settings.AutopsySkillFactor, 0.0f, 0.10f, 0.5f,
+                    "MegaMod_Medical_AutopsySkillFactor_Desc".Translate());
+
+                listing.CheckboxLabeled("MegaMod_Medical_AutopsyRequiresMedicine".Translate(), ref settings.AutopsyRequiresMedicine, "MegaMod_Medical_AutopsyRequiresMedicine_Desc".Translate());
+
                 settings.AutopsyBionicExtractChance = listing.SliderLabeled(
                     "MegaMod_Medical_AutopsyBionicChance".Translate() + $": {settings.AutopsyBionicExtractChance:P0}",
                     settings.AutopsyBionicExtractChance, 0.10f, 1.0f, 0.5f,
@@ -61,7 +68,6 @@ namespace SadSeal.MegaMod.Medical.UI
 
             if (settings.EnableFieldMedicine)
             {
-                listing.CheckboxLabeled("MegaMod_Medical_FieldDocInv".Translate(), ref settings.FieldMedicineUseDoctorInventory, "MegaMod_Medical_FieldDocInv_Desc".Translate());
                 listing.CheckboxLabeled("MegaMod_Medical_FieldPatInv".Translate(), ref settings.FieldMedicineUsePatientInventory, "MegaMod_Medical_FieldPatInv_Desc".Translate());
             }
 

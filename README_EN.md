@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="#"><img src="https://img.shields.io/badge/RimWorld-1.5%20%7C%201.6%20%7C%201.7%20(Beta)-brightgreen.svg" alt="RimWorld Versions"></a>
+  <a href="#"><img src="https://img.shields.io/badge/RimWorld-1.7%20(Beta)-brightgreen.svg" alt="RimWorld Versions"></a>
   <a href="https://github.com/pardeike/HarmonyRimWorld"><img src="https://img.shields.io/badge/Requires-Harmony-007EC6.svg?logo=unity&logoColor=white" alt="Requires Harmony"></a>
   <a href="#"><img src="https://img.shields.io/badge/Language-C%23-239120.svg?logo=csharp&logoColor=white" alt="Language C#"></a>
   <a href="#"><img src="https://img.shields.io/badge/.NET-10.0-512BD4.svg?logo=dotnet&logoColor=white" alt=".NET 10.0"></a>
@@ -25,7 +25,7 @@
 SadSeal's Mega Mod allows you to manage all 13 modules completely independently:
 
 * **Individual Toggle Control:** Enable or disable any module with a single click.
-* **Dynamic Harmony Filtering:** When the game launches, only Harmony patch classes for active modules are loaded into memory; disabled modules have their code and hooks completely bypassed.
+* **Dynamic Harmony Filtering:** When the game launches, only Harmony patch classes for active modules are loaded into memory; disabled modules skip their Harmony hooks, and their defs, WorkGivers, and components are disabled by runtime guards.
 * **Clean Architect Menu:** Buildings belonging to disabled modules (Deep Quarry, Autopsy Table, etc.) are automatically hidden from the Architect menu.
 * **Restart Persistence:** Toggle changes are saved to disk and cleanly applied upon restarting RimWorld.
 * **Batch Actions:** "Enable All" and "Disable All" quick action buttons.
@@ -82,7 +82,7 @@ SadSeal's Mega Mod allows you to manage all 13 modules completely independently:
 ---
 
 ### 6. 💼 Work & Schedule Manager
-* **Original Adaptation:** Community adaptation and performance overhaul of [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'s **Work Manager** for RimWorld 1.6 & 1.7 (.NET 10).
+* **Original Adaptation:** Community adaptation and performance overhaul of [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'s **Work Manager** for RimWorld 1.7 (.NET 10).
 * **Dynamic Suitability Scoring:** Combines skills, passions, health capacities, traits, and ideology roles to determine optimal work assignments.
 * **Emergency & Specialist Distribution:** Prioritizes critical emergency duties (Doctor, Firefight, Warden) while assigning top specialists to complex crafts (Cook, Research, Smith).
 * **Smart Sleep & Schedule Optimization:** Automatically places Night Owls on night shifts and configures optimal work/rest cycles for others.
@@ -193,7 +193,7 @@ Access the configuration suite via **Options ➔ Mod Settings ➔ SadSeal's Mega
 
 ## ⚙️ Requirements & Load Order
 
-* **RimWorld Versions:** `1.5`, `1.6`, or `1.7` (Beta / CoreCLR .NET 10)
+* **RimWorld Version:** `1.7` (Beta / CoreCLR .NET 10)
 * **Required Dependency:** [Harmony (brrainz.harmony)](https://github.com/pardeike/HarmonyRimWorld)
 
 ```
@@ -207,12 +207,26 @@ X. SadSeal's Mega Mod
 
 ## 📁 Installation
 
-1. Download `SadSealMegaMod-v1.5.0.zip` from the [Releases](https://github.com/SadSeal5/SadRimworld-mod-pack/releases) page.
+1. Download the latest release from the [Releases](https://github.com/SadSeal5/SadRimworld-mod-pack/releases) page.
 2. Extract the archive into your RimWorld mods directory:
    ```
    RimWorld/Mods/SadSealMegaMod/
    ```
 3. Launch RimWorld, navigate to the Mod Manager, place SadSeal's Mega Mod below Harmony, and activate it.
+
+---
+
+## 🛠️ Building from Source
+
+1. Install the .NET 10 SDK and RimWorld 1.7.
+2. Copy `Source/local.props.example` to `Source/local.props` and set `RimWorldDir` / `HarmonyDir` for your installation.
+3. Build all projects:
+
+   ```powershell
+   Get-ChildItem Source -Recurse -Filter *.csproj | ForEach-Object { dotnet build $_.FullName }
+   ```
+
+   The resulting DLLs are written to `Common/Assemblies/`.
 
 ---
 

@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Patch>
+  <!-- Only touch the GeneAssembler def when Biotech (or another mod) provides it.
+       This avoids patch errors when Biotech is not installed. -->
   <Operation Class="PatchOperationConditional">
-    <xpath>/Defs/ThingDef[defName="GeneAssembler"]/comps</xpath>
-    <nomatch Class="PatchOperationAdd">
-      <xpath>/Defs/ThingDef[defName="GeneAssembler"]</xpath>
-      <value>
-        <comps />
-      </value>
-    </nomatch>
-  </Operation>
+    <xpath>/Defs/ThingDef[defName="GeneAssembler"]</xpath>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationConditional">
+          <xpath>/Defs/ThingDef[defName="GeneAssembler"]/comps</xpath>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>/Defs/ThingDef[defName="GeneAssembler"]</xpath>
+            <value>
+              <comps />
+            </value>
+          </nomatch>
+        </li>
 
-  <Operation Class="PatchOperationAdd">
-    <xpath>/Defs/ThingDef[defName="GeneAssembler"]/comps</xpath>
-    <value>
-      <li Class="SadSeal.MegaMod.Genes.CompProperties_GeneSynthesizer" />
-    </value>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/ThingDef[defName="GeneAssembler"]/comps</xpath>
+          <value>
+            <li Class="SadSeal.MegaMod.Genes.CompProperties_GeneSynthesizer" />
+          </value>
+        </li>
+      </operations>
+    </match>
   </Operation>
 </Patch>

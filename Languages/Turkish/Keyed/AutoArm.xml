@@ -11,4 +11,13 @@
   <MegaMod_AutoArm_Close>Kapat</MegaMod_AutoArm_Close>
   <MegaMod_AutoArm_CategoryRanged>Menzilli</MegaMod_AutoArm_CategoryRanged>
   <MegaMod_AutoArm_CategoryMelee>Yakın Dövüş</MegaMod_AutoArm_CategoryMelee>
+  <MegaMod_AutoArm_GizmoEnable>Otomatik Kuşanma</MegaMod_AutoArm_GizmoEnable>
+  <MegaMod_AutoArm_GizmoEnableDesc>Bu kolonici için otomatik silah yükseltmelerini açın veya kapatın.</MegaMod_AutoArm_GizmoEnableDesc>
+  <MegaMod_AutoArm_GizmoPreference>Silah tercihi: {0}</MegaMod_AutoArm_GizmoPreference>
+  <MegaMod_AutoArm_GizmoPreferenceDesc>Bu kolonicinin tercih ettiği silah kategorisini seçin. "Otomatik" seçeneği yetenek ve özelliklere göre karar verir; kilitlenen kategori yükseltmeleri o kategoriyle sınırlar.</MegaMod_AutoArm_GizmoPreferenceDesc>
+  <MegaMod_AutoArm_PrefAuto>Otomatik (kilit yok)</MegaMod_AutoArm_PrefAuto>
+  <MegaMod_AutoArm_PrefRangedSingle>Menzilli - tek atış</MegaMod_AutoArm_PrefRangedSingle>
+  <MegaMod_AutoArm_PrefRangedBurst>Menzilli - seri atış</MegaMod_AutoArm_PrefRangedBurst>
+  <MegaMod_AutoArm_PrefMeleeSharp>Yakın dövüş - kesici</MegaMod_AutoArm_PrefMeleeSharp>
+  <MegaMod_AutoArm_PrefMeleeBlunt>Yakın dövüş - ezici</MegaMod_AutoArm_PrefMeleeBlunt>
 </LanguageData>

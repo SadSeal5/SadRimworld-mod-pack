@@ -27,6 +27,10 @@ namespace SadSeal.MegaMod.Medical
             if (!IsEnabled)
             {
                 DefUtility.HideThingDef("SadMedical_AutopsyTable");
+                DefUtility.DisableWorkGiver("SadMedical_DoBillsAutopsy");
+                DefUtility.HideRecipeDef("SadMedical_AutopsyCorpseHuman");
+                DefUtility.HideRecipeDef("SadMedical_AutopsyCorpseHumanAdvanced");
+                DefUtility.HideRecipeDef("SadMedical_AutopsyCorpseMechanoid");
             }
         }
 

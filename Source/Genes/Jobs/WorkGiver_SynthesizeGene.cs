@@ -23,6 +23,7 @@ namespace SadSeal.MegaMod.Genes.Jobs
 
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
+            if (GenesModule.Instance?.IsEnabled != true) return false;
             if (t.Faction != pawn.Faction && t.Faction != Faction.OfPlayer)
             {
                 return false;
@@ -66,6 +67,7 @@ namespace SadSeal.MegaMod.Genes.Jobs
 
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
+            if (GenesModule.Instance?.IsEnabled != true) return null;
             CompGeneSynthesizer comp = t.TryGetComp<CompGeneSynthesizer>();
             if (comp == null || !comp.IsSynthesizing || comp.CurrentOrder == null)
             {

@@ -8,6 +8,15 @@ namespace SadSeal.MegaMod.QoL
     {
         private static readonly Dictionary<ThingDef, float> originalTreeLifespans = new Dictionary<ThingDef, float>();
         private static bool originalLifespansCached;
+
+        private struct FilthSnapshot
+        {
+            public bool RainWashes;
+            public FloatRange DisappearsInDays;
+        }
+
+        private static readonly Dictionary<ThingDef, FilthSnapshot> originalFilthSettings = new Dictionary<ThingDef, FilthSnapshot>();
+        private static bool originalFilthCached;
 public static void ApplyAll()
         {
             if (QoLModule.Instance?.IsEnabled == false) return;
@@ -24,24 +33,48 @@ public static void ApplyAll()
 
         public static void ApplyQoLSettings()
         {
-            if (QoLModule.ModSettings?.filthVanishes == true)
+            if (QoLModule.Instance?.IsEnabled != true) return;
+            var settings = QoLModule.ModSettings;
+            if (settings == null) return;
+
+            if (!originalFilthCached)
             {
                 foreach (ThingDef td in DefDatabase<ThingDef>.AllDefs)
                 {
-                    if (td.filth != null)
+                    if (td.filth == null) continue;
+                    originalFilthSettings[td] = new FilthSnapshot
                     {
-                        td.filth.rainWashes = true;
-                        if (td.filth.disappearsInDays.TrueMax <= 0f || td.filth.disappearsInDays.TrueMax > 15f)
-                        {
-                            td.filth.disappearsInDays = new FloatRange(5f, 10f);
-                        }
+                        RainWashes = td.filth.rainWashes,
+                        DisappearsInDays = td.filth.disappearsInDays
+                    };
+                }
+                originalFilthCached = true;
+            }
+
+            foreach (var kvp in originalFilthSettings)
+            {
+                ThingDef td = kvp.Key;
+                if (td?.filth == null) continue;
+
+                if (settings.filthVanishes)
+                {
+                    td.filth.rainWashes = true;
+                    if (td.filth.disappearsInDays.TrueMax <= 0f || td.filth.disappearsInDays.TrueMax > 15f)
+                    {
+                        td.filth.disappearsInDays = new FloatRange(5f, 10f);
                     }
+                }
+                else
+                {
+                    td.filth.rainWashes = kvp.Value.RainWashes;
+                    td.filth.disappearsInDays = kvp.Value.DisappearsInDays;
                 }
             }
         }
 
         public static void ApplyMetalFlammability(bool noBurn)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             ThingDef[] metals = { ThingDefOf.Steel, ThingDefOf.Plasteel };
             foreach (var def in metals)
             {
@@ -67,6 +100,7 @@ public static void ApplyAll()
 
         public static void ApplyPreciousMetals(bool pretty)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (ThingDefOf.Gold != null)
             {
                 ThingDefOf.Gold.SetStatBaseValue(StatDefOf.Beauty, pretty ? 4f : 0f);
@@ -80,6 +114,7 @@ public static void ApplyAll()
 
         public static void ApplyChunkStackLimits(bool stackable, int limit)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             int targetLimit = stackable ? limit : 1;
             foreach (ThingDef def in DefDatabase<ThingDef>.AllDefs)
             {
@@ -95,8 +130,9 @@ public static void ApplyAll()
 
         public static void ApplySmoothPriorities(bool smoothWallsFirst)
         {
-            WorkGiverDef wall = DefDatabase<WorkGiverDef>.GetNamedSilentFail("ConstructSmoothWalls");
-            WorkGiverDef floor = DefDatabase<WorkGiverDef>.GetNamedSilentFail("ConstructSmoothFloors");
+            if (QoLModule.Instance?.IsEnabled != true) return;
+            WorkGiverDef wall = DefDatabase<WorkGiverDef>.GetNamedSilentFail("ConstructSmoothWall");
+            WorkGiverDef floor = DefDatabase<WorkGiverDef>.GetNamedSilentFail("ConstructSmoothFloor");
 
             if (wall != null && floor != null)
             {
@@ -115,6 +151,7 @@ public static void ApplyAll()
 
         public static void ApplyTreeLifespan(bool treesDontDie)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (!originalLifespansCached)
             {
                 foreach (ThingDef def in DefDatabase<ThingDef>.AllDefs)

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <HaulNeutroamineToGeneAssembler.reportString>TargetA'ya nötroamin taşıyor.</HaulNeutroamineToGeneAssembler.reportString>
+  <SynthesizeGene.reportString>TargetA'da gen sentezliyor.</SynthesizeGene.reportString>
+  <SadHaul_MultiHaulToCell.reportString>TargetA ve yakındaki eşyaları taşıyor.</SadHaul_MultiHaulToCell.reportString>
+  <Sad_Job_FinishOff.reportString>TargetA'yı infaz ediyor.</Sad_Job_FinishOff.reportString>
+  <SadQoL_CalmDown.reportString>TargetA'yı sakinleştiriyor.</SadQoL_CalmDown.reportString>
+</LanguageData>

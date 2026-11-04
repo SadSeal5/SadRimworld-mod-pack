@@ -33,10 +33,13 @@ namespace SadSeal.MegaMod.Medical.SmartMedicine
             if (__result != null && settings.EnableSmartMedicine)
             {
                 // If selected medicine is Glitterworld medicine
-                if (settings.NoGlitterOnScratches && __result.def == ThingDefOf.MedicineUltratech)
+                if (__result.def == ThingDefOf.MedicineUltratech)
                 {
                     bool isDangerous = IsInCriticalCondition(patient, settings.LethalBleedRateThreshold);
-                    if (!isDangerous)
+                    bool shouldDowngrade = !isDangerous &&
+                        (settings.NoGlitterOnScratches || settings.SaveBestMedicineForLethal);
+
+                    if (shouldDowngrade)
                     {
                         // Trivial scratch/bruise or minor ailment: do not waste glitterworld medicine!
                         Thing lowerTier = FindLowerTierMedicine(healer, patient, onlyUseInventory);

@@ -27,6 +27,15 @@ namespace SadSeal.MegaMod.Quarry
             if (!IsEnabled)
             {
                 DefUtility.HideThingDef("Sad_DeepQuarry");
+                DefUtility.DisableWorkGiver("SadQuarry_DoBillsQuarry");
+                DefUtility.HideRecipeDef("SadQuarry_MineChunks");
+                DefUtility.HideRecipeDef("SadQuarry_MineChunks_Marble");
+                DefUtility.HideRecipeDef("SadQuarry_MineChunks_Granite");
+                DefUtility.HideRecipeDef("SadQuarry_MineChunks_Slate");
+                DefUtility.HideRecipeDef("SadQuarry_MineChunks_Limestone");
+                DefUtility.HideRecipeDef("SadQuarry_MineChunks_Sandstone");
+                DefUtility.HideRecipeDef("SadQuarry_MineResources");
+                DefUtility.HideRecipeDef("SadQuarry_MineComponents");
             }
         }
 

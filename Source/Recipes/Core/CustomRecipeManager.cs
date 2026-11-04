@@ -74,16 +74,31 @@ namespace SadSeal.MegaMod.Recipes
                 for (int i = 0; i < data.ingredients.Count; i++)
                 {
                     var s = data.ingredients[i];
-                    var td = DefDatabase<ThingDef>.GetNamed(s.thingDefName, false);
-                    if (td != null)
+                    var ing = new IngredientCount();
+
+                    if (s.isFilter && s.filterDefNames != null && s.filterDefNames.Count > 0)
                     {
-                        var ing = new IngredientCount();
+                        for (int d = 0; d < s.filterDefNames.Count; d++)
+                        {
+                            var td = DefDatabase<ThingDef>.GetNamed(s.filterDefNames[d], false);
+                            if (td == null) continue;
+                            ing.filter.SetAllow(td, true);
+                            r.fixedIngredientFilter.SetAllow(td, true);
+                            r.defaultIngredientFilter.SetAllow(td, true);
+                        }
+                    }
+                    else
+                    {
+                        if (string.IsNullOrEmpty(s.thingDefName)) continue;
+                        var td = DefDatabase<ThingDef>.GetNamed(s.thingDefName, false);
+                        if (td == null) continue;
                         ing.filter.SetAllow(td, true);
-                        ing.SetBaseCount(s.count);
-                        r.ingredients.Add(ing);
                         r.fixedIngredientFilter.SetAllow(td, true);
                         r.defaultIngredientFilter.SetAllow(td, true);
                     }
+
+                    ing.SetBaseCount(s.count);
+                    r.ingredients.Add(ing);
                 }
             }
 
@@ -147,6 +162,9 @@ namespace SadSeal.MegaMod.Recipes
             {
                 r.skillRequirements = null;
             }
+
+            // Resolve filters/stat references for the runtime-created recipe.
+            r.ResolveReferences();
 
             // Register in DefDatabase
             if (DefDatabase<RecipeDef>.GetNamed(data.defName, false) == null)

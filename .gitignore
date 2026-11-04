@@ -16,6 +16,10 @@ Source/obj/
 *.user
 *.suo
 
+# Per-machine build overrides
+local.props
+Source/local.props
+
 # Temporary and Scratch directories
 scratch/
 

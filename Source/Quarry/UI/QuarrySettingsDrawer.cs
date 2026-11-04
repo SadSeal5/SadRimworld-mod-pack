@@ -27,6 +27,18 @@ namespace SadSeal.MegaMod.Quarry.UI
                 "MegaMod_Quarry_MiningSpeed".Translate() + $": {settings.MiningSpeedMultiplier:P0}",
                 settings.MiningSpeedMultiplier, 0.25f, 3.0f, 0.5f,
                 "MegaMod_Quarry_MiningSpeed_Desc".Translate());
+            listing.Gap(8f);
+
+            settings.ChunkDropChance = listing.SliderLabeled(
+                "MegaMod_Quarry_ChunkDropChance".Translate() + $": {settings.ChunkDropChance:P0}",
+                settings.ChunkDropChance, 0f, 1f, 0.5f,
+                "MegaMod_Quarry_ChunkDropChance_Desc".Translate());
+            listing.Gap(8f);
+
+            settings.ResourceDropChance = listing.SliderLabeled(
+                "MegaMod_Quarry_ResourceDropChance".Translate() + $": {settings.ResourceDropChance:P0}",
+                settings.ResourceDropChance, 0f, 1f, 0.5f,
+                "MegaMod_Quarry_ResourceDropChance_Desc".Translate());
             listing.Gap(12f);
 
             listing.Label("MegaMod_Quarry_ResourceWeightsHeader".Translate());

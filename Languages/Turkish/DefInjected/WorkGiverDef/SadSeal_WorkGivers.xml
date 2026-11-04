@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <SadMedical_DoBillsAutopsy.label>otopsi yap</SadMedical_DoBillsAutopsy.label>
+  <SadMedical_DoBillsAutopsy.verb>otopsi yap</SadMedical_DoBillsAutopsy.verb>
+  <SadMedical_DoBillsAutopsy.gerund>otopsi yapıyor</SadMedical_DoBillsAutopsy.gerund>
+
+  <SadQuarry_DoBillsQuarry.label>derin taş ocağında kaz</SadQuarry_DoBillsQuarry.label>
+  <SadQuarry_DoBillsQuarry.verb>taş ocağında kaz</SadQuarry_DoBillsQuarry.verb>
+  <SadQuarry_DoBillsQuarry.gerund>taş ocağında kazıyor</SadQuarry_DoBillsQuarry.gerund>
+
+  <SynthesizeGene.label>gen sentezle</SynthesizeGene.label>
+  <SynthesizeGene.verb>gen sentezle</SynthesizeGene.verb>
+  <SynthesizeGene.gerund>gen sentezliyor</SynthesizeGene.gerund>
+
+  <SadQoL_CalmDown.label>koloniciyi sakinleştir</SadQoL_CalmDown.label>
+  <SadQoL_CalmDown.verb>sakinleştir</SadQoL_CalmDown.verb>
+  <SadQoL_CalmDown.gerund>sakinleştiriyor</SadQoL_CalmDown.gerund>
+
+  <SadHaul_WorkGiver_HaulUrgently.label>acil taşı</SadHaul_WorkGiver_HaulUrgently.label>
+  <SadHaul_WorkGiver_HaulUrgently.verb>taşı</SadHaul_WorkGiver_HaulUrgently.verb>
+  <SadHaul_WorkGiver_HaulUrgently.gerund>taşıyor</SadHaul_WorkGiver_HaulUrgently.gerund>
+
+  <Sad_WorkGiver_FinishOff.label>yere düşen hedefleri infaz et</Sad_WorkGiver_FinishOff.label>
+  <Sad_WorkGiver_FinishOff.verb>merhamet infazı yap</Sad_WorkGiver_FinishOff.verb>
+  <Sad_WorkGiver_FinishOff.gerund>merhamet infazı yapıyor</Sad_WorkGiver_FinishOff.gerund>
+</LanguageData>

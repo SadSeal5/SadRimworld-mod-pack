@@ -44,40 +44,28 @@ namespace SadSeal.MegaMod.AutoArm
                 comp.nextCheckTick = currentTick + intervalTicks + Rand.Range(-60, 60);
             }
 
-            WeaponCategory targetCategory = WeaponCategory.None;
-            if (comp != null && comp.isCategoryLocked && comp.preferredCategory != WeaponCategory.None)
-            {
-                targetCategory = comp.preferredCategory;
-            }
-            else if (pawn.equipment?.Primary != null)
-            {
-                targetCategory = WeaponClassifier.GetCategory(pawn.equipment.Primary);
-            }
+            // A category lock is a hard filter. Without a lock the category is
+            // only a preference: the pawn may still upgrade across categories
+            // (e.g. pistol -> LMG) when the new weapon scores significantly better.
+            bool hardLock = comp != null && comp.isCategoryLocked && comp.preferredCategory != WeaponCategory.None;
+            WeaponCategory preferredCategory = WeaponCategory.None;
 
-            if (pawn.story?.traits?.HasTrait(TraitDefOf.Brawler) == true)
+            if (hardLock)
             {
-                if (comp != null && comp.isCategoryLocked && comp.preferredCategory == WeaponCategory.MeleeBlunt)
-                {
-                    targetCategory = WeaponCategory.MeleeBlunt;
-                }
-                else if (pawn.equipment?.Primary != null && WeaponClassifier.GetCategory(pawn.equipment.Primary) == WeaponCategory.MeleeBlunt)
-                {
-                    targetCategory = WeaponCategory.MeleeBlunt;
-                }
-                else
-                {
-                    targetCategory = WeaponCategory.MeleeSharp;
-                }
+                preferredCategory = comp.preferredCategory;
             }
-
-            if (targetCategory == WeaponCategory.None && settings.autoAssignBySkill)
+            else if (pawn.story?.traits?.HasTrait(TraitDefOf.Brawler) == true)
             {
-                bool prefersMelee = (pawn.story?.traits?.HasTrait(TraitDefOf.Brawler) == true)
-                    || ((pawn.skills?.GetSkill(SkillDefOf.Melee)?.Level ?? 0) > (pawn.skills?.GetSkill(SkillDefOf.Shooting)?.Level ?? 0) + 2);
+                preferredCategory = WeaponCategory.MeleeSharp;
+            }
+            else if (settings.autoAssignBySkill)
+            {
+                bool prefersMelee = (pawn.skills?.GetSkill(SkillDefOf.Melee)?.Level ?? 0) >
+                                    (pawn.skills?.GetSkill(SkillDefOf.Shooting)?.Level ?? 0) + 2;
 
                 if (prefersMelee)
                 {
-                    targetCategory = WeaponCategory.MeleeSharp;
+                    preferredCategory = WeaponCategory.MeleeSharp;
                 }
                 else
                 {
@@ -85,31 +73,49 @@ namespace SadSeal.MegaMod.AutoArm
                     Trait shootTrait = (shootDef != null && pawn.story?.traits != null) ? pawn.story.traits.GetTrait(shootDef) : null;
                     if (shootTrait != null && shootTrait.Degree == -1)
                     {
-                        targetCategory = WeaponCategory.RangedBurst;
+                        preferredCategory = WeaponCategory.RangedBurst;
                     }
                     else if (shootTrait != null && shootTrait.Degree == 1)
                     {
-                        targetCategory = WeaponCategory.RangedSingleShot;
+                        preferredCategory = WeaponCategory.RangedSingleShot;
                     }
                     else if ((pawn.skills?.GetSkill(SkillDefOf.Shooting)?.Level ?? 0) >= 10)
                     {
-                        targetCategory = WeaponCategory.RangedSingleShot;
+                        preferredCategory = WeaponCategory.RangedSingleShot;
                     }
                     else
                     {
-                        targetCategory = WeaponCategory.RangedBurst;
+                        preferredCategory = WeaponCategory.RangedBurst;
                     }
                 }
             }
-            else if (targetCategory == WeaponCategory.None)
+            else
             {
-                targetCategory = WeaponCategory.RangedBurst;
+                preferredCategory = WeaponCategory.RangedBurst;
             }
+
+            bool preferredIsMelee = preferredCategory == WeaponCategory.MeleeSharp ||
+                                    preferredCategory == WeaponCategory.MeleeBlunt;
 
             float currentScore = 0f;
             if (pawn.equipment?.Primary != null)
             {
-                if (WeaponClassifier.GetCategory(pawn.equipment.Primary) == targetCategory)
+                WeaponCategory currentCategory = WeaponClassifier.GetCategory(pawn.equipment.Primary);
+                bool currentIsMelee = currentCategory == WeaponCategory.MeleeSharp ||
+                                      currentCategory == WeaponCategory.MeleeBlunt;
+
+                // Only compare scores inside the same combat style. A brawler
+                // holding a gun should treat the gun as a score of zero so the
+                // switch to a melee weapon is never blocked by an apples-to-
+                // oranges comparison.
+                if (hardLock)
+                {
+                    if (currentCategory == preferredCategory)
+                    {
+                        currentScore = WeaponEvaluator.Evaluate(pawn.equipment.Primary, pawn, settings);
+                    }
+                }
+                else if (currentIsMelee == preferredIsMelee)
                 {
                     currentScore = WeaponEvaluator.Evaluate(pawn.equipment.Primary, pawn, settings);
                 }
@@ -139,10 +145,25 @@ namespace SadSeal.MegaMod.AutoArm
                     if (!inStorage) continue;
                 }
 
-                if (WeaponClassifier.GetCategory(w) != targetCategory) continue;
+                WeaponCategory candidateCategory = WeaponClassifier.GetCategory(w);
+                if (candidateCategory == WeaponCategory.None) continue;
+
+                if (hardLock && candidateCategory != preferredCategory) continue;
+
+                bool candidateIsMelee = candidateCategory == WeaponCategory.MeleeSharp ||
+                                        candidateCategory == WeaponCategory.MeleeBlunt;
+                if (!hardLock && candidateIsMelee != preferredIsMelee) continue;
 
                 float candScore = WeaponEvaluator.Evaluate(w, pawn, settings);
                 if (candScore <= 0f) continue;
+
+                // Soft preference: an exact category match is worth slightly
+                // more than a different category inside the same combat style.
+                if (!hardLock && candidateCategory != preferredCategory)
+                {
+                    candScore *= 0.90f;
+                }
+
                 if (candScore < currentScore * minImprovementFactor) continue;
 
                 if (!pawn.CanReach(w, PathEndMode.ClosestTouch, Danger.Some)) continue;

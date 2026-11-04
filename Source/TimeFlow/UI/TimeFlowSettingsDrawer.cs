@@ -33,7 +33,9 @@ namespace SadSeal.MegaMod.TimeFlow.UI
                 Rect row = listing.GetRect(30f);
                 Widgets.Label(new Rect(row.x, row.y + 4f, 260f, 24f), "MegaMod_TimeFlow_SleepSpeedTarget".Translate());
 
-                string speedLabel = settings.SleepFastForwardSpeed == 4 ? "4x (Ultrafast)" : "3x (Superfast)";
+                string speedLabel = settings.SleepFastForwardSpeed == 4
+                    ? "MegaMod_TimeFlow_Speed4x".Translate().ToString()
+                    : "MegaMod_TimeFlow_Speed3x".Translate().ToString();
                 if (Widgets.ButtonText(new Rect(row.x + 270f, row.y, 160f, 28f), speedLabel))
                 {
                     settings.SleepFastForwardSpeed = (settings.SleepFastForwardSpeed == 4) ? 3 : 4;

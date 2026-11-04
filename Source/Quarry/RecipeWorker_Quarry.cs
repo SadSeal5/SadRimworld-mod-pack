@@ -14,6 +14,7 @@ namespace SadSeal.MegaMod.Quarry
         {
             base.Notify_IterationCompleted(billDoer, ingredients);
 
+            if (QuarryModule.Instance?.IsEnabled != true) return;
             if (billDoer == null || billDoer.Map == null) return;
 
             var settings = QuarryModule.ModSettings;
@@ -46,7 +47,13 @@ namespace SadSeal.MegaMod.Quarry
 
             if (recipeName.Contains("MineChunks"))
             {
-                if (recipeName.Contains("Marble"))
+                float chunkChance = settings?.ChunkDropChance ?? 1f;
+                if (Rand.Value > chunkChance)
+                {
+                    outputDef = null;
+                    outputCount = 0;
+                }
+                else if (recipeName.Contains("Marble"))
                 {
                     outputDef = DefDatabase<ThingDef>.GetNamedSilentFail("ChunkMarble") ?? GetRandomStoneChunkDef();
                 }
@@ -74,18 +81,36 @@ namespace SadSeal.MegaMod.Quarry
             }
             else if (recipeName.Contains("MineComponents"))
             {
-                outputDef = ThingDefOf.ComponentIndustrial;
-                outputCount = Rand.RangeInclusive(1, 2);
-
-                if (Rand.Value < 0.12f)
+                float resourceChance = settings?.ResourceDropChance ?? 1f;
+                if (Rand.Value <= resourceChance)
                 {
-                    outputDef = ThingDefOf.ComponentSpacer;
-                    outputCount = 1;
+                    outputDef = ThingDefOf.ComponentIndustrial;
+                    outputCount = Rand.RangeInclusive(1, 2);
+
+                    if (Rand.Value < 0.12f)
+                    {
+                        outputDef = ThingDefOf.ComponentSpacer;
+                        outputCount = 1;
+                    }
+                }
+                else
+                {
+                    outputDef = null;
+                    outputCount = 0;
                 }
             }
             else
             {
-                outputDef = PickWeightedResource(settings, out outputCount);
+                float resourceChance = settings?.ResourceDropChance ?? 1f;
+                if (Rand.Value <= resourceChance)
+                {
+                    outputDef = PickWeightedResource(settings, out outputCount);
+                }
+                else
+                {
+                    outputDef = null;
+                    outputCount = 0;
+                }
             }
 
             if (outputDef != null)

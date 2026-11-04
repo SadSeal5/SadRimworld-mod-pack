@@ -29,6 +29,8 @@ namespace SadSeal.MegaMod.WorkManager.Core
         {
             base.MapComponentTick();
 
+            if (WorkManagerModule.Instance?.IsEnabled != true) return;
+
             if (Find.TickManager.CurTimeSpeed == TimeSpeed.Paused)
             {
                 return;
@@ -50,6 +52,7 @@ namespace SadSeal.MegaMod.WorkManager.Core
 
         public void UpdateSchedules()
         {
+            if (WorkManagerModule.Instance?.IsEnabled != true) return;
             if (map == null || map.mapPawns == null) return;
 
             var freeColonists = map.mapPawns.FreeColonists;

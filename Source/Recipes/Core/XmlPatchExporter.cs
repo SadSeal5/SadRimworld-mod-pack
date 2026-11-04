@@ -1,4 +1,6 @@
+using System.Globalization;
 using System.IO;
+using System.Security;
 using System.Text;
 using Verse;
 using RimWorld;
@@ -15,7 +17,7 @@ namespace SadSeal.MegaMod.Recipes
             var tweaks = RecipesModule.ModSettings?.tweaks;
             if (tweaks == null || tweaks.Count == 0)
             {
-                Messages.Message("[MegaMod] Disari aktarilacak tarif degisikligi yok.", MessageTypeDefOf.RejectInput, false);
+                Messages.Message("MegaMod_ExportXmlEmpty".Translate(), MessageTypeDefOf.RejectInput, false);
                 return;
             }
 
@@ -28,12 +30,23 @@ namespace SadSeal.MegaMod.Recipes
                 var tw = tweaks[i];
                 var r = DefDatabase<RecipeDef>.GetNamed(tw.recipeDefName, false);
                 if (r == null) continue;
-                string xpath = "Defs/RecipeDef[defName=\"" + tw.recipeDefName + "\"]";
+
+                string escapedDefName = EscapeXml(tw.recipeDefName);
+                string xpath = "Defs/RecipeDef[defName=\"" + escapedDefName + "\"]";
+                bool wroteAny = false;
 
                 if (!string.IsNullOrEmpty(tw.newLabel))
-                    Repl(sb, xpath + "/label", "<label>" + tw.newLabel + "</label>");
+                {
+                    Repl(sb, xpath + "/label", "<label>" + EscapeXml(tw.newLabel) + "</label>");
+                    wroteAny = true;
+                }
+
                 if (tw.newWorkAmount >= 0f)
-                    Repl(sb, xpath + "/workAmount", "<workAmount>" + tw.newWorkAmount.ToString("F0") + "</workAmount>");
+                {
+                    Repl(sb, xpath + "/workAmount",
+                        "<workAmount>" + tw.newWorkAmount.ToString("F0", CultureInfo.InvariantCulture) + "</workAmount>");
+                    wroteAny = true;
+                }
 
                 if (tw.hasCustomIngredients && tweakCustom(tw))
                 {
@@ -43,17 +56,44 @@ namespace SadSeal.MegaMod.Recipes
                     {
                         var item = tw.customIngredients[j];
                         ingXml.AppendLine("      <li>");
-                        ingXml.AppendLine("        <filter><thingDefs><li>" + item.thingDefName + "</li></thingDefs></filter>");
+                        ingXml.AppendLine("        <filter><thingDefs>");
+
+                        if (item.isFilter && item.filterDefNames != null && item.filterDefNames.Count > 0)
+                        {
+                            for (int d = 0; d < item.filterDefNames.Count; d++)
+                            {
+                                ingXml.AppendLine("          <li>" + EscapeXml(item.filterDefNames[d]) + "</li>");
+                            }
+                        }
+                        else if (!string.IsNullOrEmpty(item.thingDefName))
+                        {
+                            ingXml.AppendLine("          <li>" + EscapeXml(item.thingDefName) + "</li>");
+                        }
+
+                        ingXml.AppendLine("        </thingDefs></filter>");
                         ingXml.AppendLine("        <count>" + item.count + "</count>");
                         ingXml.AppendLine("      </li>");
                     }
                     ingXml.Append("    </ingredients>");
                     Repl(sb, xpath + "/ingredients", ingXml.ToString());
+                    wroteAny = true;
                 }
+
+                if (tw.disabled)
+                {
+                    // Remove the recipe from workbenches both via recipeUsers and
+                    // via any ThingDef/recipes entries that already reference it.
+                    sb.AppendLine(Remove(xpath + "/recipeUsers"));
+                    sb.AppendLine(Remove("Defs/ThingDef/recipes/li[text()=\"" + escapedDefName + "\"]"));
+                    wroteAny = true;
+                }
+
+                if (!wroteAny) continue;
             }
+
             sb.AppendLine("</Patch>");
             File.WriteAllText(FilePath, sb.ToString(), Encoding.UTF8);
-            Messages.Message("[MegaMod] XML yamasi aktarildi: " + FilePath, MessageTypeDefOf.PositiveEvent, false);
+            Messages.Message("MegaMod_ExportXmlSuccess".Translate(FilePath), MessageTypeDefOf.PositiveEvent, false);
         }
 
         private static bool tweakCustom(RecipeTweak tw)
@@ -61,9 +101,21 @@ namespace SadSeal.MegaMod.Recipes
             return tw.customIngredients != null && tw.customIngredients.Count > 0;
         }
 
+        private static string EscapeXml(string value)
+        {
+            return SecurityElement.Escape(value ?? string.Empty);
+        }
+
         private static void Repl(StringBuilder sb, string xpath, string val)
         {
             sb.AppendLine("  <Operation Class=\"PatchOperationReplace\">\n    <xpath>" + xpath + "</xpath>\n    <value>" + val + "</value>\n  </Operation>");
+        }
+
+        private static string Remove(string xpath)
+        {
+            // success="Always" keeps the generated patch quiet when the target
+            // node does not exist (e.g. a recipe without recipeUsers).
+            return "  <Operation Class=\"PatchOperationRemove\" success=\"Always\">\n    <xpath>" + xpath + "</xpath>\n  </Operation>";
         }
     }
 }

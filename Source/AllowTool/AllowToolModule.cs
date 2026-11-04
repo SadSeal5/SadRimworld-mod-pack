@@ -27,9 +27,50 @@ namespace SadSeal.MegaMod.AllowTool
         {
             if (!IsEnabled)
             {
-                DefUtility.DisableWorkGiver("HaulUrgently");
-                DefUtility.DisableWorkGiver("FinishOff");
+                DisableAll();
+                return;
             }
+
+            var settings = Settings;
+            if (settings == null) return;
+
+            if (!settings.EnableHaulUrgently)
+            {
+                DefUtility.DisableWorkGiver("SadHaul_WorkGiver_HaulUrgently");
+                DefUtility.RemoveDesignators("SadSeal.MegaMod.AllowTool.HaulUrgently.Designator_HaulUrgently");
+            }
+
+            if (!settings.EnableFinishOff)
+            {
+                DefUtility.DisableWorkGiver("Sad_WorkGiver_FinishOff");
+                DefUtility.RemoveDesignators("SadSeal.MegaMod.AllowTool.FinishOff.Designator_FinishOff");
+            }
+
+            if (!settings.EnableUnforbidAll)
+            {
+                DefUtility.RemoveDesignators(
+                    "SadSeal.MegaMod.AllowTool.Unforbid.Designator_UnforbidAll",
+                    "SadSeal.MegaMod.AllowTool.Unforbid.Designator_Unforbid");
+            }
+
+            if (!settings.EnableSelectSimilar)
+            {
+                DefUtility.RemoveDesignators("SadSeal.MegaMod.AllowTool.SelectSimilar.Designator_SelectSimilar");
+            }
+        }
+
+        private static void DisableAll()
+        {
+            DefUtility.DisableWorkGiver("SadHaul_WorkGiver_HaulUrgently");
+            DefUtility.DisableWorkGiver("Sad_WorkGiver_FinishOff");
+            DefUtility.RemoveDesignators(
+                "SadSeal.MegaMod.AllowTool.Unforbid.Designator_UnforbidAll",
+                "SadSeal.MegaMod.AllowTool.Unforbid.Designator_Unforbid",
+                "SadSeal.MegaMod.AllowTool.HaulUrgently.Designator_HaulUrgently",
+                "SadSeal.MegaMod.AllowTool.SelectSimilar.Designator_SelectSimilar",
+                "SadSeal.MegaMod.AllowTool.FinishOff.Designator_FinishOff",
+                "SadSeal.MegaMod.AllowTool.Area.Designator_StripArea",
+                "SadSeal.MegaMod.AllowTool.Area.Designator_CancelArea");
         }
 
         public override void DrawSettings(Rect inRect)

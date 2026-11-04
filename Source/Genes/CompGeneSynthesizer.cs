@@ -265,6 +265,8 @@ namespace SadSeal.MegaMod.Genes
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
+            if (GenesModule.Instance?.IsEnabled != true) yield break;
+
             foreach (Gizmo g in base.CompGetGizmosExtra())
             {
                 yield return g;
@@ -318,6 +320,7 @@ namespace SadSeal.MegaMod.Genes
 
         public override string CompInspectStringExtra()
         {
+            if (GenesModule.Instance?.IsEnabled != true) return null;
             if (!IsSynthesizing || CurrentOrder == null)
             {
                 return null;

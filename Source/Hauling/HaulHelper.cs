@@ -72,9 +72,17 @@ namespace SadSeal.MegaMod.Hauling
         {
             for (int i = 0; i < cells.Count; i++)
             {
-                if (cells[i].ItemCount < cells[i].MaxAllowed || cells[i].Stacks.Count > 0)
+                if (cells[i].ItemCount < cells[i].MaxAllowed)
                 {
                     return true;
+                }
+
+                for (int s = 0; s < cells[i].Stacks.Count; s++)
+                {
+                    if (cells[i].Stacks[s].RemainingSpace > 0)
+                    {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -86,48 +94,85 @@ namespace SadSeal.MegaMod.Hauling
             if (settings != null && !settings.AllowedToAccept(thing)) return false;
 
             int needed = thing.stackCount;
+            if (needed <= 0) return true;
 
-            // 1. First try to merge with existing simulated partial stacks
-            for (int i = 0; i < cells.Count; i++)
+            // Phase 1: plan merges into existing partial stacks without mutating
+            // state. If the item does not fit, the simulation must stay unchanged.
+            var mergePlan = new List<SimulatedStack>();
+            var mergeAmounts = new List<int>();
+            int mergeable = 0;
+
+            for (int i = 0; i < cells.Count && mergeable < needed; i++)
             {
                 var c = cells[i];
-                for (int s = 0; s < c.Stacks.Count; s++)
+                for (int s = 0; s < c.Stacks.Count && mergeable < needed; s++)
                 {
                     var st = c.Stacks[s];
-                    if (st.Def == thing.def && st.RemainingSpace > 0)
-                    {
-                        int take = Mathf.Min(needed, st.RemainingSpace);
-                        st.RemainingSpace -= take;
-                        needed -= take;
-                        if (needed <= 0)
-                        {
-                            return true;
-                        }
-                    }
+                    if (st.Def != thing.def || st.RemainingSpace <= 0) continue;
+
+                    int take = Mathf.Min(needed - mergeable, st.RemainingSpace);
+                    if (take <= 0) continue;
+
+                    mergePlan.Add(st);
+                    mergeAmounts.Add(take);
+                    mergeable += take;
                 }
             }
 
-            // 2. If remaining amount needs a new slot, check if any cell has empty slots
+            if (mergeable >= needed)
+            {
+                for (int i = 0; i < mergePlan.Count; i++)
+                {
+                    mergePlan[i].RemainingSpace -= mergeAmounts[i];
+                }
+                return true;
+            }
+
+            // Phase 2: check whether the remaining amount fits into empty slots.
+            int remaining = needed - mergeable;
+            int stackLimit = Mathf.Max(1, thing.def.stackLimit);
+            int slotsNeeded = Mathf.CeilToInt((float)remaining / stackLimit);
+            int slotsAvailable = 0;
+
             for (int i = 0; i < cells.Count; i++)
             {
-                var c = cells[i];
-                if (c.ItemCount < c.MaxAllowed)
+                if (cells[i].ItemCount < cells[i].MaxAllowed)
                 {
-                    c.ItemCount++;
-                    int spaceLeftInNewStack = thing.def.stackLimit - needed;
-                    if (spaceLeftInNewStack > 0)
-                    {
-                        c.Stacks.Add(new SimulatedStack
-                        {
-                            Def = thing.def,
-                            RemainingSpace = spaceLeftInNewStack
-                        });
-                    }
-                    return true;
+                    slotsAvailable++;
                 }
             }
 
-            return false;
+            if (slotsAvailable < slotsNeeded) return false;
+
+            // Commit the planned merges only after the whole operation is known
+            // to succeed.
+            for (int i = 0; i < mergePlan.Count; i++)
+            {
+                mergePlan[i].RemainingSpace -= mergeAmounts[i];
+            }
+
+            int toPlace = remaining;
+            for (int i = 0; i < cells.Count && toPlace > 0; i++)
+            {
+                var c = cells[i];
+                if (c.ItemCount >= c.MaxAllowed) continue;
+
+                c.ItemCount++;
+                int placed = Mathf.Min(toPlace, stackLimit);
+                toPlace -= placed;
+
+                int spaceLeftInNewStack = stackLimit - placed;
+                if (spaceLeftInNewStack > 0)
+                {
+                    c.Stacks.Add(new SimulatedStack
+                    {
+                        Def = thing.def,
+                        RemainingSpace = spaceLeftInNewStack
+                    });
+                }
+            }
+
+            return true;
         }
     }
 

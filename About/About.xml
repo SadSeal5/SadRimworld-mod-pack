@@ -4,8 +4,6 @@
   <author>SadSeal5</author>
   <packageId>sadseal.megamod</packageId>
   <supportedVersions>
-    <li>1.5</li>
-    <li>1.6</li>
     <li>1.7</li>
   </supportedVersions>
   <modDependencies>
@@ -21,21 +19,21 @@
   </loadAfter>
   <description>SadSeal's Mega Mod, RimWorld deneyiminizi tepeden tırnağa geliştiren 13 büyük bağımsız modülü ve dinamik modül yöneticisini tek bir optimize edilmiş süite altında birleştirir:
 
-⚙️ Modül Yöneticisi: 13 modülü tek tek açıp kapatabilme imkanı. Seçili olmayan modüllerin Harmony yamaları dinamik olarak atlanır.
+Modül Yöneticisi: 13 modülü tek tek açıp kapatabilme imkanı. Seçili olmayan modüllerin Harmony yamaları dinamik olarak atlanır.
 
-1. 🏹 Lethal &amp; Accurate Ranged Combat: Akıcı balistik eğriler (Soft Ballistic, Hyperbolic, Skill-Focused), hasar/zırh delme/mermi hızı çarpanları, kinetik sarsma (stopping power) ve 1-HP korumasını kaldırma.
-2. 🎓 Skill Learning Multiplier &amp; Decay Control: Genel ve yetenek bazlı XP çarpanları (0-100x), günlük 4.000 XP yumuşak tavan cezasını ve yetenek erimesini kaldırma.
-3. 🛠️ Recipe &amp; Crafting Tweaker: Oyun içi canlı üretim tarif editörü, malzeme seçici, WorkToMake senkronizasyonu ve tek tıkla XML yaması dışa aktarımı.
-4. 🧬 Gene Synthesizer: Gene Assembler üzerinde Nötroamin ile istenen tüm vanilla ve modlu genleri Genepack olarak sentezleme.
-5. 📦 Smart Haul (Pick Up And Haul): Çoklu eşya toplama, tek iş akışında toplu depolama, stok kümeleme ve askere alma koruması.
-6. 💼 Work &amp; Schedule Manager: Kolonistlerin yetenek, tutku, sağlık ve rollerine göre dinamik önceliklendirme ve akıllı gündüz/gece uyku optimizasyonu.
-7. 🛡️ Zero-Tick Durability: Silah ve kıyafet dayanıklılık mekaniğini motor düzeyinde sıfır TPS yüküyle kaldırma, çürüme/aşınma engelleme ve tainted iptali.
-8. ✨ QoL Suite: Kapıların eşyalarla tıkanmasını önleme, zemin pisliklerinin zamanla yok olması, ağaçların yaşlılıktan ölmemesi, zemin öncesi duvar düzeltme önceliği, ölüm asitleştirici iptali ve akıncı strateji kontrolleri.
-9. 🩺 Medical &amp; Autopsy Suite: Taze kadavralardan organ ve protez çıkarma (Kadavra Otopsisi araştırması ve özel çelik ameliyat masası ile), sahada doğrudan çantadan tedavi ve akıllı ilaç seçimi.
-10. ✋ Allow Tool &amp; Utility Commands: Sis korumalı harita çapında yasak kaldırma (Unforbid All), acil taşıma (Haul Urgently), benzerini seç ve can çekişen düşmanları tek vuruşta infaz etme.
-11. ⏩ Smart Speed &amp; Time Flow: Geliştirici modu gerekmeden 4x süper hız, akınlarda ve olaylarda zorunlu 1x yavaşlamasını engelleme, tüm koloni uyurken otomatik hızlandırma.
-12. ⛏️ Deep Quarry &amp; Resource Extractor: Özel 5x4 zemin taş ocağı, taş blokları, metaller ve bileşen çıkarma, derin sondaj araştırması şartı, tükenme sınırları ve çarpanlar.
-13. 🎯 Auto-Arm (Otomatik Silah Yükseltme): Kolonistlerin depolardaki daha iyi silahlara otomatik geçişi (Tek atış, Seri atış, Kesici ve Ezici 4 sınıf hiyerarşisi). Arayüz kalabalığı olmadan dinamik arka plan optimizasyonu.
+1. Lethal &amp; Accurate Ranged Combat: Akıcı balistik eğriler (Soft Ballistic, Hyperbolic, Skill-Focused), hasar/zırh delme/mermi hızı çarpanları, kinetik sarsma (stopping power) ve 1-HP korumasını kaldırma.
+2. Skill Learning Multiplier &amp; Decay Control: Genel ve yetenek bazlı XP çarpanları (0-100x), günlük 4.000 XP yumuşak tavan cezasını ve yetenek erimesini kaldırma.
+3. Recipe &amp; Crafting Tweaker: Oyun içi canlı üretim tarif editörü, malzeme seçici, WorkToMake senkronizasyonu ve tek tıkla XML yaması dışa aktarımı.
+4. Gene Synthesizer: Gene Assembler üzerinde Nötroamin ile istenen tüm vanilla ve modlu genleri Genepack olarak sentezleme.
+5. Smart Haul (Pick Up And Haul): Çoklu eşya toplama, tek iş akışında toplu depolama, stok kümeleme ve askere alma koruması.
+6. Work &amp; Schedule Manager: Kolonistlerin yetenek, tutku, sağlık ve rollerine göre dinamik önceliklendirme ve akıllı gündüz/gece uyku optimizasyonu.
+7. Zero-Tick Durability: Silah ve kıyafet dayanıklılık mekaniğini motor düzeyinde sıfır TPS yüküyle kaldırma, çürüme/aşınma engelleme ve tainted iptali.
+8. QoL Suite: Kapıların eşyalarla tıkanmasını önleme, zemin pisliklerinin zamanla yok olması, ağaçların yaşlılıktan ölmemesi, zemin öncesi duvar düzeltme önceliği, ölüm asitleştirici iptali ve akıncı strateji kontrolleri.
+9. Medical &amp; Autopsy Suite: Taze kadavralardan organ ve protez çıkarma (Kadavra Otopsisi araştırması ve özel çelik ameliyat masası ile), sahada doğrudan çantadan tedavi ve akıllı ilaç seçimi.
+10. Allow Tool &amp; Utility Commands: Sis korumalı harita çapında yasak kaldırma (Unforbid All), acil taşıma (Haul Urgently), benzerini seç ve can çekişen düşmanları tek vuruşta infaz etme.
+11. Smart Speed &amp; Time Flow: Geliştirici modu gerekmeden 4x süper hız, akınlarda ve olaylarda zorunlu 1x yavaşlamasını engelleme, tüm koloni uyurken otomatik hızlandırma.
+12. Deep Quarry &amp; Resource Extractor: Özel 5x4 zemin taş ocağı, taş blokları, metaller ve bileşen çıkarma, derin sondaj araştırması şartı, tükenme sınırları ve çarpanlar.
+13. Auto-Arm (Otomatik Silah Yükseltme): Kolonistlerin depolardaki daha iyi silahlara otomatik geçişi (Tek atış, Seri atış, Kesici ve Ezici 4 sınıf hiyerarşisi). Arayüz kalabalığı olmadan dinamik arka plan optimizasyonu.
 
 Tüm modüller oyun içi Mod Ayarları menüsünden bağımsız olarak açılıp kapatılabilir. Türkçe ve İngilizce tam dil desteğine sahiptir.</description>
 </ModMetaData>

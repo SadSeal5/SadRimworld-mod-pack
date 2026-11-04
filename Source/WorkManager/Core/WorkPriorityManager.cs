@@ -63,6 +63,8 @@ namespace SadSeal.MegaMod.WorkManager.Core
         {
             base.MapComponentTick();
 
+            if (WorkManagerModule.Instance?.IsEnabled != true) return;
+
             if (Find.TickManager.CurTimeSpeed == TimeSpeed.Paused)
             {
                 return;
@@ -84,12 +86,21 @@ namespace SadSeal.MegaMod.WorkManager.Core
 
         public void UpdateWorkPriorities()
         {
+            if (WorkManagerModule.Instance?.IsEnabled != true) return;
             if (Current.Game == null || map == null) return;
 
-            // Ensure manual priorities (1-4) are active in game
-            Current.Game.playSettings.useWorkPriorities = true;
-
             var settings = WorkManagerModule.ModSettings;
+            if (settings == null) return;
+
+            // Manual priorities (1-4) must be active for assigned priorities to
+            // have any effect. Never flip this core game setting silently unless
+            // the player explicitly opted in.
+            if (!Current.Game.playSettings.useWorkPriorities)
+            {
+                if (!settings.ForceManualPriorities) return;
+                Current.Game.playSettings.useWorkPriorities = true;
+            }
+
             var comp = WorkManagerGameComponent.Instance;
 
             // Collect capable player colonists on this map

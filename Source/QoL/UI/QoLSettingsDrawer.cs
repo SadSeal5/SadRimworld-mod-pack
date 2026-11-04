@@ -122,10 +122,15 @@ namespace SadSeal.MegaMod.QoL.UI
                 QoLApplier.ApplyMetalFlammability(settings.metalDoesntBurn);
             }
 
+            bool oldFilth = settings.filthVanishes;
             listing.CheckboxLabeled(
                 "MegaMod_QoLFilthVanishes".Translate(),
                 ref settings.filthVanishes,
                 "MegaMod_QoLFilthVanishes_Desc".Translate());
+            if (oldFilth != settings.filthVanishes)
+            {
+                QoLApplier.ApplyQoLSettings();
+            }
 
             bool oldStack = settings.stackableChunks;
             listing.CheckboxLabeled(
@@ -140,7 +145,6 @@ namespace SadSeal.MegaMod.QoL.UI
             if (settings.stackableChunks)
             {
                 Rect sliderRect = listing.GetRect(28f);
-                int oldLimit = settings.chunkStackLimit;
                 SadUI.DrawIntRow(
                     sliderRect,
                     "MegaMod_QoLChunkStackLimit".Translate() + $": {settings.chunkStackLimit}",
@@ -234,11 +238,6 @@ namespace SadSeal.MegaMod.QoL.UI
                 "MegaMod_QoLEnableReplaceStuff".Translate(),
                 ref settings.enableReplaceStuff,
                 "MegaMod_QoLEnableReplaceStuff_Desc".Translate());
-
-            listing.CheckboxLabeled(
-                "MegaMod_QoLEnableShareTheLoad".Translate(),
-                ref settings.enableShareTheLoad,
-                "MegaMod_QoLEnableShareTheLoad_Desc".Translate());
 
             listing.Gap(14f);
 

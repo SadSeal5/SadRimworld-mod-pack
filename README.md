@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="#"><img src="https://img.shields.io/badge/RimWorld-1.5%20%7C%201.6%20%7C%201.7%20(Beta)-brightgreen.svg" alt="RimWorld Versions"></a>
+  <a href="#"><img src="https://img.shields.io/badge/RimWorld-1.7%20(Beta)-brightgreen.svg" alt="RimWorld Versions"></a>
   <a href="https://github.com/pardeike/HarmonyRimWorld"><img src="https://img.shields.io/badge/Requires-Harmony-007EC6.svg?logo=unity&logoColor=white" alt="Requires Harmony"></a>
   <a href="#"><img src="https://img.shields.io/badge/Language-C%23-239120.svg?logo=csharp&logoColor=white" alt="Language C#"></a>
   <a href="#"><img src="https://img.shields.io/badge/.NET-10.0-512BD4.svg?logo=dotnet&logoColor=white" alt=".NET 10.0"></a>
@@ -25,7 +25,7 @@
 SadSeal's Mega Mod, mod paketindeki 13 modülü tamamen bağımsız olarak yönetmenize olanak tanır:
 
 * **Bireysel Açma/Kapama:** Dilediğiniz modülü tek tıkla devre dışı bırakabilir veya etkinleştirebilirsiniz.
-* **Dinamik Harmony Filtreleme:** Oyun başlatılırken yalnızca etkin modüllerin Harmony yama sınıfları belleğe yüklenir; kapalı modüllerin kodları ve kancaları tamamen atlanır.
+* **Dinamik Harmony Filtreleme:** Oyun başlatılırken yalnızca etkin modüllerin Harmony yama sınıfları belleğe yüklenir; kapalı modüllerin Harmony kancaları atlanır ve ilgili def'ler, WorkGiver'lar ve bileşenler çalışma zamanı korumalarıyla devre dışı bırakılır.
 * **Akıllı Mimari Temizliği:** Kapatılan modüllere ait yapılar (Derin Taş Ocağı, Otopsi Masası vb.) mimari inşaat menüsünden tamamen gizlenir.
 * **Yeniden Başlatma Bildirimi:** Modül ayarlarını değiştirdiğinizde, değişikliklerin oyuna temiz bir şekilde uygulanması için RimWorld'ü yeniden başlatmanız yeterlidir.
 * **Toplu Eylemler:** "Tümünü Etkinleştir" ve "Tümünü Devre Dışı Bırak" hızlı butonları.
@@ -82,7 +82,7 @@ SadSeal's Mega Mod, mod paketindeki 13 modülü tamamen bağımsız olarak yöne
 ---
 
 ### 6. 💼 Akıllı İş & Zaman Yöneticisi (Work & Schedule Manager)
-* **Orijinal Mod Uyarlaması:** [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'ın sevilen **Work Manager** modunun RimWorld 1.6 ve 1.7 (.NET 10) için optimize edilmiş topluluk uyarlamasıdır.
+* **Orijinal Mod Uyarlaması:** [LordKuper](https://steamcommunity.com/sharedfiles/filedetails/?id=2029596262)'ın sevilen **Work Manager** modunun RimWorld 1.7 (.NET 10) için optimize edilmiş topluluk uyarlamasıdır.
 * **Dinamik Uygunluk Puanlaması:** Yetenekler, tutkular, sağlık durumları, özellikler ve rolleri birleştirerek her iş türü için en yetkin kişileri belirler.
 * **Uzman & Acil Durum İş Dağıtımı:** Doktorluk, Yangın ve Gardiyanlık gibi kritik görevleri acil önceliklendirir; Aşçılık, Araştırma ve Zanaatkarlık alanlarına harita başına en yetkin uzmanları adar.
 * **Akıllı Çalışma & Uyku Takvimi:** Gece Kuşu kolonistleri otomatik gece vardiyasına, diğerlerini en verimli gündüz/uyku/eğlence döngüsüne alır.
@@ -193,7 +193,7 @@ Oyun içinde **Seçenekler ➔ Mod Ayarları ➔ SadSeal's Mega Mod** menüsüne
 
 ## ⚙️ Gereksinimler & Yükleme Sırası
 
-* **RimWorld Sürümleri:** `1.5`, `1.6` veya `1.7` (Beta / CoreCLR .NET 10)
+* **RimWorld Sürümü:** `1.7` (Beta / CoreCLR .NET 10)
 * **Gerekli Mod:** [Harmony (brrainz.harmony)](https://github.com/pardeike/HarmonyRimWorld)
 
 ```
@@ -207,12 +207,26 @@ X. SadSeal's Mega Mod
 
 ## 📁 Kurulum
 
-1. Deponun en son sürümünü [Releases](https://github.com/SadSeal5/SadRimworld-mod-pack/releases) sayfasından `SadSealMegaMod-v1.5.0.zip` olarak indirin.
+1. Deponun en son sürümünü [Releases](https://github.com/SadSeal5/SadRimworld-mod-pack/releases) sayfasından indirin.
 2. Arşiv içeriğini RimWorld mod dizininize çıkartın:
    ```
    RimWorld/Mods/SadSealMegaMod/
    ```
 3. Oyunu başlatın, Mod Yöneticisi'nde Harmony'nin altına SadSeal's Mega Mod'u ekleyin ve etkinleştirin.
+
+---
+
+## 🛠️ Kaynaktan Derleme
+
+1. .NET 10 SDK ve RimWorld 1.7 kurulu olmalıdır.
+2. `Source/local.props.example` dosyasını `Source/local.props` olarak kopyalayın ve `RimWorldDir` / `HarmonyDir` yollarını kendi kurulumunuza göre düzenleyin.
+3. Projeleri derleyin:
+
+   ```powershell
+   Get-ChildItem Source -Recurse -Filter *.csproj | ForEach-Object { dotnet build $_.FullName }
+   ```
+
+   Derlenen DLL'ler `Common/Assemblies/` klasörüne yazılır.
 
 ---
 

@@ -12,6 +12,15 @@ namespace SadSeal.MegaMod.Medical.Autopsy
 
             if (ingredients == null || billDoer == null) return;
 
+            if (MedicalModule.Instance?.IsEnabled != true) return;
+
+            var settings = MedicalModule.ModSettings;
+            if (settings == null || !settings.EnableAutopsy)
+            {
+                // Do not consume the corpse when the autopsy module/feature is off.
+                return;
+            }
+
             try
             {
                 Corpse corpse = null;

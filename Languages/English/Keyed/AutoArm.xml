@@ -11,4 +11,13 @@
   <MegaMod_AutoArm_Close>Close</MegaMod_AutoArm_Close>
   <MegaMod_AutoArm_CategoryRanged>Ranged</MegaMod_AutoArm_CategoryRanged>
   <MegaMod_AutoArm_CategoryMelee>Melee</MegaMod_AutoArm_CategoryMelee>
+  <MegaMod_AutoArm_GizmoEnable>Auto-arm</MegaMod_AutoArm_GizmoEnable>
+  <MegaMod_AutoArm_GizmoEnableDesc>Enable or disable automatic weapon upgrades for this colonist.</MegaMod_AutoArm_GizmoEnableDesc>
+  <MegaMod_AutoArm_GizmoPreference>Weapon preference: {0}</MegaMod_AutoArm_GizmoPreference>
+  <MegaMod_AutoArm_GizmoPreferenceDesc>Choose which weapon category this colonist prefers. "Auto" lets the mod decide from skills and traits; a locked category restricts upgrades to that category.</MegaMod_AutoArm_GizmoPreferenceDesc>
+  <MegaMod_AutoArm_PrefAuto>Auto (no lock)</MegaMod_AutoArm_PrefAuto>
+  <MegaMod_AutoArm_PrefRangedSingle>Ranged - single shot</MegaMod_AutoArm_PrefRangedSingle>
+  <MegaMod_AutoArm_PrefRangedBurst>Ranged - burst</MegaMod_AutoArm_PrefRangedBurst>
+  <MegaMod_AutoArm_PrefMeleeSharp>Melee - sharp</MegaMod_AutoArm_PrefMeleeSharp>
+  <MegaMod_AutoArm_PrefMeleeBlunt>Melee - blunt</MegaMod_AutoArm_PrefMeleeBlunt>
 </LanguageData>

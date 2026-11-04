@@ -47,6 +47,17 @@ namespace SadSeal.MegaMod.WorkManager.UI
             listing.CheckboxLabeled("WorkManager_ManagePriorities".Translate(), ref settings.ManageWorkPriorities, "WorkManager_ManagePriorities_Desc".Translate());
             if (oldPriorities != settings.ManageWorkPriorities) settings.ActivePreset = WorkManagerPreset.Custom;
 
+            bool oldForce = settings.ForceManualPriorities;
+            listing.CheckboxLabeled("WorkManager_ForceManualPriorities".Translate(), ref settings.ForceManualPriorities, "WorkManager_ForceManualPriorities_Desc".Translate());
+            if (oldForce != settings.ForceManualPriorities) settings.ActivePreset = WorkManagerPreset.Custom;
+
+            if (settings.ManageWorkPriorities && Current.Game?.playSettings != null && !Current.Game.playSettings.useWorkPriorities)
+            {
+                GUI.color = new Color(1f, 0.78f, 0.35f);
+                listing.Label("WorkManager_ManualPrioritiesWarning".Translate());
+                GUI.color = Color.white;
+            }
+
             bool oldSchedule = settings.ManageWorkSchedule;
             listing.CheckboxLabeled("WorkManager_ManageSchedule".Translate(), ref settings.ManageWorkSchedule, "WorkManager_ManageSchedule_Desc".Translate());
             if (oldSchedule != settings.ManageWorkSchedule) settings.ActivePreset = WorkManagerPreset.Custom;

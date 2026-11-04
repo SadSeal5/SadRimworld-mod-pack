@@ -1,4 +1,5 @@
 using RimWorld;
+using SadSeal.Common;
 using SadSeal.Core.Modules;
 using SadSeal.MegaMod.Genes.Patches;
 using SadSeal.MegaMod.Genes.UI;
@@ -31,6 +32,14 @@ namespace SadSeal.MegaMod.Genes
                 if (ModLister.BiotechInstalled && ThingDefOf.GeneAssembler != null)
                 {
                     GeneAssemblerPatch.EnsureDefHasComp(ThingDefOf.GeneAssembler);
+                }
+            }
+            else
+            {
+                DefUtility.DisableWorkGiver("SynthesizeGene");
+                if (ModLister.BiotechInstalled && ThingDefOf.GeneAssembler != null)
+                {
+                    GeneAssemblerPatch.RemoveDefComp(ThingDefOf.GeneAssembler);
                 }
             }
         }

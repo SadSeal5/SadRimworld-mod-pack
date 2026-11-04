@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <SadMedical_AutopsyTable.label>tıbbi otopsi masası</SadMedical_AutopsyTable.label>
+  <SadMedical_AutopsyTable.description>Temiz otopsi incelemeleri ve organ hasadı için drenaj kanalları, steril alet tepsileri ve parlak cerrahi aydınlatma ile donatılmış paslanmaz çelik bir diseksiyon masası.</SadMedical_AutopsyTable.description>
+
+  <Sad_DeepQuarry.label>derin taş ocağı</Sad_DeepQuarry.label>
+  <Sad_DeepQuarry.description>Derin yeraltı katmanlarından taş blokları, metal damarları ve ham bileşenler çıkarmak için ağır vinç ve makaralarla donatılmış büyük bir kazı çukuru.</Sad_DeepQuarry.description>
+</LanguageData>

@@ -57,6 +57,8 @@
   <MegaMod_RecipeActiveCount>Active Custom Tweaks: {0}</MegaMod_RecipeActiveCount>
   <MegaMod_OpenRecipeEditor>Open Recipe Editor ({0} tweaks)</MegaMod_OpenRecipeEditor>
   <MegaMod_ExportXmlPatch>Export to XML Patch</MegaMod_ExportXmlPatch>
+  <MegaMod_ExportXmlEmpty>There are no recipe changes to export.</MegaMod_ExportXmlEmpty>
+  <MegaMod_ExportXmlSuccess>XML patch exported to: {0}</MegaMod_ExportXmlSuccess>
   <MegaMod_ResetAllRecipes>Reset All Tweaks to Vanilla</MegaMod_ResetAllRecipes>
   <MegaMod_ResetAllConfirm>Are you sure you want to revert all custom recipe tweaks to vanilla defaults? This will erase all your saved recipe modifications.</MegaMod_ResetAllConfirm>
   <MegaMod_ResetAllSuccess>All recipes have been reset to vanilla defaults.</MegaMod_ResetAllSuccess>
@@ -66,6 +68,9 @@
   <MegaMod_Recipe_SelectFromLeft>Select a recipe from the list on the left.</MegaMod_Recipe_SelectFromLeft>
   <MegaMod_Recipe_CustomBadge>[Custom Recipe]</MegaMod_Recipe_CustomBadge>
   <MegaMod_Recipe_DefAndMod>defName: {0} | Mod: {1}</MegaMod_Recipe_DefAndMod>
+  <MegaMod_Recipe_CustomGroup>Custom Recipes</MegaMod_Recipe_CustomGroup>
+  <MegaMod_Recipe_UnknownMod>Unknown</MegaMod_Recipe_UnknownMod>
+  <MegaMod_Recipe_Vanilla>Vanilla</MegaMod_Recipe_Vanilla>
   <MegaMod_Recipe_Label>Display Name:</MegaMod_Recipe_Label>
   <MegaMod_Recipe_WorkAmount>Work Amount:</MegaMod_Recipe_WorkAmount>
   <MegaMod_Recipe_Disable>Disable Recipe</MegaMod_Recipe_Disable>
@@ -223,6 +228,11 @@
   <GeneSynthesis_StatCpx>Complexity</GeneSynthesis_StatCpx>
   <GeneSynthesis_StatMet>Metabolism</GeneSynthesis_StatMet>
   <GeneSynthesis_StatArc>Archite</GeneSynthesis_StatArc>
+  <GeneSynthesis_UnknownGene>Unknown Gene</GeneSynthesis_UnknownGene>
+  <GeneSynthesis_VanillaMod>Vanilla</GeneSynthesis_VanillaMod>
+  <GeneSynthesis_None>None</GeneSynthesis_None>
+  <GeneSynthesis_GenesCount>{0} genes</GeneSynthesis_GenesCount>
+  <GeneSynthesis_ArcShort>A:{0}</GeneSynthesis_ArcShort>
   <GeneSynthesis_NoDesc>No description available.</GeneSynthesis_NoDesc>
   <GeneSynthesis_CostSummary>Required Neutroamine: {0}x</GeneSynthesis_CostSummary>
   <GeneSynthesis_WorkSummary>Work Duration: {0} ticks (~{1}s)</GeneSynthesis_WorkSummary>
@@ -298,6 +308,9 @@
   <WorkManager_EnableWorkManager_Desc>Master switch for automated work priority and schedule assignments.</WorkManager_EnableWorkManager_Desc>
   <WorkManager_ManagePriorities>Manage Work Priorities</WorkManager_ManagePriorities>
   <WorkManager_ManagePriorities_Desc>Automatically assigns manual 1-4 work priorities based on colonist aptitude and colony needs.</WorkManager_ManagePriorities_Desc>
+  <WorkManager_ForceManualPriorities>Force Manual Priorities</WorkManager_ForceManualPriorities>
+  <WorkManager_ForceManualPriorities_Desc>If RimWorld's manual work priorities are disabled, turn them on automatically. Leave this off to keep your core game setting untouched.</WorkManager_ForceManualPriorities_Desc>
+  <WorkManager_ManualPrioritiesWarning>Manual work priorities are disabled in RimWorld options. Priority assignments will have no effect until you enable them or turn on "Force Manual Priorities".</WorkManager_ManualPrioritiesWarning>
   <WorkManager_ManageSchedule>Manage Colonist Schedules</WorkManager_ManageSchedule>
   <WorkManager_ManageSchedule_Desc>Optimizes 24-hour colony timetables into balanced shifts for rest, work, and recreation.</WorkManager_ManageSchedule_Desc>
   <WorkManager_UseDedicatedWorkers>Assign Dedicated Specialists</WorkManager_UseDedicatedWorkers>
@@ -415,8 +428,6 @@
   <MegaMod_RoofSafety_Prevented>Roof safety prevented {0} from removing {1}: this would cause a roof collapse on a colonist!</MegaMod_RoofSafety_Prevented>
   <MegaMod_QoLEnableReplaceStuff>Replace Stuff (Seamless Replacement)</MegaMod_QoLEnableReplaceStuff>
   <MegaMod_QoLEnableReplaceStuff_Desc>Allows placing blueprints over existing structures of the same category (e.g. stone wall over wood wall, door over wall) and smoothly replaces them without dropping roofs.</MegaMod_QoLEnableReplaceStuff_Desc>
-  <MegaMod_QoLEnableShareTheLoad>Share The Load (Multi-Pawn Hauling)</MegaMod_QoLEnableShareTheLoad>
-  <MegaMod_QoLEnableShareTheLoad_Desc>Allows multiple colonists to concurrently haul required construction materials to the same unfinished blueprint or frame instead of locking it to one worker.</MegaMod_QoLEnableShareTheLoad_Desc>
   <MegaMod_QoLEnableCleanBeforeWork>Clean Before Cooking &amp; Surgery</MegaMod_QoLEnableCleanBeforeWork>
   <MegaMod_QoLEnableCleanBeforeWork_Desc>Orders workers to quickly sweep and clean filth in kitchens and surgery/hospital rooms before starting cooking recipes or medical operations.</MegaMod_QoLEnableCleanBeforeWork_Desc>
   <MegaMod_QoLEnableAutoCutBlight>Auto-Cut Blighted Crops</MegaMod_QoLEnableAutoCutBlight>
@@ -437,7 +448,6 @@
   <MegaMod_BillsCopied>Copied {0} bills from {1}.</MegaMod_BillsCopied>
   <MegaMod_BillsPasted>Pasted {0} bills onto {1}.</MegaMod_BillsPasted>
   <MegaMod_CannotPasteBills>Clipboard bills are not compatible with this workbench.</MegaMod_CannotPasteBills>
-  <MegaMod_DurabilityPerfNote>⚡ Zero-Tick Performance Architecture:\nThis mod manipulates core RimWorld ThingDef engine flags (useHitPoints = false) rather than relying on per-tick Harmony hooks or background loops. Even with 10,000+ items on the map, there is absolute zero TPS drop.</MegaMod_DurabilityPerfNote>
   <!-- Medical & Autopsy Suite -->
   <MegaMod_Medical_Title>Medical &amp; Autopsy Suite</MegaMod_Medical_Title>
   <MegaMod_Medical_Desc>Advanced post-mortem organ extraction, combat field medicine, and smart medicine tier management.</MegaMod_Medical_Desc>
@@ -446,6 +456,10 @@
   <MegaMod_Medical_EnableAutopsy_Desc>Allows colonists to perform surgical autopsies on fresh humanlike and mechanoid corpses at butcher tables or medical spots.</MegaMod_Medical_EnableAutopsy_Desc>
   <MegaMod_Medical_AutopsyBaseChance>Base Autopsy Success Chance</MegaMod_Medical_AutopsyBaseChance>
   <MegaMod_Medical_AutopsyBaseChance_Desc>Baseline probability to successfully extract viable natural organs and parts without damaging them.</MegaMod_Medical_AutopsyBaseChance_Desc>
+  <MegaMod_Medical_AutopsySkillFactor>Skill Bonus per Medicine Level</MegaMod_Medical_AutopsySkillFactor>
+  <MegaMod_Medical_AutopsySkillFactor_Desc>Additional success chance granted by each level of the doctor's Medicine skill.</MegaMod_Medical_AutopsySkillFactor_Desc>
+  <MegaMod_Medical_AutopsyRequiresMedicine>Penalize Autopsy Without Medicine</MegaMod_Medical_AutopsyRequiresMedicine>
+  <MegaMod_Medical_AutopsyRequiresMedicine_Desc>Halves the success chance when no medicine is used during the autopsy.</MegaMod_Medical_AutopsyRequiresMedicine_Desc>
   <MegaMod_Medical_AutopsyBionicChance>Bionic &amp; Implant Extraction Chance</MegaMod_Medical_AutopsyBionicChance>
   <MegaMod_Medical_AutopsyBionicChance_Desc>Probability of successfully salvaging bionic limbs and internal implants installed in the deceased.</MegaMod_Medical_AutopsyBionicChance_Desc>
   <MegaMod_Medical_ExtractMechParts>Extract Mechanoid Components &amp; Plasteel</MegaMod_Medical_ExtractMechParts>
@@ -458,8 +472,6 @@
   <MegaMod_Medical_FieldSection>Field Medicine &amp; Emergency Doctoring</MegaMod_Medical_FieldSection>
   <MegaMod_Medical_EnableField>Enable Field Medicine</MegaMod_Medical_EnableField>
   <MegaMod_Medical_EnableField_Desc>Doctors will treat wounded pawns directly where they fall instead of carrying them all the way to a hospital bed first.</MegaMod_Medical_EnableField_Desc>
-  <MegaMod_Medical_FieldDocInv>Use Doctor's Inventory Medicine</MegaMod_Medical_FieldDocInv>
-  <MegaMod_Medical_FieldDocInv_Desc>Doctors will prioritize medicine they carry in their own pockets.</MegaMod_Medical_FieldDocInv_Desc>
   <MegaMod_Medical_FieldPatInv>Use Patient's Inventory Medicine</MegaMod_Medical_FieldPatInv>
   <MegaMod_Medical_FieldPatInv_Desc>Allows doctors to tend using medicines found in the patient's own inventory.</MegaMod_Medical_FieldPatInv_Desc>
   <MegaMod_Medical_SmartSection>Smart Medicine Distribution</MegaMod_Medical_SmartSection>
@@ -518,6 +530,8 @@
   <MegaMod_TimeFlow_SmartSleep>Smart Sleep Fast-Forward</MegaMod_TimeFlow_SmartSleep>
   <MegaMod_TimeFlow_SmartSleep_Desc>Automatically switches time speed to maximum when all colonists are sleeping and no dangers exist, restoring normal speed upon waking.</MegaMod_TimeFlow_SmartSleep_Desc>
   <MegaMod_TimeFlow_SleepSpeedTarget>Sleep Fast-Forward Target Speed:</MegaMod_TimeFlow_SleepSpeedTarget>
+  <MegaMod_TimeFlow_Speed4x>4x (Ultrafast)</MegaMod_TimeFlow_Speed4x>
+  <MegaMod_TimeFlow_Speed3x>3x (Superfast)</MegaMod_TimeFlow_Speed3x>
 
   <!-- Deep Quarry & Resource Extractor -->
   <MegaMod_Quarry_Title>Deep Quarry &amp; Resource Extractor</MegaMod_Quarry_Title>
@@ -526,6 +540,10 @@
   <MegaMod_Quarry_InfiniteQuarry_Desc>When checked, the quarry can be mined indefinitely without depleting subterranean resources.</MegaMod_Quarry_InfiniteQuarry_Desc>
   <MegaMod_Quarry_MiningSpeed>Mining Speed Multiplier</MegaMod_Quarry_MiningSpeed>
   <MegaMod_Quarry_MiningSpeed_Desc>Adjusts how quickly colonists complete excavation bills and gain mining skill.</MegaMod_Quarry_MiningSpeed_Desc>
+  <MegaMod_Quarry_ChunkDropChance>Stone Chunk Drop Chance</MegaMod_Quarry_ChunkDropChance>
+  <MegaMod_Quarry_ChunkDropChance_Desc>Chance that a stone-chunk excavation bill produces a chunk.</MegaMod_Quarry_ChunkDropChance_Desc>
+  <MegaMod_Quarry_ResourceDropChance>Mineral Drop Chance</MegaMod_Quarry_ResourceDropChance>
+  <MegaMod_Quarry_ResourceDropChance_Desc>Chance that a mineral or component excavation bill produces its resource.</MegaMod_Quarry_ResourceDropChance_Desc>
   <MegaMod_Quarry_ResourceWeightsHeader>Mineral Drop Weights (Higher = More Common)</MegaMod_Quarry_ResourceWeightsHeader>
   <MegaMod_Quarry_WeightSteel>Steel</MegaMod_Quarry_WeightSteel>
   <MegaMod_Quarry_WeightPlasteel>Plasteel</MegaMod_Quarry_WeightPlasteel>

@@ -31,11 +31,11 @@ namespace SadSeal.MegaMod.Recipes
                 string m;
                 if (CustomRecipeManager.IsCustomRecipe(r.defName))
                 {
-                    m = "Özel Tarifler";
+                    m = "MegaMod_Recipe_CustomGroup".Translate().ToString();
                 }
                 else
                 {
-                    m = r.modContentPack?.Name ?? "Unknown";
+                    m = r.modContentPack?.Name ?? "MegaMod_Recipe_UnknownMod".Translate().ToString();
                 }
                 if (!_grouped.TryGetValue(m, out var lst))
                 {

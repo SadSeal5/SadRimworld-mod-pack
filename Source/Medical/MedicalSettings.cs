@@ -15,7 +15,6 @@ namespace SadSeal.MegaMod.Medical
         public float HarvestMoodPenaltyMultiplier = 0.20f;
 
         public bool EnableFieldMedicine = true;
-        public bool FieldMedicineUseDoctorInventory = true;
         public bool FieldMedicineUsePatientInventory = true;
 
         public bool EnableSmartMedicine = true;
@@ -36,7 +35,6 @@ namespace SadSeal.MegaMod.Medical
             Scribe_Values.Look(ref HarvestMoodPenaltyMultiplier, "HarvestMoodPenaltyMultiplier", 0.20f);
 
             Scribe_Values.Look(ref EnableFieldMedicine, "EnableFieldMedicine", true);
-            Scribe_Values.Look(ref FieldMedicineUseDoctorInventory, "FieldMedicineUseDoctorInventory", true);
             Scribe_Values.Look(ref FieldMedicineUsePatientInventory, "FieldMedicineUsePatientInventory", true);
 
             Scribe_Values.Look(ref EnableSmartMedicine, "EnableSmartMedicine", true);

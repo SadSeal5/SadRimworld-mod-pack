@@ -20,6 +20,11 @@ namespace SadSeal.MegaMod.WorkManager
         public bool AssignWorkToIdlePawns = true;
         public bool SupportNightOwls = true;
 
+        // When enabled, the manager turns on RimWorld's manual work priorities
+        // if the player has them disabled. Off by default so the mod never
+        // silently changes a core game setting.
+        public bool ForceManualPriorities = false;
+
         public int PriorityUpdateIntervalTicks = 500;
         public int ScheduleUpdateIntervalHours = 4;
 
@@ -103,6 +108,7 @@ namespace SadSeal.MegaMod.WorkManager
             Scribe_Values.Look(ref UsePassionPriorities, "UsePassionPriorities", true);
             Scribe_Values.Look(ref AssignWorkToIdlePawns, "AssignWorkToIdlePawns", true);
             Scribe_Values.Look(ref SupportNightOwls, "SupportNightOwls", true);
+            Scribe_Values.Look(ref ForceManualPriorities, "ForceManualPriorities", false);
 
             Scribe_Values.Look(ref PriorityUpdateIntervalTicks, "PriorityUpdateIntervalTicks", 500);
             Scribe_Values.Look(ref ScheduleUpdateIntervalHours, "ScheduleUpdateIntervalHours", 4);

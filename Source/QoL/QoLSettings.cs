@@ -33,7 +33,6 @@ namespace SadSeal.MegaMod.QoL
         // QoL Expansion Suite v2.0
         public bool enableRoofSafety = true;
         public bool enableReplaceStuff = true;
-        public bool enableShareTheLoad = true;
         public bool enableCleanBeforeWork = true;
         public bool enableAutoCutBlight = true;
         public bool enableSnapOut = true;
@@ -70,7 +69,6 @@ namespace SadSeal.MegaMod.QoL
             // QoL Expansion Suite v2.0
             Scribe_Values.Look(ref enableRoofSafety, "enableRoofSafety", true);
             Scribe_Values.Look(ref enableReplaceStuff, "enableReplaceStuff", true);
-            Scribe_Values.Look(ref enableShareTheLoad, "enableShareTheLoad", true);
             Scribe_Values.Look(ref enableCleanBeforeWork, "enableCleanBeforeWork", true);
             Scribe_Values.Look(ref enableAutoCutBlight, "enableAutoCutBlight", true);
             Scribe_Values.Look(ref enableSnapOut, "enableSnapOut", true);
@@ -103,7 +101,6 @@ namespace SadSeal.MegaMod.QoL
 
             enableRoofSafety = true;
             enableReplaceStuff = true;
-            enableShareTheLoad = true;
             enableCleanBeforeWork = true;
             enableAutoCutBlight = true;
             enableSnapOut = true;
@@ -138,7 +135,6 @@ namespace SadSeal.MegaMod.QoL
 
             enableRoofSafety = true;
             enableReplaceStuff = true;
-            enableShareTheLoad = true;
             enableCleanBeforeWork = true;
             enableAutoCutBlight = true;
             enableSnapOut = true;
@@ -173,7 +169,6 @@ namespace SadSeal.MegaMod.QoL
 
             enableRoofSafety = false;
             enableReplaceStuff = false;
-            enableShareTheLoad = false;
             enableCleanBeforeWork = false;
             enableAutoCutBlight = false;
             enableSnapOut = false;

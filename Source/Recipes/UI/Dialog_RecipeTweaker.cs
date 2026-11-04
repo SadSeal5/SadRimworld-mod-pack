@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using UnityEngine;
 using Verse;
 using RimWorld;
@@ -11,6 +13,8 @@ namespace SadSeal.MegaMod.Recipes.UI
         public string ThingDefName;
         public string Label;
         public int Count;
+        public bool IsFilter;
+        public List<string> FilterDefNames;
     }
 
     public class Dialog_RecipeTweaker : Window
@@ -27,6 +31,7 @@ namespace SadSeal.MegaMod.Recipes.UI
 
         private string _editLabel, _editWork;
         private bool _editDisabled;
+        private bool _ingredientsDirty;
         private List<WorkingIngredient> _workingIngredients = new List<WorkingIngredient>();
 
         public Dialog_RecipeTweaker()
@@ -150,7 +155,7 @@ namespace SadSeal.MegaMod.Recipes.UI
             y += 32f;
 
             GUI.color = ColGray;
-            Widgets.Label(new Rect(rect.x, y, w, 20f), "MegaMod_Recipe_DefAndMod".Translate(_selected.defName, _selected.modContentPack?.Name ?? "Vanilla"));
+            Widgets.Label(new Rect(rect.x, y, w, 20f), "MegaMod_Recipe_DefAndMod".Translate(_selected.defName, _selected.modContentPack?.Name ?? "MegaMod_Recipe_Vanilla".Translate().ToString()));
             GUI.color = Color.white;
             y += 24f;
             Widgets.DrawLineHorizontal(rect.x, y, w);
@@ -181,6 +186,7 @@ namespace SadSeal.MegaMod.Recipes.UI
                         Label = td.LabelCap,
                         Count = 1
                     });
+                    _ingredientsDirty = true;
                 }));
             }
             y += 30f;
@@ -199,17 +205,32 @@ namespace SadSeal.MegaMod.Recipes.UI
                 Widgets.Label(new Rect(rowR.x + 4f, iy + 4f, rowR.width - 240f, 22f), ing.Label);
 
                 if (Widgets.ButtonText(new Rect(rowR.x + rowR.width - 210f, iy + 2f, SPINNER_W, 24f), "-"))
-                    if (ing.Count > 1) ing.Count--;
+                {
+                    if (ing.Count > 1)
+                    {
+                        ing.Count--;
+                        _ingredientsDirty = true;
+                    }
+                }
 
                 string cntStr = Widgets.TextField(new Rect(rowR.x + rowR.width - 180f, iy + 2f, COUNT_W, 24f), ing.Count.ToString());
-                if (int.TryParse(cntStr, out int nc)) ing.Count = Mathf.Max(1, nc);
+                if (int.TryParse(cntStr, out int nc))
+                {
+                    int clamped = Mathf.Max(1, nc);
+                    if (clamped != ing.Count) _ingredientsDirty = true;
+                    ing.Count = clamped;
+                }
 
                 if (Widgets.ButtonText(new Rect(rowR.x + rowR.width - 132f, iy + 2f, SPINNER_W, 24f), "+"))
+                {
                     ing.Count++;
+                    _ingredientsDirty = true;
+                }
 
                 if (Widgets.ButtonText(new Rect(rowR.x + rowR.width - 70f, iy + 2f, 65f, 24f), "MegaMod_Delete".Translate()))
                 {
                     _workingIngredients.RemoveAt(i);
+                    _ingredientsDirty = true;
                     i--;
                 }
                 iy += 30f;
@@ -274,6 +295,7 @@ namespace SadSeal.MegaMod.Recipes.UI
             _editDisabled = tw.disabled;
 
             _workingIngredients.Clear();
+            _ingredientsDirty = false;
             if (tw.hasCustomIngredients && tw.customIngredients != null)
             {
                 for (int i = 0; i < tw.customIngredients.Count; i++)
@@ -283,7 +305,9 @@ namespace SadSeal.MegaMod.Recipes.UI
                     {
                         ThingDefName = s.thingDefName,
                         Label = s.filterLabel,
-                        Count = s.count
+                        Count = s.count,
+                        IsFilter = s.isFilter,
+                        FilterDefNames = s.filterDefNames != null ? new List<string>(s.filterDefNames) : new List<string>()
                     });
                 }
             }
@@ -292,13 +316,29 @@ namespace SadSeal.MegaMod.Recipes.UI
                 for (int i = 0; i < r.ingredients.Count; i++)
                 {
                     var ing = r.ingredients[i];
-                    string defName = ing.filter.AnyAllowedDef?.defName ?? "Steel";
-                    _workingIngredients.Add(new WorkingIngredient
+                    if (ing.IsFixedIngredient)
                     {
-                        ThingDefName = defName,
-                        Label = ing.filter.Summary,
-                        Count = (int)ing.GetBaseCount()
-                    });
+                        var td = ing.FixedIngredient;
+                        _workingIngredients.Add(new WorkingIngredient
+                        {
+                            ThingDefName = td?.defName,
+                            Label = td?.LabelCap ?? ing.filter.Summary,
+                            Count = (int)ing.GetBaseCount()
+                        });
+                    }
+                    else
+                    {
+                        // Keep the whole filter (e.g. "any meat") instead of
+                        // collapsing it to an arbitrary single thing def.
+                        _workingIngredients.Add(new WorkingIngredient
+                        {
+                            ThingDefName = null,
+                            Label = ing.filter.Summary,
+                            Count = (int)ing.GetBaseCount(),
+                            IsFilter = true,
+                            FilterDefNames = ing.filter.AllowedThingDefs.Select(d => d.defName).ToList()
+                        });
+                    }
                 }
             }
         }
@@ -307,37 +347,61 @@ namespace SadSeal.MegaMod.Recipes.UI
         {
             if (_selected == null) return;
             var tw = RecipesModule.ModSettings.GetOrCreate(_selected.defName);
-            string van = _selected.LabelCap.ToString();
-            tw.newLabel = (!string.IsNullOrEmpty(_editLabel) && _editLabel != van) ? _editLabel : null;
-            tw.newWorkAmount = float.TryParse(_editWork, out var wp) ? wp : _selected.workAmount;
+
+            RecipePatchApplier.EnsureVanillaSaved(_selected);
+            string vanillaLabel = RecipePatchApplier.VanillaSnapshots.TryGetValue(_selected.defName, out var snap)
+                ? snap.Label
+                : _selected.defName;
+
+            tw.newLabel = (!string.IsNullOrEmpty(_editLabel) &&
+                           !string.Equals(_editLabel, vanillaLabel, StringComparison.OrdinalIgnoreCase))
+                ? _editLabel
+                : null;
+            tw.newWorkAmount = TryParseFloat(_editWork, out var wp) ? wp : _selected.workAmount;
             tw.disabled = _editDisabled;
 
-            tw.hasCustomIngredients = true;
-            tw.customIngredients.Clear();
-            for (int i = 0; i < _workingIngredients.Count; i++)
+            // Only rebuild the ingredient list when the user actually changed it.
+            // Otherwise filter-based ingredients (e.g. "any meat") would be
+            // flattened into a single thing def on every save.
+            if (_ingredientsDirty)
             {
-                tw.customIngredients.Add(new SavedIngredient
+                tw.hasCustomIngredients = _workingIngredients.Count > 0;
+                tw.customIngredients.Clear();
+                for (int i = 0; i < _workingIngredients.Count; i++)
                 {
-                    thingDefName = _workingIngredients[i].ThingDefName,
-                    filterLabel = _workingIngredients[i].Label,
-                    count = _workingIngredients[i].Count
-                });
+                    var wi = _workingIngredients[i];
+                    tw.customIngredients.Add(new SavedIngredient
+                    {
+                        thingDefName = wi.ThingDefName,
+                        filterLabel = wi.Label,
+                        count = wi.Count,
+                        isFilter = wi.IsFilter,
+                        filterDefNames = wi.FilterDefNames != null ? new List<string>(wi.FilterDefNames) : new List<string>()
+                    });
+                }
             }
 
             var customData = CustomRecipeManager.GetCustomRecipe(_selected.defName);
             if (customData != null)
             {
                 if (!string.IsNullOrEmpty(_editLabel)) customData.label = _editLabel;
-                if (float.TryParse(_editWork, out var cwp)) customData.workAmount = cwp;
-                customData.ingredients.Clear();
-                for (int i = 0; i < _workingIngredients.Count; i++)
+                if (TryParseFloat(_editWork, out var cwp)) customData.workAmount = cwp;
+
+                if (_ingredientsDirty)
                 {
-                    customData.ingredients.Add(new SavedIngredient
+                    customData.ingredients.Clear();
+                    for (int i = 0; i < _workingIngredients.Count; i++)
                     {
-                        thingDefName = _workingIngredients[i].ThingDefName,
-                        filterLabel = _workingIngredients[i].Label,
-                        count = _workingIngredients[i].Count
-                    });
+                        var wi = _workingIngredients[i];
+                        customData.ingredients.Add(new SavedIngredient
+                        {
+                            thingDefName = wi.ThingDefName,
+                            filterLabel = wi.Label,
+                            count = wi.Count,
+                            isFilter = wi.IsFilter,
+                            filterDefNames = wi.FilterDefNames != null ? new List<string>(wi.FilterDefNames) : new List<string>()
+                        });
+                    }
                 }
                 CustomRecipeManager.BuildAndRegister(customData, true);
             }
@@ -346,6 +410,12 @@ namespace SadSeal.MegaMod.Recipes.UI
             RecipesModule.ModSettings.PruneVanilla();
             RecipesModule.ModSettings.Write();
             Messages.Message("MegaMod_Recipe_Updated".Translate(_selected.LabelCap), MessageTypeDefOf.PositiveEvent, false);
+        }
+
+        private static bool TryParseFloat(string text, out float value)
+        {
+            return float.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out value) ||
+                   float.TryParse(text, NumberStyles.Float, CultureInfo.CurrentCulture, out value);
         }
 
         private void ResetToFactory()

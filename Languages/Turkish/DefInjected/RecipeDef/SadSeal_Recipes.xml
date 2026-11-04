@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <SadMedical_AutopsyCorpseHuman.label>ceset üzerinde otopsi yap</SadMedical_AutopsyCorpseHuman.label>
+  <SadMedical_AutopsyCorpseHuman.description>Taze bir cesedi dikkatlice inceleyerek doğal organları, biyonik protezleri ve yapay implantları kurtarın.</SadMedical_AutopsyCorpseHuman.description>
+  <SadMedical_AutopsyCorpseHuman.jobString>Otopsi yapılıyor.</SadMedical_AutopsyCorpseHuman.jobString>
+
+  <SadMedical_AutopsyCorpseHumanAdvanced.label>steril otopsi yap (ilaçlı)</SadMedical_AutopsyCorpseHumanAdvanced.label>
+  <SadMedical_AutopsyCorpseHumanAdvanced.description>Taze bir cesedi cerrahi ilaç ve koruyucular kullanarak dikkatlice inceleyin. Başarı şansı ve organ kalitesi ilacın gücüne göre ölçeklenir.</SadMedical_AutopsyCorpseHumanAdvanced.description>
+  <SadMedical_AutopsyCorpseHumanAdvanced.jobString>Steril otopsi yapılıyor.</SadMedical_AutopsyCorpseHumanAdvanced.jobString>
+
+  <SadMedical_AutopsyCorpseMechanoid.label>mekanoid gövdesini parçala</SadMedical_AutopsyCorpseMechanoid.label>
+  <SadMedical_AutopsyCorpseMechanoid.description>Bir mekanoid cesedini dikkatlice sökerek hassas bileşenler, plasteel ve yapısal çelik kurtarın.</SadMedical_AutopsyCorpseMechanoid.description>
+  <SadMedical_AutopsyCorpseMechanoid.jobString>Mekanoid parçalanıyor.</SadMedical_AutopsyCorpseMechanoid.jobString>
+
+  <SadQuarry_MineChunks.label>taş blokları kaz</SadQuarry_MineChunks.label>
+  <SadQuarry_MineChunks.description>Taş ocağı tabanından taş blokları çıkar.</SadQuarry_MineChunks.description>
+  <SadQuarry_MineChunks.jobString>Taş blokları kazılıyor.</SadQuarry_MineChunks.jobString>
+
+  <SadQuarry_MineChunks_Marble.label>mermer blokları kaz</SadQuarry_MineChunks_Marble.label>
+  <SadQuarry_MineChunks_Marble.description>Taş ocağı tabanından mermer blokları çıkar.</SadQuarry_MineChunks_Marble.description>
+  <SadQuarry_MineChunks_Marble.jobString>Mermer blokları kazılıyor.</SadQuarry_MineChunks_Marble.jobString>
+
+  <SadQuarry_MineChunks_Granite.label>granit blokları kaz</SadQuarry_MineChunks_Granite.label>
+  <SadQuarry_MineChunks_Granite.description>Taş ocağı tabanından granit blokları çıkar.</SadQuarry_MineChunks_Granite.description>
+  <SadQuarry_MineChunks_Granite.jobString>Granit blokları kazılıyor.</SadQuarry_MineChunks_Granite.jobString>
+
+  <SadQuarry_MineChunks_Slate.label>kayrak blokları kaz</SadQuarry_MineChunks_Slate.label>
+  <SadQuarry_MineChunks_Slate.description>Taş ocağı tabanından kayrak blokları çıkar.</SadQuarry_MineChunks_Slate.description>
+  <SadQuarry_MineChunks_Slate.jobString>Kayrak blokları kazılıyor.</SadQuarry_MineChunks_Slate.jobString>
+
+  <SadQuarry_MineChunks_Limestone.label>kireç taşı blokları kaz</SadQuarry_MineChunks_Limestone.label>
+  <SadQuarry_MineChunks_Limestone.description>Taş ocağı tabanından kireç taşı blokları çıkar.</SadQuarry_MineChunks_Limestone.description>
+  <SadQuarry_MineChunks_Limestone.jobString>Kireç taşı blokları kazılıyor.</SadQuarry_MineChunks_Limestone.jobString>
+
+  <SadQuarry_MineChunks_Sandstone.label>kum taşı blokları kaz</SadQuarry_MineChunks_Sandstone.label>
+  <SadQuarry_MineChunks_Sandstone.description>Taş ocağı tabanından kum taşı blokları çıkar.</SadQuarry_MineChunks_Sandstone.description>
+  <SadQuarry_MineChunks_Sandstone.jobString>Kum taşı blokları kazılıyor.</SadQuarry_MineChunks_Sandstone.jobString>
+
+  <SadQuarry_MineResources.label>ham mineralleri kaz</SadQuarry_MineResources.label>
+  <SadQuarry_MineResources.description>Derin yeraltı damarlarını kazarak çelik, plasteel, uranyum, altın veya gümüş çıkar.</SadQuarry_MineResources.description>
+  <SadQuarry_MineResources.jobString>Mineraller kazılıyor.</SadQuarry_MineResources.jobString>
+
+  <SadQuarry_MineComponents.label>derin bileşenleri kurtar</SadQuarry_MineComponents.label>
+  <SadQuarry_MineComponents.description>Antik molozlara gömülü kompakt makineleri ve bileşenleri dikkatlice kaz.</SadQuarry_MineComponents.description>
+  <SadQuarry_MineComponents.jobString>Bileşenler kurtarılıyor.</SadQuarry_MineComponents.jobString>
+</LanguageData>

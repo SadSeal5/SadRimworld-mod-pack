@@ -57,6 +57,8 @@
   <MegaMod_RecipeActiveCount>Aktif Özel Ayar: {0}</MegaMod_RecipeActiveCount>
   <MegaMod_OpenRecipeEditor>Tarif Düzenleyiciyi Aç ({0} ayar)</MegaMod_OpenRecipeEditor>
   <MegaMod_ExportXmlPatch>XML Yaması Olarak Dışa Aktar</MegaMod_ExportXmlPatch>
+  <MegaMod_ExportXmlEmpty>Dışa aktarılacak tarif değişikliği yok.</MegaMod_ExportXmlEmpty>
+  <MegaMod_ExportXmlSuccess>XML yaması dışa aktarıldı: {0}</MegaMod_ExportXmlSuccess>
   <MegaMod_ResetAllRecipes>Tüm Değişiklikleri Sıfırla</MegaMod_ResetAllRecipes>
   <MegaMod_ResetAllConfirm>Tüm özel tarif değişikliklerini vanilla varsayılanlarına döndürmek istediğinizden emin misiniz? Bu işlem kaydedilen tüm ayarlarınızı silecektir.</MegaMod_ResetAllConfirm>
   <MegaMod_ResetAllSuccess>Tüm tarifler varsayılan ayarlarına başarıyla döndürüldü.</MegaMod_ResetAllSuccess>
@@ -66,6 +68,9 @@
   <MegaMod_Recipe_SelectFromLeft>Sol listeden bir tarif seçin.</MegaMod_Recipe_SelectFromLeft>
   <MegaMod_Recipe_CustomBadge>[Özel Tarif]</MegaMod_Recipe_CustomBadge>
   <MegaMod_Recipe_DefAndMod>defName: {0} | Mod: {1}</MegaMod_Recipe_DefAndMod>
+  <MegaMod_Recipe_CustomGroup>Özel Tarifler</MegaMod_Recipe_CustomGroup>
+  <MegaMod_Recipe_UnknownMod>Bilinmiyor</MegaMod_Recipe_UnknownMod>
+  <MegaMod_Recipe_Vanilla>Vanilla</MegaMod_Recipe_Vanilla>
   <MegaMod_Recipe_Label>Gösterim Adı:</MegaMod_Recipe_Label>
   <MegaMod_Recipe_WorkAmount>Üretim Süresi (İş):</MegaMod_Recipe_WorkAmount>
   <MegaMod_Recipe_Disable>Tarifi Devre Dışı Bırak</MegaMod_Recipe_Disable>
@@ -223,6 +228,11 @@
   <GeneSynthesis_StatCpx>Karmaşıklık</GeneSynthesis_StatCpx>
   <GeneSynthesis_StatMet>Metabolizma</GeneSynthesis_StatMet>
   <GeneSynthesis_StatArc>Arkit</GeneSynthesis_StatArc>
+  <GeneSynthesis_UnknownGene>Bilinmeyen Gen</GeneSynthesis_UnknownGene>
+  <GeneSynthesis_VanillaMod>Vanilla</GeneSynthesis_VanillaMod>
+  <GeneSynthesis_None>Yok</GeneSynthesis_None>
+  <GeneSynthesis_GenesCount>{0} gen</GeneSynthesis_GenesCount>
+  <GeneSynthesis_ArcShort>A:{0}</GeneSynthesis_ArcShort>
   <GeneSynthesis_NoDesc>Açıklama bulunmuyor.</GeneSynthesis_NoDesc>
   <GeneSynthesis_CostSummary>Gereken Nötroamin: {0}x</GeneSynthesis_CostSummary>
   <GeneSynthesis_WorkSummary>Üretim Süresi: {0} tick (~{1} sn)</GeneSynthesis_WorkSummary>
@@ -298,6 +308,9 @@
   <WorkManager_EnableWorkManager_Desc>Otomatik iş önceliği ve vardiya yönetimi ana anahtarı.</WorkManager_EnableWorkManager_Desc>
   <WorkManager_ManagePriorities>İş Önceliklerini Yönet</WorkManager_ManagePriorities>
   <WorkManager_ManagePriorities_Desc>Kolonicilerin 1-4 manuel iş önceliklerini yeteneklerine ve koloni ihtiyaçlarına göre dinamik olarak düzenler.</WorkManager_ManagePriorities_Desc>
+  <WorkManager_ForceManualPriorities>Manuel Öncelikleri Zorla</WorkManager_ForceManualPriorities>
+  <WorkManager_ForceManualPriorities_Desc>RimWorld'de manuel iş öncelikleri kapalıysa otomatik olarak açar. Oyun ayarınıza dokunulmaması için kapalı bırakın.</WorkManager_ForceManualPriorities_Desc>
+  <WorkManager_ManualPrioritiesWarning>RimWorld ayarlarında manuel iş öncelikleri kapalı. Siz açana kadar veya "Manuel Öncelikleri Zorla" seçeneğini etkinleştirene kadar öncelik atamaları etkisiz kalacak.</WorkManager_ManualPrioritiesWarning>
   <WorkManager_ManageSchedule>Çalışma Çizelgesini Yönet</WorkManager_ManageSchedule>
   <WorkManager_ManageSchedule_Desc>Kolonicilerin 24 saatlik günlük çizelgesini uyku, çalışma ve eğlence arasında dengeli vardiyalara dağıtır.</WorkManager_ManageSchedule_Desc>
   <WorkManager_UseDedicatedWorkers>Uzman Kolonici Rolleri Ata</WorkManager_UseDedicatedWorkers>
@@ -415,8 +428,6 @@
   <MegaMod_RoofSafety_Prevented>Çatı güvenliği {0} adlı kolonistin {1} yapısını yıkmasını engelledi: bir kolonistin üstüne çatı çökebilirdi!</MegaMod_RoofSafety_Prevented>
   <MegaMod_QoLEnableReplaceStuff>Malzeme Değişimi (Replace Stuff)</MegaMod_QoLEnableReplaceStuff>
   <MegaMod_QoLEnableReplaceStuff_Desc>Aynı kategorideki yapıların üzerine doğrudan yeni taslak koymayı (örn. tahta duvar üzerine taş duvar veya kapı) ve çatıyı düşürmeden değiştirmeyi sağlar.</MegaMod_QoLEnableReplaceStuff_Desc>
-  <MegaMod_QoLEnableShareTheLoad>Ortak Taşıma (Share The Load)</MegaMod_QoLEnableShareTheLoad>
-  <MegaMod_QoLEnableShareTheLoad_Desc>Aynı inşaat taslağına veya iskelete birden fazla kolonistin eşzamanlı malzeme taşımasına izin verir.</MegaMod_QoLEnableShareTheLoad_Desc>
   <MegaMod_QoLEnableCleanBeforeWork>İş Öncesi Temizlik (Mutfak &amp; Ameliyathane)</MegaMod_QoLEnableCleanBeforeWork>
   <MegaMod_QoLEnableCleanBeforeWork_Desc>Yemek pişirme veya ameliyat öncesinde işçilerin odadaki pislikleri hızlıca süpürmesini sağlar.</MegaMod_QoLEnableCleanBeforeWork_Desc>
   <MegaMod_QoLEnableAutoCutBlight>Hastalık Vuran Ekinleri Otomatik Kes</MegaMod_QoLEnableAutoCutBlight>
@@ -437,7 +448,6 @@
   <MegaMod_BillsCopied>{1} tezgahından {0} emir kopyalandı.</MegaMod_BillsCopied>
   <MegaMod_BillsPasted>{1} tezgahına {0} emir yapıştırıldı.</MegaMod_BillsPasted>
   <MegaMod_CannotPasteBills>Panodaki emirler bu tezgahla uyumlu değil.</MegaMod_CannotPasteBills>
-  <MegaMod_DurabilityPerfNote>⚡ 0-Tick Performans Mimarisi:\nBu mod, Harmony tick dinleyicileri veya arka plan sayaçları yerine doğrudan RimWorld ThingDef motor flag'lerini (useHitPoints = false) manipüle eder. Bu sayede haritanızda 10.000 eşya dahi olsa TPS'te sıfır (0) düşüş yaşanır.</MegaMod_DurabilityPerfNote>
   <!-- Medical & Autopsy Suite -->
   <MegaMod_Medical_Title>Tıbbi &amp; Otopsi Sistemi</MegaMod_Medical_Title>
   <MegaMod_Medical_Desc>Gelişmiş otopsi ve organ çıkarma, sahada anında tedavi ve akıllı ilaç tüketim yönetimi.</MegaMod_Medical_Desc>
@@ -446,6 +456,10 @@
   <MegaMod_Medical_EnableAutopsy_Desc>Kolonicilerin kasap masasında veya tıbbi noktalarda taze insan ve mekanoid cesetlerine otopsi yapmasını sağlar.</MegaMod_Medical_EnableAutopsy_Desc>
   <MegaMod_Medical_AutopsyBaseChance>Temel Otopsi Başarı Şansı</MegaMod_Medical_AutopsyBaseChance>
   <MegaMod_Medical_AutopsyBaseChance_Desc>Organ ve parçaları zedelemeden başarıyla çıkarma temel ihtimali.</MegaMod_Medical_AutopsyBaseChance_Desc>
+  <MegaMod_Medical_AutopsySkillFactor>Tıp Seviyesi Başına Yetenek Bonusu</MegaMod_Medical_AutopsySkillFactor>
+  <MegaMod_Medical_AutopsySkillFactor_Desc>Doktorun Tıp becerisinin her seviyesinin kazandırdığı ek başarı şansı.</MegaMod_Medical_AutopsySkillFactor_Desc>
+  <MegaMod_Medical_AutopsyRequiresMedicine>İlaçsız Otopsiyi Cezalandır</MegaMod_Medical_AutopsyRequiresMedicine>
+  <MegaMod_Medical_AutopsyRequiresMedicine_Desc>Otopsi sırasında ilaç kullanılmazsa başarı şansını yarıya indirir.</MegaMod_Medical_AutopsyRequiresMedicine_Desc>
   <MegaMod_Medical_AutopsyBionicChance>Biyonik &amp; İmplant Çıkarma Şansı</MegaMod_Medical_AutopsyBionicChance>
   <MegaMod_Medical_AutopsyBionicChance_Desc>Müteveffada takılı olan biyonik uzuv ve implantları kurtarma başarı ihtimali.</MegaMod_Medical_AutopsyBionicChance_Desc>
   <MegaMod_Medical_ExtractMechParts>Mekanoidlerden Bileşen &amp; Plasteel Sök</MegaMod_Medical_ExtractMechParts>
@@ -458,8 +472,6 @@
   <MegaMod_Medical_FieldSection>Saha Tıbbı &amp; Acil Tedavi</MegaMod_Medical_FieldSection>
   <MegaMod_Medical_EnableField>Saha Tıbbını Etkinleştir</MegaMod_Medical_EnableField>
   <MegaMod_Medical_EnableField_Desc>Doktorlar yaralıları hastane yatağına taşımak yerine vurulup düştükleri yerde derhal tedavi eder.</MegaMod_Medical_EnableField_Desc>
-  <MegaMod_Medical_FieldDocInv>Doktorun Envanterindeki İlacı Kullan</MegaMod_Medical_FieldDocInv>
-  <MegaMod_Medical_FieldDocInv_Desc>Doktorlar kendi ceplerinde taşıdıkları ilaçları öncelikle kullanır.</MegaMod_Medical_FieldDocInv_Desc>
   <MegaMod_Medical_FieldPatInv>Hastanın Envanterindeki İlacı Kullan</MegaMod_Medical_FieldPatInv>
   <MegaMod_Medical_FieldPatInv_Desc>Doktorların yaralının kendi çantasındaki ilacı kullanarak tedavi etmesini sağlar.</MegaMod_Medical_FieldPatInv_Desc>
   <MegaMod_Medical_SmartSection>Akıllı İlaç Yönetimi</MegaMod_Medical_SmartSection>
@@ -518,6 +530,8 @@
   <MegaMod_TimeFlow_SmartSleep>Akıllı Uyku Hızlandırması</MegaMod_TimeFlow_SmartSleep>
   <MegaMod_TimeFlow_SmartSleep_Desc>Bütün koloniciler uyuduğunda ve haritada tehlike yokken hızı otomatik olarak en yükseğe alır, uyandıklarında eski hıza döner.</MegaMod_TimeFlow_SmartSleep_Desc>
   <MegaMod_TimeFlow_SleepSpeedTarget>Uyku Sırasında Hedeflenen Hız:</MegaMod_TimeFlow_SleepSpeedTarget>
+  <MegaMod_TimeFlow_Speed4x>4x (Ultra Hızlı)</MegaMod_TimeFlow_Speed4x>
+  <MegaMod_TimeFlow_Speed3x>3x (Süper Hızlı)</MegaMod_TimeFlow_Speed3x>
 
   <!-- Deep Quarry & Resource Extractor -->
   <MegaMod_Quarry_Title>Derin Taşocağı &amp; Maden Çıkarıcı</MegaMod_Quarry_Title>
@@ -526,6 +540,10 @@
   <MegaMod_Quarry_InfiniteQuarry_Desc>İşaretlendiğinde taşocağı tükenmeden sonsuza kadar kazılabilir.</MegaMod_Quarry_InfiniteQuarry_Desc>
   <MegaMod_Quarry_MiningSpeed>Kazma Hızı Çarpanı</MegaMod_Quarry_MiningSpeed>
   <MegaMod_Quarry_MiningSpeed_Desc>Kolonicilerin kazı işlemlerini tamamlama ve madencilik tecrübesi kazanma hızını ayarlar.</MegaMod_Quarry_MiningSpeed_Desc>
+  <MegaMod_Quarry_ChunkDropChance>Taş Bloğu Çıkma Şansı</MegaMod_Quarry_ChunkDropChance>
+  <MegaMod_Quarry_ChunkDropChance_Desc>Taş bloğu kazma işleminin blok üretme şansı.</MegaMod_Quarry_ChunkDropChance_Desc>
+  <MegaMod_Quarry_ResourceDropChance>Maden Çıkma Şansı</MegaMod_Quarry_ResourceDropChance>
+  <MegaMod_Quarry_ResourceDropChance_Desc>Maden veya bileşen kazma işleminin kaynak üretme şansı.</MegaMod_Quarry_ResourceDropChance_Desc>
   <MegaMod_Quarry_ResourceWeightsHeader>Maden Çıkma Ağırlıkları (Yüksek = Daha Sık)</MegaMod_Quarry_ResourceWeightsHeader>
   <MegaMod_Quarry_WeightSteel>Çelik</MegaMod_Quarry_WeightSteel>
   <MegaMod_Quarry_WeightPlasteel>Plasteel</MegaMod_Quarry_WeightPlasteel>
