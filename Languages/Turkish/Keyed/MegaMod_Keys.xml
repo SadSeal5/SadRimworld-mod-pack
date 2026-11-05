@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <!-- Mega Mod Shell -->
   <MegaMod_ModTitle>SadSeal Mega Mod</MegaMod_ModTitle>
@@ -22,6 +22,7 @@
   <MegaMod_TabTimeFlow>Zaman &amp; Hız</MegaMod_TabTimeFlow>
   <MegaMod_TabQuarry>Derin Taşocağı</MegaMod_TabQuarry>
   <MegaMod_TabAutoArm>Otomatik Silahlanma (Auto-Arm)</MegaMod_TabAutoArm>
+  <MegaMod_TabIncubation>Kuluçka &amp; Büyüme</MegaMod_TabIncubation>
 
   <!-- Module Toggles -->
   <MegaMod_ModuleCombat>Ölümcül ve İsabetli Menzilli Çatışma</MegaMod_ModuleCombat>
@@ -50,6 +51,8 @@
   <MegaMod_ModuleQuarry_Desc>Koloni sınırları içinde taş, çelik, plasteel ve değerli kaynak kazı alanı.</MegaMod_ModuleQuarry_Desc>
   <MegaMod_ModuleAutoArm>Otomatik Silahlanma (Auto-Arm)</MegaMod_ModuleAutoArm>
   <MegaMod_ModuleAutoArm_Desc>Kolonicilerin depolardaki daha üstün ve kaliteli silahları otomatik olarak kuşanması ve silah sınıfı hiyerarşisi.</MegaMod_ModuleAutoArm_Desc>
+  <MegaMod_ModuleIncubation>Kuluçka &amp; Büyüme Paketi</MegaMod_ModuleIncubation>
+  <MegaMod_ModuleIncubation_Desc>Biotech Büyüme Küveti (Growth Vat) geliştirmeleri: embriyo kuluçka hızı, çocuk yaşlanma çarpanı, besin ve elektrik tüketimi kontrolü, hedef yaşta otomatik tahliye, büyüme aşaması (tier) koruması, güvenli staz ve ebeveyn suçluluk düşüncesini kaldırma.</MegaMod_ModuleIncubation_Desc>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Tarif ve Üretim Düzenleyici</MegaMod_RecipeTitle>
@@ -619,4 +622,33 @@
   <AutoArm_LabelMeleeSharp>Auto-Arm: Kesici</AutoArm_LabelMeleeSharp>
   <AutoArm_LabelMeleeBlunt>Auto-Arm: Ezici</AutoArm_LabelMeleeBlunt>
   <MegaMod_RecipeJobString>Üretiyor: {0}</MegaMod_RecipeJobString>
+
+  <!-- Incubation & Growth Suite Module -->
+  <MegaMod_Incubation_Title>Kuluçka &amp; Büyüme Paketi</MegaMod_Incubation_Title>
+  <MegaMod_Incubation_Desc>Biotech büyüme küvetlerini optimize edin. Embriyo ve çocuk gelişimini hızlandırın, büyüme puanı kaybını engelleyin, elektrik ve besin kesintilerinde staz koruması sağlayın ve ebeveyn vicdan azabını kaldırın.</MegaMod_Incubation_Desc>
+  <MegaMod_Incubation_BiotechRequired>Uyarı: Biotech eklentisi aktif değil. Büyüme küveti özellikleri Biotech gerektirir.</MegaMod_Incubation_BiotechRequired>
+  <MegaMod_Incubation_SpeedSection>Büyüme &amp; Kuluçka Hızları</MegaMod_Incubation_SpeedSection>
+  <MegaMod_Incubation_EmbryoSpeed>Embriyo Kuluçka Hızı</MegaMod_Incubation_EmbryoSpeed>
+  <MegaMod_Incubation_EmbryoSpeed_Desc>Büyüme küvetindeki embriyoların kuluçka hız çarpanı (0.1x - 100x). Varsayılan 1.0x.</MegaMod_Incubation_EmbryoSpeed_Desc>
+  <MegaMod_Incubation_ChildSpeed>Çocuk Yaşlanma Hızı</MegaMod_Incubation_ChildSpeed>
+  <MegaMod_Incubation_ChildSpeed_Desc>Büyüme küvetindeki çocukların yaşlanma hızı çarpanı (0.1x - 100x). Not: Vanilla taban hızı 20x'tir. 1.0x çarpanda toplam hız 20x, 5.0x çarpanda 100x olur.</MegaMod_Incubation_ChildSpeed_Desc>
+  <MegaMod_Incubation_ResourcesSection>Kaynak Tüketimi</MegaMod_Incubation_ResourcesSection>
+  <MegaMod_Incubation_NutritionMultiplier>Besin Tüketimi</MegaMod_Incubation_NutritionMultiplier>
+  <MegaMod_Incubation_NutritionMultiplier_Desc>Büyüme küvetinin tükettiği besin çarpanı (%0 - %500). %0 yapılarak besin ihtiyacı tamamen kapatılabilir.</MegaMod_Incubation_NutritionMultiplier_Desc>
+  <MegaMod_Incubation_PowerMultiplier>Elektrik Tüketimi</MegaMod_Incubation_PowerMultiplier>
+  <MegaMod_Incubation_PowerMultiplier_Desc>Büyüme küvetinin çektiği elektrik gücü çarpanı (%0 - %500). %0 yapılarak elektrik ihtiyacı tamamen kapatılabilir.</MegaMod_Incubation_PowerMultiplier_Desc>
+  <MegaMod_Incubation_SafetySection>Otomasyon &amp; Güvenlik Koruması</MegaMod_Incubation_SafetySection>
+  <MegaMod_Incubation_AutoEject>Otomatik Tahliye</MegaMod_Incubation_AutoEject>
+  <MegaMod_Incubation_AutoEject_Desc>Çocuğun biyolojik yaşı belirlenen hedef yaşa ulaştığında büyüme küvetinden otomatik olarak çıkarılır.</MegaMod_Incubation_AutoEject_Desc>
+  <MegaMod_Incubation_TargetAge>Hedef Tahliye Yaşı</MegaMod_Incubation_TargetAge>
+  <MegaMod_Incubation_TargetAge_Desc>Çocukların otomatik olarak tahliye edileceği biyolojik yaş (3, 7, 10, 13, 18).</MegaMod_Incubation_TargetAge_Desc>
+  <MegaMod_Incubation_PreserveGrowthTier>Gelişim Aşaması ve Öğrenmeyi Koru</MegaMod_Incubation_PreserveGrowthTier>
+  <MegaMod_Incubation_PreserveGrowthTier_Desc>Küvette büyüyen çocukların büyüme puanı kaybetmesini önleyerek gelişim anlarında (Growth Moment) en üst düzeyde (Tier 8) tutku ve özellik seçeneği sunar.</MegaMod_Incubation_PreserveGrowthTier_Desc>
+  <MegaMod_Incubation_StasisProtection>Güvenli Staz Koruması</MegaMod_Incubation_StasisProtection>
+  <MegaMod_Incubation_StasisProtection_Desc>Elektrik kesilirse veya besin tükenirse küvet içindeki canlılar güvenli askıya alma durumuna geçer; biyoaçlık (biostarvation), hasar veya ölüm engellenir.</MegaMod_Incubation_StasisProtection_Desc>
+  <MegaMod_Incubation_DisableParentGuilt>Ebeveyn Suçluluğunu Kaldır</MegaMod_Incubation_DisableParentGuilt>
+  <MegaMod_Incubation_DisableParentGuilt_Desc>Çocuğu büyüme küvetinde olan ebeveynlerin aldığı olumsuz ruh hali cezasını (vicdan azabını) kaldırır.</MegaMod_Incubation_DisableParentGuilt_Desc>
+  <SadSeal_Incubation_AutoEjectedTargetAge>{PAWN} hedef yaş olan {TARGETAGE} yaşına ulaştı ve büyüme küvetinden güvenle tahliye edildi.</SadSeal_Incubation_AutoEjectedTargetAge>
+  <MegaMod_Incubation_Presets>Hız Hazır Ayarları</MegaMod_Incubation_Presets>
+  <MegaMod_Incubation_ResetDefaults>Varsayılanlara Sıfırla</MegaMod_Incubation_ResetDefaults>
 </LanguageData>

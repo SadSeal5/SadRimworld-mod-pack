@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <!-- Mega Mod Shell -->
   <MegaMod_ModTitle>SadSeal's Mega Mod</MegaMod_ModTitle>
@@ -22,6 +22,7 @@
   <MegaMod_TabTimeFlow>Speed &amp; Time</MegaMod_TabTimeFlow>
   <MegaMod_TabQuarry>Deep Quarry</MegaMod_TabQuarry>
   <MegaMod_TabAutoArm>Auto-Arm</MegaMod_TabAutoArm>
+  <MegaMod_TabIncubation>Incubation &amp; Growth</MegaMod_TabIncubation>
 
   <!-- Module Toggles -->
   <MegaMod_ModuleCombat>Lethal Ranged Combat</MegaMod_ModuleCombat>
@@ -50,6 +51,8 @@
   <MegaMod_ModuleQuarry_Desc>Excavate rock chunks, steel, plasteel, components, and precious resources.</MegaMod_ModuleQuarry_Desc>
   <MegaMod_ModuleAutoArm>Auto-Arm (Weapon Upgrades)</MegaMod_ModuleAutoArm>
   <MegaMod_ModuleAutoArm_Desc>Automatically upgrade colonist weapons to superior equipment from stockpiles based on tier hierarchy.</MegaMod_ModuleAutoArm_Desc>
+  <MegaMod_ModuleIncubation>Incubation &amp; Growth Suite</MegaMod_ModuleIncubation>
+  <MegaMod_ModuleIncubation_Desc>Enhancements for the Biotech Growth Vat: custom embryo gestation speed, child aging multiplier, nutrition &amp; power controls, auto-eject at configurable age, growth tier preservation, safe stasis, and parent guilt toggle.</MegaMod_ModuleIncubation_Desc>
 
   <!-- Recipe Tweaker Module -->
   <MegaMod_RecipeTitle>Recipe &amp; Crafting Tweaker</MegaMod_RecipeTitle>
@@ -619,4 +622,33 @@
   <AutoArm_LabelMeleeSharp>Auto-Arm: Sharp</AutoArm_LabelMeleeSharp>
   <AutoArm_LabelMeleeBlunt>Auto-Arm: Blunt</AutoArm_LabelMeleeBlunt>
   <MegaMod_RecipeJobString>Producing {0}</MegaMod_RecipeJobString>
+
+  <!-- Incubation & Growth Suite Module -->
+  <MegaMod_Incubation_Title>Incubation &amp; Growth Suite</MegaMod_Incubation_Title>
+  <MegaMod_Incubation_Desc>Fine-tune and optimize Biotech Growth Vats. Accelerate embryo gestation and child growth, prevent learning point loss, protect occupants from starvation power cuts, and eliminate parental guilt.</MegaMod_Incubation_Desc>
+  <MegaMod_Incubation_BiotechRequired>Warning: Biotech expansion is not active. Growth Vat features require Biotech.</MegaMod_Incubation_BiotechRequired>
+  <MegaMod_Incubation_SpeedSection>Growth &amp; Gestation Speeds</MegaMod_Incubation_SpeedSection>
+  <MegaMod_Incubation_EmbryoSpeed>Embryo Gestation Speed</MegaMod_Incubation_EmbryoSpeed>
+  <MegaMod_Incubation_EmbryoSpeed_Desc>Multiplier for how fast human embryos gestate inside growth vats (0.1x - 100x). Default is 1.0x.</MegaMod_Incubation_EmbryoSpeed_Desc>
+  <MegaMod_Incubation_ChildSpeed>Child Aging Speed</MegaMod_Incubation_ChildSpeed>
+  <MegaMod_Incubation_ChildSpeed_Desc>Multiplier for child aging speed inside growth vats (0.1x - 100x). Note: Vanilla base speed is 20x. At 1.0x multiplier, total speed is 20x; at 5.0x, total speed is 100x.</MegaMod_Incubation_ChildSpeed_Desc>
+  <MegaMod_Incubation_ResourcesSection>Resource Consumption</MegaMod_Incubation_ResourcesSection>
+  <MegaMod_Incubation_NutritionMultiplier>Nutrition Consumption</MegaMod_Incubation_NutritionMultiplier>
+  <MegaMod_Incubation_NutritionMultiplier_Desc>Multiplier applied to food/nutrition consumed by growth vats (0.0x - 5.0x). Set to 0% to eliminate food requirements.</MegaMod_Incubation_NutritionMultiplier_Desc>
+  <MegaMod_Incubation_PowerMultiplier>Power Consumption</MegaMod_Incubation_PowerMultiplier>
+  <MegaMod_Incubation_PowerMultiplier_Desc>Multiplier applied to electrical power drawn by growth vats (0.0x - 5.0x). Set to 0% to eliminate power usage.</MegaMod_Incubation_PowerMultiplier_Desc>
+  <MegaMod_Incubation_SafetySection>Automation &amp; Protection</MegaMod_Incubation_SafetySection>
+  <MegaMod_Incubation_AutoEject>Auto-Eject Occupant</MegaMod_Incubation_AutoEject>
+  <MegaMod_Incubation_AutoEject_Desc>Automatically ejects the child from the growth vat when their biological age reaches the target age.</MegaMod_Incubation_AutoEject_Desc>
+  <MegaMod_Incubation_TargetAge>Target Ejection Age</MegaMod_Incubation_TargetAge>
+  <MegaMod_Incubation_TargetAge_Desc>The biological age at which children will be automatically ejected (Ages: 3, 7, 10, 13, 18).</MegaMod_Incubation_TargetAge_Desc>
+  <MegaMod_Incubation_PreserveGrowthTier>Preserve Growth Tier &amp; Learning</MegaMod_Incubation_PreserveGrowthTier>
+  <MegaMod_Incubation_PreserveGrowthTier_Desc>Ensures vat-grown children do not lose growth points, guaranteeing maximum trait and passion options (Tier 8) upon reaching growth moments.</MegaMod_Incubation_PreserveGrowthTier_Desc>
+  <MegaMod_Incubation_StasisProtection>Safe Stasis Protection</MegaMod_Incubation_StasisProtection>
+  <MegaMod_Incubation_StasisProtection_Desc>If power is lost or food is depleted, occupants enter a protected suspended animation state. Prevents biostarvation damage, injury, and death.</MegaMod_Incubation_StasisProtection_Desc>
+  <MegaMod_Incubation_DisableParentGuilt>Disable Parent Guilt</MegaMod_Incubation_DisableParentGuilt>
+  <MegaMod_Incubation_DisableParentGuilt_Desc>Removes the negative thought and mood penalty parents experience when their child is growing inside a vat.</MegaMod_Incubation_DisableParentGuilt_Desc>
+  <SadSeal_Incubation_AutoEjectedTargetAge>{PAWN} has reached the target age of {TARGETAGE} and was safely ejected from the growth vat.</SadSeal_Incubation_AutoEjectedTargetAge>
+  <MegaMod_Incubation_Presets>Speed Presets</MegaMod_Incubation_Presets>
+  <MegaMod_Incubation_ResetDefaults>Reset to Defaults</MegaMod_Incubation_ResetDefaults>
 </LanguageData>
