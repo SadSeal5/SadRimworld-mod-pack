@@ -8,7 +8,7 @@ namespace SadSeal.MegaMod.Incubation.Patches
     public static class HediffComp_VatGrowing_Patch
     {
         [HarmonyPrepare]
-        public static bool Prepare() => ModLister.BiotechInstalled;
+        public static bool Prepare() => ModsConfig.BiotechActive;
 
         [HarmonyPostfix]
         public static void Postfix(ref string __result)

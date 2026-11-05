@@ -1,6 +1,8 @@
+using HarmonyLib;
 using SadSeal.Core.Modules;
 using SadSeal.MegaMod.Incubation.UI;
 using UnityEngine;
+using Verse;
 
 namespace SadSeal.MegaMod.Incubation
 {
@@ -14,12 +16,24 @@ namespace SadSeal.MegaMod.Incubation
         public override string DescriptionKey => "MegaMod_ModuleIncubation_Desc";
         public override int Order => 14;
 
+        public override bool IsEnabled
+        {
+            get => base.IsEnabled && ModsConfig.BiotechActive;
+            set => base.IsEnabled = value;
+        }
+
         public static new IncubationSettings ModSettings => Instance?.CurrentSettings ?? ModModule<IncubationSettings>.ModSettings;
         public static new IncubationSettings Settings => ModSettings;
 
         public IncubationModule()
         {
             Instance = this;
+        }
+
+        public override void Initialize(Harmony harmony)
+        {
+            if (!ModsConfig.BiotechActive) return;
+            base.Initialize(harmony);
         }
 
         public override void DrawSettings(Rect inRect)

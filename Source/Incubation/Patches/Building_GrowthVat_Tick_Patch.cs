@@ -11,12 +11,17 @@ namespace SadSeal.MegaMod.Incubation.Patches
     public static class Building_GrowthVat_Tick_Patch
     {
         [HarmonyPrepare]
-        public static bool Prepare() => ModLister.BiotechInstalled;
+        public static bool Prepare() => ModsConfig.BiotechActive;
 
         private static readonly AccessTools.FieldRef<Building_Enterable, int> StartTickRef =
             AccessTools.FieldRefAccess<Building_Enterable, int>("startTick");
 
         private static readonly Dictionary<int, float> embryoAccumulators = new Dictionary<int, float>();
+
+        public static void CleanupVat(int thingIDNumber)
+        {
+            embryoAccumulators.Remove(thingIDNumber);
+        }
 
         [HarmonyPrefix]
         public static bool Prefix(Building_GrowthVat __instance)
@@ -50,7 +55,7 @@ namespace SadSeal.MegaMod.Incubation.Patches
             if (__instance.IsHashIntervalTick(250))
             {
                 CompPowerTrader power = __instance.TryGetComp<CompPowerTrader>();
-                if (power != null && power.PowerOn)
+                if (power != null)
                 {
                     float mult = settings.powerUsageMultiplier;
                     CompPower powerComp = __instance.PowerComp;
@@ -64,7 +69,14 @@ namespace SadSeal.MegaMod.Incubation.Patches
             // Embryo gestation speed & safe stasis
             if (__instance.selectedEmbryo != null && __instance.innerContainer.Contains(__instance.selectedEmbryo))
             {
-                bool unpoweredOrStarving = !__instance.PowerOn || __instance.NutritionStored <= 0f;
+                if (!__instance.Working || StartTickRef(__instance) <= 0) return;
+
+                bool powerRequired = settings.powerUsageMultiplier > 0.001f;
+                bool unpowered = powerRequired && !__instance.PowerOn;
+                bool foodRequired = settings.nutritionUsageMultiplier > 0.001f;
+                bool starving = foodRequired && (__instance.NutritionStored <= 0f);
+                bool unpoweredOrStarving = unpowered || starving;
+
                 if (settings.stasisProtection && unpoweredOrStarving)
                 {
                     // Safe stasis: freeze embryo gestation progress
@@ -91,6 +103,23 @@ namespace SadSeal.MegaMod.Incubation.Patches
                     embryoAccumulators[id] = acc;
                 }
             }
+            else
+            {
+                embryoAccumulators.Remove(__instance.thingIDNumber);
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(Building_GrowthVat), nameof(Building_GrowthVat.DeSpawn))]
+    public static class Building_GrowthVat_DeSpawn_Patch
+    {
+        [HarmonyPrepare]
+        public static bool Prepare() => ModsConfig.BiotechActive;
+
+        [HarmonyPostfix]
+        public static void Postfix(Building_GrowthVat __instance)
+        {
+            Building_GrowthVat_Tick_Patch.CleanupVat(__instance.thingIDNumber);
         }
     }
 }

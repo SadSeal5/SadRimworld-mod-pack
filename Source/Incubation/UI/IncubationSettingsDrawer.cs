@@ -21,7 +21,7 @@ namespace SadSeal.MegaMod.Incubation.UI
 
             SadUI.DrawHeader(listing, "MegaMod_Incubation_Title", "MegaMod_Incubation_Desc");
 
-            if (!ModLister.BiotechInstalled)
+            if (!ModsConfig.BiotechActive)
             {
                 GUI.color = Color.yellow;
                 listing.Label("MegaMod_Incubation_BiotechRequired".Translate());

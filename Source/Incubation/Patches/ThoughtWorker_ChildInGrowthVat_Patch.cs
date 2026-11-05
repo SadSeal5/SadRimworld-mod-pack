@@ -8,7 +8,7 @@ namespace SadSeal.MegaMod.Incubation.Patches
     public static class ThoughtWorker_ChildInGrowthVat_Patch
     {
         [HarmonyPrepare]
-        public static bool Prepare() => ModLister.BiotechInstalled;
+        public static bool Prepare() => ModsConfig.BiotechActive;
 
         [HarmonyPrefix]
         public static bool Prefix(ref ThoughtState __result)

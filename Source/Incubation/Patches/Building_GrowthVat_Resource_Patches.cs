@@ -8,7 +8,7 @@ namespace SadSeal.MegaMod.Incubation.Patches
     public static class Building_GrowthVat_NutritionConsumedPerDay_Patch
     {
         [HarmonyPrepare]
-        public static bool Prepare() => ModLister.BiotechInstalled;
+        public static bool Prepare() => ModsConfig.BiotechActive;
 
         public static void Postfix(ref float __result)
         {
@@ -23,14 +23,28 @@ namespace SadSeal.MegaMod.Incubation.Patches
     public static class Building_GrowthVat_BiostarvationDailyOffset_Patch
     {
         [HarmonyPrepare]
-        public static bool Prepare() => ModLister.BiotechInstalled;
+        public static bool Prepare() => ModsConfig.BiotechActive;
 
         public static void Postfix(Building_GrowthVat __instance, ref float __result)
         {
-            if (IncubationModule.Instance.IsEnabled && IncubationModule.Settings.stasisProtection)
+            if (!IncubationModule.Instance.IsEnabled) return;
+
+            var settings = IncubationModule.Settings;
+            if (settings.nutritionUsageMultiplier <= 0.001f)
             {
-                // If power is lost or food is depleted, freeze biostarvation increase
-                if (!__instance.PowerOn || __instance.NutritionStored <= 0f)
+                __result = 0f;
+                return;
+            }
+
+            if (settings.stasisProtection)
+            {
+                bool powerRequired = settings.powerUsageMultiplier > 0.001f;
+                bool unpowered = powerRequired && !__instance.PowerOn;
+                bool foodRequired = settings.nutritionUsageMultiplier > 0.001f;
+                bool starving = foodRequired && (__instance.NutritionStored <= 0f);
+                bool unpoweredOrStarving = unpowered || starving;
+
+                if (unpoweredOrStarving)
                 {
                     __result = 0f;
                 }

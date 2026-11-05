@@ -9,7 +9,7 @@ namespace SadSeal.MegaMod.Incubation.Patches
     public static class Pawn_AgeTracker_Notify_TickedInGrowthVat_Patch
     {
         [HarmonyPrepare]
-        public static bool Prepare() => ModLister.BiotechInstalled;
+        public static bool Prepare() => ModsConfig.BiotechActive;
 
         [HarmonyPrefix]
         public static bool Prefix(Pawn_AgeTracker __instance, ref int ticks, Pawn ___pawn)
@@ -22,7 +22,13 @@ namespace SadSeal.MegaMod.Incubation.Patches
             if (vat != null)
             {
                 // Safe stasis protection: if unpowered or food is depleted, pause biological aging
-                if (settings.stasisProtection && (!vat.PowerOn || vat.NutritionStored <= 0f))
+                bool powerRequired = settings.powerUsageMultiplier > 0.001f;
+                bool unpowered = powerRequired && !vat.PowerOn;
+                bool foodRequired = settings.nutritionUsageMultiplier > 0.001f;
+                bool starving = foodRequired && (vat.NutritionStored <= 0f);
+                bool unpoweredOrStarving = unpowered || starving;
+
+                if (settings.stasisProtection && unpoweredOrStarving)
                 {
                     return false;
                 }
@@ -48,30 +54,20 @@ namespace SadSeal.MegaMod.Incubation.Patches
             var vat = ___pawn.ParentHolder as Building_GrowthVat;
             if (vat == null) return;
 
-            // Preserve growth tier progression
+            // Preserve growth tier progression: accrue points smoothly
             if (settings.preserveGrowthTier && __instance.canGainGrowthPoints)
             {
                 float age = __instance.AgeBiologicalYearsFloat;
                 if (age >= 3f && age < 13f)
                 {
-                    float cycleStart = age < 7f ? 3f : (age < 10f ? 7f : 10f);
-                    float cycleEnd = age < 7f ? 7f : (age < 10f ? 10f : 13f);
-                    float progress = Mathf.Clamp01((age - cycleStart) / (cycleEnd - cycleStart));
-                    float targetPoints = progress * 162f; // 162f is Tier 8 max requirement
-                    if (__instance.growthPoints < targetPoints)
-                    {
-                        __instance.growthPoints = targetPoints;
-                    }
+                    float cycleYears = age < 7f ? 4f : 3f;
+                    float cycleTicks = cycleYears * 3600000f; // 60 days * 60,000 ticks/day
+                    float maxPoints = GrowthUtility.GrowthTiers != null && GrowthUtility.GrowthTiers.Length > 0
+                        ? GrowthUtility.GrowthTiers[GrowthUtility.GrowthTiers.Length - 1].pointsRequirement
+                        : 162f;
+                    float pointsToAdd = (ticks / cycleTicks) * maxPoints;
+                    __instance.growthPoints = Mathf.Min(__instance.growthPoints + pointsToAdd, maxPoints);
                 }
-            }
-
-            // Auto-eject occupant when reaching target age
-            if (settings.autoEjectEnabled && __instance.AgeBiologicalYearsFloat >= settings.targetEjectAge)
-            {
-                int targetAge = settings.targetEjectAge;
-                Pawn pawn = ___pawn;
-                vat.EjectContents();
-                Messages.Message("SadSeal_Incubation_AutoEjectedTargetAge".Translate(pawn.Named("PAWN"), targetAge.Named("TARGETAGE")), pawn, MessageTypeDefOf.PositiveEvent);
             }
         }
     }
@@ -80,19 +76,22 @@ namespace SadSeal.MegaMod.Incubation.Patches
     public static class Pawn_AgeTracker_TryChildGrowthMoment_Patch
     {
         [HarmonyPrepare]
-        public static bool Prepare() => ModLister.BiotechInstalled;
+        public static bool Prepare() => ModsConfig.BiotechActive;
 
         [HarmonyPrefix]
         public static void Prefix(Pawn_AgeTracker __instance, Pawn ___pawn, int birthdayAge)
         {
             if (IncubationModule.Instance.IsEnabled && IncubationModule.Settings.preserveGrowthTier)
             {
-                // If the pawn is in a growth vat or was grown in one, ensure they achieve Tier 8 choices
-                if (___pawn.ParentHolder is Building_GrowthVat || __instance.vatGrowTicks > 0)
+                // Only apply if pawn is currently in a growth vat and this is a growth birthday
+                if (___pawn.ParentHolder is Building_GrowthVat && GrowthUtility.IsGrowthBirthday(birthdayAge))
                 {
-                    if (__instance.growthPoints < 162f)
+                    float maxPoints = GrowthUtility.GrowthTiers != null && GrowthUtility.GrowthTiers.Length > 0
+                        ? GrowthUtility.GrowthTiers[GrowthUtility.GrowthTiers.Length - 1].pointsRequirement
+                        : 162f;
+                    if (__instance.growthPoints < maxPoints)
                     {
-                        __instance.growthPoints = 162f;
+                        __instance.growthPoints = maxPoints;
                     }
                 }
             }
