@@ -1,7 +1,9 @@
 using System;
+using System.Reflection;
 using HarmonyLib;
 using SadSeal.Common;
 using SadSeal.Core.Modules;
+using SadSeal.MegaMod.Combat.Patches;
 using SadSeal.MegaMod.Combat.UI;
 using UnityEngine;
 using Verse;
@@ -60,6 +62,42 @@ namespace SadSeal.MegaMod.Combat
             else
             {
                 harmony.PatchAll(GetType().Assembly);
+                PatchProjectileSubclasses(harmony);
+            }
+        }
+
+        private void PatchProjectileSubclasses(Harmony harmony)
+        {
+            var damagePostfix = new HarmonyMethod(typeof(Patch_Projectile_Subclasses), nameof(Patch_Projectile_Subclasses.SubclassDamagePostfix));
+            var apPostfix = new HarmonyMethod(typeof(Patch_Projectile_Subclasses), nameof(Patch_Projectile_Subclasses.SubclassApPostfix));
+            var ticksPostfix = new HarmonyMethod(typeof(Patch_Projectile_Subclasses), nameof(Patch_Projectile_Subclasses.SubclassStartingTicksPostfix));
+
+            foreach (Type type in GenTypes.AllSubclasses(typeof(Verse.Projectile)))
+            {
+                try
+                {
+                    var dmgMethod = type.GetMethod("get_DamageAmount", BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
+                    if (dmgMethod != null)
+                    {
+                        harmony.Patch(dmgMethod, postfix: damagePostfix);
+                    }
+
+                    var apMethod = type.GetMethod("get_ArmorPenetration", BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
+                    if (apMethod != null)
+                    {
+                        harmony.Patch(apMethod, postfix: apPostfix);
+                    }
+
+                    var ticksMethod = type.GetMethod("get_StartingTicksToImpact", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly);
+                    if (ticksMethod != null)
+                    {
+                        harmony.Patch(ticksMethod, postfix: ticksPostfix);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    SadLog.Warning("Combat", $"Could not dynamically patch projectile subclass {type.FullName}: {ex.Message}");
+                }
             }
         }
 
