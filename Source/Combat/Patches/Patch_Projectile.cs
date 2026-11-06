@@ -11,6 +11,8 @@ namespace SadSeal.MegaMod.Combat.Patches
         [HarmonyPostfix]
         public static void Postfix(ref float __result)
         {
+            if (CombatModule.Instance?.IsEnabled != true) return;
+
             var settings = CombatModule.ModSettings;
             if (settings != null && settings.projectileSpeedMultiplier > 0.01f && Math.Abs(settings.projectileSpeedMultiplier - 1.0f) > 0.001f)
             {
@@ -25,6 +27,8 @@ namespace SadSeal.MegaMod.Combat.Patches
         [HarmonyPostfix]
         public static void Postfix(ref int __result)
         {
+            if (CombatModule.Instance?.IsEnabled != true) return;
+
             var settings = CombatModule.ModSettings;
             if (settings != null && Math.Abs(settings.damageMultiplier - 1.0f) > 0.001f)
             {
@@ -39,6 +43,8 @@ namespace SadSeal.MegaMod.Combat.Patches
         [HarmonyPostfix]
         public static void Postfix(ref float __result)
         {
+            if (CombatModule.Instance?.IsEnabled != true) return;
+
             var settings = CombatModule.ModSettings;
             if (settings != null && Math.Abs(settings.armorPenetrationMultiplier - 1.0f) > 0.001f)
             {

@@ -26,6 +26,8 @@ namespace SadSeal.Core.Modules
         public abstract void ExposeData();
 
         public abstract void DrawSettings(Rect inRect);
+
+        public virtual void OnGameEnded() { }
     }
 
     public abstract class ModModule<TSettings> : ModModule where TSettings : class, IExposable, new()

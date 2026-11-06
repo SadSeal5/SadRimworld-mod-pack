@@ -25,9 +25,81 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
             Instance = this;
         }
 
+        public static void ResetInstance()
+        {
+            Instance = null;
+        }
+
         public static WhereIsMyWeaponGameComponent GetInstance()
         {
             return Instance ?? Current.Game?.GetComponent<WhereIsMyWeaponGameComponent>();
+        }
+
+        public override void GameComponentTick()
+        {
+            base.GameComponentTick();
+            if (Find.TickManager.TicksGame % 250 != 0) return;
+            if (droppedWeapons == null || droppedWeapons.Count == 0) return;
+            if (QoLModule.Instance?.IsEnabled != true || QoLModule.ModSettings?.whereIsMyWeapon != true) return;
+
+            List<Verse.Pawn> toRemove = null;
+
+            foreach (var kvp in droppedWeapons)
+            {
+                Verse.Pawn pawn = kvp.Key;
+                ThingWithComps weapon = kvp.Value;
+
+                if (pawn == null || pawn.Dead || !pawn.Spawned || !pawn.IsColonist)
+                {
+                    if (toRemove == null) toRemove = new List<Verse.Pawn>();
+                    toRemove.Add(pawn);
+                    continue;
+                }
+
+                // If already equipped primary or cannot manipulate, discard
+                if (pawn.equipment?.Primary != null || pawn.health?.capacities == null || !pawn.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation))
+                {
+                    if (toRemove == null) toRemove = new List<Verse.Pawn>();
+                    toRemove.Add(pawn);
+                    continue;
+                }
+
+                // If downed, sleeping, mental, or bleeding heavily, wait
+                if (pawn.Downed || pawn.InMentalState || (pawn.health?.hediffSet?.BleedRateTotal ?? 0f) > 0.10f)
+                {
+                    continue;
+                }
+
+                // If weapon is invalid, destroyed or on different map
+                if (weapon == null || weapon.Destroyed || !weapon.Spawned || weapon.Map != pawn.Map)
+                {
+                    if (toRemove == null) toRemove = new List<Verse.Pawn>();
+                    toRemove.Add(pawn);
+                    continue;
+                }
+
+                // Eligible to retrieve weapon!
+                if (weapon.IsForbidden(pawn))
+                {
+                    weapon.SetForbidden(false, false);
+                }
+
+                if (pawn.CanReach(weapon, PathEndMode.ClosestTouch, Danger.Some))
+                {
+                    Job job = JobMaker.MakeJob(JobDefOf.Equip, weapon);
+                    pawn.jobs?.jobQueue?.EnqueueFirst(job);
+                    if (toRemove == null) toRemove = new List<Verse.Pawn>();
+                    toRemove.Add(pawn);
+                }
+            }
+
+            if (toRemove != null)
+            {
+                for (int i = 0; i < toRemove.Count; i++)
+                {
+                    droppedWeapons.Remove(toRemove[i]);
+                }
+            }
         }
 
         public override void ExposeData()
@@ -67,6 +139,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
         {
             public static void Prefix(Pawn_HealthTracker __instance)
             {
+                if (QoLModule.Instance?.IsEnabled != true) return;
                 if (QoLModule.ModSettings?.whereIsMyWeapon != true) return;
 
                 Verse.Pawn pawn = Traverse.Create(__instance).Field("pawn").GetValue<Verse.Pawn>();
@@ -86,6 +159,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
         {
             public static void Postfix(Pawn_HealthTracker __instance)
             {
+                if (QoLModule.Instance?.IsEnabled != true) return;
                 if (QoLModule.ModSettings?.whereIsMyWeapon != true) return;
 
                 Verse.Pawn pawn = Traverse.Create(__instance).Field("pawn").GetValue<Verse.Pawn>();

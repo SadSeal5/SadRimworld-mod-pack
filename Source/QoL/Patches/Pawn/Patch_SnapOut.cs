@@ -13,6 +13,11 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
     {
         public static readonly Dictionary<int, int> CalmDownCooldowns = new Dictionary<int, int>();
 
+        public static void ClearCache()
+        {
+            CalmDownCooldowns.Clear();
+        }
+
         public static bool CanCalmDown(Verse.Pawn calmer, Verse.Pawn target)
         {
             if (QoLModule.Instance?.IsEnabled != true) return false;
@@ -88,7 +93,10 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
                 }
             };
 
-            talkToil.AddFinishAction(() =>
+            yield return talkToil;
+
+            Toil finishToil = ToilMaker.MakeToil("CalmDownFinish");
+            finishToil.initAction = () =>
             {
                 Verse.Pawn target = TargetPawn;
                 if (target == null || !target.InMentalState) return;
@@ -110,9 +118,9 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
                 {
                     Messages.Message("MegaMod_SnapOut_Failed".Translate(pawn.LabelShort, target.LabelShort), target, MessageTypeDefOf.NeutralEvent);
                 }
-            });
-
-            yield return talkToil;
+            };
+            finishToil.defaultCompleteMode = ToilCompleteMode.Instant;
+            yield return finishToil;
         }
     }
 

@@ -157,5 +157,20 @@ namespace SadSeal.Core.Registry
                 }
             }
         }
+
+        public static void OnGameEndedAll()
+        {
+            foreach (var module in modules)
+            {
+                try
+                {
+                    module.OnGameEnded();
+                }
+                catch (Exception ex)
+                {
+                    SadLog.Error("Core", $"Error in OnGameEnded for module {module.Id}: {ex}");
+                }
+            }
+        }
     }
 }

@@ -10,6 +10,8 @@ namespace SadSeal.MegaMod.Durability.Patches
 
         public static void Prefix()
         {
+            if (DurabilityModule.Instance?.IsEnabled != true) return;
+
             if (DurabilityModule.ModSettings?.preventTaintedApparel == true)
             {
                 SuppressTaint = true;
@@ -18,6 +20,12 @@ namespace SadSeal.MegaMod.Durability.Patches
 
         public static void Postfix(Pawn_ApparelTracker __instance)
         {
+            if (DurabilityModule.Instance?.IsEnabled != true)
+            {
+                SuppressTaint = false;
+                return;
+            }
+
             if (SuppressTaint)
             {
                 SuppressTaint = false;

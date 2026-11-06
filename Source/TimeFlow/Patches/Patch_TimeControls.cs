@@ -11,6 +11,12 @@ namespace SadSeal.MegaMod.TimeFlow.Patches
     {
         public static void Prefix(ref bool __state)
         {
+            if (TimeFlowModule.Instance?.IsEnabled != true)
+            {
+                __state = false;
+                return;
+            }
+
             var settings = TimeFlowModule.ModSettings;
             if (settings != null && settings.UnlockSuperSpeed && !Prefs.DevMode)
             {
@@ -25,6 +31,8 @@ namespace SadSeal.MegaMod.TimeFlow.Patches
 
         public static void Postfix()
         {
+            if (TimeFlowModule.Instance?.IsEnabled != true) return;
+
             var settings = TimeFlowModule.ModSettings;
             if (settings != null && settings.UnlockSuperSpeed)
             {

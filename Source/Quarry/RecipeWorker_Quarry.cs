@@ -205,6 +205,8 @@ namespace SadSeal.MegaMod.Quarry
     {
         public static void Postfix(RecipeDef __instance, ref float __result)
         {
+            if (QuarryModule.Instance?.IsEnabled != true) return;
+
             if (__instance?.workerClass == typeof(RecipeWorker_Quarry))
             {
                 float mult = QuarryModule.ModSettings?.MiningSpeedMultiplier ?? 1.0f;

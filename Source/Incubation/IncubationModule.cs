@@ -40,5 +40,10 @@ namespace SadSeal.MegaMod.Incubation
         {
             IncubationSettingsDrawer.DrawSettings(inRect, Settings);
         }
+
+        public override void OnGameEnded()
+        {
+            Patches.Building_GrowthVat_Tick_Patch.ClearAllAccumulators();
+        }
     }
 }

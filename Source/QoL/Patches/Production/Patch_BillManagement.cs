@@ -13,6 +13,12 @@ namespace SadSeal.MegaMod.QoL.Patches.Production
 
         public static bool HasCopiedBills => clipboard.Count > 0;
 
+        public static void ClearClipboard()
+        {
+            clipboard.Clear();
+            sourceTableDef = null;
+        }
+
         public static void CopyBillsFrom(Building_WorkTable table)
         {
             clipboard.Clear();
@@ -97,6 +103,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Production
             {
                 foreach (Gizmo g in __result) yield return g;
             }
+            if (QoLModule.Instance?.IsEnabled != true) yield break;
             if (QoLModule.ModSettings?.enableBillQoL != true) yield break;
             if (!(__instance is Building_WorkTable workTable)) yield break;
             if (!workTable.Spawned || workTable.Faction != Faction.OfPlayer) yield break;

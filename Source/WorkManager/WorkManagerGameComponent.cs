@@ -24,6 +24,11 @@ namespace SadSeal.MegaMod.WorkManager
             Instance = this;
         }
 
+        public static void ResetInstance()
+        {
+            Instance = null;
+        }
+
         public bool IsPawnPriorityEnabled(Pawn pawn)
         {
             if (pawn == null) return false;

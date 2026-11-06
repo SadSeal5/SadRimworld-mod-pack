@@ -17,10 +17,18 @@ namespace SadSeal.MegaMod.Incubation.Patches
             AccessTools.FieldRefAccess<Building_Enterable, int>("startTick");
 
         private static readonly Dictionary<int, float> embryoAccumulators = new Dictionary<int, float>();
+        private static readonly Dictionary<int, float> enteredAges = new Dictionary<int, float>();
 
         public static void CleanupVat(int thingIDNumber)
         {
             embryoAccumulators.Remove(thingIDNumber);
+            enteredAges.Remove(thingIDNumber);
+        }
+
+        public static void ClearAllAccumulators()
+        {
+            embryoAccumulators.Clear();
+            enteredAges.Clear();
         }
 
         [HarmonyPrefix]
@@ -28,16 +36,34 @@ namespace SadSeal.MegaMod.Incubation.Patches
         {
             if (!IncubationModule.Instance.IsEnabled) return true;
 
+            int id = __instance.thingIDNumber;
+            if (__instance.SelectedPawn == null || !__instance.innerContainer.Contains(__instance.SelectedPawn))
+            {
+                enteredAges.Remove(id);
+                return true;
+            }
+
             var settings = IncubationModule.Settings;
-            if (settings.autoEjectEnabled && __instance.SelectedPawn != null && __instance.innerContainer.Contains(__instance.SelectedPawn))
+            if (settings.autoEjectEnabled)
             {
                 Pawn pawn = __instance.SelectedPawn;
-                if (pawn.ageTracker != null && pawn.ageTracker.AgeBiologicalYearsFloat >= settings.targetEjectAge)
+                if (pawn.ageTracker != null)
                 {
+                    float currentAge = pawn.ageTracker.AgeBiologicalYearsFloat;
+                    if (!enteredAges.TryGetValue(id, out float enteredAge))
+                    {
+                        enteredAge = currentAge;
+                        enteredAges[id] = enteredAge;
+                    }
+
                     int targetAge = settings.targetEjectAge;
-                    __instance.EjectContents();
-                    Messages.Message("SadSeal_Incubation_AutoEjectedTargetAge".Translate(pawn.Named("PAWN"), targetAge.Named("TARGETAGE")), pawn, MessageTypeDefOf.PositiveEvent);
-                    return false;
+                    if (enteredAge < targetAge && currentAge >= targetAge)
+                    {
+                        enteredAges.Remove(id);
+                        __instance.EjectContents();
+                        Messages.Message("SadSeal_Incubation_AutoEjectedTargetAge".Translate(pawn.Named("PAWN"), targetAge.Named("TARGETAGE")), pawn, MessageTypeDefOf.PositiveEvent);
+                        return false;
+                    }
                 }
             }
 

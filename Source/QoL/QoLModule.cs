@@ -1,4 +1,7 @@
 using SadSeal.Core.Modules;
+using SadSeal.MegaMod.QoL.Patches.Pawn;
+using SadSeal.MegaMod.QoL.Patches.Production;
+using SadSeal.MegaMod.QoL.Patches.Safety;
 using SadSeal.MegaMod.QoL.UI;
 using UnityEngine;
 
@@ -32,6 +35,15 @@ namespace SadSeal.MegaMod.QoL
         public override void DrawSettings(Rect inRect)
         {
             QoLSettingsDrawer.DrawSettings(inRect, Settings);
+        }
+
+        public override void OnGameEnded()
+        {
+            SnapOutUtility.ClearCache();
+            RoofSafetyUtility.ClearCache();
+            WhereIsMyWeaponGameComponent.ResetInstance();
+            BillClipboard.ClearClipboard();
+            Patch_ReplaceStuff.ResetState();
         }
     }
 }

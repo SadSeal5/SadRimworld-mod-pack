@@ -26,5 +26,10 @@ namespace SadSeal.MegaMod.WorkManager
         {
             WorkManagerSettingsDrawer.DrawSettings(inRect, Settings);
         }
+
+        public override void OnGameEnded()
+        {
+            WorkManagerGameComponent.ResetInstance();
+        }
     }
 }

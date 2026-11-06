@@ -8,6 +8,8 @@ namespace SadSeal.MegaMod.TimeFlow.Patches
     {
         public static bool Prefix(ref bool __result)
         {
+            if (TimeFlowModule.Instance?.IsEnabled != true) return true;
+
             var settings = TimeFlowModule.ModSettings;
             if (settings != null && settings.DisableForcedSlowdown)
             {
@@ -23,6 +25,8 @@ namespace SadSeal.MegaMod.TimeFlow.Patches
     {
         public static bool Prefix()
         {
+            if (TimeFlowModule.Instance?.IsEnabled != true) return true;
+
             var settings = TimeFlowModule.ModSettings;
             if (settings != null && settings.DisableForcedSlowdown)
             {
@@ -37,6 +41,8 @@ namespace SadSeal.MegaMod.TimeFlow.Patches
     {
         public static bool Prefix()
         {
+            if (TimeFlowModule.Instance?.IsEnabled != true) return true;
+
             var settings = TimeFlowModule.ModSettings;
             if (settings != null && settings.DisableForcedSlowdown)
             {

@@ -11,6 +11,11 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
     {
         private static readonly Dictionary<int, int> lastWarningTickByTargetId = new Dictionary<int, int>();
 
+        public static void ClearCache()
+        {
+            lastWarningTickByTargetId.Clear();
+        }
+
         public static void NotifyRoofSafetyPrevented(Verse.Pawn pawn, Thing target)
         {
             if (target == null) return;
@@ -27,39 +32,14 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
 
         public static bool WillCauseRoofCollapse(Thing target, Map map)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return false;
             if (QoLModule.ModSettings?.enableRoofSafety != true) return false;
             if (target == null) return false;
             if (map == null) map = target.Map;
             if (map == null || target.def == null) return false;
             if (!target.def.holdsRoof) return false;
 
-            IntVec3 targetPos = target.Position;
-
-            // Check if any roof cell within radial 7f of target.Position has NO other building edifice with def.holdsRoof == true within radial 6.9f
-            foreach (IntVec3 rc in GenRadial.RadialCellsAround(targetPos, 7f, true))
-            {
-                if (!rc.InBounds(map)) continue;
-                if (map.roofGrid.RoofAt(rc) == null) continue;
-
-                bool hasOtherSupport = false;
-                foreach (IntVec3 sc in GenRadial.RadialCellsAround(rc, 6.9f, true))
-                {
-                    if (!sc.InBounds(map)) continue;
-                    Building edifice = sc.GetEdifice(map);
-                    if (edifice != null && edifice != target && edifice.def != null && edifice.def.holdsRoof)
-                    {
-                        hasOtherSupport = true;
-                        break;
-                    }
-                }
-
-                if (!hasOtherSupport)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return RoofCollapseChecker.WouldCollapseIfHere(target.Position, map);
         }
     }
 
@@ -68,6 +48,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
     {
         public static void Postfix(Verse.Pawn pawn, Thing t, bool forced, ref Job __result)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (__result == null) return;
             if (QoLModule.ModSettings?.enableRoofSafety != true) return;
             if (forced) return;
@@ -83,6 +64,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
     {
         public static void Postfix(Verse.Pawn pawn, Thing t, bool forced, ref bool __result)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (!__result) return;
             if (QoLModule.ModSettings?.enableRoofSafety != true) return;
             if (forced) return;
@@ -98,6 +80,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
     {
         public static bool Prefix(JobDriver_Mine __instance, bool errorOnFailed, ref bool __result)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return true;
             if (QoLModule.ModSettings?.enableRoofSafety != true) return true;
             if (__instance.job != null && __instance.job.playerForced) return true;
             Verse.Pawn pawn = __instance.pawn;
@@ -117,6 +100,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
     {
         public static bool Prefix(JobDriver_RemoveBuilding __instance, bool errorOnFailed, ref bool __result)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return true;
             if (QoLModule.ModSettings?.enableRoofSafety != true) return true;
             if (!(__instance is JobDriver_Deconstruct)) return true;
             if (__instance.job != null && __instance.job.playerForced) return true;
@@ -141,6 +125,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
             {
                 toil.AddPreTickAction(() =>
                 {
+                    if (QoLModule.Instance?.IsEnabled != true) return;
                     if (QoLModule.ModSettings?.enableRoofSafety != true) return;
                     if (__instance.job != null && __instance.job.playerForced) return;
                     Verse.Pawn pawn = __instance.pawn;
@@ -169,6 +154,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
             {
                 toil.AddPreTickAction(() =>
                 {
+                    if (QoLModule.Instance?.IsEnabled != true) return;
                     if (QoLModule.ModSettings?.enableRoofSafety != true) return;
                     if (__instance.job != null && __instance.job.playerForced) return;
                     Verse.Pawn pawn = __instance.pawn;

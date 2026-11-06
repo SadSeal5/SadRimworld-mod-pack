@@ -8,6 +8,8 @@ namespace SadSeal.MegaMod.Skills.Patches
     {
         public static bool Prefix(SkillRecord __instance)
         {
+            if (SkillsModule.Instance?.IsEnabled != true) return true;
+
             if (SkillsModule.ModSettings != null && SkillsModule.ModSettings.disableSkillDecay)
             {
                 if (__instance != null && SkillsModule.ModSettings.ShouldApplyTo(__instance.Pawn))

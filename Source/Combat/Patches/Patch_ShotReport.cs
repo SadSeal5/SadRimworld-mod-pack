@@ -10,6 +10,8 @@ namespace SadSeal.MegaMod.Combat.Patches
         [HarmonyPrefix]
         public static bool Prefix(Thing caster, float distance, float? acc, ref float __result)
         {
+            if (CombatModule.Instance?.IsEnabled != true) return true;
+
             if (CombatModule.ModSettings != null && CombatModule.ModSettings.enableAccuracyOverhaul)
             {
                 __result = AccuracyCalculator.CalculateShooterFactor(caster, distance, acc);

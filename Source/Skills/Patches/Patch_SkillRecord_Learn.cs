@@ -8,6 +8,8 @@ namespace SadSeal.MegaMod.Skills.Patches
     {
         public static void Prefix(SkillRecord __instance, ref float xp, bool direct, bool ignoreLearnRate)
         {
+            if (SkillsModule.Instance?.IsEnabled != true) return;
+
             if (xp > 0f && __instance != null && __instance.def != null && SkillsModule.ModSettings != null)
             {
                 if (!SkillsModule.ModSettings.ShouldApplyTo(__instance.Pawn))

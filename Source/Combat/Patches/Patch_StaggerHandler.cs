@@ -11,6 +11,8 @@ namespace SadSeal.MegaMod.Combat.Patches
         [HarmonyPrefix]
         public static bool Prefix(StaggerHandler __instance, Bullet bullet)
         {
+            if (CombatModule.Instance?.IsEnabled != true) return true;
+
             var settings = CombatModule.ModSettings;
             if (settings != null && settings.enableStaggerEnhancement)
             {

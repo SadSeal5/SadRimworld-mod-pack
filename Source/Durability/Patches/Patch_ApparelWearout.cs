@@ -9,6 +9,8 @@ namespace SadSeal.MegaMod.Durability.Patches
     {
         public static bool Prefix()
         {
+            if (DurabilityModule.Instance?.IsEnabled != true) return true;
+
             if (DurabilityModule.ModSettings != null && DurabilityModule.ModSettings.removeApparelDurability)
             {
                 return false;

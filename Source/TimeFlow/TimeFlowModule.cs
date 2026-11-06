@@ -1,4 +1,5 @@
 using SadSeal.Core.Modules;
+using SadSeal.MegaMod.TimeFlow.SmartSleep;
 using SadSeal.MegaMod.TimeFlow.UI;
 using UnityEngine;
 
@@ -25,6 +26,11 @@ namespace SadSeal.MegaMod.TimeFlow
         public override void DrawSettings(Rect inRect)
         {
             TimeFlowSettingsDrawer.DrawSettings(inRect, Settings);
+        }
+
+        public override void OnGameEnded()
+        {
+            SmartSleepManager.ResetState();
         }
     }
 }

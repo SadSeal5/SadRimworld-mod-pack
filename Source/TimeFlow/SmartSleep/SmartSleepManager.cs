@@ -24,6 +24,15 @@ namespace SadSeal.MegaMod.TimeFlow.SmartSleep
 
         public static void Postfix()
         {
+            if (TimeFlowModule.Instance?.IsEnabled != true)
+            {
+                if (isSleepingFastForwarding)
+                {
+                    isSleepingFastForwarding = false;
+                }
+                return;
+            }
+
             var settings = TimeFlowModule.ModSettings;
             if (settings == null || !settings.EnableSmartSleepFastForward)
             {

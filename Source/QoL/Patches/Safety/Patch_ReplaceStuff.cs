@@ -10,6 +10,11 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
     {
         public static bool isReplacingBuilding = false;
 
+        public static void ResetState()
+        {
+            isReplacingBuilding = false;
+        }
+
         public static bool CanReplaceDefs(BuildableDef newDef, BuildableDef oldDef)
         {
             if (newDef == null || oldDef == null) return false;
@@ -57,6 +62,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
 
         public static void Postfix(BuildableDef newDef, ThingDef oldDef, ref bool __result)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (__result) return;
             if (QoLModule.ModSettings?.enableReplaceStuff != true) return;
 
@@ -87,6 +93,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
     {
         public static void Postfix(Thing constructible, Thing t, ref bool __result)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (!__result) return;
             if (QoLModule.ModSettings?.enableReplaceStuff != true) return;
             if (constructible == null || t == null) return;
@@ -104,6 +111,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
     {
         public static bool Prefix(Verse.Pawn pawn, Thing t, ref bool __result)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return true;
             if (QoLModule.ModSettings?.enableReplaceStuff != true) return true;
             if (pawn?.Map == null || t == null) return true;
 
@@ -139,6 +147,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
     {
         public static void Postfix(BuildableDef newEntDef, BuildableDef oldEntDef, ref bool __result)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (!__result) return;
             if (QoLModule.ModSettings?.enableReplaceStuff != true) return;
             if (newEntDef == null || oldEntDef == null) return;
@@ -158,6 +167,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
     {
         public static void Postfix(BuildableDef entDef, IntVec3 center, Rot4 rot, Map map, ThingDef stuffDef, ref AcceptanceReport __result)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (!__result.Accepted) return;
             if (QoLModule.ModSettings?.enableReplaceStuff != true) return;
             if (entDef == null || map == null) return;
@@ -180,6 +190,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
     {
         public static void Prefix(Frame __instance, Verse.Pawn worker)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (QoLModule.ModSettings?.enableReplaceStuff != true) return;
             if (__instance == null || !__instance.Spawned) return;
 
@@ -217,6 +228,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
     {
         public static bool Prefix(Thing t, Map map)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return true;
             if (QoLModule.ModSettings?.enableReplaceStuff != true) return true;
             if (Patch_ReplaceStuff.isReplacingBuilding)
             {

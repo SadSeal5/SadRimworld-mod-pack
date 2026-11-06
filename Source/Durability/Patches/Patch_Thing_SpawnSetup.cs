@@ -8,6 +8,7 @@ namespace SadSeal.MegaMod.Durability.Patches
     {
         public static void Postfix(Thing __instance)
         {
+            if (DurabilityModule.Instance?.IsEnabled != true) return;
             if (__instance?.def == null) return;
 
             if (DurabilityModule.ModSettings?.restoreExistingOnLoad == true &&

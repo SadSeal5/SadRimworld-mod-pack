@@ -89,6 +89,14 @@ namespace SadSeal.MegaMod.Hauling
             }
         }
 
+        public static void ClearAll()
+        {
+            lock (syncLock)
+            {
+                trackedCargo.Clear();
+            }
+        }
+
         public static void DropAllHauled(Pawn pawn, bool forbidden = false)
         {
             if (pawn == null) return;

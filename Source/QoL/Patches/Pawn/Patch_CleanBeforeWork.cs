@@ -12,6 +12,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
     {
         public static void Postfix(WorkGiver_DoBill __instance, Verse.Pawn pawn, Thing thing, bool forced, ref Job __result)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (__result == null) return;
             if (QoLModule.ModSettings?.enableCleanBeforeWork != true) return;
             // Respect player priority: if forced, proceed immediately
@@ -78,7 +79,6 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
             if (primaryFilth == null) return null;
 
             Job cleanJob = JobMaker.MakeJob(JobDefOf.Clean, primaryFilth);
-            cleanJob.AddQueuedTarget(TargetIndex.A, primaryFilth);
             int queued = 0;
             for (int i = 0; i < candidateFilth.Count; i++)
             {
@@ -121,6 +121,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
     {
         public static void Postfix(WorkGiver_TakeToBedToOperate __instance, Verse.Pawn pawn, Thing t, bool forced, ref Job __result)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (__result == null) return;
             if (QoLModule.ModSettings?.enableCleanBeforeWork != true) return;
             // Respect player priority: if forced, proceed immediately

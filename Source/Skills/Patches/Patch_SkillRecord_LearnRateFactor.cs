@@ -8,6 +8,8 @@ namespace SadSeal.MegaMod.Skills.Patches
     {
         public static void Postfix(SkillRecord __instance, bool direct, ref float __result)
         {
+            if (SkillsModule.Instance?.IsEnabled != true) return;
+
             if (SkillsModule.ModSettings != null && SkillsModule.ModSettings.disableDailyCap && !direct)
             {
                 if (__instance != null && SkillsModule.ModSettings.ShouldApplyTo(__instance.Pawn) && __instance.LearningSaturatedToday)

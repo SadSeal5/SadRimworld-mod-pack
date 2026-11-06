@@ -11,6 +11,8 @@ namespace SadSeal.MegaMod.Combat.Patches
         [HarmonyPostfix]
         public static void Postfix(ref IEnumerable<DamageInfo> __result)
         {
+            if (CombatModule.Instance?.IsEnabled != true) return;
+
             var settings = CombatModule.ModSettings;
             if (settings == null || __result == null) return;
 

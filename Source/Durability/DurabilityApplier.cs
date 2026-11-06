@@ -6,7 +6,7 @@ namespace SadSeal.MegaMod.Durability
 {
     public static class DurabilityApplier
     {
-public static void ApplyDurabilitySettings()
+        public static void ApplyDurabilitySettings()
         {
             if (DurabilityModule.Instance?.IsEnabled == false) return;
             var settings = DurabilityModule.ModSettings;
@@ -25,6 +25,23 @@ public static void ApplyDurabilitySettings()
                 if (def.IsWeapon)
                 {
                     def.useHitPoints = !settings.removeWeaponDurability;
+                }
+            }
+        }
+
+        public static void RestoreDefDefaults()
+        {
+            var allDefs = DefDatabase<ThingDef>.AllDefsListForReading;
+            if (allDefs == null) return;
+
+            for (int i = 0; i < allDefs.Count; i++)
+            {
+                ThingDef def = allDefs[i];
+                if (def == null) continue;
+
+                if (def.IsApparel || def.IsWeapon)
+                {
+                    def.useHitPoints = true;
                 }
             }
         }

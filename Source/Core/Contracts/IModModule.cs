@@ -16,5 +16,6 @@ namespace SadSeal.Core.Contracts
         void OnDefsLoaded();
         void ExposeData();
         void DrawSettings(Rect inRect);
+        void OnGameEnded();
     }
 }

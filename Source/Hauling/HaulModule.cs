@@ -25,5 +25,10 @@ namespace SadSeal.MegaMod.Hauling
         {
             HaulSettingsDrawer.DrawSettings(inRect, Settings);
         }
+
+        public override void OnGameEnded()
+        {
+            HauledCargoTracker.ClearAll();
+        }
     }
 }
