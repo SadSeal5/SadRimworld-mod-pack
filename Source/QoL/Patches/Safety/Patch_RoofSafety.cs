@@ -39,7 +39,54 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
             if (map == null || target.def == null) return false;
             if (!target.def.holdsRoof) return false;
 
-            return RoofCollapseChecker.WouldCollapseIfHere(target.Position, map);
+            IntVec3 targetPos = target.Position;
+            RoofGrid roofGrid = map.roofGrid;
+            if (roofGrid == null) return false;
+
+            // 1. Collect all other roof-holding buildings within radial 13.8f of target
+            int maxRadiusIndex = GenRadial.NumCellsInRadius(13.8f);
+            List<IntVec3> otherSupportPositions = new List<IntVec3>();
+
+            for (int i = 0; i < maxRadiusIndex; i++)
+            {
+                IntVec3 sc = targetPos + GenRadial.RadialPattern[i];
+                if (!sc.InBounds(map) || sc == targetPos) continue;
+
+                Building edifice = sc.GetEdifice(map);
+                if (edifice != null && edifice != target && edifice.def != null && edifice.def.holdsRoof)
+                {
+                    otherSupportPositions.Add(sc);
+                }
+            }
+
+            // 2. Check roofed cells within support distance (6.9f) of target
+            int supportRadiusIndex = RoofCollapseUtility.RoofSupportRadialCellsCount;
+            for (int i = 0; i < supportRadiusIndex; i++)
+            {
+                IntVec3 rc = targetPos + GenRadial.RadialPattern[i];
+                if (!rc.InBounds(map)) continue;
+
+                RoofDef roof = roofGrid.RoofAt(rc);
+                if (roof == null || !roof.canCollapse) continue;
+
+                // Check if any other support covers this cell
+                bool coveredByOther = false;
+                for (int s = 0; s < otherSupportPositions.Count; s++)
+                {
+                    if (rc.InHorDistOf(otherSupportPositions[s], 6.9f))
+                    {
+                        coveredByOther = true;
+                        break;
+                    }
+                }
+
+                if (!coveredByOther)
+                {
+                    return true; // Removing target will cause rc to collapse!
+                }
+            }
+
+            return false;
         }
     }
 
