@@ -19,7 +19,16 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
         {
             if (newDef == null || oldDef == null) return false;
             if (!(newDef is ThingDef newThingDef) || !(oldDef is ThingDef oldThingDef)) return false;
-            if (oldThingDef.category != ThingCategory.Building) return false;
+            if (newThingDef.category != ThingCategory.Building || oldThingDef.category != ThingCategory.Building) return false;
+
+            // Filter out conduits
+            if (newThingDef.building?.isPowerConduit == true || oldThingDef.building?.isPowerConduit == true) return false;
+
+            // Filter out edifice mismatches
+            if (newThingDef.IsEdifice() != oldThingDef.IsEdifice()) return false;
+
+            // Filter out size mismatches
+            if (newThingDef.size != oldThingDef.size) return false;
 
             // Wood Bed to Marble Bed, Wood Wall to Slate Wall, Wood Door to Steel Door
             if (newThingDef == oldThingDef)
@@ -41,18 +50,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
                 return true;
             }
 
-            // Same building class and same size
-            if (newThingDef.thingClass != null && oldThingDef.thingClass != null &&
-                newThingDef.thingClass == oldThingDef.thingClass &&
-                newThingDef.size == oldThingDef.size)
-            {
-                return true;
-            }
-
-            // Same designation category & size (e.g. upgraded workstations)
-            if (newThingDef.designationCategory != null &&
-                newThingDef.designationCategory == oldThingDef.designationCategory &&
-                newThingDef.size == oldThingDef.size)
+            if (GenConstruct.HasMatchingReplacementTag(newThingDef, oldThingDef))
             {
                 return true;
             }
@@ -152,6 +150,12 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
             if (QoLModule.ModSettings?.enableReplaceStuff != true) return;
             if (newEntDef == null || oldEntDef == null) return;
 
+            ThingDef newThingDef = newEntDef as ThingDef;
+            if (newThingDef == null || (!newThingDef.IsFrame && !newThingDef.IsBlueprint))
+            {
+                return;
+            }
+
             BuildableDef builtNew = GenConstruct.BuiltDefOf(newEntDef as ThingDef) ?? newEntDef;
             BuildableDef builtOld = GenConstruct.BuiltDefOf(oldEntDef as ThingDef) ?? oldEntDef;
 
@@ -197,6 +201,9 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
             Map map = __instance.Map;
             if (map == null) return;
 
+            BuildableDef targetDef = __instance.def?.entityDefToBuild;
+            if (targetDef == null) return;
+
             HashSet<Building> destroyed = new HashSet<Building>();
             foreach (IntVec3 pos in __instance.OccupiedRect().Cells)
             {
@@ -205,7 +212,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
                 {
                     if (things[i] is Building b && b != __instance && !(b is Frame) && !b.Destroyed)
                     {
-                        if (Patch_ReplaceStuff.CanReplaceDefs(__instance.def?.entityDefToBuild, b.def) && destroyed.Add(b))
+                        if (Patch_ReplaceStuff.CanReplaceDefs(targetDef, b.def) && destroyed.Add(b))
                         {
                             try
                             {
