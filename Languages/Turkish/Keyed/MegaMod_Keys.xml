@@ -650,5 +650,27 @@
   <MegaMod_Incubation_DisableParentGuilt_Desc>Çocuğu büyüme küvetinde olan ebeveynlerin aldığı olumsuz ruh hali cezasını (vicdan azabını) kaldırır.</MegaMod_Incubation_DisableParentGuilt_Desc>
   <SadSeal_Incubation_AutoEjectedTargetAge>{PAWN} hedef yaş olan {TARGETAGE} yaşına ulaştı ve büyüme küvetinden güvenle tahliye edildi.</SadSeal_Incubation_AutoEjectedTargetAge>
   <MegaMod_Incubation_Presets>Hız Hazır Ayarları</MegaMod_Incubation_Presets>
+  <MegaMod_Incubation_GrowthSection>Gelişim Anı Otomasyonu</MegaMod_Incubation_GrowthSection>
+  <MegaMod_Incubation_RightClickAutoGrowth>Sağ Tık ile Otomatik Gelişim Seçimi</MegaMod_Incubation_RightClickAutoGrowth>
+  <MegaMod_Incubation_RightClickAutoGrowth_Desc>Gelişim Anı (Growth Moment) mektuplarına sağ tıklayarak en iyi özelliği ve en uygun yetenek tutkularını otomatik seçmeyi sağlar.</MegaMod_Incubation_RightClickAutoGrowth_Desc>
+  <MegaMod_Incubation_AutoResolveMode>Otomatik Çözümleme Modu</MegaMod_Incubation_AutoResolveMode>
+  <MegaMod_Incubation_AutoResolveMode_Desc>Gelişim Anlarının yalnızca sağ tıkla mı yoksa mektup geldiğinde otomatik olarak mı çözümleneceğini belirler.</MegaMod_Incubation_AutoResolveMode_Desc>
+  <MegaMod_Incubation_AutoMode_RightClickOnly>Yalnızca Sağ Tık</MegaMod_Incubation_AutoMode_RightClickOnly>
+  <MegaMod_Incubation_AutoMode_AutoVatChildrenOnly>Otomatik (Yalnızca Küvet Çocukları)</MegaMod_Incubation_AutoMode_AutoVatChildrenOnly>
+  <MegaMod_Incubation_AutoMode_AutoAllChildren>Otomatik (Tüm Çocuklar)</MegaMod_Incubation_AutoMode_AutoAllChildren>
+  <MegaMod_Incubation_PassionStrategy>Tutku Seçim Stratejisi</MegaMod_Incubation_PassionStrategy>
+  <MegaMod_Incubation_PassionStrategy_Desc>Otomatik Gelişim Anı çözümlemesinde yetenek tutkularının nasıl önceliklendirileceğini belirler.</MegaMod_Incubation_PassionStrategy_Desc>
+  <MegaMod_Incubation_Strategy_BalancedColonyNeed>Dengeli ve Koloni İhtiyacı</MegaMod_Incubation_Strategy_BalancedColonyNeed>
+  <MegaMod_Incubation_Strategy_CombatFocused>Savaş Odaklı</MegaMod_Incubation_Strategy_CombatFocused>
+  <MegaMod_Incubation_Strategy_ExistingSynergy>Mevcut Yetenek Sinerjisi</MegaMod_Incubation_Strategy_ExistingSynergy>
+  <MegaMod_Incubation_Strategy_BroadCoverage>Geniş Kapsam</MegaMod_Incubation_Strategy_BroadCoverage>
+  <MegaMod_Incubation_AvoidNegativeTraits>Negatif Özelliklerden Kaçın (Özellik Alma)</MegaMod_Incubation_AvoidNegativeTraits>
+  <MegaMod_Incubation_AvoidNegativeTraits_Desc>Sunulan tüm özellikler negatif puana sahipse ve "Özellik yok" seçeneği mevcutsa, zararlı özellik yerine özellik almamayı seçer.</MegaMod_Incubation_AvoidNegativeTraits_Desc>
+  <MegaMod_Incubation_ShowGrowthToast>Seçim Bildirimini Göster</MegaMod_Incubation_ShowGrowthToast>
+  <MegaMod_Incubation_ShowGrowthToast_Desc>Çocuk için seçilen özelliği ve tutkuları gösteren kısa bir bildirim mesajı görüntüler.</MegaMod_Incubation_ShowGrowthToast_Desc>
+  <MegaMod_Incubation_RightClickHint>En iyi özellik ve tutkuları otomatik seçmek için sağ tıklayın.</MegaMod_Incubation_RightClickHint>
+  <MegaMod_Incubation_GrowthToast>{PAWN} gelişimi tamamlandı — Özellik: {TRAIT} | Tutkular: {PASSIONS}</MegaMod_Incubation_GrowthToast>
+  <MegaMod_Incubation_NoTraitChosen>Özellik yok</MegaMod_Incubation_NoTraitChosen>
+  <MegaMod_Incubation_NoPassionChosen>Yok</MegaMod_Incubation_NoPassionChosen>
   <MegaMod_Incubation_ResetDefaults>Varsayılanlara Sıfırla</MegaMod_Incubation_ResetDefaults>
 </LanguageData>

@@ -650,5 +650,27 @@
   <MegaMod_Incubation_DisableParentGuilt_Desc>Removes the negative thought and mood penalty parents experience when their child is growing inside a vat.</MegaMod_Incubation_DisableParentGuilt_Desc>
   <SadSeal_Incubation_AutoEjectedTargetAge>{PAWN} has reached the target age of {TARGETAGE} and was safely ejected from the growth vat.</SadSeal_Incubation_AutoEjectedTargetAge>
   <MegaMod_Incubation_Presets>Speed Presets</MegaMod_Incubation_Presets>
+  <MegaMod_Incubation_GrowthSection>Growth Moment Automation</MegaMod_Incubation_GrowthSection>
+  <MegaMod_Incubation_RightClickAutoGrowth>Right-Click Auto-Resolve Growth Moments</MegaMod_Incubation_RightClickAutoGrowth>
+  <MegaMod_Incubation_RightClickAutoGrowth_Desc>Allows right-clicking Growth Moment letters to automatically pick the highest-rated trait and optimal skill passions.</MegaMod_Incubation_RightClickAutoGrowth_Desc>
+  <MegaMod_Incubation_AutoResolveMode>Auto-Resolve Mode</MegaMod_Incubation_AutoResolveMode>
+  <MegaMod_Incubation_AutoResolveMode_Desc>Controls whether Growth Moments resolve only on right-click or automatically when the letter arrives.</MegaMod_Incubation_AutoResolveMode_Desc>
+  <MegaMod_Incubation_AutoMode_RightClickOnly>Right-Click Only</MegaMod_Incubation_AutoMode_RightClickOnly>
+  <MegaMod_Incubation_AutoMode_AutoVatChildrenOnly>Auto (Vat Children Only)</MegaMod_Incubation_AutoMode_AutoVatChildrenOnly>
+  <MegaMod_Incubation_AutoMode_AutoAllChildren>Auto (All Children)</MegaMod_Incubation_AutoMode_AutoAllChildren>
+  <MegaMod_Incubation_PassionStrategy>Passion Selection Strategy</MegaMod_Incubation_PassionStrategy>
+  <MegaMod_Incubation_PassionStrategy_Desc>Determines how skill passions are prioritized during automated Growth Moment resolution.</MegaMod_Incubation_PassionStrategy_Desc>
+  <MegaMod_Incubation_Strategy_BalancedColonyNeed>Balanced &amp; Colony Need</MegaMod_Incubation_Strategy_BalancedColonyNeed>
+  <MegaMod_Incubation_Strategy_CombatFocused>Combat Focused</MegaMod_Incubation_Strategy_CombatFocused>
+  <MegaMod_Incubation_Strategy_ExistingSynergy>Existing Skill Synergy</MegaMod_Incubation_Strategy_ExistingSynergy>
+  <MegaMod_Incubation_Strategy_BroadCoverage>Broad Coverage</MegaMod_Incubation_Strategy_BroadCoverage>
+  <MegaMod_Incubation_AvoidNegativeTraits>Avoid Negative Traits (Pick No Trait)</MegaMod_Incubation_AvoidNegativeTraits>
+  <MegaMod_Incubation_AvoidNegativeTraits_Desc>If all offered traits have a negative score and the "No trait" option is available, picks no trait instead of a harmful one.</MegaMod_Incubation_AvoidNegativeTraits_Desc>
+  <MegaMod_Incubation_ShowGrowthToast>Show Selection Notification</MegaMod_Incubation_ShowGrowthToast>
+  <MegaMod_Incubation_ShowGrowthToast_Desc>Displays a brief message showing which trait and passions were selected for the child.</MegaMod_Incubation_ShowGrowthToast_Desc>
+  <MegaMod_Incubation_RightClickHint>Right-click to auto-select best trait &amp; passions.</MegaMod_Incubation_RightClickHint>
+  <MegaMod_Incubation_GrowthToast>{PAWN} growth resolved — Trait: {TRAIT} | Passions: {PASSIONS}</MegaMod_Incubation_GrowthToast>
+  <MegaMod_Incubation_NoTraitChosen>No trait</MegaMod_Incubation_NoTraitChosen>
+  <MegaMod_Incubation_NoPassionChosen>None</MegaMod_Incubation_NoPassionChosen>
   <MegaMod_Incubation_ResetDefaults>Reset to Defaults</MegaMod_Incubation_ResetDefaults>
 </LanguageData>
