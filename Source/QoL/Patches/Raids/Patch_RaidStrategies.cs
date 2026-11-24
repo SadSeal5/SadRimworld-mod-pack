@@ -12,6 +12,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Raids
         {
             public static void Postfix(RaidStrategyWorker __instance, IncidentParms parms, ref bool __result)
             {
+                if (QoLModule.Instance?.IsEnabled != true) return;
                 if (!__result || __instance.def == null) return;
 
                 var settings = QoLModule.ModSettings;
@@ -50,6 +51,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Raids
         {
             public static void Postfix(PawnsArrivalModeWorker __instance, ref bool __result)
             {
+                if (QoLModule.Instance?.IsEnabled != true) return;
                 if (!__result || __instance.def == null) return;
 
                 var settings = QoLModule.ModSettings;

@@ -18,14 +18,14 @@ namespace SadSeal.MegaMod.Hauling
 
         private class SimulatedStack
         {
-            public ThingDef Def;
+            public Thing Representative;
             public int RemainingSpace;
         }
 
         private readonly List<SimulatedCell> cells = new List<SimulatedCell>();
         private readonly StorageSettings settings;
 
-        public StorageSlotSimulator(SlotGroup slotGroup, Map map)
+        public StorageSlotSimulator(SlotGroup slotGroup, Map map, Pawn pawn = null)
         {
             if (slotGroup == null || map == null) return;
             this.settings = slotGroup.Settings;
@@ -37,6 +37,12 @@ namespace SadSeal.MegaMod.Hauling
             {
                 IntVec3 c = cellList[i];
                 if (!c.InBounds(map)) continue;
+                if (map.reservationManager != null &&
+                    map.reservationManager.IsReserved(c) &&
+                    (pawn == null || !map.reservationManager.ReservedBy(c, pawn)))
+                {
+                    continue;
+                }
 
                 var simCell = new SimulatedCell
                 {
@@ -57,7 +63,7 @@ namespace SadSeal.MegaMod.Hauling
                         {
                             simCell.Stacks.Add(new SimulatedStack
                             {
-                                Def = th.def,
+                                Representative = th,
                                 RemainingSpace = spaceLeft
                             });
                         }
@@ -108,7 +114,7 @@ namespace SadSeal.MegaMod.Hauling
                 for (int s = 0; s < c.Stacks.Count && mergeable < needed; s++)
                 {
                     var st = c.Stacks[s];
-                    if (st.Def != thing.def || st.RemainingSpace <= 0) continue;
+                    if (st.Representative == null || !st.Representative.CanStackWith(thing) || st.RemainingSpace <= 0) continue;
 
                     int take = Mathf.Min(needed - mergeable, st.RemainingSpace);
                     if (take <= 0) continue;
@@ -166,7 +172,7 @@ namespace SadSeal.MegaMod.Hauling
                 {
                     c.Stacks.Add(new SimulatedStack
                     {
-                        Def = thing.def,
+                        Representative = thing,
                         RemainingSpace = spaceLeftInNewStack
                     });
                 }
@@ -185,6 +191,23 @@ namespace SadSeal.MegaMod.Hauling
             return settings != null && settings.AllowedToAccept(thing);
         }
 
+        public static int CountToPickUpWithinMassLimit(Pawn pawn, Thing thing, float massLimitPercent)
+        {
+            if (pawn == null || thing == null) return 0;
+
+            int vanillaMax = MassUtility.CountToPickUpUntilOverEncumbered(pawn, thing);
+            if (vanillaMax <= 0) return 0;
+
+            float cap = MassUtility.Capacity(pawn) * Mathf.Clamp(massLimitPercent, 0.1f, 1.0f);
+            float freeMass = cap - MassUtility.GearAndInventoryMass(pawn);
+            if (freeMass <= 0f) return 0;
+
+            float itemMass = thing.GetStatValue(StatDefOf.Mass);
+            if (itemMass <= 0.0001f) return vanillaMax;
+
+            return Mathf.Min(vanillaMax, Mathf.FloorToInt(freeMass / itemMass));
+        }
+
         public static void FindNearbyHaulables(Pawn pawn, IntVec3 rootPos, Thing primaryThing, IntVec3 storeCell, List<Thing> outCandidates)
         {
             if (outCandidates == null) return;
@@ -195,6 +218,7 @@ namespace SadSeal.MegaMod.Hauling
             var settings = HaulModule.ModSettings;
             int searchRadius = settings != null ? settings.SearchRadius : 12;
             int maxItems = settings != null ? settings.MaxItemsPerTrip : 8;
+            float massLimitPercent = settings != null ? settings.MassLimitPercent : 0.95f;
 
             if (MassUtility.FreeSpace(pawn) <= 0.1f || maxItems <= 0)
             {
@@ -208,7 +232,7 @@ namespace SadSeal.MegaMod.Hauling
             StorageSlotSimulator sim = null;
             if (targetSlotGroup != null)
             {
-                sim = new StorageSlotSimulator(targetSlotGroup, pawn.Map);
+                sim = new StorageSlotSimulator(targetSlotGroup, pawn.Map, pawn);
 
                 // Reserve destination capacity for the primary carried item first!
                 if (primaryThing != null)
@@ -216,7 +240,17 @@ namespace SadSeal.MegaMod.Hauling
                     sim.TrySimulateAdd(primaryThing);
                 }
 
-                // If destination is completely full after primary item, do not collect extra items
+                // Account for cargo already picked up during this trip
+                List<Thing> alreadyHauled = HauledCargoTracker.GetHauledThings(pawn);
+                for (int i = 0; i < alreadyHauled.Count; i++)
+                {
+                    if (alreadyHauled[i] != null)
+                    {
+                        sim.TrySimulateAdd(alreadyHauled[i]);
+                    }
+                }
+
+                // If destination is completely full after primary and already-hauled items, do not collect extra items
                 if (!sim.HasAnyCapacityLeft())
                 {
                     return;
@@ -307,7 +341,7 @@ namespace SadSeal.MegaMod.Hauling
                     continue;
                 }
 
-                if (MassUtility.CountToPickUpUntilOverEncumbered(pawn, thing) <= 0)
+                if (CountToPickUpWithinMassLimit(pawn, thing, massLimitPercent) <= 0)
                 {
                     continue;
                 }

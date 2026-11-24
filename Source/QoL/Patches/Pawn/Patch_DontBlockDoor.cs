@@ -9,6 +9,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
     {
         public static void Postfix(IntVec3 c, Map map, ref bool __result)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (!__result) return;
             if (QoLModule.ModSettings?.dontBlockDoors != true) return;
             if (map == null) return;

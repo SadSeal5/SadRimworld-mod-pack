@@ -10,6 +10,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Raids
     {
         public static void Postfix(AlertsReadout __instance)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             var allAlerts = Traverse.Create(__instance).Field<List<Alert>>("AllAlerts").Value;
             if (allAlerts != null)
             {

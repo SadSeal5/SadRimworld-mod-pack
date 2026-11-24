@@ -20,6 +20,9 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
             if (newDef == null || oldDef == null) return false;
             if (!(newDef is ThingDef newThingDef) || !(oldDef is ThingDef oldThingDef)) return false;
             if (newThingDef.category != ThingCategory.Building || oldThingDef.category != ThingCategory.Building) return false;
+            if (newThingDef.IsFrame || newThingDef.IsBlueprint || oldThingDef.IsFrame || oldThingDef.IsBlueprint) return false;
+            if (newThingDef.mineable || oldThingDef.mineable) return false;
+            if (typeof(Mineable).IsAssignableFrom(oldThingDef.thingClass) || typeof(Mineable).IsAssignableFrom(newThingDef.thingClass)) return false;
 
             // Filter out conduits
             if (newThingDef.building?.isPowerConduit == true || oldThingDef.building?.isPowerConduit == true) return false;
@@ -72,7 +75,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
 
         public static bool IsWall(ThingDef def)
         {
-            if (def == null) return false;
+            if (def == null || def.IsFrame || def.IsBlueprint || def.mineable || typeof(Mineable).IsAssignableFrom(def.thingClass)) return false;
             if (def.building != null && def.building.isPlaceOverableWall) return true;
             if (def.holdsRoof && def.fillPercent >= 1f && def.passability == Traversability.Impassable) return true;
             return def == ThingDefOf.Wall || (def.defName != null && def.defName.Contains("Wall"));
@@ -80,9 +83,14 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
 
         public static bool IsDoor(ThingDef def)
         {
-            if (def == null) return false;
+            if (def == null || def.IsFrame || def.IsBlueprint) return false;
             if (typeof(Building_Door).IsAssignableFrom(def.thingClass)) return true;
             return def == ThingDefOf.Door || (def.defName != null && def.defName.Contains("Door"));
+        }
+
+        public static bool IsPlayerDeconstructible(Thing t)
+        {
+            return !(t is Building b) || b.DeconstructibleBy(Faction.OfPlayer).Accepted;
         }
     }
 
@@ -97,7 +105,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
             if (constructible == null || t == null) return;
 
             BuildableDef newDef = constructible.def?.entityDefToBuild;
-            if (newDef != null && Patch_ReplaceStuff.CanReplaceDefs(newDef, t.def))
+            if (newDef != null && Patch_ReplaceStuff.CanReplaceDefs(newDef, t.def) && Patch_ReplaceStuff.IsPlayerDeconstructible(t))
             {
                 __result = false;
             }
@@ -112,6 +120,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
             if (QoLModule.Instance?.IsEnabled != true) return true;
             if (QoLModule.ModSettings?.enableReplaceStuff != true) return true;
             if (pawn?.Map == null || t == null) return true;
+            if (!Patch_ReplaceStuff.IsPlayerDeconstructible(t)) return true;
 
             List<Thing> thingList = t.Position.GetThingList(pawn.Map);
             for (int i = 0; i < thingList.Count; i++)
@@ -166,24 +175,33 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
         }
     }
 
-    [HarmonyPatch(typeof(GenConstruct), nameof(GenConstruct.CanPlaceBlueprintAt))]
+    [HarmonyPatch(typeof(GenConstruct), nameof(GenConstruct.CanPlaceBlueprintAt_NewTemp))]
     public static class Patch_GenConstruct_CanPlaceBlueprintAt
     {
-        public static void Postfix(BuildableDef entDef, IntVec3 center, Rot4 rot, Map map, ThingDef stuffDef, ref AcceptanceReport __result)
+        public static void Postfix(BuildableDef entDef, IntVec3 center, Rot4 rot, Map map, Thing thing, ThingDef stuffDef, ref AcceptanceReport __result)
         {
             if (QoLModule.Instance?.IsEnabled != true) return;
             if (!__result.Accepted) return;
             if (QoLModule.ModSettings?.enableReplaceStuff != true) return;
             if (entDef == null || map == null) return;
 
-            Building edifice = center.GetEdifice(map);
-            if (edifice != null && edifice.def == entDef)
+            ThingDef effectiveStuff = stuffDef ?? thing?.Stuff;
+
+            // When newThingDef == oldDef, ensure replacement is only allowed if the stuff is different
+            // E.g. Slate Wall over Wood Wall is allowed, but Slate Wall over Slate Wall is rejected.
+            foreach (IntVec3 cell in GenAdj.OccupiedRect(center, rot, entDef.Size))
             {
-                // When newThingDef == oldDef, ensure replacement is only allowed if the stuff is different
-                // E.g. Slate Wall over Wood Wall is allowed, but Slate Wall over Slate Wall is rejected.
-                if (edifice.Stuff == stuffDef)
+                if (!cell.InBounds(map)) continue;
+
+                List<Thing> things = map.thingGrid.ThingsListAt(cell);
+                for (int i = 0; i < things.Count; i++)
                 {
-                    __result = new AcceptanceReport("IdenticalThingExists".Translate());
+                    Thing th = things[i];
+                    if (th is Building b && !(b is Frame) && !(th is Blueprint) && !b.Destroyed && b.def == entDef && b.Stuff == effectiveStuff)
+                    {
+                        __result = new AcceptanceReport("IdenticalThingExists".Translate());
+                        return;
+                    }
                 }
             }
         }
@@ -204,6 +222,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
             BuildableDef targetDef = __instance.def?.entityDefToBuild;
             if (targetDef == null) return;
 
+            bool targetHoldsRoof = (targetDef as ThingDef)?.holdsRoof == true;
             HashSet<Building> destroyed = new HashSet<Building>();
             foreach (IntVec3 pos in __instance.OccupiedRect().Cells)
             {
@@ -212,11 +231,11 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
                 {
                     if (things[i] is Building b && b != __instance && !(b is Frame) && !b.Destroyed)
                     {
-                        if (Patch_ReplaceStuff.CanReplaceDefs(targetDef, b.def) && destroyed.Add(b))
+                        if (Patch_ReplaceStuff.CanReplaceDefs(targetDef, b.def) && b.DeconstructibleBy(Faction.OfPlayer).Accepted && destroyed.Add(b))
                         {
                             try
                             {
-                                Patch_ReplaceStuff.isReplacingBuilding = true;
+                                Patch_ReplaceStuff.isReplacingBuilding = targetHoldsRoof;
                                 b.Destroy(DestroyMode.Deconstruct);
                             }
                             finally
@@ -249,10 +268,6 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
                     if (item is Frame f && f.def?.entityDefToBuild is ThingDef td1 && td1.holdsRoof)
                     {
                         return false; // Replacement frame is present propping up the roof
-                    }
-                    if (item is Blueprint bp && bp.def?.entityDefToBuild is ThingDef td2 && td2.holdsRoof)
-                    {
-                        return false; // Replacement blueprint is present propping up the roof
                     }
                 }
             }

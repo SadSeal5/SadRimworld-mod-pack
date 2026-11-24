@@ -12,97 +12,118 @@ namespace SadSeal.MegaMod.TimeFlow.SmartSleep
         private static TimeSpeed savedSpeed = TimeSpeed.Normal;
         private static TimeSpeed lastSetSpeed = TimeSpeed.Normal;
         private static int checkInterval = 30;
-        private static int lastMapId = -1;
+        private static int lastCheckTick = -1;
+        private static bool manualOverrideActive = false;
 
         public static void ResetState()
         {
             isSleepingFastForwarding = false;
             savedSpeed = TimeSpeed.Normal;
             lastSetSpeed = TimeSpeed.Normal;
-            lastMapId = -1;
+            lastCheckTick = -1;
+            manualOverrideActive = false;
         }
 
         public static void Postfix()
         {
-            if (TimeFlowModule.Instance?.IsEnabled != true)
-            {
-                if (isSleepingFastForwarding)
-                {
-                    isSleepingFastForwarding = false;
-                }
-                return;
-            }
-
             var settings = TimeFlowModule.ModSettings;
-            if (settings == null || !settings.EnableSmartSleepFastForward)
+            if (TimeFlowModule.Instance?.IsEnabled != true || settings == null || !settings.EnableSmartSleepFastForward)
             {
                 if (isSleepingFastForwarding)
                 {
+                    if (Current.Game?.PlayerHasControl == true
+                        && Find.TickManager != null
+                        && (Find.World == null || Find.GravshipController?.LandingAreaConfirmationInProgress != true))
+                    {
+                        Find.TickManager.CurTimeSpeed = savedSpeed;
+                        lastSetSpeed = savedSpeed;
+                    }
                     isSleepingFastForwarding = false;
                 }
+                manualOverrideActive = false;
                 return;
             }
 
-            if (Find.TickManager == null || Find.TickManager.Paused) return;
-
-            Map map = Find.CurrentMap;
-            if (map == null) return;
-
-            if (map.uniqueID != lastMapId)
+            if (Current.Game == null
+                || Find.TickManager == null
+                || Find.TickManager.Paused
+                || !Current.Game.PlayerHasControl
+                || (Find.World != null && Find.GravshipController?.LandingAreaConfirmationInProgress == true))
             {
-                lastMapId = map.uniqueID;
-                isSleepingFastForwarding = false;
+                return;
             }
 
             // If player manually changed speed during fast-forwarding, respect the player's choice!
             if (isSleepingFastForwarding && Find.TickManager.CurTimeSpeed != lastSetSpeed)
             {
                 isSleepingFastForwarding = false;
+                manualOverrideActive = true;
                 return;
             }
 
-            if (Find.TickManager.TicksGame % checkInterval != 0) return;
+            int ticksGame = Find.TickManager.TicksGame;
+            if (lastCheckTick >= 0 && ticksGame >= lastCheckTick && ticksGame - lastCheckTick < checkInterval)
+            {
+                return;
+            }
+            lastCheckTick = ticksGame;
 
-            List<Pawn> colonists = map.mapPawns.FreeColonists;
-            if (colonists == null || colonists.Count == 0) return;
+            List<Map> maps = Find.Maps;
+            if (maps == null || maps.Count == 0) return;
 
+            bool anyColonist = false;
             bool allSleeping = true;
             bool criticalDangerOrBleed = false;
 
-            for (int i = 0; i < colonists.Count; i++)
+            for (int m = 0; m < maps.Count; m++)
             {
-                Pawn c = colonists[i];
-                if (c == null || c.Dead) continue;
+                Map map = maps[m];
+                if (map == null) continue;
 
-                // If any colonist is bleeding out, don't fast forward through their death
-                if (c.health?.hediffSet != null && c.health.hediffSet.BleedRateTotal > 0.05f)
+                bool hasFireDanger = map.fireWatcher != null && map.fireWatcher.LargeFireDangerPresent;
+                bool hasGeneralDanger = map.dangerWatcher != null && map.dangerWatcher.DangerRating != StoryDanger.None;
+                if (hasFireDanger || hasGeneralDanger)
                 {
                     criticalDangerOrBleed = true;
                     break;
                 }
 
-                if (c.Downed) continue;
+                List<Pawn> colonists = map.mapPawns?.FreeColonists;
+                if (colonists == null) continue;
 
-                // Accurate vanilla awake check
-                if (RestUtility.Awake(c))
+                for (int i = 0; i < colonists.Count; i++)
                 {
-                    allSleeping = false;
+                    Pawn c = colonists[i];
+                    if (c == null || c.Dead) continue;
+
+                    anyColonist = true;
+
+                    // If any colonist is bleeding out, don't fast forward through their death
+                    if (c.health?.hediffSet != null && c.health.hediffSet.BleedRateTotal > 0.05f)
+                    {
+                        criticalDangerOrBleed = true;
+                        break;
+                    }
+
+                    if (c.Downed) continue;
+
+                    // Accurate vanilla awake check
+                    if (RestUtility.Awake(c))
+                    {
+                        allSleeping = false;
+                        break;
+                    }
+                }
+
+                if (criticalDangerOrBleed || !allSleeping)
+                {
                     break;
                 }
             }
 
-            bool hasFireDanger = map.fireWatcher != null && map.fireWatcher.LargeFireDangerPresent;
-            bool hasGeneralDanger = map.dangerWatcher != null && map.dangerWatcher.DangerRating != StoryDanger.None;
-            if (hasFireDanger || hasGeneralDanger)
+            if (anyColonist && allSleeping && !criticalDangerOrBleed)
             {
-                criticalDangerOrBleed = true;
-            }
-
-            bool hasDanger = map.dangerWatcher != null && map.dangerWatcher.DangerRating == StoryDanger.High;
-
-            if (allSleeping && !hasDanger && !criticalDangerOrBleed)
-            {
-                if (!isSleepingFastForwarding)
+                if (!isSleepingFastForwarding && !manualOverrideActive)
                 {
                     savedSpeed = Find.TickManager.CurTimeSpeed;
                     if (savedSpeed == TimeSpeed.Paused) savedSpeed = TimeSpeed.Normal;
@@ -115,6 +136,7 @@ namespace SadSeal.MegaMod.TimeFlow.SmartSleep
             }
             else
             {
+                manualOverrideActive = false;
                 if (isSleepingFastForwarding)
                 {
                     isSleepingFastForwarding = false;

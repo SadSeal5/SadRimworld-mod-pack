@@ -12,10 +12,16 @@ namespace SadSeal.Core.Registry
     {
         private static readonly List<IModModule> modules = new List<IModModule>();
         private static readonly Dictionary<string, IModModule> modulesById = new Dictionary<string, IModModule>(StringComparer.OrdinalIgnoreCase);
+        private static readonly HashSet<Assembly> patchedAssemblies = new HashSet<Assembly>();
         private static bool discovered = false;
         private static bool initialized = false;
 
         public static IReadOnlyList<IModModule> Modules => modules;
+
+        public static bool TryMarkAssemblyPatched(Assembly asm)
+        {
+            return asm != null && patchedAssemblies.Add(asm);
+        }
 
         public static void DiscoverModules()
         {
@@ -23,6 +29,7 @@ namespace SadSeal.Core.Registry
             discovered = true;
 
             var moduleList = new List<IModModule>();
+            var seenIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
             foreach (var asm in assemblies)
@@ -58,6 +65,19 @@ namespace SadSeal.Core.Registry
                             {
                                 if (Activator.CreateInstance(type) is IModModule module)
                                 {
+                                    if (string.IsNullOrEmpty(module.Id))
+                                    {
+                                        SadLog.Warning("Core", $"Skipping module {type.FullName} with empty Id.");
+                                        continue;
+                                    }
+
+                                    if (!seenIds.Add(module.Id))
+                                    {
+                                        SadLog.Warning("Core", $"Duplicate module Id '{module.Id}' from {type.FullName}; skipping.");
+                                        continue;
+                                    }
+
+                                    module.IsEnabled = module.DefaultEnabled;
                                     moduleList.Add(module);
                                 }
                             }
@@ -101,6 +121,8 @@ namespace SadSeal.Core.Registry
         {
             if (initialized) return;
             initialized = true;
+
+            patchedAssemblies.Add(typeof(SadSealCoreMod).Assembly);
 
             int enabledCount = 0;
             int skippedCount = 0;
@@ -162,6 +184,8 @@ namespace SadSeal.Core.Registry
         {
             foreach (var module in modules)
             {
+                if (!module.IsEnabled) continue;
+
                 try
                 {
                     module.OnGameEnded();

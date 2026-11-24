@@ -10,7 +10,7 @@ namespace SadSeal.MegaMod.AutoArm
     {
         protected override Job TryGiveJob(Pawn pawn)
         {
-            if (AutoArmModule.Instance?.IsEnabled == false) return null;
+            if (AutoArmModule.Instance?.IsEnabled != true) return null;
 
             AutoArmSettings settings = AutoArmModule.ModSettings;
             if (settings != null && !settings.enableAutoArm) return null;
@@ -18,6 +18,7 @@ namespace SadSeal.MegaMod.AutoArm
 
             if (pawn == null || !pawn.Spawned || pawn.Dead || pawn.Downed) return null;
             if (pawn.Faction != Faction.OfPlayer || !pawn.RaceProps.Humanlike || !pawn.IsColonist) return null;
+            if (pawn.IsSlave || pawn.IsQuestLodger() || pawn.DevelopmentalStage.Baby()) return null;
             if (pawn.Drafted || pawn.InMentalState) return null;
             if (pawn.IsBurning() || (pawn.health?.hediffSet?.BleedRateTotal ?? 0f) > 0.05f) return null;
             if (pawn.mindState?.enemyTarget != null) return null;
@@ -29,7 +30,11 @@ namespace SadSeal.MegaMod.AutoArm
 
             if (pawn.equipment?.Primary != null)
             {
-                CompBladelinkWeapon blade = pawn.equipment.Primary.TryGetComp<CompBladelinkWeapon>();
+                ThingWithComps primary = pawn.equipment.Primary;
+                if (WeaponClassifier.IsExcludedWeapon(primary.def)) return null;
+                if (CompBiocodable.IsBiocodedFor(primary, pawn)) return null;
+
+                CompBladelinkWeapon blade = primary.TryGetComp<CompBladelinkWeapon>();
                 if (blade != null && blade.Biocoded && blade.CodedPawn == pawn)
                 {
                     return null;
@@ -135,9 +140,12 @@ namespace SadSeal.MegaMod.AutoArm
             {
                 Thing w = weapons[i];
                 if (w == null || !w.Spawned || w.Position.Fogged(map)) continue;
+                if (!(w is ThingWithComps) || !w.HasComp<CompEquippable>()) continue;
+                if (w.def.IsRangedWeapon && pawn.WorkTagIsDisabled(WorkTags.Shooting)) continue;
                 if (ForbidUtility.IsForbidden(w, pawn)) continue;
                 if (w.IsBurning()) continue;
                 if (!ForbidUtility.InAllowedArea(w.Position, pawn)) continue;
+                if (!EquipmentUtility.CanEquip(w, pawn)) continue;
 
                 if (settings.onlyFromStockpile)
                 {
@@ -165,6 +173,7 @@ namespace SadSeal.MegaMod.AutoArm
                 }
 
                 if (candScore < currentScore * minImprovementFactor) continue;
+                if (candScore <= bestAdjustedScore) continue;
 
                 if (!pawn.CanReach(w, PathEndMode.ClosestTouch, Danger.Some)) continue;
                 if (!pawn.CanReserve(w, 1, -1, null, false)) continue;

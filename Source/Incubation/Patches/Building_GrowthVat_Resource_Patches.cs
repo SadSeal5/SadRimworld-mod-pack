@@ -12,9 +12,12 @@ namespace SadSeal.MegaMod.Incubation.Patches
 
         public static void Postfix(ref float __result)
         {
-            if (IncubationModule.Instance.IsEnabled)
+            if (IncubationModule.Instance?.IsEnabled != true) return;
+
+            var settings = IncubationModule.Settings;
+            if (settings != null)
             {
-                __result *= IncubationModule.Settings.nutritionUsageMultiplier;
+                __result *= settings.nutritionUsageMultiplier;
             }
         }
     }
@@ -27,27 +30,19 @@ namespace SadSeal.MegaMod.Incubation.Patches
 
         public static void Postfix(Building_GrowthVat __instance, ref float __result)
         {
-            if (!IncubationModule.Instance.IsEnabled) return;
+            if (IncubationModule.Instance?.IsEnabled != true) return;
+            if (__result <= 0f) return;
 
             var settings = IncubationModule.Settings;
-            if (settings.nutritionUsageMultiplier <= 0.001f)
+            if (settings == null || __instance == null) return;
+
+            bool unpowered = !__instance.PowerOn;
+            bool starving = __instance.NutritionStored <= 0f;
+            bool powerCovered = !unpowered || settings.stasisProtection || settings.powerUsageMultiplier <= 0.001f;
+            bool foodCovered = !starving || settings.stasisProtection || settings.nutritionUsageMultiplier <= 0.001f;
+            if (powerCovered && foodCovered)
             {
                 __result = 0f;
-                return;
-            }
-
-            if (settings.stasisProtection)
-            {
-                bool powerRequired = settings.powerUsageMultiplier > 0.001f;
-                bool unpowered = powerRequired && !__instance.PowerOn;
-                bool foodRequired = settings.nutritionUsageMultiplier > 0.001f;
-                bool starving = foodRequired && (__instance.NutritionStored <= 0f);
-                bool unpoweredOrStarving = unpowered || starving;
-
-                if (unpoweredOrStarving)
-                {
-                    __result = 0f;
-                }
             }
         }
     }

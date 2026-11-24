@@ -22,15 +22,18 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
         public static void AddSleepOption(Vector3 clickPos, Verse.Pawn pawn, List<FloatMenuOption> opts)
         {
             if (opts == null) return;
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (QoLModule.ModSettings?.prioritizeSleep != true) return;
-            if (pawn == null || !pawn.IsColonistPlayerControlled || pawn.Drafted || pawn.Map == null) return;
+            if (pawn == null || !pawn.IsColonistPlayerControlled || pawn.Drafted || pawn.Downed || pawn.Deathresting || pawn.InMentalState || pawn.Map == null) return;
+            if (!FloatMenuMakerMap.ShouldGenerateFloatMenuForPawn(pawn).Accepted) return;
             if (pawn.needs?.rest == null || pawn.needs.rest.CurLevel >= 0.75f) return;
 
             IntVec3 cell = IntVec3.FromVector3(clickPos);
+            if (!cell.InBounds(pawn.Map)) return;
             Building_Bed bed = cell.GetFirstThing<Building_Bed>(pawn.Map);
             if (bed == null) return;
 
-            if (RestUtility.IsValidBedFor(bed, pawn, pawn, false) && pawn.CanReach(bed, PathEndMode.OnCell, Danger.Some))
+            if (!bed.IsForbidden(pawn) && RestUtility.IsValidBedFor(bed, pawn, pawn, false) && pawn.CanReach(bed, PathEndMode.OnCell, Danger.Some) && pawn.CanReserve(bed, bed.SleepingSlotsCount, 0))
             {
                 string label = "MegaMod_QoLPrioritizeRest".Translate(bed.LabelShort);
                 FloatMenuOption option = FloatMenuUtility.DecoratePrioritizedTask(new FloatMenuOption(label, () =>

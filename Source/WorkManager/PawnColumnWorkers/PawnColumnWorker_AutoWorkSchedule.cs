@@ -9,7 +9,8 @@ namespace SadSeal.MegaMod.WorkManager.PawnColumnWorkers
     {
         public override void DoCell(Rect rect, Pawn pawn, PawnTable table)
         {
-            if (pawn == null || pawn.Dead || pawn.timetable == null)
+            if (WorkManagerModule.Instance?.IsEnabled != true) return;
+            if (pawn == null || pawn.Dead || pawn.IsSlaveOfColony || pawn.timetable == null)
             {
                 return;
             }

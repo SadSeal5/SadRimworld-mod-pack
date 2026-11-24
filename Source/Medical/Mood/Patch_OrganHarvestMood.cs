@@ -9,6 +9,7 @@ namespace SadSeal.MegaMod.Medical.Mood
     {
         public static void Postfix(Thought_Memory __instance, ref float __result)
         {
+            if (MedicalModule.Instance?.IsEnabled != true) return;
             if (__result >= 0f) return; // Only soften negative mood penalties
 
             var settings = MedicalModule.ModSettings;
@@ -17,8 +18,11 @@ namespace SadSeal.MegaMod.Medical.Mood
             if (__instance?.def == null) return;
 
             string name = __instance.def.defName;
-            if (name.IndexOf("Organ", StringComparison.OrdinalIgnoreCase) >= 0 ||
-                name.IndexOf("HarvestedOrgan", StringComparison.OrdinalIgnoreCase) >= 0)
+            if (string.IsNullOrEmpty(name)) return;
+
+            if (name.IndexOf("HarvestedOrgan", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                name.IndexOf("OrganHarvested", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                name.IndexOf("MyOrganHarvested", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 __result *= settings.HarvestMoodPenaltyMultiplier;
             }

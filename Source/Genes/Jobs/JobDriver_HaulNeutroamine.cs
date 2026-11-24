@@ -35,8 +35,10 @@ namespace SadSeal.MegaMod.Genes.Jobs
                 if (building == null) return true;
                 CompGeneSynthesizer comp = building.TryGetComp<CompGeneSynthesizer>();
                 if (comp == null || !comp.IsSynthesizing || comp.CurrentOrder == null) return true;
-                if (comp.innerContainer.TotalStackCount >= comp.CurrentOrder.NeutroamineCost) return true;
-                return false;
+                ThingDef resourceDef = job.GetTarget(NeutroamineIndex).Thing?.def ?? pawn.carryTracker?.CarriedThing?.def;
+                bool isArchite = resourceDef != null && resourceDef == CompGeneSynthesizer.ArchiteDef;
+                int needed = isArchite ? comp.ArchiteNeeded : comp.NeutroamineNeeded;
+                return needed <= 0;
             });
 
             yield return Toils_Goto.GotoThing(NeutroamineIndex, PathEndMode.ClosestTouch)
@@ -56,20 +58,21 @@ namespace SadSeal.MegaMod.Genes.Jobs
                     CompGeneSynthesizer comp = building?.TryGetComp<CompGeneSynthesizer>();
                     if (comp != null && comp.CurrentOrder != null)
                     {
-                        int needed = comp.CurrentOrder.NeutroamineCost - comp.innerContainer.TotalStackCount;
+                        bool isArchite = carried.def != null && carried.def == CompGeneSynthesizer.ArchiteDef;
+                        int needed = isArchite ? comp.ArchiteNeeded : comp.NeutroamineNeeded;
                         int transfer = Mathf.Min(carried.stackCount, needed);
                         if (transfer > 0)
                         {
                             pawn.carryTracker.innerContainer.TryTransferToContainer(carried, comp.innerContainer, transfer);
                         }
 
-                        if (comp.innerContainer.TotalStackCount >= comp.CurrentOrder.NeutroamineCost && comp.CurrentOrder.WorkRequired <= 0f)
+                        if (comp.HasAllMaterials && comp.CurrentOrder.WorkRequired <= 0f)
                         {
                             comp.FinishCurrentOrder();
                         }
                     }
 
-                    if (carried.stackCount > 0)
+                    if (pawn.carryTracker.CarriedThing != null && pawn.carryTracker.CarriedThing.stackCount > 0)
                     {
                         pawn.carryTracker.TryDropCarriedThing(pawn.Position, ThingPlaceMode.Near, out _);
                     }

@@ -14,12 +14,21 @@ namespace SadSeal.MegaMod.Genes
         public List<GeneSynthesisOrder> OrderQueue = new List<GeneSynthesisOrder>();
         public ThingOwner innerContainer;
 
+        public static ThingDef NeutroamineDef => GeneThingDefOf.Neutroamine ?? DefDatabase<ThingDef>.GetNamed("Neutroamine", false);
+        public static ThingDef ArchiteDef => GeneThingDefOf.ArchiteCapsule ?? DefDatabase<ThingDef>.GetNamed("ArchiteCapsule", false);
+
         public GeneSynthesisOrder CurrentOrder => OrderQueue != null && OrderQueue.Count > 0 ? OrderQueue[0] : null;
         public bool IsSynthesizing => CurrentOrder != null;
 
         // Compatibility properties for jobs and inspect
         public GeneDef TargetGene => CurrentOrder?.Genes?.FirstOrDefault();
         public int NeutroamineCost => CurrentOrder?.NeutroamineCost ?? 0;
+        public int ArchiteCost => CurrentOrder?.ArchiteCost ?? 0;
+        public int NeutroamineStored => GetStoredCount(NeutroamineDef);
+        public int ArchiteStored => GetStoredCount(ArchiteDef);
+        public int NeutroamineNeeded => CurrentOrder != null ? Mathf.Max(0, CurrentOrder.NeutroamineCost - NeutroamineStored) : 0;
+        public int ArchiteNeeded => CurrentOrder != null ? Mathf.Max(0, CurrentOrder.ArchiteCost - ArchiteStored) : 0;
+        public bool HasAllMaterials => CurrentOrder != null && NeutroamineNeeded == 0 && ArchiteNeeded == 0;
         public float WorkRequired => CurrentOrder?.WorkRequired ?? 0f;
         public float WorkDone
         {
@@ -36,6 +45,25 @@ namespace SadSeal.MegaMod.Genes
         public CompGeneSynthesizer()
         {
             innerContainer = new ThingOwner<Thing>(this);
+        }
+
+        public int GetStoredCount(ThingDef def)
+        {
+            if (def == null || innerContainer == null)
+            {
+                return 0;
+            }
+
+            int total = 0;
+            for (int i = 0; i < innerContainer.Count; i++)
+            {
+                Thing item = innerContainer[i];
+                if (item?.def == def)
+                {
+                    total += item.stackCount;
+                }
+            }
+            return total;
         }
 
         public ThingOwner GetDirectlyHeldThings() => innerContainer;
@@ -67,8 +95,8 @@ namespace SadSeal.MegaMod.Genes
             }
             OrderQueue.Add(order);
 
-            // If this is the only order and it requires no work and no neutroamine (or already satisfied), process immediately
-            if (OrderQueue.Count == 1 && order.WorkRequired <= 0f && (innerContainer?.TotalStackCount ?? 0) >= order.NeutroamineCost)
+            // If this is the only order and it requires no work and already has all required materials, process immediately
+            if (OrderQueue.Count == 1 && order.WorkRequired <= 0f && HasAllMaterials)
             {
                 FinishCurrentOrder();
             }
@@ -163,21 +191,31 @@ namespace SadSeal.MegaMod.Genes
             OrderQueue?.Clear();
         }
 
-        public void FinishCurrentOrder()
+        private void ConsumeFromContainer(ThingDef def, int amount)
         {
-            if (CurrentOrder == null)
+            if (def == null || innerContainer == null || amount <= 0)
             {
                 return;
             }
 
-            GeneSynthesisOrder finished = CurrentOrder;
-            Map map = parent.Map;
-            IntVec3 pos = parent.Position;
+            int remaining = amount;
+            for (int i = innerContainer.Count - 1; i >= 0 && remaining > 0; i--)
+            {
+                Thing item = innerContainer[i];
+                if (item?.def != def) continue;
 
-            if (finished.Genes != null && finished.Genes.Count > 0)
+                int count = Mathf.Min(item.stackCount, remaining);
+                item.SplitOff(count).Destroy();
+                remaining -= count;
+            }
+        }
+
+        private void CompleteAndConsumeOrder(GeneSynthesisOrder order, IntVec3 pos, Map map)
+        {
+            if (order.Genes != null && order.Genes.Count > 0)
             {
                 Genepack pack = (Genepack)ThingMaker.MakeThing(ThingDefOf.Genepack);
-                pack.Initialize(finished.Genes);
+                pack.Initialize(order.Genes);
                 if (map != null && parent.Spawned)
                 {
                     GenPlace.TryPlaceThing(pack, pos, map, ThingPlaceMode.Near);
@@ -185,72 +223,41 @@ namespace SadSeal.MegaMod.Genes
 
                 SoundDefOf.GeneAssembler_Complete?.PlayOneShot(SoundInfo.InMap(parent));
 
-                if (finished.IsCombinedPack && finished.SourceXenotype != null)
+                if (order.IsCombinedPack && order.SourceXenotype != null)
                 {
-                    Messages.Message("GeneSynthesis_XenotypeFinished".Translate(finished.SourceXenotype.LabelCap), pack, MessageTypeDefOf.PositiveEvent);
+                    Messages.Message("GeneSynthesis_XenotypeFinished".Translate(order.SourceXenotype.LabelCap), pack, MessageTypeDefOf.PositiveEvent);
                 }
                 else
                 {
-                    Messages.Message("GeneSynthesis_Finished".Translate(finished.Label), pack, MessageTypeDefOf.PositiveEvent);
+                    Messages.Message("GeneSynthesis_Finished".Translate(order.Label), pack, MessageTypeDefOf.PositiveEvent);
                 }
             }
 
-            // Consume Neutroamine
-            int toConsume = finished.NeutroamineCost;
-            if (innerContainer != null && toConsume > 0)
+            ConsumeFromContainer(NeutroamineDef, order.NeutroamineCost);
+            ConsumeFromContainer(ArchiteDef, order.ArchiteCost);
+        }
+
+        public void FinishCurrentOrder()
+        {
+            if (CurrentOrder == null || parent == null || !parent.Spawned || parent.Map == null)
             {
-                int remaining = toConsume;
-                for (int i = innerContainer.Count - 1; i >= 0 && remaining > 0; i--)
-                {
-                    Thing item = innerContainer[i];
-                    int count = Mathf.Min(item.stackCount, remaining);
-                    item.SplitOff(count).Destroy();
-                    remaining -= count;
-                }
+                return;
             }
+
+            Map map = parent.Map;
+            IntVec3 pos = parent.Position;
+
+            CompleteAndConsumeOrder(CurrentOrder, pos, map);
 
             if (OrderQueue != null && OrderQueue.Count > 0)
             {
                 OrderQueue.RemoveAt(0);
             }
 
-            // If the next order is instant craft and has enough neutroamine, finish it too
-            while (CurrentOrder != null && CurrentOrder.WorkRequired <= 0f && (innerContainer?.TotalStackCount ?? 0) >= CurrentOrder.NeutroamineCost)
+            // If the next order is instant craft and has all required materials, finish it too
+            while (CurrentOrder != null && CurrentOrder.WorkRequired <= 0f && HasAllMaterials)
             {
-                GeneSynthesisOrder nextOrder = CurrentOrder;
-                if (nextOrder.Genes != null && nextOrder.Genes.Count > 0)
-                {
-                    Genepack pack = (Genepack)ThingMaker.MakeThing(ThingDefOf.Genepack);
-                    pack.Initialize(nextOrder.Genes);
-                    if (map != null && parent.Spawned)
-                    {
-                        GenPlace.TryPlaceThing(pack, pos, map, ThingPlaceMode.Near);
-                    }
-
-                    SoundDefOf.GeneAssembler_Complete?.PlayOneShot(SoundInfo.InMap(parent));
-
-                    if (nextOrder.IsCombinedPack && nextOrder.SourceXenotype != null)
-                    {
-                        Messages.Message("GeneSynthesis_XenotypeFinished".Translate(nextOrder.SourceXenotype.LabelCap), pack, MessageTypeDefOf.PositiveEvent);
-                    }
-                    else
-                    {
-                        Messages.Message("GeneSynthesis_Finished".Translate(nextOrder.Label), pack, MessageTypeDefOf.PositiveEvent);
-                    }
-                }
-
-                int nextConsume = nextOrder.NeutroamineCost;
-                if (innerContainer != null && nextConsume > 0)
-                {
-                    int remaining = nextConsume;
-                    for (int i = innerContainer.Count - 1; i >= 0 && remaining > 0; i--)
-                    {
-                        Thing item = innerContainer[i];
-                        int count = Mathf.Min(item.stackCount, remaining);
-                        item.SplitOff(count).Destroy();
-                        remaining -= count;
-                    }
-                }
+                CompleteAndConsumeOrder(CurrentOrder, pos, map);
 
                 if (OrderQueue != null && OrderQueue.Count > 0)
                 {
@@ -334,7 +341,12 @@ namespace SadSeal.MegaMod.Genes
                 sb.AppendLine("GeneSynthesis_QueueProgress".Translate(1, OrderQueue.Count));
             }
 
-            sb.AppendLine("GeneSynthesis_NeutroamineProgress".Translate(innerContainer?.TotalStackCount ?? 0, CurrentOrder.NeutroamineCost));
+            sb.AppendLine("GeneSynthesis_NeutroamineProgress".Translate(NeutroamineStored, CurrentOrder.NeutroamineCost));
+            if (CurrentOrder.ArchiteCost > 0)
+            {
+                string architeLabel = ArchiteDef != null ? ArchiteDef.LabelCap.ToString() : "Archite Capsule";
+                sb.AppendLine($"{architeLabel}: {ArchiteStored} / {CurrentOrder.ArchiteCost}");
+            }
             float pct = CurrentOrder.WorkRequired > 0f ? (CurrentOrder.WorkDone / CurrentOrder.WorkRequired) : 1f;
             sb.Append("GeneSynthesis_WorkProgress".Translate(pct.ToStringPercent()));
 
@@ -393,7 +405,7 @@ namespace SadSeal.MegaMod.Genes
                 {
                     OrderQueue = new List<GeneSynthesisOrder>();
                 }
-                OrderQueue.RemoveAll(o => o == null);
+                OrderQueue.RemoveAll(o => o == null || o.Genes == null || o.Genes.Count == 0);
             }
         }
     }

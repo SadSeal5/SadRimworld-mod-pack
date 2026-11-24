@@ -1,58 +1,29 @@
-using System;
 using HarmonyLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using Verse.Sound;
 
 namespace SadSeal.MegaMod.TimeFlow.Patches
 {
     [HarmonyPatch(typeof(TimeControls), nameof(TimeControls.DoTimeControlsGUI))]
     public static class Patch_TimeControls
     {
-        public static void Prefix(ref bool __state)
-        {
-            if (TimeFlowModule.Instance?.IsEnabled != true)
-            {
-                __state = false;
-                return;
-            }
-
-            var settings = TimeFlowModule.ModSettings;
-            if (settings != null && settings.UnlockSuperSpeed && !Prefs.DevMode)
-            {
-                Prefs.DevMode = true;
-                __state = true;
-            }
-            else
-            {
-                __state = false;
-            }
-        }
-
         public static void Postfix()
         {
-            if (TimeFlowModule.Instance?.IsEnabled != true) return;
+            if (TimeFlowModule.Instance?.IsEnabled != true || Find.TickManager == null) return;
 
             var settings = TimeFlowModule.ModSettings;
-            if (settings != null && settings.UnlockSuperSpeed)
+            if (settings != null
+                && settings.UnlockSuperSpeed
+                && Event.current != null
+                && KeyBindingDefOf.TimeSpeed_Ultrafast.KeyDownEvent
+                && (Find.WindowStack == null || (!Find.WindowStack.WindowsForcePause && !Find.WindowStack.WindowsPreventCameraMotion)))
             {
-                // Only trigger hotkey when not typing in text fields or modal dialogs
-                if (KeyBindingDefOf.TimeSpeed_Ultrafast.KeyDownEvent &&
-                    (Find.WindowStack == null || !Find.WindowStack.WindowsPreventCameraMotion))
-                {
-                    Find.TickManager.CurTimeSpeed = TimeSpeed.Ultrafast;
-                    Event.current.Use();
-                }
+                Find.TickManager.CurTimeSpeed = TimeSpeed.Ultrafast;
+                SoundDefOf.Clock_Superfast.PlayOneShotOnCamera();
+                Event.current.Use();
             }
-        }
-
-        public static Exception Finalizer(Exception __exception, bool __state)
-        {
-            if (__state)
-            {
-                Prefs.DevMode = false;
-            }
-            return __exception;
         }
     }
 }

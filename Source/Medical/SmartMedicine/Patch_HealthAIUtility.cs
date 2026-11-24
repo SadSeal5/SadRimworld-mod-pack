@@ -11,13 +11,18 @@ namespace SadSeal.MegaMod.Medical.SmartMedicine
     {
         public static void Postfix(Pawn healer, Pawn patient, bool onlyUseInventory, ref Thing __result)
         {
+            if (MedicalModule.Instance?.IsEnabled != true) return;
             if (patient == null || patient.health == null) return;
 
             var settings = MedicalModule.ModSettings;
             if (settings == null) return;
 
+            MedicalCareCategory care = patient.playerSettings?.medCare ?? MedicalCareCategory.NoMeds;
+            if ((int)care <= (int)MedicalCareCategory.NoMeds) return;
+            if (Medicine.GetMedicineCountToFullyHeal(patient) <= 0) return;
+
             // 1. Field Medicine: If healer has no medicine, check patient's inventory
-            if (settings.EnableFieldMedicine && settings.FieldMedicineUsePatientInventory)
+            if (!onlyUseInventory && settings.EnableFieldMedicine && settings.FieldMedicineUsePatientInventory)
             {
                 if (__result == null && patient.inventory?.innerContainer != null)
                 {
@@ -42,7 +47,7 @@ namespace SadSeal.MegaMod.Medical.SmartMedicine
                     if (shouldDowngrade)
                     {
                         // Trivial scratch/bruise or minor ailment: do not waste glitterworld medicine!
-                        Thing lowerTier = FindLowerTierMedicine(healer, patient, onlyUseInventory);
+                        Thing lowerTier = FindLowerTierMedicine(healer, patient, onlyUseInventory, settings);
                         if (lowerTier != null)
                         {
                             __result = lowerTier;
@@ -54,21 +59,44 @@ namespace SadSeal.MegaMod.Medical.SmartMedicine
 
         private static Thing FindBestMedicineInContainer(ThingOwner container, Pawn patient)
         {
-            MedicalCareCategory care = patient.playerSettings?.medCare ?? MedicalCareCategory.Best;
+            MedicalCareCategory care = patient.playerSettings?.medCare ?? MedicalCareCategory.NoMeds;
+            return FindHighestPotencyMedicineInContainer(container, care, lowerTierOnly: false, ultratechPotency: 0f);
+        }
+
+        private static bool IsLowerTierMedicine(Thing item, MedicalCareCategory care, float ultratechPotency)
+        {
+            return item?.def != null &&
+                   item.def.IsMedicine &&
+                   item.def != ThingDefOf.MedicineUltratech &&
+                   item.GetStatValue(StatDefOf.MedicalPotency) < ultratechPotency &&
+                   MedicalCareUtility.AllowsMedicine(care, item.def);
+        }
+
+        private static Thing FindHighestPotencyMedicineInContainer(ThingOwner container, MedicalCareCategory care, bool lowerTierOnly, float ultratechPotency)
+        {
+            if (container == null) return null;
+
             Thing best = null;
             float bestPotency = -1f;
 
             for (int i = 0; i < container.Count; i++)
             {
                 Thing item = container[i];
-                if (item?.def != null && item.def.IsMedicine && MedicalCareUtility.AllowsMedicine(care, item.def))
+                if (item?.def == null || !item.def.IsMedicine || !MedicalCareUtility.AllowsMedicine(care, item.def))
                 {
-                    float potency = item.GetStatValue(StatDefOf.MedicalPotency);
-                    if (potency > bestPotency)
-                    {
-                        bestPotency = potency;
-                        best = item;
-                    }
+                    continue;
+                }
+
+                float potency = item.GetStatValue(StatDefOf.MedicalPotency);
+                if (lowerTierOnly && (item.def == ThingDefOf.MedicineUltratech || potency >= ultratechPotency))
+                {
+                    continue;
+                }
+
+                if (potency > bestPotency)
+                {
+                    bestPotency = potency;
+                    best = item;
                 }
             }
 
@@ -100,35 +128,27 @@ namespace SadSeal.MegaMod.Medical.SmartMedicine
             return false;
         }
 
-        private static Thing FindLowerTierMedicine(Pawn healer, Pawn patient, bool onlyUseInventory)
+        private static Thing FindLowerTierMedicine(Pawn healer, Pawn patient, bool onlyUseInventory, MedicalSettings settings)
         {
-            MedicalCareCategory care = patient?.playerSettings?.medCare ?? MedicalCareCategory.Best;
+            MedicalCareCategory care = patient?.playerSettings?.medCare ?? MedicalCareCategory.NoMeds;
+            float ultratechPotency = ThingDefOf.MedicineUltratech != null
+                ? ThingDefOf.MedicineUltratech.GetStatValueAbstract(StatDefOf.MedicalPotency)
+                : 1.6f;
 
-            // Check healer inventory for industrial medicine first, then herbal
-            if (healer?.inventory?.innerContainer != null)
+            // Check healer inventory for highest-potency lower-tier medicine
+            Thing healerMed = FindHighestPotencyMedicineInContainer(healer?.inventory?.innerContainer, care, lowerTierOnly: true, ultratechPotency);
+            if (healerMed != null)
             {
-                for (int i = 0; i < healer.inventory.innerContainer.Count; i++)
-                {
-                    Thing item = healer.inventory.innerContainer[i];
-                    if ((item.def == ThingDefOf.MedicineIndustrial || item.def == ThingDefOf.MedicineHerbal) &&
-                        MedicalCareUtility.AllowsMedicine(care, item.def))
-                    {
-                        return item;
-                    }
-                }
+                return healerMed;
             }
 
-            // Check patient inventory
-            if (patient?.inventory?.innerContainer != null)
+            // Check patient inventory only when allowed and Field Medicine patient inventory is enabled
+            if (!onlyUseInventory && settings.EnableFieldMedicine && settings.FieldMedicineUsePatientInventory)
             {
-                for (int i = 0; i < patient.inventory.innerContainer.Count; i++)
+                Thing patientMed = FindHighestPotencyMedicineInContainer(patient?.inventory?.innerContainer, care, lowerTierOnly: true, ultratechPotency);
+                if (patientMed != null)
                 {
-                    Thing item = patient.inventory.innerContainer[i];
-                    if ((item.def == ThingDefOf.MedicineIndustrial || item.def == ThingDefOf.MedicineHerbal) &&
-                        MedicalCareUtility.AllowsMedicine(care, item.def))
-                    {
-                        return item;
-                    }
+                    return patientMed;
                 }
             }
 
@@ -143,8 +163,8 @@ namespace SadSeal.MegaMod.Medical.SmartMedicine
                     Verse.AI.PathEndMode.ClosestTouch,
                     traverseParams,
                     30f,
-                    t => (t.def == ThingDefOf.MedicineIndustrial || t.def == ThingDefOf.MedicineHerbal) &&
-                         !t.IsForbidden(healer) && healer.CanReserve(t) && MedicalCareUtility.AllowsMedicine(care, t.def)
+                    t => IsLowerTierMedicine(t, care, ultratechPotency) &&
+                         !t.IsForbidden(healer) && healer.CanReserve(t, 10, 1)
                 );
                 if (found != null)
                 {

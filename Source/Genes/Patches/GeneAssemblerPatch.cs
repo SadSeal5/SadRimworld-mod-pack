@@ -9,7 +9,7 @@ namespace SadSeal.MegaMod.Genes.Patches
     public static class GeneAssemblerPatch
     {
         [HarmonyPrepare]
-        public static bool Prepare() => ModLister.BiotechInstalled;
+        public static bool Prepare() => ModsConfig.BiotechActive;
 
         [HarmonyPostfix]
         public static void Postfix(Building_GeneAssembler __instance)
@@ -19,10 +19,17 @@ namespace SadSeal.MegaMod.Genes.Patches
 
         public static void EnsureCompOnInstance(Building_GeneAssembler instance)
         {
-            if (instance == null) return;
+            if (instance == null || GenesModule.Instance?.IsEnabled != true || !ModsConfig.BiotechActive) return;
             EnsureDefHasComp(instance.def);
 
-            if (instance.GetComp<CompGeneSynthesizer>() == null)
+            if (instance.GetComp<CompGeneSynthesizer>() != null) return;
+
+            if (instance.AllComps.Count == 0 && instance.def != null)
+            {
+                instance.InitializeComps();
+            }
+
+            if (instance.GetComp<CompGeneSynthesizer>() == null && instance.AllComps.Count > 0)
             {
                 CompGeneSynthesizer comp = new CompGeneSynthesizer
                 {
@@ -64,14 +71,15 @@ namespace SadSeal.MegaMod.Genes.Patches
     public static class GeneAssemblerExposePatch
     {
         [HarmonyPrepare]
-        public static bool Prepare() => ModLister.BiotechInstalled;
+        public static bool Prepare() => ModsConfig.BiotechActive;
 
-        [HarmonyPostfix]
-        public static void Postfix(Building_GeneAssembler __instance)
+        [HarmonyPrefix]
+        public static void Prefix(Building_GeneAssembler __instance)
         {
-            if (Scribe.mode == LoadSaveMode.LoadingVars || Scribe.mode == LoadSaveMode.PostLoadInit)
+            if (GenesModule.Instance?.IsEnabled != true || !ModsConfig.BiotechActive) return;
+            if (__instance?.def != null && Scribe.mode == LoadSaveMode.LoadingVars)
             {
-                GeneAssemblerPatch.EnsureCompOnInstance(__instance);
+                GeneAssemblerPatch.EnsureDefHasComp(__instance.def);
             }
         }
     }
@@ -80,7 +88,7 @@ namespace SadSeal.MegaMod.Genes.Patches
     public static class GeneAssemblerGetGizmosPatch
     {
         [HarmonyPrepare]
-        public static bool Prepare() => ModLister.BiotechInstalled;
+        public static bool Prepare() => ModsConfig.BiotechActive;
 
         [HarmonyPostfix]
         public static IEnumerable<Gizmo> Postfix(IEnumerable<Gizmo> __result, Building_GeneAssembler __instance)
@@ -99,6 +107,7 @@ namespace SadSeal.MegaMod.Genes.Patches
                 }
             }
 
+            if (GenesModule.Instance?.IsEnabled != true || !ModsConfig.BiotechActive) yield break;
             if (__instance == null || !__instance.Spawned) yield break;
 
             GeneAssemblerPatch.EnsureCompOnInstance(__instance);
@@ -118,7 +127,7 @@ namespace SadSeal.MegaMod.Genes.Patches
     public static class GeneAssemblerInspectStringPatch
     {
         [HarmonyPrepare]
-        public static bool Prepare() => ModLister.BiotechInstalled;
+        public static bool Prepare() => ModsConfig.BiotechActive;
 
         [HarmonyPostfix]
         public static string Postfix(string __result, Building_GeneAssembler __instance)

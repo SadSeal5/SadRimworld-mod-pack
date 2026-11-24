@@ -54,6 +54,7 @@ namespace SadSeal.MegaMod.WorkManager.Core
 
         private bool isDirty = true;
         public void MarkDirty() => isDirty = true;
+        public void ClearDirty() => isDirty = false;
 
         public WorkPriorityManager(Map map) : base(map)
         {
@@ -79,7 +80,7 @@ namespace SadSeal.MegaMod.WorkManager.Core
             int interval = Mathf.Clamp(settings.PriorityUpdateIntervalTicks, 250, 2500);
             if (isDirty || (Find.TickManager.TicksGame + map.Index * 37) % interval == 0)
             {
-                isDirty = false;
+                ClearDirty();
                 UpdateWorkPriorities();
             }
         }
@@ -91,6 +92,8 @@ namespace SadSeal.MegaMod.WorkManager.Core
 
             var settings = WorkManagerModule.ModSettings;
             if (settings == null) return;
+
+            ClearDirty();
 
             // Manual priorities (1-4) must be active for assigned priorities to
             // have any effect. Never flip this core game setting silently unless
@@ -111,7 +114,7 @@ namespace SadSeal.MegaMod.WorkManager.Core
             for (int i = 0; i < freeColonists.Count; i++)
             {
                 var pawn = freeColonists[i];
-                if (pawn == null || pawn.Dead || pawn.Downed || pawn.InMentalState) continue;
+                if (pawn == null || pawn.Dead || pawn.Downed || pawn.InMentalState || !pawn.Spawned || pawn.Suspended || pawn.IsQuestLodger()) continue;
                 if (pawn.workSettings == null || !pawn.workSettings.EverWork) continue;
                 if (comp != null && !comp.IsPawnPriorityEnabled(pawn)) continue;
 
@@ -218,7 +221,7 @@ namespace SadSeal.MegaMod.WorkManager.Core
             {
                 var pawn = capablePawns[i];
                 float score = PawnSuitabilityScorer.CalculateScore(pawn, workType);
-                if (score > 0f)
+                if (score > -9000f)
                 {
                     candidateScores.Add(new PawnScoreEntry { Pawn = pawn, Score = score });
                 }
@@ -234,13 +237,13 @@ namespace SadSeal.MegaMod.WorkManager.Core
             for (int i = 0; i < candidateScores.Count; i++)
             {
                 var entry = candidateScores[i];
-                if (assigned < targetCount)
+                if (entry.Score > 0f && assigned < targetCount)
                 {
                     int prio = (assigned == 0) ? primaryPriority : Math.Min(primaryPriority + 1, 3);
                     entry.Pawn.workSettings.SetPriority(workType, prio);
                     assigned++;
                 }
-                else if (assigned < targetCount + 2 && entry.Score >= 40f)
+                else if (entry.Score >= 40f && assigned < targetCount + 2)
                 {
                     entry.Pawn.workSettings.SetPriority(workType, 3);
                     assigned++;
@@ -248,6 +251,15 @@ namespace SadSeal.MegaMod.WorkManager.Core
                 else
                 {
                     entry.Pawn.workSettings.SetPriority(workType, 0);
+                }
+            }
+
+            if (assigned == 0 && candidateScores.Count > 0)
+            {
+                int fallbackCount = Math.Min(targetCount, candidateScores.Count);
+                for (int i = 0; i < fallbackCount; i++)
+                {
+                    candidateScores[i].Pawn.workSettings.SetPriority(workType, 3);
                 }
             }
         }
@@ -259,7 +271,7 @@ namespace SadSeal.MegaMod.WorkManager.Core
             {
                 var pawn = capablePawns[i];
                 float score = PawnSuitabilityScorer.CalculateScore(pawn, workType);
-                if (score > 0f)
+                if (score > -9000f)
                 {
                     candidateScores.Add(new PawnScoreEntry { Pawn = pawn, Score = score });
                 }
@@ -273,14 +285,39 @@ namespace SadSeal.MegaMod.WorkManager.Core
 
             candidateScores.Sort(ScoreComparison);
 
-            int count = candidateScores.Count;
-            int topTierCount = Math.Max(1, count / 3);
-            int midTierCount = Math.Max(1, count * 2 / 3);
+            int posCount = 0;
+            for (int i = 0; i < candidateScores.Count; i++)
+            {
+                if (candidateScores[i].Score > 0f)
+                {
+                    posCount++;
+                }
+                else
+                {
+                    break;
+                }
+            }
 
-            for (int i = 0; i < count; i++)
+            if (posCount == 0)
+            {
+                for (int i = 0; i < candidateScores.Count; i++)
+                {
+                    candidateScores[i].Pawn.workSettings.SetPriority(workType, 4);
+                }
+                return;
+            }
+
+            int topTierCount = Math.Max(1, posCount / 3);
+            int midTierCount = Math.Max(1, posCount * 2 / 3);
+
+            for (int i = 0; i < candidateScores.Count; i++)
             {
                 var entry = candidateScores[i];
-                if (i < topTierCount)
+                if (entry.Score <= 0f)
+                {
+                    entry.Pawn.workSettings.SetPriority(workType, 0);
+                }
+                else if (i < topTierCount)
                 {
                     entry.Pawn.workSettings.SetPriority(workType, 2);
                 }
@@ -288,16 +325,13 @@ namespace SadSeal.MegaMod.WorkManager.Core
                 {
                     entry.Pawn.workSettings.SetPriority(workType, 3);
                 }
+                else if (workType.relevantSkills != null && workType.relevantSkills.Count > 0 && entry.Score < 25f)
+                {
+                    entry.Pawn.workSettings.SetPriority(workType, 0);
+                }
                 else
                 {
-                    if (workType.relevantSkills != null && workType.relevantSkills.Count > 0 && entry.Score < 25f)
-                    {
-                        entry.Pawn.workSettings.SetPriority(workType, 0);
-                    }
-                    else
-                    {
-                        entry.Pawn.workSettings.SetPriority(workType, 4);
-                    }
+                    entry.Pawn.workSettings.SetPriority(workType, 4);
                 }
             }
         }

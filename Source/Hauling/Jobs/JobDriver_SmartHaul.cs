@@ -12,16 +12,35 @@ namespace SadSeal.MegaMod.Hauling.Jobs
         private const TargetIndex StoreCellInd = TargetIndex.B;
 
         private List<Thing> haulCandidates = new List<Thing>();
+        private List<Thing> hauledCargo = new List<Thing>();
         private int candidateIndex = 0;
 
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Collections.Look(ref haulCandidates, "haulCandidates", LookMode.Reference);
-            Scribe_Values.Look(ref candidateIndex, "candidateIndex", 0);
-            if (haulCandidates == null)
+            if (Scribe.mode == LoadSaveMode.Saving && pawn != null)
             {
-                haulCandidates = new List<Thing>();
+                hauledCargo = HauledCargoTracker.GetHauledThings(pawn);
+                hauledCargo.RemoveAll(t => t == null || t.Destroyed);
+            }
+
+            Scribe_Collections.Look(ref haulCandidates, "haulCandidates", LookMode.Reference);
+            Scribe_Collections.Look(ref hauledCargo, "hauledCargo", LookMode.Reference);
+            Scribe_Values.Look(ref candidateIndex, "candidateIndex", 0);
+
+            haulCandidates ??= new List<Thing>();
+            hauledCargo ??= new List<Thing>();
+
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                hauledCargo.RemoveAll(t => t == null || t.Destroyed);
+                if (pawn != null)
+                {
+                    for (int i = 0; i < hauledCargo.Count; i++)
+                    {
+                        HauledCargoTracker.Register(pawn, hauledCargo[i]);
+                    }
+                }
             }
         }
 
@@ -34,6 +53,7 @@ namespace SadSeal.MegaMod.Hauling.Jobs
         public virtual void Notify_PawnJobEnded()
         {
             HauledCargoTracker.DropAllHauled(pawn);
+            hauledCargo = HauledCargoTracker.GetHauledThings(pawn);
         }
 
         public override string GetReport()
@@ -109,8 +129,8 @@ namespace SadSeal.MegaMod.Hauling.Jobs
 
             findNextCandidate.initAction = () =>
             {
-                bool smartHaulEnabled = HaulModule.ModSettings?.EnableSmartHaul ?? true;
-                if (!smartHaulEnabled)
+                bool smartHaulEnabled = HaulModule.Instance?.IsEnabled == true && (HaulModule.ModSettings?.EnableSmartHaul ?? true);
+                if (!smartHaulEnabled || pawn.inventory?.innerContainer == null)
                 {
                     pawn.jobs.curDriver.JumpToToil(gotoDestination);
                     return;
@@ -166,6 +186,12 @@ namespace SadSeal.MegaMod.Hauling.Jobs
 
             pickupCandidate.initAction = () =>
             {
+                if (pawn.inventory?.innerContainer == null)
+                {
+                    pawn.jobs.curDriver.JumpToToil(gotoDestination);
+                    return;
+                }
+
                 Thing candidate = job.GetTarget(HaulableInd).Thing;
                 if (candidate == null || !candidate.Spawned || candidate.Destroyed || candidate.IsForbidden(pawn))
                 {
@@ -173,16 +199,28 @@ namespace SadSeal.MegaMod.Hauling.Jobs
                     return;
                 }
 
-                int maxPickable = MassUtility.CountToPickUpUntilOverEncumbered(pawn, candidate);
+                float massLimitPercent = HaulModule.ModSettings?.MassLimitPercent ?? 0.95f;
+                int maxPickable = HaulHelper.CountToPickUpWithinMassLimit(pawn, candidate, massLimitPercent);
                 int countToTake = Mathf.Min(candidate.stackCount, maxPickable);
 
                 if (countToTake <= 0)
                 {
+                    if (pawn.Map?.reservationManager?.ReservedBy(candidate, pawn, job) == true)
+                    {
+                        pawn.Map.reservationManager.Release(candidate, pawn, job);
+                    }
                     pawn.jobs.curDriver.JumpToToil(gotoDestination);
                     return;
                 }
 
                 Thing taken = candidate.SplitOff(countToTake);
+                if (candidate != taken && candidate.Spawned && !candidate.Destroyed)
+                {
+                    if (pawn.Map?.reservationManager?.ReservedBy(candidate, pawn, job) == true)
+                    {
+                        pawn.Map.reservationManager.Release(candidate, pawn, job);
+                    }
+                }
 
                 bool hasPersonalStack = false;
                 Thing existingHauledStack = null;
@@ -205,13 +243,13 @@ namespace SadSeal.MegaMod.Hauling.Jobs
                 bool added = pawn.inventory.innerContainer.TryAdd(taken, !hasPersonalStack);
                 if (added)
                 {
-                    if (existingHauledStack != null && !taken.Spawned && !pawn.inventory.innerContainer.Contains(taken))
+                    Thing registeredItem = (existingHauledStack != null && !taken.Spawned && !pawn.inventory.innerContainer.Contains(taken))
+                        ? existingHauledStack
+                        : taken;
+                    HauledCargoTracker.Register(pawn, registeredItem);
+                    if (!hauledCargo.Contains(registeredItem))
                     {
-                        HauledCargoTracker.Register(pawn, existingHauledStack);
-                    }
-                    else
-                    {
-                        HauledCargoTracker.Register(pawn, taken);
+                        hauledCargo.Add(registeredItem);
                     }
                 }
                 else
@@ -243,10 +281,23 @@ namespace SadSeal.MegaMod.Hauling.Jobs
             Toil unloadToil = ToilMaker.MakeToil("BatchUnloadHauled");
             unloadToil.initAction = () =>
             {
+                if (pawn.inventory?.innerContainer == null)
+                {
+                    HauledCargoTracker.Clear(pawn);
+                    hauledCargo.Clear();
+                    return;
+                }
+
+                if (pawn.Map == null)
+                {
+                    return;
+                }
+
                 List<Thing> hauledItems = HauledCargoTracker.GetHauledThings(pawn);
                 if (hauledItems == null || hauledItems.Count == 0)
                 {
                     HauledCargoTracker.Clear(pawn);
+                    hauledCargo.Clear();
                     return;
                 }
 
@@ -259,10 +310,13 @@ namespace SadSeal.MegaMod.Hauling.Jobs
                     if (item == null || item.Destroyed || !pawn.inventory.innerContainer.Contains(item))
                     {
                         HauledCargoTracker.Unregister(pawn, item);
+                        hauledCargo.Remove(item);
                         continue;
                     }
 
                     bool placed = false;
+                    bool placedInStorage = false;
+                    Thing dropped = null;
 
                     // 1. Try placing into cells of primary destination SlotGroup (shelves, stockpiles)
                     if (primarySlotGroup != null && primarySlotGroup.parent != null && primarySlotGroup.parent.Accepts(item))
@@ -271,7 +325,11 @@ namespace SadSeal.MegaMod.Hauling.Jobs
                         for (int cIdx = 0; cIdx < cells.Count; cIdx++)
                         {
                             IntVec3 targetCell = cells[cIdx];
-                            if (!targetCell.InBounds(pawn.Map)) continue;
+                            if (!targetCell.InBounds(pawn.Map) ||
+                                (!targetCell.AdjacentTo8WayOrInside(pawn.Position) && targetCell.DistanceToSquared(primaryStoreCell) > 144))
+                            {
+                                continue;
+                            }
 
                             int maxAllowed = GridsUtility.GetMaxItemsAllowedInCell(targetCell, pawn.Map);
                             List<Thing> thingsInCell = targetCell.GetThingList(pawn.Map);
@@ -284,7 +342,7 @@ namespace SadSeal.MegaMod.Hauling.Jobs
                                 if (th.def.category == ThingCategory.Item)
                                 {
                                     currentItemCount++;
-                                    if (th.CanStackWith(item) && th.stackCount < th.def.stackLimit)
+                                    if (th.CanStackWith(item) && th.stackCount + item.stackCount <= th.def.stackLimit)
                                     {
                                         canStack = true;
                                     }
@@ -293,9 +351,10 @@ namespace SadSeal.MegaMod.Hauling.Jobs
 
                             if (canStack || currentItemCount < maxAllowed)
                             {
-                                if (pawn.inventory.innerContainer.TryDrop(item, targetCell, pawn.Map, ThingPlaceMode.Direct, out Thing dropped))
+                                if (pawn.inventory.innerContainer.TryDrop(item, targetCell, pawn.Map, ThingPlaceMode.Direct, out dropped))
                                 {
                                     placed = true;
+                                    placedInStorage = true;
                                     if (primarySlotGroup.parent is Building_Storage bStorage)
                                     {
                                         bStorage.Notify_ReceivedThing(dropped ?? item);
@@ -313,9 +372,10 @@ namespace SadSeal.MegaMod.Hauling.Jobs
                         {
                             if (altCell.AdjacentTo8WayOrInside(pawn.Position))
                             {
-                                if (pawn.inventory.innerContainer.TryDrop(item, altCell, pawn.Map, ThingPlaceMode.Direct, out Thing dropped))
+                                if (pawn.inventory.innerContainer.TryDrop(item, altCell, pawn.Map, ThingPlaceMode.Direct, out dropped))
                                 {
                                     placed = true;
+                                    placedInStorage = true;
                                     SlotGroup altSlot = altCell.GetSlotGroup(pawn.Map);
                                     if (altSlot?.parent is Building_Storage altStorage)
                                     {
@@ -335,20 +395,23 @@ namespace SadSeal.MegaMod.Hauling.Jobs
                         }
                     }
 
-                    if (placed)
+                    if (placedInStorage)
                     {
-                        DesignationDef urgentDef = DefDatabase<DesignationDef>.GetNamedSilentFail("Sad_Designation_HaulUrgently");
+                        DesignationDef urgentDef = DefDatabase<DesignationDef>.GetNamedSilentFail("SadHaul_HaulUrgently");
                         if (urgentDef != null && pawn.Map?.designationManager != null)
                         {
-                            Designation des = pawn.Map.designationManager.DesignationOn(item, urgentDef);
+                            Thing targetDes = dropped ?? item;
+                            Designation des = pawn.Map.designationManager.DesignationOn(targetDes, urgentDef);
                             if (des != null) pawn.Map.designationManager.RemoveDesignation(des);
                         }
                     }
 
                     HauledCargoTracker.Unregister(pawn, item);
+                    hauledCargo.Remove(item);
                 }
 
                 HauledCargoTracker.Clear(pawn);
+                hauledCargo.Clear();
             };
 
             return unloadToil;

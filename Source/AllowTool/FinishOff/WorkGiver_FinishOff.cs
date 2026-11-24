@@ -30,9 +30,9 @@ namespace SadSeal.MegaMod.AllowTool.FinishOff
                 Designation des = designations[i];
                 if (des.target.HasThing && des.target.Thing is Pawn victim)
                 {
-                    if (victim.Dead || !victim.Downed || !victim.Spawned)
+                    if (!Designator_FinishOff.CanFinishOffPawn(victim))
                     {
-                        // Stale designation: victim died or got back up. Clean it up to save TPS!
+                        // Stale designation: victim died, got back up, or is no longer eligible. Clean it up to save TPS!
                         pawn.Map.designationManager.RemoveDesignation(des);
                         continue;
                     }
@@ -54,7 +54,7 @@ namespace SadSeal.MegaMod.AllowTool.FinishOff
         {
             if (pawn.WorkTagIsDisabled(WorkTags.Violent)) return null;
 
-            if (!(t is Pawn victim) || victim.Dead || !victim.Downed || !victim.Spawned)
+            if (!(t is Pawn victim) || !Designator_FinishOff.CanFinishOffPawn(victim))
             {
                 if (t != null && pawn?.Map?.designationManager != null)
                 {

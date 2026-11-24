@@ -8,6 +8,8 @@ namespace SadSeal.MegaMod.Hauling.Patches
     {
         public static void Postfix(Pawn_DraftController __instance, bool value)
         {
+            if (HaulModule.Instance?.IsEnabled != true) return;
+
             if (value && (HaulModule.ModSettings?.DropOnDraft ?? true))
             {
                 if (__instance?.pawn != null)

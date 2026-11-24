@@ -111,25 +111,22 @@ namespace SadSeal.MegaMod.Hauling
             Map map = pawn.MapHeld ?? pawn.Map;
             IntVec3 dropPos = pawn.PositionHeld.IsValid ? pawn.PositionHeld : pawn.Position;
 
-            if (pawn.inventory?.innerContainer != null && map != null && dropPos.IsValid)
+            for (int i = 0; i < toDrop.Count; i++)
             {
-                for (int i = 0; i < toDrop.Count; i++)
+                Thing item = toDrop[i];
+                if (item == null || item.Destroyed || pawn.inventory?.innerContainer == null || !pawn.inventory.innerContainer.Contains(item))
                 {
-                    Thing item = toDrop[i];
-                    if (item != null && !item.Destroyed && pawn.inventory.innerContainer.Contains(item))
+                    Unregister(pawn, item);
+                }
+                else if (map != null && dropPos.IsValid && pawn.inventory.innerContainer.TryDrop(item, dropPos, map, ThingPlaceMode.Near, out Thing dropped))
+                {
+                    if (dropped != null)
                     {
-                        if (pawn.inventory.innerContainer.TryDrop(item, dropPos, map, ThingPlaceMode.Near, out Thing dropped))
-                        {
-                            if (dropped != null)
-                            {
-                                dropped.SetForbidden(forbidden, false);
-                            }
-                        }
+                        dropped.SetForbidden(forbidden, false);
                     }
+                    Unregister(pawn, item);
                 }
             }
-
-            Clear(pawn);
         }
     }
 }

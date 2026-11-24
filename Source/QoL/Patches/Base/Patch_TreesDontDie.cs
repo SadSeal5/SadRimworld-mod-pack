@@ -9,6 +9,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Base
     {
         public static void Prefix(Plant __instance)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (QoLModule.ModSettings?.treesDontDie != true) return;
             if (__instance.def?.plant == null || !__instance.def.plant.IsTree) return;
 

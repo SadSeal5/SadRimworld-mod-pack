@@ -10,6 +10,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Work
     {
         public static void Postfix(Verse.Pawn executioner, Verse.Pawn victim)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (QoLModule.ModSettings?.haulAfterSlaughter != true) return;
             if (executioner == null || !executioner.IsColonist || !executioner.Spawned) return;
             if (executioner.WorkTagIsDisabled(WorkTags.Hauling)) return;

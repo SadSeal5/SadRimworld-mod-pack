@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using HarmonyLib;
 using RimWorld;
 
@@ -6,40 +7,41 @@ namespace SadSeal.MegaMod.Durability.Patches
     [HarmonyPatch(typeof(Pawn_ApparelTracker), nameof(Pawn_ApparelTracker.Notify_PawnKilled))]
     public static class Patch_Apparel_Tainted
     {
-        public static bool SuppressTaint = false;
-
-        public static void Prefix()
+        public static void Prefix(Pawn_ApparelTracker __instance, out List<Apparel> __state)
         {
-            if (DurabilityModule.Instance?.IsEnabled != true) return;
-
-            if (DurabilityModule.ModSettings?.preventTaintedApparel == true)
+            __state = null;
+            if (DurabilityModule.Instance?.IsEnabled != true ||
+                DurabilityModule.ModSettings?.preventTaintedApparel != true ||
+                __instance?.WornApparel == null)
             {
-                SuppressTaint = true;
-            }
-        }
-
-        public static void Postfix(Pawn_ApparelTracker __instance)
-        {
-            if (DurabilityModule.Instance?.IsEnabled != true)
-            {
-                SuppressTaint = false;
                 return;
             }
 
-            if (SuppressTaint)
+            var worn = __instance.WornApparel;
+            for (int i = 0; i < worn.Count; i++)
             {
-                SuppressTaint = false;
-                if (__instance?.WornApparel != null)
+                var apparel = worn[i];
+                if (apparel != null && !apparel.WornByCorpse)
                 {
-                    var worn = __instance.WornApparel;
-                    for (int i = 0; i < worn.Count; i++)
+                    if (__state == null)
                     {
-                        var apparel = worn[i];
-                        if (apparel != null)
-                        {
-                            apparel.WornByCorpse = false;
-                        }
+                        __state = new List<Apparel>(worn.Count);
                     }
+                    __state.Add(apparel);
+                }
+            }
+        }
+
+        public static void Postfix(List<Apparel> __state)
+        {
+            if (__state == null) return;
+
+            for (int i = 0; i < __state.Count; i++)
+            {
+                var apparel = __state[i];
+                if (apparel != null)
+                {
+                    apparel.WornByCorpse = false;
                 }
             }
         }

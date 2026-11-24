@@ -10,8 +10,8 @@ namespace SadSeal.Core.Events
     {
         public static void Postfix()
         {
-            ModEventBus.Clear();
             ModuleManager.OnGameEndedAll();
+            ModEventBus.Clear();
         }
     }
 }

@@ -9,6 +9,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
     {
         public static void Postfix(Plant __instance)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (QoLModule.ModSettings?.enableAutoCutBlight != true) return;
             if (__instance == null || !__instance.Spawned) return;
 

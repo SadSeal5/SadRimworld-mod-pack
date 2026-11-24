@@ -10,10 +10,12 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
     public static class RoofSafetyUtility
     {
         private static readonly Dictionary<int, int> lastWarningTickByTargetId = new Dictionary<int, int>();
+        private static readonly HashSet<IntVec3> candidateRoofCells = new HashSet<IntVec3>();
 
         public static void ClearCache()
         {
             lastWarningTickByTargetId.Clear();
+            candidateRoofCells.Clear();
         }
 
         public static void NotifyRoofSafetyPrevented(Verse.Pawn pawn, Thing target)
@@ -39,51 +41,60 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
             if (map == null || target.def == null) return false;
             if (!target.def.holdsRoof) return false;
 
-            IntVec3 targetPos = target.Position;
             RoofGrid roofGrid = map.roofGrid;
-            if (roofGrid == null) return false;
+            if (roofGrid == null || map.floodFiller == null) return false;
 
-            // 1. Collect all other roof-holding buildings within radial 13.8f of target
-            int maxRadiusIndex = GenRadial.NumCellsInRadius(13.8f);
-            List<IntVec3> otherSupportPositions = new List<IntVec3>();
-
-            for (int i = 0; i < maxRadiusIndex; i++)
+            candidateRoofCells.Clear();
+            int supportRadiusIndex = RoofCollapseUtility.RoofSupportRadialCellsCount;
+            foreach (IntVec3 cell in target.OccupiedRect())
             {
-                IntVec3 sc = targetPos + GenRadial.RadialPattern[i];
-                if (!sc.InBounds(map) || sc == targetPos) continue;
-
-                Building edifice = sc.GetEdifice(map);
-                if (edifice != null && edifice != target && edifice.def != null && edifice.def.holdsRoof)
+                for (int i = 0; i < supportRadiusIndex; i++)
                 {
-                    otherSupportPositions.Add(sc);
+                    IntVec3 rc = cell + GenRadial.RadialPattern[i];
+                    if (!rc.InBounds(map)) continue;
+
+                    RoofDef roof = roofGrid.RoofAt(rc);
+                    if (roof != null && roof.canCollapse)
+                    {
+                        candidateRoofCells.Add(rc);
+                    }
                 }
             }
 
-            // 2. Check roofed cells within support distance (6.9f) of target
-            int supportRadiusIndex = RoofCollapseUtility.RoofSupportRadialCellsCount;
-            for (int i = 0; i < supportRadiusIndex; i++)
+            try
             {
-                IntVec3 rc = targetPos + GenRadial.RadialPattern[i];
-                if (!rc.InBounds(map)) continue;
-
-                RoofDef roof = roofGrid.RoofAt(rc);
-                if (roof == null || !roof.canCollapse) continue;
-
-                // Check if any other support covers this cell
-                bool coveredByOther = false;
-                for (int s = 0; s < otherSupportPositions.Count; s++)
+                foreach (IntVec3 rc in candidateRoofCells)
                 {
-                    if (rc.InHorDistOf(otherSupportPositions[s], 6.9f))
+                    bool supported = false;
+                    map.floodFiller.FloodFill(
+                        rc,
+                        (IntVec3 x) => (x.Roofed(map) || x == rc) && x.InHorDistOf(rc, 6.9f),
+                        (IntVec3 x) =>
+                        {
+                            for (int d = 0; d < 5; d++)
+                            {
+                                IntVec3 adj = x + GenAdj.CardinalDirectionsAndInside[d];
+                                if (adj.InBounds(map) && adj.InHorDistOf(rc, 6.9f))
+                                {
+                                    Building edifice = adj.GetEdifice(map);
+                                    if (edifice != null && edifice != target && edifice.def != null && edifice.def.holdsRoof)
+                                    {
+                                        supported = true;
+                                        return true;
+                                    }
+                                }
+                            }
+                            return false;
+                        });
+                    if (!supported)
                     {
-                        coveredByOther = true;
-                        break;
+                        return true;
                     }
                 }
-
-                if (!coveredByOther)
-                {
-                    return true; // Removing target will cause rc to collapse!
-                }
+            }
+            finally
+            {
+                candidateRoofCells.Clear();
             }
 
             return false;
@@ -108,6 +119,22 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
 
     [HarmonyPatch(typeof(WorkGiver_Deconstruct), nameof(WorkGiver_Deconstruct.HasJobOnThing))]
     public static class Patch_WorkGiver_Deconstruct_RoofSafety
+    {
+        public static void Postfix(Verse.Pawn pawn, Thing t, bool forced, ref bool __result)
+        {
+            if (QoLModule.Instance?.IsEnabled != true) return;
+            if (!__result) return;
+            if (QoLModule.ModSettings?.enableRoofSafety != true) return;
+            if (forced) return;
+            if (RoofSafetyUtility.WillCauseRoofCollapse(t, pawn?.Map))
+            {
+                __result = false;
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(WorkGiver_Uninstall), nameof(WorkGiver_Uninstall.HasJobOnThing))]
+    public static class Patch_WorkGiver_Uninstall_RoofSafety
     {
         public static void Postfix(Verse.Pawn pawn, Thing t, bool forced, ref bool __result)
         {
@@ -149,7 +176,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
         {
             if (QoLModule.Instance?.IsEnabled != true) return true;
             if (QoLModule.ModSettings?.enableRoofSafety != true) return true;
-            if (!(__instance is JobDriver_Deconstruct)) return true;
+            if (!(__instance is JobDriver_Deconstruct || __instance is JobDriver_Uninstall)) return true;
             if (__instance.job != null && __instance.job.playerForced) return true;
             Verse.Pawn pawn = __instance.pawn;
             Thing target = __instance.job?.targetA.Thing;
@@ -192,30 +219,34 @@ namespace SadSeal.MegaMod.QoL.Patches.Safety
         }
     }
 
-    [HarmonyPatch(typeof(JobDriver_Deconstruct), "MakeNewToils")]
+    [HarmonyPatch(typeof(JobDriver_RemoveBuilding), "MakeNewToils")]
     public static class Patch_JobDriver_Deconstruct_Toils_RoofSafety
     {
-        public static IEnumerable<Toil> Postfix(IEnumerable<Toil> toils, JobDriver_Deconstruct __instance)
+        public static IEnumerable<Toil> Postfix(IEnumerable<Toil> toils, JobDriver_RemoveBuilding __instance)
         {
+            bool shouldGuard = __instance is JobDriver_Deconstruct || __instance is JobDriver_Uninstall;
             foreach (Toil toil in toils)
             {
-                toil.AddPreTickAction(() =>
+                if (shouldGuard)
                 {
-                    if (QoLModule.Instance?.IsEnabled != true) return;
-                    if (QoLModule.ModSettings?.enableRoofSafety != true) return;
-                    if (__instance.job != null && __instance.job.playerForced) return;
-                    Verse.Pawn pawn = __instance.pawn;
-                    if (pawn == null || !pawn.Spawned) return;
-                    if (pawn.IsHashIntervalTick(60))
+                    toil.AddPreTickAction(() =>
                     {
-                        Thing target = __instance.job?.targetA.Thing;
-                        if (target != null && RoofSafetyUtility.WillCauseRoofCollapse(target, pawn.Map))
+                        if (QoLModule.Instance?.IsEnabled != true) return;
+                        if (QoLModule.ModSettings?.enableRoofSafety != true) return;
+                        if (__instance.job != null && __instance.job.playerForced) return;
+                        Verse.Pawn pawn = __instance.pawn;
+                        if (pawn == null || !pawn.Spawned) return;
+                        if (pawn.IsHashIntervalTick(60))
                         {
-                            RoofSafetyUtility.NotifyRoofSafetyPrevented(pawn, target);
-                            pawn.jobs.EndCurrentJob(JobCondition.Incompletable, true);
+                            Thing target = __instance.job?.targetA.Thing;
+                            if (target != null && RoofSafetyUtility.WillCauseRoofCollapse(target, pawn.Map))
+                            {
+                                RoofSafetyUtility.NotifyRoofSafetyPrevented(pawn, target);
+                                pawn.jobs.EndCurrentJob(JobCondition.Incompletable, true);
+                            }
                         }
-                    }
-                });
+                    });
+                }
                 yield return toil;
             }
         }

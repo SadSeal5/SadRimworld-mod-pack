@@ -6,44 +6,24 @@ namespace SadSeal.MegaMod.Durability
 {
     public static class DurabilityApplier
     {
+        public static bool IsProtected(Thing thing)
+        {
+            if (DurabilityModule.Instance?.IsEnabled != true) return false;
+            var settings = DurabilityModule.ModSettings;
+            if (settings == null || thing?.def == null || !thing.def.useHitPoints) return false;
+
+            return (thing.def.IsApparel && settings.removeApparelDurability)
+                || (thing.def.IsWeapon && settings.removeWeaponDurability);
+        }
+
         public static void ApplyDurabilitySettings()
         {
-            if (DurabilityModule.Instance?.IsEnabled == false) return;
-            var settings = DurabilityModule.ModSettings;
-            if (settings == null) return;
-
-            var allDefs = DefDatabase<ThingDef>.AllDefsListForReading;
-            for (int i = 0; i < allDefs.Count; i++)
-            {
-                ThingDef def = allDefs[i];
-                if (def == null) continue;
-
-                if (def.IsApparel)
-                {
-                    def.useHitPoints = !settings.removeApparelDurability;
-                }
-                if (def.IsWeapon)
-                {
-                    def.useHitPoints = !settings.removeWeaponDurability;
-                }
-            }
+            // No-op: protection is enforced via Harmony patches without mutating ThingDef.useHitPoints.
         }
 
         public static void RestoreDefDefaults()
         {
-            var allDefs = DefDatabase<ThingDef>.AllDefsListForReading;
-            if (allDefs == null) return;
-
-            for (int i = 0; i < allDefs.Count; i++)
-            {
-                ThingDef def = allDefs[i];
-                if (def == null) continue;
-
-                if (def.IsApparel || def.IsWeapon)
-                {
-                    def.useHitPoints = true;
-                }
-            }
+            // No-op: ThingDef.useHitPoints is never mutated.
         }
 
         public static void RestoreAllDamagedItemsInWorld()
@@ -58,7 +38,7 @@ namespace SadSeal.MegaMod.Durability
 
             void TryRestore(Thing item)
             {
-                if (item == null || item.def == null || processed.Contains(item)) return;
+                if (item == null || item.def == null || !item.def.useHitPoints || processed.Contains(item)) return;
                 processed.Add(item);
 
                 if (item.def.IsWeapon || item.def.IsApparel)
@@ -67,6 +47,38 @@ namespace SadSeal.MegaMod.Durability
                     {
                         item.HitPoints = item.MaxHitPoints;
                         restoredCount++;
+                    }
+                }
+            }
+
+            void TryRestorePawnGear(Pawn pawn)
+            {
+                if (pawn == null) return;
+
+                if (pawn.apparel?.WornApparel != null)
+                {
+                    var worn = pawn.apparel.WornApparel;
+                    for (int a = 0; a < worn.Count; a++)
+                    {
+                        TryRestore(worn[a]);
+                    }
+                }
+
+                if (pawn.equipment?.AllEquipmentListForReading != null)
+                {
+                    var eq = pawn.equipment.AllEquipmentListForReading;
+                    for (int e = 0; e < eq.Count; e++)
+                    {
+                        TryRestore(eq[e]);
+                    }
+                }
+
+                if (pawn.inventory?.innerContainer != null)
+                {
+                    var inv = pawn.inventory.innerContainer;
+                    for (int v = 0; v < inv.Count; v++)
+                    {
+                        TryRestore(inv[v]);
                     }
                 }
             }
@@ -80,7 +92,12 @@ namespace SadSeal.MegaMod.Durability
                         var allThings = map.listerThings.AllThings;
                         for (int i = 0; i < allThings.Count; i++)
                         {
-                            TryRestore(allThings[i]);
+                            Thing thing = allThings[i];
+                            TryRestore(thing);
+                            if (thing is Corpse corpse && corpse.InnerPawn != null)
+                            {
+                                TryRestorePawnGear(corpse.InnerPawn);
+                            }
                         }
                     }
 
@@ -89,35 +106,7 @@ namespace SadSeal.MegaMod.Durability
                         var pawns = map.mapPawns.AllPawns;
                         for (int i = 0; i < pawns.Count; i++)
                         {
-                            Pawn pawn = pawns[i];
-                            if (pawn == null) continue;
-
-                            if (pawn.apparel?.WornApparel != null)
-                            {
-                                var worn = pawn.apparel.WornApparel;
-                                for (int a = 0; a < worn.Count; a++)
-                                {
-                                    TryRestore(worn[a]);
-                                }
-                            }
-
-                            if (pawn.equipment?.AllEquipmentListForReading != null)
-                            {
-                                var eq = pawn.equipment.AllEquipmentListForReading;
-                                for (int e = 0; e < eq.Count; e++)
-                                {
-                                    TryRestore(eq[e]);
-                                }
-                            }
-
-                            if (pawn.inventory?.innerContainer != null)
-                            {
-                                var inv = pawn.inventory.innerContainer;
-                                for (int v = 0; v < inv.Count; v++)
-                                {
-                                    TryRestore(inv[v]);
-                                }
-                            }
+                            TryRestorePawnGear(pawns[i]);
                         }
                     }
                 }
@@ -128,35 +117,7 @@ namespace SadSeal.MegaMod.Durability
                 var worldPawns = Find.WorldPawns.AllPawnsAlive;
                 for (int i = 0; i < worldPawns.Count; i++)
                 {
-                    Pawn pawn = worldPawns[i];
-                    if (pawn == null) continue;
-
-                    if (pawn.apparel?.WornApparel != null)
-                    {
-                        var worn = pawn.apparel.WornApparel;
-                        for (int a = 0; a < worn.Count; a++)
-                        {
-                            TryRestore(worn[a]);
-                        }
-                    }
-
-                    if (pawn.equipment?.AllEquipmentListForReading != null)
-                    {
-                        var eq = pawn.equipment.AllEquipmentListForReading;
-                        for (int e = 0; e < eq.Count; e++)
-                        {
-                            TryRestore(eq[e]);
-                        }
-                    }
-
-                    if (pawn.inventory?.innerContainer != null)
-                    {
-                        var inv = pawn.inventory.innerContainer;
-                        for (int v = 0; v < inv.Count; v++)
-                        {
-                            TryRestore(inv[v]);
-                        }
-                    }
+                    TryRestorePawnGear(worldPawns[i]);
                 }
             }
 

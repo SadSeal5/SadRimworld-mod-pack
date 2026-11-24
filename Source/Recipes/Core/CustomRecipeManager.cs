@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace SadSeal.MegaMod.Recipes
@@ -46,7 +47,16 @@ namespace SadSeal.MegaMod.Recipes
 
         public static RecipeDef BuildAndRegister(CustomRecipeData data, bool addToSettings = true)
         {
+            if (RecipesModule.Instance?.IsEnabled != true) return null;
             if (data == null || string.IsNullOrEmpty(data.defName)) return null;
+
+            // Product
+            var prodDef = DefDatabase<ThingDef>.GetNamed(data.productDefName, false);
+            if (prodDef == null)
+            {
+                Log.Warning($"[SadSeal.Recipes] Skipping custom recipe '{data.defName}': product ThingDef '{data.productDefName}' not found.");
+                return null;
+            }
 
             var r = DefDatabase<RecipeDef>.GetNamed(data.defName, false) ?? new RecipeDef();
             r.defName = data.defName;
@@ -57,17 +67,23 @@ namespace SadSeal.MegaMod.Recipes
             r.effectWorking = DefDatabase<EffecterDef>.GetNamedSilentFail("Cook");
             r.soundWorking = DefDatabase<SoundDef>.GetNamedSilentFail("Recipe_CookMeal");
 
-            // Product
-            var prodDef = DefDatabase<ThingDef>.GetNamed(data.productDefName, false);
-            if (prodDef != null)
+            var product = new ThingDefCountClass(prodDef, Mathf.Max(1, data.productCount));
+            if (prodDef.MadeFromStuff)
             {
-                r.products = new List<ThingDefCountClass> { new ThingDefCountClass(prodDef, data.productCount) };
+                // RimWorld 1.7 RecipeDef has no defaultStuff field; GenRecipe reads
+                // dominantIngredient.def (and ThingDefCountClass.stuff stores the
+                // resolved default stuff metadata).
+                product.stuff = GenStuff.DefaultStuffFor(prodDef);
             }
+            r.products = new List<ThingDefCountClass> { product };
 
             // Ingredients & Filters
             r.ingredients = new List<IngredientCount>();
             r.fixedIngredientFilter = new ThingFilter();
             r.defaultIngredientFilter = new ThingFilter();
+
+            bool hasStuffIngredient = false;
+            bool firstIngredientHasStuff = false;
 
             if (data.ingredients != null)
             {
@@ -75,6 +91,8 @@ namespace SadSeal.MegaMod.Recipes
                 {
                     var s = data.ingredients[i];
                     var ing = new IngredientCount();
+                    bool anyAllowed = false;
+                    bool ingHasStuff = false;
 
                     if (s.isFilter && s.filterDefNames != null && s.filterDefNames.Count > 0)
                     {
@@ -85,6 +103,8 @@ namespace SadSeal.MegaMod.Recipes
                             ing.filter.SetAllow(td, true);
                             r.fixedIngredientFilter.SetAllow(td, true);
                             r.defaultIngredientFilter.SetAllow(td, true);
+                            anyAllowed = true;
+                            if (td.IsStuff) ingHasStuff = true;
                         }
                     }
                     else
@@ -95,12 +115,29 @@ namespace SadSeal.MegaMod.Recipes
                         ing.filter.SetAllow(td, true);
                         r.fixedIngredientFilter.SetAllow(td, true);
                         r.defaultIngredientFilter.SetAllow(td, true);
+                        anyAllowed = true;
+                        if (td.IsStuff) ingHasStuff = true;
                     }
 
-                    ing.SetBaseCount(s.count);
-                    r.ingredients.Add(ing);
+                    if (anyAllowed)
+                    {
+                        ing.SetBaseCount(Mathf.Max(1, s.count));
+                        if (r.ingredients.Count == 0 && ingHasStuff)
+                        {
+                            firstIngredientHasStuff = true;
+                        }
+                        if (ingHasStuff) hasStuffIngredient = true;
+                        r.ingredients.Add(ing);
+                    }
                 }
             }
+
+            // Ensure GenRecipe.MakeRecipeProducts always receives a non-null
+            // dominantIngredient for MadeFromStuff products: use ingredient 0 if
+            // it is stuff (matching RecipeDefGenerator) or if no ingredient is
+            // stuff (avoiding a NullReferenceException in MakeRecipeProducts).
+            r.productHasIngredientStuff = prodDef.MadeFromStuff &&
+                (firstIngredientHasStuff || (!hasStuffIngredient && r.ingredients.Count > 0));
 
             // Workbenches
             if (r.recipeUsers != null)
@@ -150,7 +187,11 @@ namespace SadSeal.MegaMod.Recipes
             if (r.researchPrerequisites.Count == 1) r.researchPrerequisite = r.researchPrerequisites[0];
             else r.researchPrerequisite = null;
 
-            // Skill requirement
+            // Skill requirement & workSkill for quality-capable products
+            r.workSkill = prodDef.HasComp<CompQuality>()
+                ? (prodDef.recipeMaker?.workSkill ?? SkillDefOf.Crafting)
+                : null;
+
             if (data.minSkillLevel > 0)
             {
                 r.skillRequirements = new List<SkillRequirement>
@@ -170,6 +211,13 @@ namespace SadSeal.MegaMod.Recipes
             if (DefDatabase<RecipeDef>.GetNamed(data.defName, false) == null)
             {
                 DefDatabase<RecipeDef>.Add(r);
+            }
+
+            var disableTweak = RecipesModule.ModSettings?.tweaks?.Find(t => t.recipeDefName == data.defName && t.disabled);
+            if (disableTweak != null)
+            {
+                RecipePatchApplier.VanillaSnapshots.Remove(data.defName);
+                RecipePatchApplier.ApplyTweak(r, disableTweak);
             }
 
             // Add to settings
@@ -195,6 +243,35 @@ namespace SadSeal.MegaMod.Recipes
             var r = DefDatabase<RecipeDef>.GetNamed(data.defName, false);
             if (r != null)
             {
+                var maps = Find.Maps;
+                if (maps != null)
+                {
+                    for (int m = 0; m < maps.Count; m++)
+                    {
+                        var buildings = maps[m]?.listerBuildings?.allBuildingsColonist;
+                        if (buildings == null) continue;
+                        for (int i = 0; i < buildings.Count; i++)
+                        {
+                            if (buildings[i] is IBillGiver bg && bg.BillStack != null)
+                            {
+                                var bills = bg.BillStack.Bills;
+                                for (int j = bills.Count - 1; j >= 0; j--)
+                                {
+                                    if (bills[j]?.recipe == r)
+                                    {
+                                        bg.BillStack.Delete(bills[j]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (BillUtility.Clipboard?.recipe == r)
+                {
+                    BillUtility.Clipboard = null;
+                }
+
                 if (r.recipeUsers != null)
                 {
                     for (int i = 0; i < r.recipeUsers.Count; i++)
@@ -227,10 +304,13 @@ namespace SadSeal.MegaMod.Recipes
                 removeMethod?.Invoke(null, new object[] { r });
             }
 
+            RecipePatchApplier.VanillaSnapshots.Remove(data.defName);
+
             var settings = RecipesModule.ModSettings;
-            if (settings?.customRecipes != null)
+            if (settings != null)
             {
-                settings.customRecipes.RemoveAll(x => x.defName == data.defName);
+                settings.customRecipes?.RemoveAll(x => x.defName == data.defName);
+                settings.tweaks?.RemoveAll(x => x.recipeDefName == data.defName);
                 settings.Write();
             }
 

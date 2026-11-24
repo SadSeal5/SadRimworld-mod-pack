@@ -9,6 +9,13 @@ namespace SadSeal.MegaMod.AllowTool.SelectSimilar
     [HarmonyPatch(typeof(Thing), nameof(Thing.GetGizmos))]
     public static class Patch_Thing_GetGizmos
     {
+        private static Texture2D selectSimilarIcon;
+
+        private static Texture2D SelectSimilarIcon =>
+            selectSimilarIcon ??= ContentFinder<Texture2D>.Get("UI/Commands/SelectSimilar", false)
+                ?? ContentFinder<Texture2D>.Get("UI/Designators/SelectSimilar", false)
+                ?? BaseContent.WhiteTex;
+
         public static IEnumerable<Gizmo> Postfix(IEnumerable<Gizmo> __result, Thing __instance)
         {
             if (__result != null)
@@ -18,6 +25,8 @@ namespace SadSeal.MegaMod.AllowTool.SelectSimilar
                     yield return g;
                 }
             }
+
+            if (AllowToolModule.Instance?.IsEnabled != true) yield break;
 
             var settings = AllowToolModule.ModSettings;
             if (settings == null || !settings.EnableSelectSimilar) yield break;
@@ -36,7 +45,7 @@ namespace SadSeal.MegaMod.AllowTool.SelectSimilar
                 {
                     defaultLabel = "MegaMod_SelectSimilar_Gizmo".Translate(),
                     defaultDesc = "MegaMod_SelectSimilar_Gizmo_Desc".Translate(),
-                    icon = ContentFinder<Texture2D>.Get("UI/Commands/SelectSimilar", false) ?? ContentFinder<Texture2D>.Get("UI/Designators/SelectSimilar", false) ?? BaseContent.WhiteTex,
+                    icon = SelectSimilarIcon,
                     action = () => Designator_SelectSimilar.SelectAllSimilar(__instance, false)
                 };
             }

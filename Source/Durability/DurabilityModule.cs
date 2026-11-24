@@ -13,37 +13,12 @@ namespace SadSeal.MegaMod.Durability
         public override string DescriptionKey => "MegaMod_ModuleDurability_Desc";
         public override int Order => 7;
 
-        public override bool IsEnabled
-        {
-            get => base.IsEnabled;
-            set
-            {
-                base.IsEnabled = value;
-                if (!value)
-                {
-                    DurabilityApplier.RestoreDefDefaults();
-                }
-                else
-                {
-                    DurabilityApplier.ApplyDurabilitySettings();
-                }
-            }
-        }
-
         public static new DurabilitySettings ModSettings => Instance?.CurrentSettings ?? ModModule<DurabilitySettings>.ModSettings;
         public static new DurabilitySettings Settings => ModSettings;
 
         public DurabilityModule()
         {
             Instance = this;
-        }
-
-        public override void OnDefsLoaded()
-        {
-            if (IsEnabled)
-            {
-                DurabilityApplier.ApplyDurabilitySettings();
-            }
         }
 
         public override void DrawSettings(Rect inRect)

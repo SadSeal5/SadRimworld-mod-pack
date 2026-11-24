@@ -27,9 +27,9 @@ namespace SadSeal.MegaMod.Genes
 
         public override void OnDefsLoaded()
         {
-            if (IsEnabled)
+            if (IsEnabled && ModsConfig.BiotechActive)
             {
-                if (ModLister.BiotechInstalled && ThingDefOf.GeneAssembler != null)
+                if (ThingDefOf.GeneAssembler != null)
                 {
                     GeneAssemblerPatch.EnsureDefHasComp(ThingDefOf.GeneAssembler);
                 }
@@ -37,7 +37,7 @@ namespace SadSeal.MegaMod.Genes
             else
             {
                 DefUtility.DisableWorkGiver("SynthesizeGene");
-                if (ModLister.BiotechInstalled && ThingDefOf.GeneAssembler != null)
+                if (ModsConfig.BiotechActive && ThingDefOf.GeneAssembler != null)
                 {
                     GeneAssemblerPatch.RemoveDefComp(ThingDefOf.GeneAssembler);
                 }

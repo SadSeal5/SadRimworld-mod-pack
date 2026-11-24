@@ -21,25 +21,15 @@ namespace SadSeal.MegaMod.Durability.UI
 
             SadUI.DrawHeader(listing, "MegaMod_DurabilityTitle", "MegaMod_DurabilityDesc");
 
-            bool oldApparel = settings.removeApparelDurability;
             listing.CheckboxLabeled(
                 "MegaMod_RemoveApparelDurability".Translate(),
                 ref settings.removeApparelDurability,
                 "MegaMod_RemoveApparelDurability_Desc".Translate());
-            if (oldApparel != settings.removeApparelDurability)
-            {
-                DurabilityApplier.ApplyDurabilitySettings();
-            }
 
-            bool oldWeapon = settings.removeWeaponDurability;
             listing.CheckboxLabeled(
                 "MegaMod_RemoveWeaponDurability".Translate(),
                 ref settings.removeWeaponDurability,
                 "MegaMod_RemoveWeaponDurability_Desc".Translate());
-            if (oldWeapon != settings.removeWeaponDurability)
-            {
-                DurabilityApplier.ApplyDurabilitySettings();
-            }
 
             listing.Gap(6f);
 

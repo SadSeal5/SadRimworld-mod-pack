@@ -37,7 +37,7 @@ namespace SadSeal.MegaMod.WorkManager.Core
             }
 
             var settings = WorkManagerModule.ModSettings;
-            if (!settings.EnableWorkManager || !settings.ManageWorkSchedule)
+            if (settings == null || !settings.EnableWorkManager || !settings.ManageWorkSchedule)
             {
                 return;
             }
@@ -55,16 +55,19 @@ namespace SadSeal.MegaMod.WorkManager.Core
             if (WorkManagerModule.Instance?.IsEnabled != true) return;
             if (map == null || map.mapPawns == null) return;
 
+            isDirty = false;
+
             var freeColonists = map.mapPawns.FreeColonists;
             if (freeColonists == null || freeColonists.Count == 0) return;
 
             var comp = WorkManagerGameComponent.Instance;
             var settings = WorkManagerModule.ModSettings;
+            if (settings == null) return;
 
             for (int i = 0; i < freeColonists.Count; i++)
             {
                 var pawn = freeColonists[i];
-                if (pawn == null || pawn.Dead || pawn.timetable == null || pawn.story?.traits == null) continue;
+                if (pawn == null || pawn.Dead || !pawn.Spawned || pawn.Suspended || pawn.IsQuestLodger() || pawn.timetable == null || pawn.story?.traits == null) continue;
                 if (comp != null && !comp.IsPawnScheduleEnabled(pawn)) continue;
 
                 bool isNeverSleep = (pawn.genes != null && NeverSleepGene != null && pawn.genes.HasActiveGene(NeverSleepGene))

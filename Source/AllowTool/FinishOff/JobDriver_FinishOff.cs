@@ -17,16 +17,12 @@ namespace SadSeal.MegaMod.AllowTool.FinishOff
         protected override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOnDespawnedOrNull(VictimInd);
-            this.FailOn(() =>
-            {
-                Pawn victim = TargetA.Pawn;
-                return victim == null || victim.Dead || !victim.Downed;
-            });
+            this.FailOn(() => !Designator_FinishOff.CanFinishOffPawn(TargetA.Pawn));
 
             AddFinishAction(cond =>
             {
                 Pawn victim = TargetA.Pawn;
-                if (victim != null && (victim.Dead || !victim.Downed))
+                if (victim != null && !Designator_FinishOff.CanFinishOffPawn(victim))
                 {
                     DesignationDef def = Designator_FinishOff.FinishOffDef;
                     if (def != null && Map?.designationManager != null)
@@ -57,7 +53,7 @@ namespace SadSeal.MegaMod.AllowTool.FinishOff
             strike.initAction = () =>
             {
                 Pawn victim = TargetA.Pawn;
-                if (victim != null && !victim.Dead)
+                if (Designator_FinishOff.CanFinishOffPawn(victim))
                 {
                     DamageInfo dinfo = new DamageInfo(DamageDefOf.ExecutionCut, 9999f, 999f, -1, pawn);
                     victim.Kill(dinfo);

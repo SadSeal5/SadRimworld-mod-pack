@@ -59,7 +59,7 @@ namespace SadSeal.MegaMod.Recipes
 
         public static void ApplyAll()
         {
-            if (RecipesModule.Instance?.IsEnabled == false) return;
+            if (RecipesModule.Instance?.IsEnabled != true) return;
             var settings = RecipesModule.ModSettings;
             if (settings?.tweaks == null || settings.tweaks.Count == 0) return;
             for (int i = 0; i < settings.tweaks.Count; i++)
@@ -78,7 +78,14 @@ namespace SadSeal.MegaMod.Recipes
             if (recipe == null || tweak == null) return;
             EnsureVanillaSaved(recipe);
 
-            if (!string.IsNullOrEmpty(tweak.newLabel)) recipe.label = tweak.newLabel;
+            if (!string.IsNullOrEmpty(tweak.newLabel))
+            {
+                recipe.label = tweak.newLabel;
+            }
+            else if (VanillaSnapshots.TryGetValue(recipe.defName, out var labelSnap))
+            {
+                recipe.label = labelSnap.Label;
+            }
 
             // RecipeDef.WorkAmountTotal already prefers recipe.workAmount when it is
             // >= 0. Do not touch the shared product WorkToMake stat, otherwise two
@@ -98,6 +105,7 @@ namespace SadSeal.MegaMod.Recipes
                 {
                     var s = tweak.customIngredients[i];
                     var ing = new IngredientCount();
+                    bool anyAllowed = false;
 
                     if (s.isFilter && s.filterDefNames != null && s.filterDefNames.Count > 0)
                     {
@@ -108,6 +116,7 @@ namespace SadSeal.MegaMod.Recipes
                             ing.filter.SetAllow(td, true);
                             recipe.fixedIngredientFilter?.SetAllow(td, true);
                             recipe.defaultIngredientFilter?.SetAllow(td, true);
+                            anyAllowed = true;
                         }
                     }
                     else
@@ -118,10 +127,14 @@ namespace SadSeal.MegaMod.Recipes
                         ing.filter.SetAllow(td, true);
                         recipe.fixedIngredientFilter?.SetAllow(td, true);
                         recipe.defaultIngredientFilter?.SetAllow(td, true);
+                        anyAllowed = true;
                     }
 
-                    ing.SetBaseCount(s.count);
-                    recipe.ingredients.Add(ing);
+                    if (anyAllowed)
+                    {
+                        ing.SetBaseCount(s.count);
+                        recipe.ingredients.Add(ing);
+                    }
                 }
             }
 
@@ -135,11 +148,29 @@ namespace SadSeal.MegaMod.Recipes
             }
         }
 
+        private static void InvalidateRecipeUsersCache(List<ThingDef> users)
+        {
+            if (users == null) return;
+            for (int i = 0; i < users.Count; i++)
+            {
+                var td = users[i];
+                if (td != null)
+                {
+                    allRecipesCachedField?.SetValue(td, null);
+                }
+            }
+        }
+
         private static void RemoveRecipeLinks(RecipeDef recipe)
         {
             if (recipe == null) return;
 
+            InvalidateRecipeUsersCache(recipe.recipeUsers);
             recipe.recipeUsers?.Clear();
+            if (VanillaSnapshots.TryGetValue(recipe.defName, out var snap))
+            {
+                InvalidateRecipeUsersCache(snap.RecipeUsers);
+            }
 
             var allThings = DefDatabase<ThingDef>.AllDefsListForReading;
             for (int i = 0; i < allThings.Count; i++)
@@ -166,6 +197,7 @@ namespace SadSeal.MegaMod.Recipes
                     recipe.recipeUsers.Add(td);
                 }
             }
+            InvalidateRecipeUsersCache(snap.RecipeUsers);
 
             for (int i = 0; i < snap.ThingDefRecipes.Count; i++)
             {
@@ -198,9 +230,11 @@ namespace SadSeal.MegaMod.Recipes
                     recipe.defaultIngredientFilter.CopyAllowancesFrom(snap.DefaultIngredientFilter);
                 }
 
+                InvalidateRecipeUsersCache(recipe.recipeUsers);
                 if (recipe.recipeUsers == null) recipe.recipeUsers = new List<ThingDef>();
                 recipe.recipeUsers.Clear();
                 recipe.recipeUsers.AddRange(snap.RecipeUsers);
+                InvalidateRecipeUsersCache(snap.RecipeUsers);
 
                 // Re-add the recipe to every ThingDef that had it before the tweak.
                 var allThings = DefDatabase<ThingDef>.AllDefsListForReading;

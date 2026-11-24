@@ -6,6 +6,15 @@ namespace SadSeal.MegaMod.Medical.Autopsy
 {
     public class Recipe_Autopsy : RecipeWorker
     {
+        public override bool AvailableOnNow(Thing thing, BodyPartRecord part = null)
+        {
+            if (MedicalModule.Instance?.IsEnabled != true || MedicalModule.ModSettings?.EnableAutopsy != true)
+            {
+                return false;
+            }
+            return base.AvailableOnNow(thing, part);
+        }
+
         public override void Notify_IterationCompleted(Pawn billDoer, List<Thing> ingredients)
         {
             base.Notify_IterationCompleted(billDoer, ingredients);
@@ -102,6 +111,10 @@ namespace SadSeal.MegaMod.Medical.Autopsy
             if (ingredient is Corpse)
             {
                 // Defer destruction of corpse until Notify_IterationCompleted so inner pawn body parts remain intact
+                return;
+            }
+            if (MedicalModule.Instance?.IsEnabled != true || MedicalModule.ModSettings?.EnableAutopsy != true)
+            {
                 return;
             }
             base.ConsumeIngredient(ingredient, recipe, map);

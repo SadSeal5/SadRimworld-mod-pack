@@ -276,11 +276,25 @@ namespace SadSeal.MegaMod.Recipes.UI
             }
         }
 
+        private static RecipeTweak FindTweak(string defName)
+        {
+            var tweaks = RecipesModule.ModSettings?.tweaks;
+            if (tweaks == null) return null;
+            for (int i = 0; i < tweaks.Count; i++)
+            {
+                if (tweaks[i].recipeDefName == defName) return tweaks[i];
+            }
+            return null;
+        }
+
         private void SelectRecipe(RecipeDef r)
         {
             _selected = r;
-            RecipePatchApplier.EnsureVanillaSaved(r);
-            var tw = RecipesModule.ModSettings?.GetOrCreate(r.defName) ?? new RecipeTweak { recipeDefName = r.defName };
+            if (!CustomRecipeManager.IsCustomRecipe(r.defName))
+            {
+                RecipePatchApplier.EnsureVanillaSaved(r);
+            }
+            var tw = FindTweak(r.defName) ?? new RecipeTweak { recipeDefName = r.defName };
 
             _editLabel = tw.newLabel ?? r.LabelCap.ToString();
 
@@ -346,46 +360,25 @@ namespace SadSeal.MegaMod.Recipes.UI
         private void SaveChanges()
         {
             if (_selected == null) return;
-            var tw = RecipesModule.ModSettings.GetOrCreate(_selected.defName);
 
-            RecipePatchApplier.EnsureVanillaSaved(_selected);
-            string vanillaLabel = RecipePatchApplier.VanillaSnapshots.TryGetValue(_selected.defName, out var snap)
-                ? snap.Label
-                : _selected.defName;
-
-            tw.newLabel = (!string.IsNullOrEmpty(_editLabel) &&
-                           !string.Equals(_editLabel, vanillaLabel, StringComparison.OrdinalIgnoreCase))
-                ? _editLabel
-                : null;
-            tw.newWorkAmount = TryParseFloat(_editWork, out var wp) ? wp : _selected.workAmount;
-            tw.disabled = _editDisabled;
-
-            // Only rebuild the ingredient list when the user actually changed it.
-            // Otherwise filter-based ingredients (e.g. "any meat") would be
-            // flattened into a single thing def on every save.
-            if (_ingredientsDirty)
+            if (!TryParseFloat(_editWork, out var wp) || wp <= 0f)
             {
-                tw.hasCustomIngredients = _workingIngredients.Count > 0;
-                tw.customIngredients.Clear();
-                for (int i = 0; i < _workingIngredients.Count; i++)
-                {
-                    var wi = _workingIngredients[i];
-                    tw.customIngredients.Add(new SavedIngredient
-                    {
-                        thingDefName = wi.ThingDefName,
-                        filterLabel = wi.Label,
-                        count = wi.Count,
-                        isFilter = wi.IsFilter,
-                        filterDefNames = wi.FilterDefNames != null ? new List<string>(wi.FilterDefNames) : new List<string>()
-                    });
-                }
+                Messages.Message("MegaMod_Recipe_ErrInvalidWork".Translate(), MessageTypeDefOf.RejectInput, false);
+                return;
             }
 
+            if (_ingredientsDirty && _workingIngredients.Count == 0)
+            {
+                Messages.Message("MegaMod_Recipe_ErrNoIngredients".Translate(), MessageTypeDefOf.RejectInput, false);
+                return;
+            }
+
+            var settings = RecipesModule.ModSettings;
             var customData = CustomRecipeManager.GetCustomRecipe(_selected.defName);
             if (customData != null)
             {
-                if (!string.IsNullOrEmpty(_editLabel)) customData.label = _editLabel;
-                if (TryParseFloat(_editWork, out var cwp)) customData.workAmount = cwp;
+                if (!string.IsNullOrWhiteSpace(_editLabel)) customData.label = _editLabel.Trim();
+                customData.workAmount = wp;
 
                 if (_ingredientsDirty)
                 {
@@ -403,12 +396,67 @@ namespace SadSeal.MegaMod.Recipes.UI
                         });
                     }
                 }
+
+                if (_editDisabled)
+                {
+                    var tw = settings.GetOrCreate(_selected.defName);
+                    tw.newLabel = null;
+                    tw.newWorkAmount = -1f;
+                    tw.hasCustomIngredients = false;
+                    tw.customIngredients.Clear();
+                    tw.disabled = true;
+                }
+                else
+                {
+                    settings?.tweaks?.RemoveAll(t => t.recipeDefName == _selected.defName);
+                }
+
+                RecipePatchApplier.VanillaSnapshots.Remove(_selected.defName);
                 CustomRecipeManager.BuildAndRegister(customData, true);
             }
+            else
+            {
+                var tw = settings.GetOrCreate(_selected.defName);
 
-            RecipePatchApplier.ApplyTweak(_selected, tw);
-            RecipesModule.ModSettings.PruneVanilla();
-            RecipesModule.ModSettings.Write();
+                RecipePatchApplier.EnsureVanillaSaved(_selected);
+                string vanillaLabel = RecipePatchApplier.VanillaSnapshots.TryGetValue(_selected.defName, out var snap)
+                    ? snap.Label
+                    : _selected.defName;
+
+                tw.newLabel = (!string.IsNullOrEmpty(_editLabel) &&
+                               !string.Equals(_editLabel, vanillaLabel, StringComparison.OrdinalIgnoreCase))
+                    ? _editLabel
+                    : null;
+                tw.newWorkAmount = wp;
+                tw.disabled = _editDisabled;
+
+                // Only rebuild the ingredient list when the user actually changed it.
+                // Otherwise filter-based ingredients (e.g. "any meat") would be
+                // flattened into a single thing def on every save.
+                if (_ingredientsDirty)
+                {
+                    tw.hasCustomIngredients = true;
+                    tw.customIngredients.Clear();
+                    for (int i = 0; i < _workingIngredients.Count; i++)
+                    {
+                        var wi = _workingIngredients[i];
+                        tw.customIngredients.Add(new SavedIngredient
+                        {
+                            thingDefName = wi.ThingDefName,
+                            filterLabel = wi.Label,
+                            count = wi.Count,
+                            isFilter = wi.IsFilter,
+                            filterDefNames = wi.FilterDefNames != null ? new List<string>(wi.FilterDefNames) : new List<string>()
+                        });
+                    }
+                }
+
+                RecipePatchApplier.ApplyTweak(_selected, tw);
+            }
+
+            _ingredientsDirty = false;
+            settings.PruneVanilla();
+            settings.Write();
             Messages.Message("MegaMod_Recipe_Updated".Translate(_selected.LabelCap), MessageTypeDefOf.PositiveEvent, false);
         }
 

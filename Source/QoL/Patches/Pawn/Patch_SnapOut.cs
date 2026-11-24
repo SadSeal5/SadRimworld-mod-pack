@@ -24,6 +24,8 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
             if (QoLModule.ModSettings?.enableSnapOut != true) return false;
             if (calmer == null || target == null || calmer == target) return false;
             if (!calmer.Spawned || !target.Spawned) return false;
+            if (calmer.Downed || calmer.InMentalState || target.Downed) return false;
+            if (target.RaceProps == null || !target.RaceProps.Humanlike) return false;
             if (target.Faction != Faction.OfPlayer) return false;
             if (!target.InMentalState) return false;
 
@@ -179,14 +181,16 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
 
             IntVec3 cell = IntVec3.FromVector3(clickPos);
             Map map = pawn.Map;
-            if (map == null || !cell.InBounds(map)) return;
+            if (map == null || !FloatMenuMakerMap.ShouldGenerateFloatMenuForPawn(pawn).Accepted || !cell.InBounds(map)) return;
 
             List<Thing> thingList = cell.GetThingList(map);
             for (int i = 0; i < thingList.Count; i++)
             {
                 if (thingList[i] is Verse.Pawn targetPawn && targetPawn != pawn)
                 {
-                    if (SnapOutUtility.CanCalmDown(pawn, targetPawn))
+                    if (SnapOutUtility.CanCalmDown(pawn, targetPawn) &&
+                        pawn.CanReach(targetPawn, PathEndMode.Touch, Danger.Some) &&
+                        pawn.CanReserve(targetPawn, 1, -1, null, true))
                     {
                         opts.Add(new FloatMenuOption("MegaMod_SnapOut_Option".Translate(targetPawn.LabelShort), () =>
                         {

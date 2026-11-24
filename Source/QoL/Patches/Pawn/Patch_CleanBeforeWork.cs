@@ -42,7 +42,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
             if (room == null || room.TouchesMapEdge || room.PsychologicallyOutdoors) return null;
 
             Map map = pawn.Map;
-            if (map == null) return null;
+            if (map == null || map.areaManager?.Home == null) return null;
             IntVec3 center = thing.Position;
             List<Thing> candidateFilth = new List<Thing>();
 
@@ -50,6 +50,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
             foreach (IntVec3 cell in GenRadial.RadialCellsAround(center, 8f, true))
             {
                 if (!cell.InBounds(map)) continue;
+                if (!map.areaManager.Home[cell]) continue;
                 if (cell.GetRoom(map) != room) continue;
 
                 List<Thing> thingList = cell.GetThingList(map);
@@ -83,7 +84,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
             for (int i = 0; i < candidateFilth.Count; i++)
             {
                 Thing f = candidateFilth[i];
-                if (f != primaryFilth && pawn.CanReserve(f))
+                if (f != primaryFilth && pawn.CanReserve(f) && pawn.CanReach(f, PathEndMode.Touch, Danger.Some))
                 {
                     cleanJob.AddQueuedTarget(TargetIndex.A, f);
                     queued++;

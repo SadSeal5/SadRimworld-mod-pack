@@ -31,8 +31,9 @@ namespace SadSeal.MegaMod.Medical.Autopsy
             Pawn pawn = corpse.InnerPawn;
             Map map = billDoer.Map;
             IntVec3 pos = billDoer.Position;
+            if (map == null || pawn.health?.hediffSet == null) return;
 
-            float doctorSkill = billDoer.skills != null ? billDoer.skills.GetSkill(SkillDefOf.Medicine).Level : 5f;
+            float doctorSkill = billDoer.skills?.GetSkill(SkillDefOf.Medicine)?.Level ?? 5f;
             float baseChance = settings.AutopsySuccessBaseChance + (doctorSkill * settings.AutopsySkillFactor);
 
             // Medicine scaling
@@ -52,8 +53,10 @@ namespace SadSeal.MegaMod.Medical.Autopsy
             float successChance = Mathf.Clamp(baseChance + medicineBonus, 0.40f, 0.98f);
             int extractedCount = 0;
 
-            if (pawn.RaceProps.IsMechanoid && settings.ExtractMechanoidParts)
+            if (pawn.RaceProps.IsMechanoid)
             {
+                if (!settings.ExtractMechanoidParts) return;
+
                 // Mechanoid extraction
                 int steelAmount = Mathf.RoundToInt(pawn.BodySize * 15f * successChance);
                 int plasteelAmount = Mathf.RoundToInt(pawn.BodySize * 8f * successChance);
@@ -91,21 +94,17 @@ namespace SadSeal.MegaMod.Medical.Autopsy
             for (int i = 0; i < hediffs.Count; i++)
             {
                 Hediff h = hediffs[i];
+                if (h?.def == null) continue;
+
+                bool isAddedPart = h is Hediff_AddedPart;
+                bool isImplant = h is Hediff_Implant;
                 ThingDef dropDef = null;
 
                 if (h.def.spawnThingOnRemoved != null)
                 {
                     dropDef = h.def.spawnThingOnRemoved;
                 }
-                else if (h is Hediff_AddedPart added && added.def.spawnThingOnRemoved != null)
-                {
-                    dropDef = added.def.spawnThingOnRemoved;
-                }
-                else if (h is Hediff_Implant implant && implant.def.spawnThingOnRemoved != null)
-                {
-                    dropDef = implant.def.spawnThingOnRemoved;
-                }
-                else
+                else if ((isAddedPart || isImplant) && !string.IsNullOrEmpty(h.def.defName))
                 {
                     ThingDef direct = DefDatabase<ThingDef>.GetNamedSilentFail(h.def.defName);
                     if (direct != null && direct.category == ThingCategory.Item)
@@ -123,7 +122,7 @@ namespace SadSeal.MegaMod.Medical.Autopsy
                         extractedCount++;
                     }
 
-                    if (h.Part != null)
+                    if (isAddedPart && h.Part != null)
                     {
                         Hediff_MissingPart missing = (Hediff_MissingPart)HediffMaker.MakeHediff(HediffDefOf.MissingBodyPart, pawn, h.Part);
                         missing.IsFresh = false;

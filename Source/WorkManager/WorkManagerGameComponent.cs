@@ -93,13 +93,35 @@ namespace SadSeal.MegaMod.WorkManager
 
         public static void ForceUpdateAll()
         {
+            if (WorkManagerModule.Instance?.IsEnabled != true) return;
             if (Current.Game == null || Find.Maps == null) return;
+
+            var settings = WorkManagerModule.ModSettings;
             var maps = Find.Maps;
             for (int i = 0; i < maps.Count; i++)
             {
                 var map = maps[i];
-                map.GetComponent<WorkPriorityManager>()?.MarkDirty();
-                map.GetComponent<ScheduleManager>()?.MarkDirty();
+                if (map == null) continue;
+
+                var wpm = map.GetComponent<WorkPriorityManager>();
+                var sm = map.GetComponent<ScheduleManager>();
+
+                if (settings != null && settings.EnableWorkManager)
+                {
+                    if (settings.ManageWorkPriorities && wpm != null)
+                    {
+                        wpm.UpdateWorkPriorities();
+                    }
+                    if (settings.ManageWorkSchedule && sm != null)
+                    {
+                        sm.UpdateSchedules();
+                    }
+                }
+                else
+                {
+                    wpm?.MarkDirty();
+                    sm?.MarkDirty();
+                }
             }
         }
 

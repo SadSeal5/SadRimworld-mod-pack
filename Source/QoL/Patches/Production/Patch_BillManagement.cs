@@ -31,12 +31,25 @@ namespace SadSeal.MegaMod.QoL.Patches.Production
             }
         }
 
+        private static bool CanPasteBillTo(Bill bill, Building_WorkTable table)
+        {
+            return bill?.recipe != null &&
+                table?.def?.AllRecipes != null &&
+                table.def.AllRecipes.Contains(bill.recipe) &&
+                bill.recipe.AvailableNow &&
+                bill.recipe.AvailableOnNow(table);
+        }
+
         public static bool CanPasteTo(Building_WorkTable table)
         {
-            if (!HasCopiedBills || table == null || table.def?.AllRecipes == null) return false;
+            if (!HasCopiedBills || table?.BillStack == null || table.def?.AllRecipes == null || table.BillStack.Count >= BillStack.MaxCount)
+            {
+                return false;
+            }
+
             foreach (Bill bill in clipboard)
             {
-                if (table.def.AllRecipes.Contains(bill.recipe))
+                if (CanPasteBillTo(bill, table))
                 {
                     return true;
                 }
@@ -46,16 +59,19 @@ namespace SadSeal.MegaMod.QoL.Patches.Production
 
         public static int PasteBillsTo(Building_WorkTable table)
         {
-            if (table?.BillStack == null || !HasCopiedBills) return 0;
+            if (table?.BillStack == null || table.def?.AllRecipes == null || !HasCopiedBills) return 0;
 
             int count = 0;
             foreach (Bill bill in clipboard)
             {
-                if (table.def.AllRecipes != null && table.def.AllRecipes.Contains(bill.recipe))
+                if (table.BillStack.Count >= BillStack.MaxCount) break;
+
+                if (CanPasteBillTo(bill, table))
                 {
                     Bill newBill = bill.Clone();
-                    newBill.billStack = table.BillStack;
+                    newBill.InitializeAfterClone();
                     table.BillStack.AddBill(newBill);
+                    newBill.ValidateSettings();
                     count++;
                 }
             }

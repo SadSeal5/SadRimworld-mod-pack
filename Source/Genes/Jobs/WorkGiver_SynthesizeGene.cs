@@ -23,7 +23,8 @@ namespace SadSeal.MegaMod.Genes.Jobs
 
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            if (GenesModule.Instance?.IsEnabled != true) return false;
+            if (!ModsConfig.BiotechActive || GenesModule.Instance?.IsEnabled != true) return false;
+            if (t == null || pawn == null || t.IsForbidden(pawn)) return false;
             if (t.Faction != pawn.Faction && t.Faction != Faction.OfPlayer)
             {
                 return false;
@@ -47,16 +48,23 @@ namespace SadSeal.MegaMod.Genes.Jobs
                 return false;
             }
 
-            if (comp.innerContainer.TotalStackCount < comp.CurrentOrder.NeutroamineCost)
+            if (comp.NeutroamineNeeded > 0)
             {
-                Thing neutro = FindNeutroamine(pawn);
+                Thing neutro = FindResource(pawn, CompGeneSynthesizer.NeutroamineDef, forced);
                 if (neutro == null)
                 {
                     JobFailReason.Is("GeneSynthesis_NoNeutroamine".Translate());
                     return false;
                 }
-                if (!pawn.CanReserve(neutro, 10, 1, null, forced))
+                return true;
+            }
+
+            if (comp.ArchiteNeeded > 0)
+            {
+                Thing archite = FindResource(pawn, CompGeneSynthesizer.ArchiteDef, forced);
+                if (archite == null)
                 {
+                    JobFailReason.Is("GeneSynthesis_RequiresArchiteCapsule".Translate(comp.ArchiteNeeded));
                     return false;
                 }
                 return true;
@@ -67,34 +75,51 @@ namespace SadSeal.MegaMod.Genes.Jobs
 
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            if (GenesModule.Instance?.IsEnabled != true) return null;
+            if (!ModsConfig.BiotechActive || GenesModule.Instance?.IsEnabled != true) return null;
+            if (t == null || pawn == null || t.IsForbidden(pawn)) return null;
+
             CompGeneSynthesizer comp = t.TryGetComp<CompGeneSynthesizer>();
             if (comp == null || !comp.IsSynthesizing || comp.CurrentOrder == null)
             {
                 return null;
             }
 
-            if (comp.innerContainer.TotalStackCount < comp.CurrentOrder.NeutroamineCost)
+            if (comp.NeutroamineNeeded > 0)
             {
-                Thing neutro = FindNeutroamine(pawn);
-                if (neutro == null)
-                {
-                    return null;
-                }
+                return CreateHaulJob(pawn, t, CompGeneSynthesizer.NeutroamineDef, comp.NeutroamineNeeded, forced);
+            }
 
-                int needed = comp.CurrentOrder.NeutroamineCost - comp.innerContainer.TotalStackCount;
-                Job haulJob = JobMaker.MakeJob(GeneJobDefOf.HaulNeutroamineToGeneAssembler, t, neutro);
-                haulJob.count = Mathf.Min(needed, neutro.stackCount);
-                return haulJob;
+            if (comp.ArchiteNeeded > 0)
+            {
+                return CreateHaulJob(pawn, t, CompGeneSynthesizer.ArchiteDef, comp.ArchiteNeeded, forced);
             }
 
             return JobMaker.MakeJob(GeneJobDefOf.SynthesizeGene, t);
         }
 
-        private Thing FindNeutroamine(Pawn pawn)
+        private Job CreateHaulJob(Pawn pawn, Thing assembler, ThingDef resourceDef, int needed, bool forced)
         {
-            ThingDef neutroDef = GeneThingDefOf.Neutroamine ?? DefDatabase<ThingDef>.GetNamed("Neutroamine", false);
-            if (neutroDef == null)
+            Thing found = FindResource(pawn, resourceDef, forced);
+            if (found == null)
+            {
+                return null;
+            }
+
+            int maxReservable = pawn.Map?.reservationManager?.CanReserveStack(pawn, found, 10, null, forced) ?? found.stackCount;
+            int count = Mathf.Min(needed, Mathf.Min(found.stackCount, maxReservable));
+            if (count <= 0)
+            {
+                return null;
+            }
+
+            Job haulJob = JobMaker.MakeJob(GeneJobDefOf.HaulNeutroamineToGeneAssembler, assembler, found);
+            haulJob.count = count;
+            return haulJob;
+        }
+
+        private Thing FindResource(Pawn pawn, ThingDef resourceDef, bool forced)
+        {
+            if (pawn == null || pawn.Map == null || resourceDef == null)
             {
                 return null;
             }
@@ -102,11 +127,11 @@ namespace SadSeal.MegaMod.Genes.Jobs
             return GenClosest.ClosestThingReachable(
                 pawn.Position,
                 pawn.Map,
-                ThingRequest.ForDef(neutroDef),
+                ThingRequest.ForDef(resourceDef),
                 PathEndMode.ClosestTouch,
                 TraverseParms.For(pawn),
                 9999f,
-                item => !item.IsForbidden(pawn) && pawn.CanReserve(item)
+                item => !item.IsForbidden(pawn) && pawn.CanReserve(item, 10, 1, null, forced)
             );
         }
     }

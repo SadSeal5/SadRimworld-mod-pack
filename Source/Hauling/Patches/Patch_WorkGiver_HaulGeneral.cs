@@ -13,6 +13,8 @@ namespace SadSeal.MegaMod.Hauling.Patches
 
         public static void Postfix(Pawn pawn, Thing t, bool forced, ref Job __result)
         {
+            if (HaulModule.Instance?.IsEnabled != true) return;
+
             if (__result == null || __result.def != JobDefOf.HaulToCell)
             {
                 return;

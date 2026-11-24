@@ -12,8 +12,23 @@ public static class AutoGrowthResolver
 
 	public static bool TryResolve(ChoiceLetter_GrowthMoment letter)
 	{
-		if (letter == null || letter.ArchiveView || letter.choiceMade || letter.pawn == null || letter.pawn.Destroyed)
+		if (letter == null
+			|| letter.ArchiveView
+			|| letter.choiceMade
+			|| letter.pawn == null
+			|| letter.pawn.Destroyed
+			|| letter.pawn.Dead
+			|| letter.pawn.skills == null
+			|| letter.pawn.story?.traits == null)
 		{
+			return false;
+		}
+
+		if (TrySetChoicesMethod == null
+			&& ((letter.traitChoices == null && letter.traitChoiceCount > 0)
+				|| (letter.passionChoices == null && letter.passionGainsCount > 0)))
+		{
+			Log.ErrorOnce("[SadSeal.Incubation] ChoiceLetter_GrowthMoment.TrySetChoices method not found; aborting auto-resolve.", 84920144);
 			return false;
 		}
 

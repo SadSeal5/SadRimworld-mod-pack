@@ -1,6 +1,7 @@
 using System;
 using HarmonyLib;
 using SadSeal.Core.Contracts;
+using SadSeal.Core.Registry;
 using UnityEngine;
 using Verse;
 
@@ -13,12 +14,20 @@ namespace SadSeal.Core.Modules
         public virtual string DescriptionKey => $"MegaMod_Module{Id}_Desc";
         public virtual int Order => 100;
         public virtual bool DefaultEnabled => true;
-        public virtual bool IsEnabled { get; set; } = true;
+        public virtual bool IsEnabled { get; set; }
         public virtual string ScribeTag => Id.ToLowerInvariant();
+
+        protected ModModule()
+        {
+            IsEnabled = DefaultEnabled;
+        }
 
         public virtual void Initialize(Harmony harmony)
         {
-            harmony.PatchAll(GetType().Assembly);
+            if (harmony != null && ModuleManager.TryMarkAssemblyPatched(GetType().Assembly))
+            {
+                harmony.PatchAll(GetType().Assembly);
+            }
         }
 
         public virtual void OnDefsLoaded() { }

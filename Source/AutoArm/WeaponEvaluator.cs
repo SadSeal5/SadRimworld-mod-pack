@@ -16,7 +16,7 @@ namespace SadSeal.MegaMod.AutoArm
             if (bio != null && bio.Biocoded && bio.CodedPawn != pawn) return -1f;
 
             CompBladelinkWeapon blade = weapon.TryGetComp<CompBladelinkWeapon>();
-            if (blade != null && blade.Biocoded && blade.CodedPawn != pawn) return -1f;
+            if (blade != null && (!blade.Biocoded || blade.CodedPawn != pawn)) return -1f;
 
             if (settings == null)
             {
@@ -96,6 +96,7 @@ namespace SadSeal.MegaMod.AutoArm
             else if (cat == WeaponCategory.MeleeSharp || cat == WeaponCategory.MeleeBlunt)
             {
                 float dps = weapon.GetStatValue(StatDefOf.MeleeWeapon_AverageDPS);
+                if (float.IsNaN(dps) || float.IsInfinity(dps)) dps = 0f;
 
                 float totalAp = 0f;
                 int toolCount = 0;
@@ -160,6 +161,8 @@ namespace SadSeal.MegaMod.AutoArm
             {
                 score = score * 5.0f + 500f;
             }
+
+            if (float.IsNaN(score) || float.IsInfinity(score) || score <= 0f) return 0f;
 
             return Mathf.Max(0.1f, score);
         }

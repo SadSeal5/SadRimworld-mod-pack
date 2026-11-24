@@ -68,30 +68,38 @@ namespace SadSeal.MegaMod.Combat
 
         private void PatchProjectileSubclasses(Harmony harmony)
         {
+            var damagePrefix = new HarmonyMethod(typeof(Patch_Projectile_Subclasses), nameof(Patch_Projectile_Subclasses.SubclassDamagePrefix));
             var damagePostfix = new HarmonyMethod(typeof(Patch_Projectile_Subclasses), nameof(Patch_Projectile_Subclasses.SubclassDamagePostfix));
+            var damageFinalizer = new HarmonyMethod(typeof(Patch_Projectile_Subclasses), nameof(Patch_Projectile_Subclasses.SubclassDamageFinalizer));
+
+            var apPrefix = new HarmonyMethod(typeof(Patch_Projectile_Subclasses), nameof(Patch_Projectile_Subclasses.SubclassApPrefix));
             var apPostfix = new HarmonyMethod(typeof(Patch_Projectile_Subclasses), nameof(Patch_Projectile_Subclasses.SubclassApPostfix));
+            var apFinalizer = new HarmonyMethod(typeof(Patch_Projectile_Subclasses), nameof(Patch_Projectile_Subclasses.SubclassApFinalizer));
+
+            var ticksPrefix = new HarmonyMethod(typeof(Patch_Projectile_Subclasses), nameof(Patch_Projectile_Subclasses.SubclassStartingTicksPrefix));
             var ticksPostfix = new HarmonyMethod(typeof(Patch_Projectile_Subclasses), nameof(Patch_Projectile_Subclasses.SubclassStartingTicksPostfix));
+            var ticksFinalizer = new HarmonyMethod(typeof(Patch_Projectile_Subclasses), nameof(Patch_Projectile_Subclasses.SubclassStartingTicksFinalizer));
 
             foreach (Type type in GenTypes.AllSubclasses(typeof(Verse.Projectile)))
             {
                 try
                 {
                     var dmgMethod = type.GetMethod("get_DamageAmount", BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
-                    if (dmgMethod != null)
+                    if (dmgMethod != null && !dmgMethod.IsAbstract)
                     {
-                        harmony.Patch(dmgMethod, postfix: damagePostfix);
+                        harmony.Patch(dmgMethod, prefix: damagePrefix, postfix: damagePostfix, finalizer: damageFinalizer);
                     }
 
                     var apMethod = type.GetMethod("get_ArmorPenetration", BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
-                    if (apMethod != null)
+                    if (apMethod != null && !apMethod.IsAbstract)
                     {
-                        harmony.Patch(apMethod, postfix: apPostfix);
+                        harmony.Patch(apMethod, prefix: apPrefix, postfix: apPostfix, finalizer: apFinalizer);
                     }
 
                     var ticksMethod = type.GetMethod("get_StartingTicksToImpact", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly);
-                    if (ticksMethod != null)
+                    if (ticksMethod != null && !ticksMethod.IsAbstract)
                     {
-                        harmony.Patch(ticksMethod, postfix: ticksPostfix);
+                        harmony.Patch(ticksMethod, prefix: ticksPrefix, postfix: ticksPostfix, finalizer: ticksFinalizer);
                     }
                 }
                 catch (Exception ex)

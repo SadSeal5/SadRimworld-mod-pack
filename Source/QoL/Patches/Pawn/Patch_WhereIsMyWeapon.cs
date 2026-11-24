@@ -49,10 +49,15 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
                 Verse.Pawn pawn = kvp.Key;
                 ThingWithComps weapon = kvp.Value;
 
-                if (pawn == null || pawn.Dead || !pawn.Spawned || !pawn.IsColonist)
+                if (pawn == null || pawn.Dead || pawn.Destroyed || !pawn.IsColonist)
                 {
                     if (toRemove == null) toRemove = new List<Verse.Pawn>();
                     toRemove.Add(pawn);
+                    continue;
+                }
+
+                if (!pawn.Spawned)
+                {
                     continue;
                 }
 
@@ -64,8 +69,8 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
                     continue;
                 }
 
-                // If downed, sleeping, mental, or bleeding heavily, wait
-                if (pawn.Downed || pawn.InMentalState || (pawn.health?.hediffSet?.BleedRateTotal ?? 0f) > 0.10f)
+                // If downed, drafted, sleeping in bed, mental, or bleeding heavily, wait
+                if (pawn.Downed || pawn.Drafted || pawn.InBed() || pawn.InMentalState || (pawn.health?.hediffSet?.BleedRateTotal ?? 0f) > 0.10f)
                 {
                     continue;
                 }
@@ -84,7 +89,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
                     weapon.SetForbidden(false, false);
                 }
 
-                if (pawn.CanReach(weapon, PathEndMode.ClosestTouch, Danger.Some))
+                if (pawn.CanReach(weapon, PathEndMode.ClosestTouch, Danger.Some) && pawn.CanReserve(weapon))
                 {
                     Job job = JobMaker.MakeJob(JobDefOf.Equip, weapon);
                     pawn.jobs?.jobQueue?.EnqueueFirst(job);
@@ -163,7 +168,7 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
                 if (QoLModule.ModSettings?.whereIsMyWeapon != true) return;
 
                 Verse.Pawn pawn = Traverse.Create(__instance).Field("pawn").GetValue<Verse.Pawn>();
-                if (pawn == null || !pawn.IsColonist || !pawn.Spawned || pawn.Dead) return;
+                if (pawn == null || !pawn.IsColonist || !pawn.Spawned || pawn.Dead || pawn.Destroyed) return;
 
                 var comp = WhereIsMyWeaponGameComponent.GetInstance();
                 if (comp == null) return;
@@ -176,22 +181,27 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
 
                 if (comp.DroppedWeapons.TryGetValue(pawn, out ThingWithComps weapon))
                 {
-                    if ((pawn.health?.hediffSet?.BleedRateTotal ?? 0f) > 0.10f) return;
-
-                    comp.DroppedWeapons.Remove(pawn);
-
-                    if (weapon != null && !weapon.Destroyed && weapon.Spawned && weapon.Map == pawn.Map && pawn.equipment?.Primary == null)
+                    if (pawn.InMentalState || pawn.Drafted || pawn.InBed() || (pawn.health?.hediffSet?.BleedRateTotal ?? 0f) > 0.10f)
                     {
-                        if (weapon.IsForbidden(pawn))
-                        {
-                            weapon.SetForbidden(false, false);
-                        }
+                        return;
+                    }
 
-                        if (pawn.CanReach(weapon, PathEndMode.ClosestTouch, Danger.Some))
-                        {
-                            Job job = JobMaker.MakeJob(JobDefOf.Equip, weapon);
-                            pawn.jobs?.jobQueue?.EnqueueFirst(job);
-                        }
+                    if (weapon == null || weapon.Destroyed || !weapon.Spawned || weapon.Map != pawn.Map || pawn.equipment?.Primary != null)
+                    {
+                        comp.DroppedWeapons.Remove(pawn);
+                        return;
+                    }
+
+                    if (weapon.IsForbidden(pawn))
+                    {
+                        weapon.SetForbidden(false, false);
+                    }
+
+                    if (pawn.CanReach(weapon, PathEndMode.ClosestTouch, Danger.Some) && pawn.CanReserve(weapon))
+                    {
+                        comp.DroppedWeapons.Remove(pawn);
+                        Job job = JobMaker.MakeJob(JobDefOf.Equip, weapon);
+                        pawn.jobs?.jobQueue?.EnqueueFirst(job);
                     }
                 }
             }

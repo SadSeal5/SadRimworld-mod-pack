@@ -10,11 +10,13 @@ namespace SadSeal.MegaMod.QoL.Patches.Pawn
     {
         public static void Postfix(MentalState_SocialFighting __instance)
         {
+            if (QoLModule.Instance?.IsEnabled != true) return;
             if (QoLModule.ModSettings?.ughYouGotMe != true) return;
 
-            Verse.Pawn pawn = __instance.pawn;
-            Verse.Pawn other = __instance.otherPawn;
+            Verse.Pawn pawn = __instance?.pawn;
+            Verse.Pawn other = __instance?.otherPawn;
             if (pawn == null || other == null) return;
+            if (pawn.MentalState != __instance) return;
 
             // Stop social fighting if either participant experiences severe pain (> 0.50f) or is incapacitated
             if (pawn.health?.hediffSet == null || other.health?.hediffSet == null) return;

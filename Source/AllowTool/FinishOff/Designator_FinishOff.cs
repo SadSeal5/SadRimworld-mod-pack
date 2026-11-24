@@ -23,9 +23,39 @@ namespace SadSeal.MegaMod.AllowTool.FinishOff
             soundSucceeded = SoundDefOf.Designate_Hunt;
         }
 
+        public static bool CanFinishOffPawn(Pawn p)
+        {
+            if (p == null || !p.Spawned || p.Dead || !p.Downed)
+            {
+                return false;
+            }
+
+            if (p.Faction == Faction.OfPlayer || p.IsSlaveOfColony)
+            {
+                return false;
+            }
+
+            if (p.Faction != null)
+            {
+                if (!p.Faction.HostileTo(Faction.OfPlayer))
+                {
+                    return false;
+                }
+            }
+            else if (p.RaceProps?.Humanlike == true)
+            {
+                if (!p.HostileTo(Faction.OfPlayer) && !p.InAggroMentalState)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         public override AcceptanceReport CanDesignateCell(IntVec3 loc)
         {
-            if (!loc.InBounds(Map)) return false;
+            if (Map == null || !loc.InBounds(Map) || loc.Fogged(Map)) return false;
 
             List<Thing> thingList = loc.GetThingList(Map);
             for (int i = 0; i < thingList.Count; i++)
@@ -41,32 +71,28 @@ namespace SadSeal.MegaMod.AllowTool.FinishOff
 
         public override AcceptanceReport CanDesignateThing(Thing t)
         {
-            if (t is Pawn p && p.Spawned && p.Map == Map && p.Downed && !p.Dead)
+            if (Map == null || !(t is Pawn p) || p.Map != Map || p.Position.Fogged(Map))
             {
-                // Can finish off hostile pawns or wild animals; exclude non-hostile colony members
-                if (p.Faction == Faction.OfPlayer)
-                {
-                    return false;
-                }
-
-                if (p.Faction != null && !p.Faction.HostileTo(Faction.OfPlayer) && !p.IsPrisonerOfColony && !p.IsSlaveOfColony && !p.InAggroMentalState)
-                {
-                    return false;
-                }
-
-                if (FinishOffDef != null && Map.designationManager.DesignationOn(p, FinishOffDef) != null)
-                {
-                    return false;
-                }
-
-                return true;
+                return false;
             }
 
-            return false;
+            if (!CanFinishOffPawn(p))
+            {
+                return false;
+            }
+
+            if (FinishOffDef != null && Map.designationManager.DesignationOn(p, FinishOffDef) != null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public override void DesignateSingleCell(IntVec3 loc)
         {
+            if (Map == null || !loc.InBounds(Map) || loc.Fogged(Map)) return;
+
             List<Thing> thingList = loc.GetThingList(Map);
             for (int i = 0; i < thingList.Count; i++)
             {
@@ -80,7 +106,7 @@ namespace SadSeal.MegaMod.AllowTool.FinishOff
 
         public override void DesignateThing(Thing t)
         {
-            if (FinishOffDef == null || t == null) return;
+            if (FinishOffDef == null || t == null || Map?.designationManager == null) return;
             Map.designationManager.AddDesignation(new Designation(t, FinishOffDef));
         }
     }

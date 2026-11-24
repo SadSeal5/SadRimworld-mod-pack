@@ -11,6 +11,7 @@ namespace SadSeal.MegaMod.WorkManager.Patches
     {
         public static void Postfix(Rect rect)
         {
+            if (WorkManagerModule.Instance?.IsEnabled != true) return;
             var settings = WorkManagerModule.ModSettings;
             if (settings == null) return;
 

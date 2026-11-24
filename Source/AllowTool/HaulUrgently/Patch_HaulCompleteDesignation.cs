@@ -26,7 +26,7 @@ namespace SadSeal.MegaMod.AllowTool.HaulUrgently
 
                 if (actor?.Map?.designationManager == null || def == null) return;
 
-                if (carried != null)
+                if (carried != null && carried.Spawned && carried.IsInValidStorage())
                 {
                     Designation des = actor.Map.designationManager.DesignationOn(carried, def);
                     if (des != null)
